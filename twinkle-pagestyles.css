@@ -1,0 +1,14 @@
+/**
+ * This is loaded as a hidden peer gadget of Twinkle.
+ * Why is this a peer gadget? Because it will load before the page finishes its first paint.
+ * It adds whitespace where the "TW" menu goes in the Vector 2010 skin, basically reserving
+ * a spot for the "TW" menu so that the top bar does not "jump".
+ * The "TW" menu itself is painted later, after the gadget JS files finish loading.
+ */
+.client-js > body.skin-vector:not(.ns-special) #p-cactions,
+.client-js > body.skin-vector.mw-special-Block #p-cactions,
+.client-js > body.skin-vector.mw-special-Contributions #p-cactions,
+.client-js > body.skin-vector.mw-special-DeletedContributions #p-cactions,
+.client-js > body.skin-vector.mw-special-Prefixindex #p-cactions {
+	margin-right: 3.24em;
+}

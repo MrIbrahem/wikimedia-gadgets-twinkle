@@ -1,0 +1,6 @@
+{
+	"globals": {
+		"Morebits": "readonly",
+		"Twinkle": "writable"
+	}
+}

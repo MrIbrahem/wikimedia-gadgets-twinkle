@@ -1,0 +1,50 @@
+"Module: twinkle":
+  - twinkle.js
+  - twinkle.css
+  - twinkle-pagestyles.css
+"Module: morebits":
+  - morebits.js
+  - morebits.css
+"Module: arv":
+  - modules/twinklearv.js
+"Module: batch":
+  - modules/twinklebatchdelete.js
+  - modules/twinklebatchundelete.js
+  - modules/twinklebatchprotect.js
+  - modules/twinkledeprod.js
+"Module: block":
+  - modules/twinkleblock.js
+"Module: config":
+  - modules/twinkleconfig.js
+"Module: diff":
+  - modules/twinklediff.js
+"Module: prod":
+  - modules/twinkleprod.js
+"Module: protect":
+  - modules/twinkleprotect.js
+"Module: rollback":
+  - modules/twinklerollback.js
+"Module: speedy":
+  - modules/twinklespeedy.js
+  - modules/twinkleimage.js
+"Module: tag":
+  - modules/twinkletag.js
+"Module: talkback":
+  - modules/twinkletalkback.js
+"Module: unlink":
+  - modules/twinkleunlink.js
+"Module: warn":
+  - modules/twinklewarn.js
+"Module: welcome":
+  - modules/twinklewelcome.js
+"Module: xfd":
+  - modules/twinklexfd.js
+Tests:
+  - tests/*
+Docs:
+  - "*.md"
+Gadget:
+  - gadget.txt
+dependencies:
+  - package.json
+  - package-lock.json
