@@ -29,3 +29,4 @@ Icon
 # Node
 node_modules/
 npm-debug.log*
+/modules-ar

@@ -1,122 +1,122 @@
 // <nowiki>
 
-(function() {
+(function () {
 
-/*
-****************************************
-*** twinkledeprod.js: Batch deletion of expired PRODs (sysops only)
-****************************************
-* Mode of invocation:     Tab ("Deprod")
-* Active on:              Categories whose name contains "proposed_deletion"
-*/
+	/*
+	****************************************
+	*** twinkledeprod.js: Batch deletion of expired PRODs (sysops only)
+	****************************************
+	* Mode of invocation:     Tab ("Deprod")
+	* Active on:              Categories whose name contains "proposed_deletion"
+	*/
 
-Twinkle.deprod = function() {
-	if (
-		!Morebits.userIsSysop ||
-		mw.config.get('wgNamespaceNumber') !== 14 ||
-		!(/proposed_deletion/i).test(mw.config.get('wgPageName'))
-	) {
-		return;
-	}
-	Twinkle.addPortletLink(Twinkle.deprod.callback, 'Deprod', 'tw-deprod', 'Delete prod pages found in this category');
-};
-
-const concerns = {};
-
-Twinkle.deprod.callback = function() {
-	const Window = new Morebits.SimpleWindow(800, 400);
-	Window.setTitle('PROD cleaning');
-	Window.setScriptName('Twinkle');
-	Window.addFooterLink('Proposed deletion', 'WP:PROD');
-	Window.addFooterLink('Twinkle help', 'WP:TW/DOC#deprod');
-	Window.addFooterLink('Give feedback', 'WT:TW');
-
-	const form = new Morebits.QuickForm(callback_commit);
-
-	const statusdiv = document.createElement('div');
-	statusdiv.style.padding = '15px'; // just so it doesn't look broken
-	Window.setContent(statusdiv);
-	Morebits.Status.init(statusdiv);
-	Window.display();
-
-	const query = {
-		action: 'query',
-		generator: 'categorymembers',
-		gcmtitle: mw.config.get('wgPageName'),
-		gcmlimit: Twinkle.getPref('batchMax'),
-		gcmnamespace: '0|2', // only display articles or user pages
-		prop: 'info|revisions',
-		rvprop: 'content',
-		inprop: 'protection',
-		format: 'json'
+	Twinkle.deprod = function () {
+		if (
+			!Morebits.userIsSysop ||
+			mw.config.get('wgNamespaceNumber') !== 14 ||
+			!(/proposed_deletion/i).test(mw.config.get('wgPageName'))
+		) {
+			return;
+		}
+		Twinkle.addPortletLink(Twinkle.deprod.callback, 'Deprod', 'tw-deprod', 'Delete prod pages found in this category');
 	};
 
-	const statelem = new Morebits.Status('Grabbing list of pages');
-	const wikipedia_api = new Morebits.wiki.Api('loading...', query, ((apiobj) => {
-		const response = apiobj.getResponse();
-		const pages = (response.query && response.query.pages) || [];
-		const list = [];
-		const re = /\{\{Proposed deletion/;
-		pages.sort(Twinkle.sortByNamespace);
-		pages.forEach((page) => {
-			const metadata = [];
+	const concerns = {};
 
-			const content = page.revisions[0].content;
-			const res = re.exec(content);
-			const title = page.title;
-			if (res) {
-				const parsed = Morebits.wikitext.parseTemplate(content, res.index);
-				concerns[title] = parsed.parameters.concern || '';
-				metadata.push(concerns[title]);
-			}
+	Twinkle.deprod.callback = function () {
+		const Window = new Morebits.SimpleWindow(800, 400);
+		Window.setTitle('PROD cleaning');
+		Window.setScriptName('Twinkle');
+		Window.addFooterLink('Proposed deletion', 'WP:PROD');
+		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#deprod');
+		Window.addFooterLink('Give feedback', 'WT:TW');
 
-			const editProt = page.protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
-			if (editProt) {
-				metadata.push('fully protected' +
-					(editProt.expiry === 'infinity' ? ' indefinitely' : ', expires ' + editProt.expiry));
-			}
+		const form = new Morebits.QuickForm(callback_commit);
 
-			list.push({
-				label: metadata.length ? '(' + metadata.join('; ') + ')' : '',
-				value: title,
-				checked: concerns[title] !== '',
-				style: editProt ? 'color:red' : ''
+		const statusdiv = document.createElement('div');
+		statusdiv.style.padding = '15px'; // just so it doesn't look broken
+		Window.setContent(statusdiv);
+		Morebits.Status.init(statusdiv);
+		Window.display();
+
+		const query = {
+			action: 'query',
+			generator: 'categorymembers',
+			gcmtitle: mw.config.get('wgPageName'),
+			gcmlimit: Twinkle.getPref('batchMax'),
+			gcmnamespace: '0|2', // only display articles or user pages
+			prop: 'info|revisions',
+			rvprop: 'content',
+			inprop: 'protection',
+			format: 'json'
+		};
+
+		const statelem = new Morebits.Status('Grabbing list of pages');
+		const wikipedia_api = new Morebits.wiki.Api('loading...', query, ((apiobj) => {
+			const response = apiobj.getResponse();
+			const pages = (response.query && response.query.pages) || [];
+			const list = [];
+			const re = /\{\{Proposed deletion/;
+			pages.sort(Twinkle.sortByNamespace);
+			pages.forEach((page) => {
+				const metadata = [];
+
+				const content = page.revisions[0].content;
+				const res = re.exec(content);
+				const title = page.title;
+				if (res) {
+					const parsed = Morebits.wikitext.parseTemplate(content, res.index);
+					concerns[title] = parsed.parameters.concern || '';
+					metadata.push(concerns[title]);
+				}
+
+				const editProt = page.protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
+				if (editProt) {
+					metadata.push('fully protected' +
+						(editProt.expiry === 'infinity' ? ' indefinitely' : ', expires ' + editProt.expiry));
+				}
+
+				list.push({
+					label: metadata.length ? '(' + metadata.join('; ') + ')' : '',
+					value: title,
+					checked: concerns[title] !== '',
+					style: editProt ? 'color:red' : ''
+				});
 			});
-		});
-		apiobj.params.form.append({ type: 'header', label: 'Pages to delete' });
-		apiobj.params.form.append({
-			type: 'button',
-			label: 'Select All',
-			event: function(e) {
-				$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', true);
-			}
-		});
-		apiobj.params.form.append({
-			type: 'button',
-			label: 'Deselect All',
-			event: function(e) {
-				$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', false);
-			}
-		});
-		apiobj.params.form.append({
-			type: 'checkbox',
-			name: 'pages',
-			list: list
-		});
-		apiobj.params.form.append({
-			type: 'submit'
-		});
+			apiobj.params.form.append({ type: 'header', label: 'Pages to delete' });
+			apiobj.params.form.append({
+				type: 'button',
+				label: 'Select All',
+				event: function (e) {
+					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', true);
+				}
+			});
+			apiobj.params.form.append({
+				type: 'button',
+				label: 'Deselect All',
+				event: function (e) {
+					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', false);
+				}
+			});
+			apiobj.params.form.append({
+				type: 'checkbox',
+				name: 'pages',
+				list: list
+			});
+			apiobj.params.form.append({
+				type: 'submit'
+			});
 
-		const rendered = apiobj.params.form.render();
-		apiobj.params.Window.setContent(rendered);
-		Morebits.QuickForm.getElements(rendered, 'pages').forEach(Twinkle.generateBatchPageLinks);
-	}), statelem);
+			const rendered = apiobj.params.form.render();
+			apiobj.params.Window.setContent(rendered);
+			Morebits.QuickForm.getElements(rendered, 'pages').forEach(Twinkle.generateBatchPageLinks);
+		}), statelem);
 
-	wikipedia_api.params = { form: form, Window: Window };
-	wikipedia_api.post();
-};
+		wikipedia_api.params = { form: form, Window: Window };
+		wikipedia_api.post();
+	};
 
-var callback_commit = function(event) {
+	var callback_commit = function (event) {
 		const pages = Morebits.QuickForm.getInputData(event.target).pages;
 		Morebits.Status.init(event.target);
 
@@ -160,30 +160,30 @@ var callback_commit = function(event) {
 			page.deletePage(batchOperation.workerSuccess, batchOperation.workerFailure);
 		});
 	},
-	callback_deleteTalk = function(apiobj) {
-		// no talk page; forget about it
-		if (apiobj.getResponse().query.pages[0].missing) {
-			return;
-		}
+		callback_deleteTalk = function (apiobj) {
+			// no talk page; forget about it
+			if (apiobj.getResponse().query.pages[0].missing) {
+				return;
+			}
 
-		const page = new Morebits.wiki.Page('Talk:' + apiobj.params.page, 'Deleting talk page of page ' + apiobj.params.page);
-		page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|Talk page]] of deleted page [[' + apiobj.params.page + ']]');
-		page.setChangeTags(Twinkle.changeTags);
-		page.deletePage();
-	},
-	callback_deleteRedirects = function(apiobj) {
-		const response = apiobj.getResponse();
-		const redirects = response.query.pages[0].redirects || [];
-		redirects.forEach((rd) => {
-			const title = rd.title;
-			const page = new Morebits.wiki.Page(title, 'Deleting redirecting page ' + title);
-			page.setEditSummary('[[WP:CSD#G8|G8]]: Redirect to deleted page [[' + apiobj.params.page + ']]');
+			const page = new Morebits.wiki.Page('Talk:' + apiobj.params.page, 'Deleting talk page of page ' + apiobj.params.page);
+			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|Talk page]] of deleted page [[' + apiobj.params.page + ']]');
 			page.setChangeTags(Twinkle.changeTags);
 			page.deletePage();
-		});
-	};
+		},
+		callback_deleteRedirects = function (apiobj) {
+			const response = apiobj.getResponse();
+			const redirects = response.query.pages[0].redirects || [];
+			redirects.forEach((rd) => {
+				const title = rd.title;
+				const page = new Morebits.wiki.Page(title, 'Deleting redirecting page ' + title);
+				page.setEditSummary('[[WP:CSD#G8|G8]]: Redirect to deleted page [[' + apiobj.params.page + ']]');
+				page.setChangeTags(Twinkle.changeTags);
+				page.deletePage();
+			});
+		};
 
-Twinkle.addInitCallback(Twinkle.deprod, 'deprod');
+	Twinkle.addInitCallback(Twinkle.deprod, 'deprod');
 }());
 
 // </nowiki>
