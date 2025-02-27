@@ -57,7 +57,7 @@
 		 */
 		setParser: function (parser) {
 			if (!parser || typeof parser.get !== 'function') {
-				throw new Error('Morebits.i18n: يجب أن يقوم المحلل بتنفيذ الدالة get()');
+				throw new Error('Morebits.i18n: parser must implement get()');
 			}
 			Morebits.i18n.parser = parser;
 		},
@@ -153,7 +153,7 @@
 	 * @return {string}
 	 */
 	Morebits.sanitizeIPv6 = function (address) {
-		console.warn('ملاحظة: تم إعادة تسمية Morebits.sanitizeIPv6 إلى Morebits.ip.sanitizeIPv6 في فبراير 2021، يرجى استخدام ذلك بدلاً من هذه الوظيفة'); // eslint-disable-line no-console
+		console.warn('NOTE: Morebits.sanitizeIPv6 was renamed to Morebits.ip.sanitizeIPv6 in February 2021, please use that instead'); // eslint-disable-line no-console
 		return Morebits.ip.sanitizeIPv6(address);
 	};
 
@@ -712,7 +712,7 @@
 
 				var more = this.compute({
 					type: 'button',
-					label: 'المزيد',
+					label: 'more',
 					disabled: min >= max,
 					event: function (e) {
 						const new_node = new Morebits.quickForm.element(e.target.sublist);
@@ -902,7 +902,7 @@
 				childContainer = subnode;
 				break;
 			default:
-				throw new Error('Morebits.quickForm: نوع العنصر غير معروف ' + data.type.toString());
+				throw new Error('Morebits.quickForm: unknown element type ' + data.type.toString());
 		}
 
 		if (!childContainer) {
@@ -1449,7 +1449,7 @@
 		 */
 		splitWeightedByKeys: function (str, start, end, skiplist) {
 			if (start.length !== end.length) {
-				throw new Error('علامات البداية والنهاية يجب أن تكون بنفس الطول');
+				throw new Error('start marker and end marker must be of the same length');
 			}
 			let level = 0;
 			let initial = null;
@@ -1460,7 +1460,7 @@
 				} else if (typeof skiplist === 'string') {
 					skiplist = [skiplist];
 				} else {
-					throw new Error('قائمة الكلمات المراد تخطيها غير صالحة');
+					throw new Error('non-applicable skiplist parameter');
 				}
 			}
 			for (let i = 0; i < str.length; ++i) {
@@ -1832,7 +1832,7 @@
 
 		// Still no?
 		if (!this.isValid()) {
-			mw.log.warn('تهيئة Morebits.date غير صالحة:', args);
+			mw.log.warn('Invalid Morebits.date initialisation:', args);
 		}
 	};
 
@@ -1850,55 +1850,27 @@
 	 */
 	Morebits.date.localeData = {
 		// message names here correspond to MediaWiki message names
-		months: [
-			msg('january', 'يناير'),
-			msg('february', 'فبراير'),
-			msg('march', 'مارس'),
-			msg('april', 'أبريل'),
-			msg('may_long', 'مايو'),
-			msg('june', 'يونيو'),
-			msg('july', 'يوليو'),
-			msg('august', 'أغسطس'),
-			msg('september', 'سبتمبر'),
-			msg('october', 'أكتوبر'),
-			msg('november', 'نوفمبر'),
-			msg('december', 'ديسمبر')],
-		monthsShort: [
-			msg('jan', 'يناير'),
-			msg('feb', 'فبراير'),
-			msg('mar', 'مارس'),
-			msg('apr', 'أبريل'),
-			msg('may', 'مايو'),
-			msg('jun', 'يونيو'),
-			msg('jul', 'يوليو'),
-			msg('aug', 'أغسطس'),
-			msg('sep', 'سبتمبر'),
-			msg('oct', 'أكتوبر'),
-			msg('nov', 'نوفمبر'),
-			msg('dec', 'ديسمبر')],
-		days: [
-			msg('sunday', 'الأحد'),
-			msg('monday', 'الاثنين'),
-			msg('tuesday', 'الثلاثاء'),
-			msg('wednesday', 'الأربعاء'),
-			msg('thursday', 'الخميس'),
-			msg('friday', 'الجمعة'),
-			msg('saturday', 'السبت')],
-		daysShort: [
-			msg('sun', 'أحد'),
-			msg('mon', 'اثنين'),
-			msg('tue', 'ثلاثاء'),
-			msg('wed', 'أربعاء'),
-			msg('thu', 'خميس'),
-			msg('fri', 'جمعة'),
-			msg('sat', 'سبت')],
+		months: [msg('january', 'January'), msg('february', 'February'), msg('march', 'March'),
+		msg('april', 'April'), msg('may_long', 'May'), msg('june', 'June'),
+		msg('july', 'July'), msg('august', 'August'), msg('september', 'September'),
+		msg('october', 'October'), msg('november', 'November'), msg('december', 'December')],
+		monthsShort: [msg('jan', 'Jan'), msg('feb', 'Feb'), msg('mar', 'Mar'),
+		msg('apr', 'Apr'), msg('may', 'May'), msg('jun', 'Jun'),
+		msg('jul', 'Jul'), msg('aug', 'Aug'), msg('sep', 'Sep'),
+		msg('oct', 'Oct'), msg('nov', 'Nov'), msg('dec', 'Dec')],
+		days: [msg('sunday', 'Sunday'), msg('monday', 'Monday'), msg('tuesday', 'Tuesday'),
+		msg('wednesday', 'Wednesday'), msg('thursday', 'Thursday'), msg('friday', 'Friday'),
+		msg('saturday', 'Saturday')],
+		daysShort: [msg('sun', 'Sun'), msg('mon', 'Mon'), msg('tue', 'Tue'),
+		msg('wed', 'Wed'), msg('thu', 'Thu'), msg('fri', 'Fri'),
+		msg('sat', 'Sat')],
 
 		relativeTimes: {
-			thisDay: msg('relative-today', '[اليوم في] h:mm A'),
-			prevDay: msg('relative-prevday', '[أمس في] h:mm A'),
-			nextDay: msg('relative-nextday', '[غدًا في] h:mm A'),
-			thisWeek: msg('relative-thisweek', 'dddd [في] h:mm A'),
-			pastWeek: msg('relative-pastweek', '[آخر] dddd [في] h:mm A'),
+			thisDay: msg('relative-today', '[Today at] h:mm A'),
+			prevDay: msg('relative-prevday', '[Yesterday at] h:mm A'),
+			nextDay: msg('relative-nextday', '[Tomorrow at] h:mm A'),
+			thisWeek: msg('relative-thisweek', 'dddd [at] h:mm A'),
+			pastWeek: msg('relative-pastweek', '[Last] dddd [at] h:mm A'),
 			other: msg('relative-other', 'YYYY-MM-DD')
 		}
 	};
@@ -1993,7 +1965,7 @@
 		add: function (number, unit) {
 			let num = parseInt(number, 10); // normalize
 			if (isNaN(num)) {
-				throw new Error('عدد غير صالح "' + number + '" تم توفيره.');
+				throw new Error('Invalid number "' + number + '" provided.');
 			}
 			unit = unit.toLowerCase(); // normalize
 			const unitMap = Morebits.date.unitMap;
@@ -2008,7 +1980,7 @@
 				this['set' + unitNorm](this['get' + unitNorm]() + num);
 				return this;
 			}
-			throw new Error('وحدة غير صالحة "' + unit + '": فقط الوحدات التالية مسموحة: ' + Object.keys(unitMap).join(', ') + '.');
+			throw new Error('Invalid unit "' + unit + '": Only ' + Object.keys(unitMap).join(', ') + ' are allowed.');
 		},
 
 		/**
@@ -2062,7 +2034,7 @@
 		 */
 		format: function (formatstr, zone) {
 			if (!this.isValid()) {
-				return 'التاريخ غير صالح'; // Put the truth out, preferable to "NaNNaNNan NaN:NaN" or whatever
+				return 'Invalid date'; // Put the truth out, preferable to "NaNNaNNan NaN:NaN" or whatever
 			}
 			let udate = this;
 			// create a new date object that will contain the date to display as system time
@@ -2084,7 +2056,7 @@
 			};
 			const h24 = udate.getHours(), m = udate.getMinutes(), s = udate.getSeconds(), ms = udate.getMilliseconds();
 			const D = udate.getDate(), M = udate.getMonth() + 1, Y = udate.getFullYear();
-			const h12 = h24 % 12 || 12, amOrPm = h24 >= 12 ? msg('period-pm', 'م') : msg('period-am', 'ص');
+			const h12 = h24 % 12 || 12, amOrPm = h24 >= 12 ? msg('period-pm', 'PM') : msg('period-am', 'AM');
 			const replacementMap = {
 				HH: pad(h24), H: h24, hh: pad(h12), h: h12, A: amOrPm,
 				mm: pad(m), m: m,
@@ -2196,7 +2168,7 @@
 	 * @return {boolean}
 	 */
 	Morebits.wiki.isPageRedirect = function wikipediaIsPageRedirect() {
-		console.warn('تنبيه: تم إهمال استخدام Morebits.wiki.isPageRedirect، يُرجى استخدام Morebits.isPageRedirect بدلاً منها.'); // eslint-disable-line no-console
+		console.warn('NOTE: Morebits.wiki.isPageRedirect has been deprecated, use Morebits.isPageRedirect instead.'); // eslint-disable-line no-console
 		return Morebits.isPageRedirect();
 	};
 
@@ -2334,7 +2306,7 @@
 		} else if (query.format === 'json' && !query.formatversion) {
 			this.query.formatversion = '2';
 		} else if (!['xml', 'json'].includes(query.format)) {
-			this.statelem.error('تنسيق API غير صالح: المدعوم فقط هما xml وjson.');
+			this.statelem.error('Invalid API format: only xml and json are supported.');
 		}
 
 		// Ignore tags for queries and most common unsupported actions, produces warnings
@@ -2435,7 +2407,7 @@
 						// as the first argument to the callback (for legacy code)
 						this.onSuccess.call(this.parent, this);
 					} else {
-						this.statelem.info(msg('done', 'تم'));
+						this.statelem.info(msg('done', 'done'));
 					}
 
 					Morebits.wiki.actionCompleted();
@@ -2447,7 +2419,7 @@
 				function onAPIfailure(jqXHR, statusText, errorThrown) {
 					this.statusText = statusText;
 					this.errorThrown = errorThrown; // frequently undefined
-					this.errorText = msg('api-error', statusText, jqXHR.statusText, statusText + ' "' + jqXHR.statusText + '" حدث أثناء الاتصال بواجهة برمجة التطبيقات (API).');
+					this.errorText = msg('api-error', statusText, jqXHR.statusText, statusText + ' "' + jqXHR.statusText + '" occurred while contacting the API.');
 					return this.returnError();
 				}
 
@@ -2456,7 +2428,7 @@
 
 		returnError: function (callerAjaxParameters) {
 			if (this.errorCode === 'badtoken' && !this.badtokenRetry) {
-				this.statelem.warn(msg('invalid-token-retrying', 'الرمز غير صالح. جارٍ الحصول على رمز جديد والمحاولة مرة أخرى...'));
+				this.statelem.warn(msg('invalid-token-retrying', 'Invalid token. Getting a new token and retrying...'));
 				this.badtokenRetry = true;
 				// Get a new CSRF token and retry. If the original action needs a different
 				// type of action than CSRF, we do one pointless retry before bailing out
@@ -2557,7 +2529,7 @@
 	 * @return {string} MediaWiki CSRF token.
 	 */
 	Morebits.wiki.api.getToken = function () {
-		const tokenApi = new Morebits.wiki.api(msg('getting-token', 'جاري الحصول على الرمز'), {
+		const tokenApi = new Morebits.wiki.api(msg('getting-token', 'Getting token'), {
 			action: 'query',
 			meta: 'tokens',
 			type: 'csrf',
@@ -2616,7 +2588,7 @@
 	Morebits.wiki.page = function (pageName, status) {
 
 		if (!status) {
-			status = msg('opening-page', pageName, 'جاري فتح الصفحة "' + pageName + '"');
+			status = msg('opening-page', pageName, 'Opening page "' + pageName + '"');
 		}
 
 		/**
@@ -2753,7 +2725,7 @@
 
 			// Need to be able to do something after the page loads
 			if (!onSuccess) {
-				ctx.statusElement.error('خطأ داخلي: لم يتم توفير وظيفة رد الاتصال onSuccess لـ load()!');
+				ctx.statusElement.error('Internal error: no onSuccess callback provided to load()!');
 				ctx.onLoadFailure(this);
 				return;
 			}
@@ -2789,7 +2761,7 @@
 				ctx.loadQuery.inprop += '|protection';
 			}
 
-			ctx.loadApi = new Morebits.wiki.api(msg('retrieving-page', 'جاري استرداد الصفحة...'), ctx.loadQuery, fnLoadSuccess, ctx.statusElement, ctx.onLoadFailure);
+			ctx.loadApi = new Morebits.wiki.api(msg('retrieving-page', 'Retrieving page...'), ctx.loadQuery, fnLoadSuccess, ctx.statusElement, ctx.onLoadFailure);
 			ctx.loadApi.setParent(this);
 			ctx.loadApi.post();
 		};
@@ -2815,7 +2787,7 @@
 			const canUseMwUserToken = fnCanUseMwUserToken('edit');
 
 			if (!ctx.pageLoaded && !canUseMwUserToken) {
-				ctx.statusElement.error('خطأ داخلي: لم يتم تعيين معرف المراجعة للتراجع قبل تنفيذ التراجع!');
+				ctx.statusElement.error('Internal error: attempt to save a page that has not been loaded!');
 				ctx.onSaveFailure(this);
 				return;
 			}
@@ -2826,7 +2798,7 @@
 				if (ctx.editMode === 'new' && ctx.newSectionTitle) {
 					ctx.editSummary = '';
 				} else {
-					ctx.statusElement.error('خطأ داخلي: لم يتم تعيين ملخص التعديل قبل الحفظ!');
+					ctx.statusElement.error('Internal error: edit summary not set before save!');
 					ctx.onSaveFailure(this);
 					return;
 				}
@@ -2837,15 +2809,15 @@
 				!confirm(
 					ctx.fullyProtected === 'infinity' ?
 						msg('protected-indef-edit-warning', ctx.pageName,
-							'أنت على وشك إجراء تعديل على الصفحة المحمية بالكامل "' + ctx.pageName + '" (محمية إلى أجل غير مسمى). \n\nانقر فوق "موافق" للمتابعة في التعديل ، أو "إلغاء" لتخطي هذا التعديل.'
+							'You are about to make an edit to the fully protected page "' + ctx.pageName + '" (protected indefinitely).  \n\nClick OK to proceed with the edit, or Cancel to skip this edit.'
 						) :
 						msg('protected-edit-warning', ctx.pageName, ctx.fullyProtected,
-							'أنت على وشك إجراء تعديل على الصفحة المحمية بالكامل "' + ctx.pageName +
-							'" (تنتهي الحماية في ' + new Morebits.date(ctx.fullyProtected).calendar('utc') + ' (UTC)). \n\nانقر فوق "موافق" للمتابعة في التعديل ، أو "إلغاء" لتخطي هذا التعديل.'
+							'You are about to make an edit to the fully protected page "' + ctx.pageName +
+							'" (protection expiring ' + new Morebits.date(ctx.fullyProtected).calendar('utc') + ' (UTC)).  \n\nClick OK to proceed with the edit, or Cancel to skip this edit.'
 						)
 				)
 			) {
-				ctx.statusElement.error(msg('protected-aborted', 'تم إلغاء التعديل على الصفحة المحمية بالكامل.'));
+				ctx.statusElement.error(msg('protected-aborted', 'Edit to fully protected page was aborted.'));
 				ctx.onSaveFailure(this);
 				return;
 			}
@@ -2936,7 +2908,7 @@
 				query.redirect = true;
 			}
 
-			ctx.saveApi = new Morebits.wiki.api(msg('saving-page', 'جارٍ حفظ الصفحة...'), query, fnSaveSuccess, ctx.statusElement, fnSaveError);
+			ctx.saveApi = new Morebits.wiki.api(msg('saving-page', 'Saving page...'), query, fnSaveSuccess, ctx.statusElement, fnSaveError);
 			ctx.saveApi.setParent(this);
 			ctx.saveApi.post();
 		};
@@ -3479,7 +3451,7 @@
 			ctx.onLookupCreationSuccess = onSuccess;
 			ctx.onLookupCreationFailure = onFailure || emptyFunction;
 			if (!onSuccess) {
-				ctx.statusElement.error('خطأ داخلي: لم يتم تقديم دالة onSuccess callback في lookupCreation()!');
+				ctx.statusElement.error('Internal error: no onSuccess callback provided to lookupCreation()!');
 				ctx.onLookupCreationFailure(this);
 				return;
 			}
@@ -3508,7 +3480,7 @@
 				query.redirects = ''; // follow all redirects
 			}
 
-			ctx.lookupCreationApi = new Morebits.wiki.api(msg('getting-creator', 'استرجاع معلومات إنشاء الصفحة'), query, fnLookupCreationSuccess, ctx.statusElement, ctx.onLookupCreationFailure);
+			ctx.lookupCreationApi = new Morebits.wiki.api(msg('getting-creator', 'Retrieving page creation information'), query, fnLookupCreationSuccess, ctx.statusElement, ctx.onLookupCreationFailure);
 			ctx.lookupCreationApi.setParent(this);
 			ctx.lookupCreationApi.post();
 		};
@@ -3548,7 +3520,7 @@
 			}
 
 			if (!ctx.moveDestination) {
-				ctx.statusElement.error('خطأ داخلي: لم يتم تعيين اسم الصفحة الوجهة قبل النقل!');
+				ctx.statusElement.error('Internal error: destination page name was not set before move!');
 				ctx.onMoveFailure(this);
 				return;
 			}
@@ -3558,7 +3530,7 @@
 			} else {
 				const query = fnNeedTokenInfoQuery('move');
 
-				ctx.moveApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), query, fnProcessMove, ctx.statusElement, ctx.onMoveFailure);
+				ctx.moveApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), query, fnProcessMove, ctx.statusElement, ctx.onMoveFailure);
 				ctx.moveApi.setParent(this);
 				ctx.moveApi.post();
 			}
@@ -3597,7 +3569,7 @@
 					format: 'json'
 				};
 
-				ctx.patrolApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), patrolQuery, fnProcessPatrol);
+				ctx.patrolApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), patrolQuery, fnProcessPatrol);
 				ctx.patrolApi.setParent(this);
 				ctx.patrolApi.post();
 			}
@@ -3636,7 +3608,7 @@
 				} else {
 					const query = fnNeedTokenInfoQuery('triage');
 
-					ctx.triageApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), query, fnProcessTriageList);
+					ctx.triageApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), query, fnProcessTriageList);
 					ctx.triageApi.setParent(this);
 					ctx.triageApi.post();
 				}
@@ -3663,7 +3635,7 @@
 			} else {
 				const query = fnNeedTokenInfoQuery('delete');
 
-				ctx.deleteApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), query, fnProcessDelete, ctx.statusElement, ctx.onDeleteFailure);
+				ctx.deleteApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), query, fnProcessDelete, ctx.statusElement, ctx.onDeleteFailure);
 				ctx.deleteApi.setParent(this);
 				ctx.deleteApi.post();
 			}
@@ -3688,7 +3660,7 @@
 			} else {
 				const query = fnNeedTokenInfoQuery('undelete');
 
-				ctx.undeleteApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), query, fnProcessUndelete, ctx.statusElement, ctx.onUndeleteFailure);
+				ctx.undeleteApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), query, fnProcessUndelete, ctx.statusElement, ctx.onUndeleteFailure);
 				ctx.undeleteApi.setParent(this);
 				ctx.undeleteApi.post();
 			}
@@ -3709,7 +3681,7 @@
 			}
 
 			if (!ctx.protectEdit && !ctx.protectMove && !ctx.protectCreate) {
-				ctx.statusElement.error('خطأ داخلي: يجب تعيين الحماية للتعديل أو النقل أو الإنشاء قبل استدعاء protect()!');
+				ctx.statusElement.error('Internal error: you must set edit and/or move and/or create protection before calling protect()!');
 				ctx.onProtectFailure(this);
 				return;
 			}
@@ -3719,7 +3691,7 @@
 			// protection levels from the server
 			const query = fnNeedTokenInfoQuery('protect');
 
-			ctx.protectApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), query, fnProcessProtect, ctx.statusElement, ctx.onProtectFailure);
+			ctx.protectApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), query, fnProcessProtect, ctx.statusElement, ctx.onProtectFailure);
 			ctx.protectApi.setParent(this);
 			ctx.protectApi.post();
 		};
@@ -3744,7 +3716,7 @@
 			}
 
 			if (!ctx.flaggedRevs) {
-				ctx.statusElement.error('خطأ داخلي: يجب تعيين flaggedRevs قبل استدعاء stabilize()!');
+				ctx.statusElement.error('Internal error: you must set flaggedRevs before calling stabilize()!');
 				ctx.onStabilizeFailure(this);
 				return;
 			}
@@ -3754,7 +3726,7 @@
 			} else {
 				const query = fnNeedTokenInfoQuery('stabilize');
 
-				ctx.stabilizeApi = new Morebits.wiki.api(msg('getting-token', 'استرجاع الرمز...'), query, fnProcessStabilize, ctx.statusElement, ctx.onStabilizeFailure);
+				ctx.stabilizeApi = new Morebits.wiki.api(msg('getting-token', 'retrieving token...'), query, fnProcessStabilize, ctx.statusElement, ctx.onStabilizeFailure);
 				ctx.stabilizeApi.setParent(this);
 				ctx.stabilizeApi.post();
 			}
@@ -3876,13 +3848,13 @@
 			}
 			ctx.csrfToken = response.tokens.csrftoken;
 			if (!ctx.csrfToken) {
-				ctx.statusElement.error(msg('token-fetch-fail', 'فشل في إسترجاع رمز التعديل.'));
+				ctx.statusElement.error(msg('token-fetch-fail', 'Failed to retrieve edit token.'));
 				ctx.onLoadFailure(this);
 				return;
 			}
 			ctx.loadTime = ctx.loadApi.getResponse().curtimestamp;
 			if (!ctx.loadTime) {
-				ctx.statusElement.error('فشل في استرجاع الطابع الزمني الحالي.');
+				ctx.statusElement.error('Failed to retrieve current timestamp.');
 				ctx.onLoadFailure(this);
 				return;
 			}
@@ -3914,7 +3886,7 @@
 			if (ctx.editMode === 'revert') {
 				ctx.revertCurID = rev && rev.revid;
 				if (!ctx.revertCurID) {
-					ctx.statusElement.error('فشل في استرجاع المراجعة الحالية.');
+					ctx.statusElement.error('Failed to retrieve current revision ID.');
 					ctx.onLoadFailure(this);
 					return;
 				}
@@ -3923,13 +3895,13 @@
 					if (rev && rev.userhidden) { // username was RevDel'd or oversighted
 						ctx.revertUser = '<username hidden>';
 					} else {
-						ctx.statusElement.error('فشل في معرفة المستخدم لذي راجعها.');
+						ctx.statusElement.error('Failed to retrieve user who made the revision.');
 						ctx.onLoadFailure(this);
 						return;
 					}
 				}
 				// set revert edit summary
-				ctx.editSummary = '[[مساعدة:تراجع|تراجع]] إلى المراجعة ' + ctx.revertOldID + ' بواسطة ' + ctx.revertUser + ': ' + ctx.editSummary;
+				ctx.editSummary = '[[Help:Revert|Reverted]] to revision ' + ctx.revertOldID + ' by ' + ctx.revertUser + ': ' + ctx.editSummary;
 			}
 
 			ctx.pageLoaded = true;
@@ -3948,7 +3920,7 @@
 			if (page) {
 				// check for invalid titles
 				if (page.invalid) {
-					ctx.statusElement.error(msg('invalid-title', ctx.pageName, 'عنوان الصفحة غير صالح: ' + ctx.pageName));
+					ctx.statusElement.error(msg('invalid-title', ctx.pageName, 'The page title is invalid: ' + ctx.pageName));
 					onFailure(this);
 					return false; // abort
 				}
@@ -3961,20 +3933,20 @@
 					const origNs = new mw.Title(ctx.pageName).namespace;
 					const newNs = new mw.Title(resolvedName).namespace;
 					if (origNs !== newNs && !ctx.followCrossNsRedirect) {
-						ctx.statusElement.error(msg('cross-redirect-abort', ctx.pageName, resolvedName, ctx.pageName + ' هو إعادة توجيه عبر النطاقات إلى ' + resolvedName + '، تم الإيقاف'));
+						ctx.statusElement.error(msg('cross-redirect-abort', ctx.pageName, resolvedName, ctx.pageName + ' is a cross-namespace redirect to ' + resolvedName + ', aborted'));
 						onFailure(this);
 						return false;
 					}
 
 					// only notify user for redirects, not normalization
-					new Morebits.status('Note', msg('redirected', ctx.pageName, resolvedName, 'تم ترك تحويلة من ' + ctx.pageName + ' إلى ' + resolvedName));
+					new Morebits.status('Note', msg('redirected', ctx.pageName, resolvedName, 'Redirected from ' + ctx.pageName + ' to ' + resolvedName));
 				}
 
 				ctx.pageName = resolvedName; // update to redirect target or normalized name
 
 			} else {
 				// could be a circular redirect or other problem
-				ctx.statusElement.error(msg('redirect-resolution-fail', ctx.pageName, 'تعذر ترك تحويلة لـ: ' + ctx.pageName));
+				ctx.statusElement.error(msg('redirect-resolution-fail', ctx.pageName, 'Could not resolve redirects for: ' + ctx.pageName));
 				onFailure(this);
 
 				// force error to stay on the screen
@@ -4049,9 +4021,9 @@
 			// errors here are only generated by extensions which hook APIEditBeforeSave within MediaWiki,
 			// which as of 1.34.0-wmf.23 (Sept 2019) should only encompass captcha messages
 			if (response.edit.captcha) {
-				ctx.statusElement.error('لم يتم حفظ الصفحة لأن خادم الويكي يطلب منك ملء الكابتشا.');
+				ctx.statusElement.error('Could not save the page because the wiki server wanted you to fill out a CAPTCHA.');
 			} else {
-				ctx.statusElement.error(msg('خطأ غير معروف تم تلقيه من API أثناء حفظ الصفحة'));
+				ctx.statusElement.error(msg('api-error-unknown', 'Unknown error received from API while saving page'));
 			}
 
 			// force error to stay on the screen
@@ -4073,10 +4045,10 @@
 					titles: ctx.pageName // redirects are already resolved
 				};
 
-				const purgeApi = new Morebits.wiki.api(msg('editconflict-purging', 'هناك تضارب تحريري، جارٍ إفراغ الإختزان للخادم'), purgeQuery, (() => {
+				const purgeApi = new Morebits.wiki.api(msg('editconflict-purging', 'Edit conflict detected, purging server cache'), purgeQuery, (() => {
 					--Morebits.wiki.numberOfActionsLeft; // allow for normal completion if retry succeeds
 
-					ctx.statusElement.info(msg('editconflict-retrying', 'هناك تضارب تحريري، جارٍ تطبيق التعديل'));
+					ctx.statusElement.info(msg('editconflict-retrying', 'Edit conflict detected, reapplying edit'));
 					if (fnCanUseMwUserToken('edit')) {
 						ctx.saveApi.post(); // necessarily append, prepend, or newSection, so this should work as desired
 					} else {
@@ -4089,7 +4061,7 @@
 			} else if ((errorCode === null || errorCode === undefined) && ctx.retries++ < ctx.maxRetries) {
 
 				// the error might be transient, so try again
-				ctx.statusElement.info(msg('save-failed-retrying', 2, 'فشل الحفظ، إعادة المحاولة بعد ثانيتين ...'));
+				ctx.statusElement.info(msg('save-failed-retrying', 2, 'Save failed, retrying in 2 seconds ...'));
 				--Morebits.wiki.numberOfActionsLeft; // allow for normal completion if retry succeeds
 
 				// wait for sometime for client to regain connectivity
@@ -4107,15 +4079,15 @@
 
 					case 'protectedpage':
 						// non-admin attempting to edit a protected page - this gives a friendlier message than the default
-						ctx.statusElement.error('فشل حفظ التعديل: الصفحة محمية');
+						ctx.statusElement.error('Failed to save edit: Page is protected');
 						break;
 
 					case 'abusefilter-disallowed':
-						ctx.statusElement.error('مُنعت من التعديل بواسطة مُرشح التحرير: "' + errorData.abusefilter.description + '".');
+						ctx.statusElement.error('The edit was disallowed by the edit filter: "' + errorData.abusefilter.description + '".');
 						break;
 
 					case 'abusefilter-warning':
-						ctx.statusElement.error(['تخذير من مُرشح التحرير: "', errorData.abusefilter.description, '". إذا كنت ترغب في المتابعة، يرجى تنفيذ التعديل مجددًا. هذا التحذير لن يظهر مرة أخرى.']);
+						ctx.statusElement.error(['A warning was returned by the edit filter: "', errorData.abusefilter.description, '". If you wish to proceed with the edit, please carry it out again. This warning will not appear a second time.']);
 						// We should provide the user with a way to automatically retry the action if they so choose -
 						// I can't see how to do this without creating a UI dependency on Morebits.wiki.page though -- TTO
 						break;
@@ -4123,11 +4095,11 @@
 					case 'spamblacklist':
 						// If multiple items are blacklisted, we only return the first
 						var spam = errorData.spamblacklist.matches[0];
-						ctx.statusElement.error('لا يمكن حفظ الصفحة لأن الرابط ' + spam + ' مدرج في قائمة السوداء');
+						ctx.statusElement.error('Could not save the page because the URL ' + spam + ' is on the spam blacklist');
 						break;
 
 					default:
-						ctx.statusElement.error('فشل في حفظ التعديل: ' + ctx.saveApi.getErrorText());
+						ctx.statusElement.error('Failed to save edit: ' + ctx.saveApi.getErrorText());
 				}
 
 				ctx.editMode = 'all'; // cancel append/prepend/newSection/revert modes
@@ -4153,7 +4125,7 @@
 
 			const rev = response.pages[0].revisions && response.pages[0].revisions[0];
 			if (!rev) {
-				ctx.statusElement.error('تعذّر العثور على أي تعديلات للصفحة ' + ctx.pageName);
+				ctx.statusElement.error('Could not find any revisions of ' + ctx.pageName);
 				ctx.onLookupCreationFailure(this);
 				return;
 			}
@@ -4162,25 +4134,25 @@
 
 				ctx.creator = rev.user;
 				if (!ctx.creator) {
-					ctx.statusElement.error('تعذّر العثور على اسم منشئ الصفحة');
+					ctx.statusElement.error('Could not find name of page creator');
 					ctx.onLookupCreationFailure(this);
 					return;
 				}
 				ctx.timestamp = rev.timestamp;
 				if (!ctx.timestamp) {
-					ctx.statusElement.error('تعذّر العثور على تاريخ إنشاء الصفحة');
+					ctx.statusElement.error('Could not find timestamp of page creation');
 					ctx.onLookupCreationFailure(this);
 					return;
 				}
 
-				ctx.statusElement.info('تم استرداد معلومات إنشاء الصفحة');
+				ctx.statusElement.info('retrieved page creation information');
 				ctx.onLookupCreationSuccess(this);
 
 			} else {
 				ctx.lookupCreationApi.query.rvlimit = 50; // modify previous query to fetch more revisions
 				ctx.lookupCreationApi.query.titles = ctx.pageName; // update pageName if redirect resolution took place in earlier query
 
-				ctx.lookupCreationApi = new Morebits.wiki.api('جارٍ استرداد معلومات إنشاء الصفحة', ctx.lookupCreationApi.query, fnLookupNonRedirectCreator, ctx.statusElement, ctx.onLookupCreationFailure);
+				ctx.lookupCreationApi = new Morebits.wiki.api('Retrieving page creation information', ctx.lookupCreationApi.query, fnLookupNonRedirectCreator, ctx.statusElement, ctx.onLookupCreationFailure);
 				ctx.lookupCreationApi.setParent(this);
 				ctx.lookupCreationApi.post();
 			}
@@ -4205,19 +4177,19 @@
 				ctx.creator = revs[0].user;
 				ctx.timestamp = revs[0].timestamp;
 				if (!ctx.creator) {
-					ctx.statusElement.error('لم يتم العثور على اسم منشئ الصفحة');
+					ctx.statusElement.error('Could not find name of page creator');
 					ctx.onLookupCreationFailure(this);
 					return;
 				}
 
 			}
 			if (!ctx.timestamp) {
-				ctx.statusElement.error('لم يتم العثور على الطابع الزمني لإنشاء الصفحة');
+				ctx.statusElement.error('Could not find timestamp of page creation');
 				ctx.onLookupCreationFailure(this);
 				return;
 			}
 
-			ctx.statusElement.info('تم استرداد معلومات إنشاء الصفحة');
+			ctx.statusElement.info('retrieved page creation information');
 			ctx.onLookupCreationSuccess(this);
 
 		};
@@ -4233,13 +4205,13 @@
 		var fnPreflightChecks = function (action, onFailure) {
 			// if a non-admin tries to do this, don't bother
 			if (!Morebits.userIsSysop && action !== 'move') {
-				ctx.statusElement.error('لا يمكن ' + action + 'الصفحة: هذه الصلاحية متاحة فقط للإداريين');
+				ctx.statusElement.error('Cannot ' + action + 'page : only admins can do that');
 				onFailure(this);
 				return false;
 			}
 
 			if (!ctx.editSummary) {
-				ctx.statusElement.error('خطأ داخلي: ' + action + ' لم يُحدد سبب (استخدام دالة setEditSummary)!');
+				ctx.statusElement.error('Internal error: ' + action + ' reason not set (use setEditSummary function)!');
 				onFailure(this);
 				return false;
 			}
@@ -4264,7 +4236,7 @@
 			const saltMissing = action === 'protect' && !missing && ctx.protectCreate;
 
 			if (actionMissing || protectMissing || saltMissing) {
-				ctx.statusElement.error('لا يمكن ' + action + ' الصفحة لأنها ' + (missing ? 'لم تعد' : 'موجودة') + ' بالفعل');
+				ctx.statusElement.error('Cannot ' + action + ' the page because it ' + (missing ? 'no longer' : 'already') + ' exists');
 				onFailure(this);
 				return false;
 			}
@@ -4278,16 +4250,16 @@
 				editprot = response.pages[0].protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
 			}
 			if (editprot && !ctx.suppressProtectWarning &&
-				!confirm('أنت على وشك ' + action + ' صفحة محمية بالكامل "' + ctx.pageName +
-					(editprot.expiry === 'infinity' ? '" (محمية إلى أجل غير مسمى)' : '" (تنتهي الحماية ' + new Morebits.date(editprot.expiry).calendar('utc') + ' (UTC))') +
-					'.  \n\nانقر فوق "موافق" للمتابعة باستخدام ' + action + '، أو انقر فوق "إلغاء" للتخطي.')) {
-				ctx.statusElement.error('لم يتم ' + action + ' على الصفحة المحمية بالكامل.');
+				!confirm('You are about to ' + action + ' the fully protected page "' + ctx.pageName +
+					(editprot.expiry === 'infinity' ? '" (protected indefinitely)' : '" (protection expiring ' + new Morebits.date(editprot.expiry).calendar('utc') + ' (UTC))') +
+					'.  \n\nClick OK to proceed with ' + action + ', or Cancel to skip.')) {
+				ctx.statusElement.error('Aborted ' + action + ' on fully protected page.');
 				onFailure(this);
 				return false;
 			}
 
 			if (!response.tokens.csrftoken) {
-				ctx.statusElement.error('فشل في استرداد الرمز.');
+				ctx.statusElement.error('Failed to retrieve token.');
 				onFailure(this);
 				return false;
 			}
@@ -4339,7 +4311,7 @@
 				query.noredirect = 'true';
 			}
 
-			ctx.moveProcessApi = new Morebits.wiki.api(msg('moving-page', 'جارٍ نقل الصفحة...'), query, ctx.onMoveSuccess, ctx.statusElement, ctx.onMoveFailure);
+			ctx.moveProcessApi = new Morebits.wiki.api(msg('moving-page', 'moving page...'), query, ctx.onMoveSuccess, ctx.statusElement, ctx.onMoveFailure);
 			ctx.moveProcessApi.setParent(this);
 			ctx.moveProcessApi.post();
 		};
@@ -4378,7 +4350,7 @@
 				query.tags = ctx.changeTags;
 			}
 
-			const patrolStat = new Morebits.status('وضع علامة على الصفحة كمُراجعة');
+			const patrolStat = new Morebits.status('Marking page as patrolled');
 
 			ctx.patrolProcessApi = new Morebits.wiki.api('patrolling page...', query, null, patrolStat);
 			ctx.patrolProcessApi.setParent(this);
@@ -4409,7 +4381,7 @@
 				format: 'json'
 			};
 
-			ctx.triageProcessListApi = new Morebits.wiki.api('جارٍ فحص حالة التقييم...', query, fnProcessTriage);
+			ctx.triageProcessListApi = new Morebits.wiki.api('checking curation status...', query, fnProcessTriage);
 			ctx.triageProcessListApi.setParent(this);
 			ctx.triageProcessListApi.post();
 		};
@@ -4434,7 +4406,7 @@
 					token: ctx.csrfToken,
 					format: 'json'
 				};
-				const triageStat = new Morebits.status('وضع علامة على الصفحة كمنسقة');
+				const triageStat = new Morebits.status('Marking page as curated');
 				ctx.triageProcessApi = new Morebits.wiki.api('curating page...', query, null, triageStat);
 				ctx.triageProcessApi.setParent(this);
 				ctx.triageProcessApi.post();
@@ -4479,7 +4451,7 @@
 				query.watchlistexpiry = ctx.watchlistExpiry;
 			}
 
-			ctx.deleteProcessApi = new Morebits.wiki.api('جارٍ حذف الصفحة...', query, ctx.onDeleteSuccess, ctx.statusElement, fnProcessDeleteError);
+			ctx.deleteProcessApi = new Morebits.wiki.api('deleting page...', query, ctx.onDeleteSuccess, ctx.statusElement, fnProcessDeleteError);
 			ctx.deleteProcessApi.setParent(this);
 			ctx.deleteProcessApi.post();
 		};
@@ -4491,18 +4463,18 @@
 
 			// check for "Database query error"
 			if (errorCode === 'internal_api_error_DBQueryError' && ctx.retries++ < ctx.maxRetries) {
-				ctx.statusElement.info('خطأ في استعلام قاعدة البيانات، يتم إعادة المحاولة');
-				--Morebits.wiki.numberOfActionsLeft;  // allow for normal completion if retry succeeds
+				ctx.statusElement.info('Database query error, retrying');
+				--Morebits.wiki.numberOfActionsLeft; // allow for normal completion if retry succeeds
 				ctx.deleteProcessApi.post(); // give it another go!
 
 			} else if (errorCode === 'missingtitle') {
-				ctx.statusElement.error('لا يمكن حذف الصفحة لأنها لم تعد موجودة');
+				ctx.statusElement.error('Cannot delete the page, because it no longer exists');
 				if (ctx.onDeleteFailure) {
 					ctx.onDeleteFailure.call(this, ctx.deleteProcessApi); // invoke callback
 				}
 				// hard error, give up
 			} else {
-				ctx.statusElement.error('فشل في حذف الصفحة: ' + ctx.deleteProcessApi.getErrorText());
+				ctx.statusElement.error('Failed to delete the page: ' + ctx.deleteProcessApi.getErrorText());
 				if (ctx.onDeleteFailure) {
 					ctx.onDeleteFailure.call(this, ctx.deleteProcessApi); // invoke callback
 				}
@@ -4547,7 +4519,7 @@
 				query.watchlistexpiry = ctx.watchlistExpiry;
 			}
 
-			ctx.undeleteProcessApi = new Morebits.wiki.api('جارٍ استعادة الصفحة...', query, ctx.onUndeleteSuccess, ctx.statusElement, fnProcessUndeleteError);
+			ctx.undeleteProcessApi = new Morebits.wiki.api('undeleting page...', query, ctx.onUndeleteSuccess, ctx.statusElement, fnProcessUndeleteError);
 			ctx.undeleteProcessApi.setParent(this);
 			ctx.undeleteProcessApi.post();
 		};
@@ -4560,23 +4532,23 @@
 			// check for "Database query error"
 			if (errorCode === 'internal_api_error_DBQueryError') {
 				if (ctx.retries++ < ctx.maxRetries) {
-					ctx.statusElement.info('خطأ في استعلام قاعدة البيانات، يتم إعادة المحاولة');
-					--Morebits.wiki.numberOfActionsLeft;  // allow for normal completion if retry succeeds
+					ctx.statusElement.info('Database query error, retrying');
+					--Morebits.wiki.numberOfActionsLeft; // allow for normal completion if retry succeeds
 					ctx.undeleteProcessApi.post(); // give it another go!
 				} else {
-					ctx.statusElement.error('خطأ متكرر في استعلام قاعدة البيانات، يرجى المحاولة مجددًا');
+					ctx.statusElement.error('Repeated database query error, please try again');
 					if (ctx.onUndeleteFailure) {
 						ctx.onUndeleteFailure.call(this, ctx.undeleteProcessApi); // invoke callback
 					}
 				}
 			} else if (errorCode === 'cantundelete') {
-				ctx.statusElement.error('لا يمكن استعادة الصفحة، إما لعدم وجود تعديلات للاستعادة أو لأنها مستعادة مسبقًا');
+				ctx.statusElement.error('Cannot undelete the page, either because there are no revisions to undelete or because it has already been undeleted');
 				if (ctx.onUndeleteFailure) {
 					ctx.onUndeleteFailure.call(this, ctx.undeleteProcessApi); // invoke callback
 				}
 				// hard error, give up
 			} else {
-				ctx.statusElement.error('فشل في استعادة الصفحة: ' + ctx.undeleteProcessApi.getErrorText());
+				ctx.statusElement.error('Failed to undelete the page: ' + ctx.undeleteProcessApi.getErrorText());
 				if (ctx.onUndeleteFailure) {
 					ctx.onUndeleteFailure.call(this, ctx.undeleteProcessApi); // invoke callback
 				}
@@ -4631,10 +4603,10 @@
 				// but seems reasonable to avoid dumb values and misleading log entries (T265626)
 				if (((!ctx.protectEdit || ctx.protectEdit.level !== 'sysop') ||
 					(!ctx.protectMove || ctx.protectMove.level !== 'sysop')) &&
-					!confirm('لقد قمت بتمكين الحماية المتتالية على "' + ctx.pageName +
-						'" ولكنك لم تحدد حماية موحدة على مستوى sysop.\n\n' +
-						'انقر فوق "موافق" لضبط المتابعة بحماية متتالية على مستوى sysop ، أو انقر فوق "إلغاء الأمر" لتخطي هذا الإجراء.')) {
-					ctx.statusElement.error('تم إحباط الحماية المتتالية.');
+					!confirm('You have cascading protection enabled on "' + ctx.pageName +
+						'" but have not selected uniform sysop-level protection.\n\n' +
+						'Click OK to adjust and proceed with sysop-level cascading protection, or Cancel to skip this action.')) {
+					ctx.statusElement.error('Cascading protection was aborted.');
 					ctx.onProtectFailure(this);
 					return;
 				}
@@ -5599,7 +5571,7 @@
 		 */
 		this.run = function (worker, postFinish) {
 			if (ctx.running) {
-				ctx.statusElement.error('عملية الدُفعات قيد التشغيل بالفعل');
+				ctx.statusElement.error('Batch operation is already running');
 				return;
 			}
 			ctx.running = true;
@@ -5614,7 +5586,7 @@
 
 			const total = ctx.pageList.length;
 			if (!total) {
-				ctx.statusElement.info(msg('batch-no-pages', 'لم يتم تحديد صفحات'));
+				ctx.statusElement.info(msg('batch-no-pages', 'no pages specified'));
 				ctx.running = false;
 				if (ctx.postFinish) {
 					ctx.postFinish();
@@ -5649,10 +5621,10 @@
 					if (arg.getPageName || arg.pageName || (arg.query && arg.query.title)) {
 						// we know the page title - display a relevant message
 						const pageName = arg.getPageName ? arg.getPageName() : arg.pageName || arg.query.title;
-						statelem.info(msg('batch-done-page', pageName, 'تم الانتهاء من [[ ' + pageName + ' ]]'));
+						statelem.info(msg('batch-done-page', pageName, 'completed ([[' + pageName + ']])'));
 					} else {
 						// we don't know the page title - just display a generic message
-						statelem.info(msg('done', 'تم'));
+						statelem.info(msg('done', 'done'));
 					}
 				} else {
 					// remove the status line automatically produced by Morebits.wiki.*
@@ -5660,7 +5632,7 @@
 				}
 
 			} else if (typeof arg === 'string' && ctx.options.preserveIndividualStatusLines) {
-				new Morebits.status(arg, msg('batch-done-page', arg, 'أكتمل ([[' + arg + ']])'));
+				new Morebits.status(arg, msg('batch-done-page', arg, 'completed ([[' + arg + ']])'));
 			}
 
 			ctx.countFinishedSuccess++;
@@ -5704,8 +5676,8 @@
 					fnStartNewChunk();
 				}
 			} else if (ctx.countFinished === total) {
-				const statusString = msg('batch-progress', ctx.countFinishedSuccess, ctx.countFinished, 'نُفذ (' + ctx.countFinishedSuccess +
-					'/' + ctx.countFinished + ' إجراء بنجاح!)');
+				const statusString = msg('batch-progress', ctx.countFinishedSuccess, ctx.countFinished, 'Done (' + ctx.countFinishedSuccess +
+					'/' + ctx.countFinished + ' actions completed successfully)');
 				if (ctx.countFinishedSuccess < ctx.countFinished) {
 					ctx.statusElement.warn(statusString);
 				} else {
@@ -6010,7 +5982,7 @@
 				} else if (value.textContent) {
 					button.textContent = value.textContent;
 				} else {
-					button.textContent = msg('submit', 'تنفيذ');
+					button.textContent = msg('submit', 'Submit');
 				}
 
 				button.className = value.className || 'submitButtonProxy';

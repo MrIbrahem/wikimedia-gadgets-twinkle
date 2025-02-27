@@ -15,101 +15,95 @@
 	Twinkle.config = {};
 
 	Twinkle.config.watchlistEnums = {
-		"نعم": 'أضف إلى قائمة المراقبة (بلا تحديد مدة)',
 		yes: 'أضف إلى قائمة المراقبة (بلا تحديد مدة)',
 		no: 'لا تضف إلى قائمة المراقبة',
-		"لا": 'لا تضف إلى قائمة المراقبة',
 		default: 'اتبع تفضيلات موقعك',
 		'1 week': 'راقب لمدة أسبوع واحد',
-		'أسبوع واحد': 'راقب لمدة أسبوع واحد',
 		'1 month': 'راقب لمدة شهر واحد',
-		'شهر واحد': 'راقب لمدة شهر واحد',
-		'3 أشهر': 'راقب لمدة 3 أشهر',
 		'3 months': 'راقب لمدة 3 أشهر',
-		'6 أشهر': 'راقب لمدة 6 أشهر',
 		'6 months': 'راقب لمدة 6 أشهر'
 	};
 
 	Twinkle.config.commonSets = {
 		csdCriteria: {
 			db: 'Custom rationale ({{db}})',
-			g1: 'G1', g2: 'G2', g3: 'G3', g4: 'G4', g5: 'G5', g6: 'G6', g7: 'G7', g8: 'G8', g10: 'G10', g11: 'G11', g12: 'G12', g13: 'G13', g14: 'G14',
-			a1: 'A1', a2: 'A2', a3: 'A3', a7: 'A7', a9: 'A9', a10: 'A10', a11: 'A11',
-			u1: 'U1', u2: 'U2', u5: 'U5',
-			f1: 'F1', f2: 'F2', f3: 'F3', f7: 'F7', f8: 'F8', f9: 'F9',
-			c1: 'C1', c4: 'C4',
-			r2: 'R2', r3: 'R3', r4: 'R4'
+			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
+			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
+			u1: "U1", u2: "U2", u5: "U5",
+			f1: "F1", f2: "F2", f3: "F3", f7: "F7", f8: "F8", f9: "F9",
+			c1: "C1", c4: "C4",
+			r2: "R2", r3: "R3", r4: "R4"
 		},
 		csdCriteriaDisplayOrder: [
-			'db',
-			'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g10', 'g11', 'g12', 'g13', 'g14',
-			'a1', 'a2', 'a3', 'a7', 'a9', 'a10', 'a11',
-			'u1', 'u2', 'u5',
-			'f1', 'f2', 'f3', 'f7', 'f8', 'f9',
-			'c1', 'c4',
-			'r2', 'r3', 'r4'
+			"db",
+			"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g10", "g11", "g12", "g13", "g14",
+			"a1", "a2", "a3", "a7", "a9", "a10", "a11",
+			"u1", "u2", "u5",
+			"f1", "f2", "f3", "f7", "f8", "f9",
+			"c1", "c4",
+			"r2", "r3", "r4"
 		],
 		csdCriteriaNotification: {
 			db: 'Custom rationale ({{db}})',
-			g1: 'G1', g2: 'G2', g3: 'G3', g4: 'G4', g6: 'G6 ("copy-paste move" only)',
-			g10: 'G10', g11: 'G11', g12: 'G12', g13: 'G13', g14: 'G14',
-			a1: 'A1', a2: 'A2', a3: 'A3', a7: 'A7', a9: 'A9', a10: 'A10', a11: 'A11',
-			u5: 'U5',
-			f1: 'F1', f2: 'F2', f3: 'F3', f7: 'F7', f9: 'F9',
-			c1: 'C1',
-			r2: 'R2', r3: 'R3', r4: 'R4'
+			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g6: 'G6 ("copy-paste move" only)',
+			g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
+			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
+			u5: "U5",
+			f1: "F1", f2: "F2", f3: "F3", f7: "F7", f9: "F9",
+			c1: "C1",
+			r2: "R2", r3: "R3", r4: "R4"
 		},
 		csdCriteriaNotificationDisplayOrder: [
-			'db',
-			'g1', 'g2', 'g3', 'g4', 'g6', 'g10', 'g11', 'g12', 'g13', 'g14',
-			'a1', 'a2', 'a3', 'a7', 'a9', 'a10', 'a11',
-			'u5',
-			'f1', 'f2', 'f3', 'f7', 'f9',
-			'c1',
-			'r2', 'r3', 'r4'
+			"db",
+			"g1", "g2", "g3", "g4", "g6", "g10", "g11", "g12", "g13", "g14",
+			"a1", "a2", "a3", "a7", "a9", "a10", "a11",
+			"u5",
+			"f1", "f2", "f3", "f7", "f9",
+			"c1",
+			"r2", "r3", "r4"
 		],
 		csdAndImageDeletionCriteria: {
 			db: 'Custom rationale ({{db}})',
-			g1: 'G1', g2: 'G2', g3: 'G3', g4: 'G4', g5: 'G5', g6: 'G6', g7: 'G7', g8: 'G8', g10: 'G10', g11: 'G11', g12: 'G12', g13: 'G13', g14: 'G14',
-			a1: 'A1', a2: 'A2', a3: 'A3', a7: 'A7', a9: 'A9', a10: 'A10', a11: 'A11',
-			u1: 'U1', u2: 'U2', u5: 'U5',
-			f1: 'F1', f2: 'F2', f3: 'F3', f4: 'F4', f5: 'F5', f6: 'F6', f7: 'F7', f8: 'F8', f9: 'F9', f11: 'F11',
-			c1: 'C1', c4: 'C4',
-			r2: 'R2', r3: 'R3', r4: 'R4'
+			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
+			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
+			u1: "U1", u2: "U2", u5: "U5",
+			f1: "F1", f2: "F2", f3: "F3", f4: "F4", f5: "F5", f6: "F6", f7: "F7", f8: "F8", f9: "F9", f11: "F11",
+			c1: "C1", c4: "C4",
+			r2: "R2", r3: "R3", r4: "R4"
 		},
 		csdAndImageDeletionCriteriaDisplayOrder: [
-			'db',
-			'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g10', 'g11', 'g12', 'g13', 'g14',
-			'a1', 'a2', 'a3', 'a7', 'a9', 'a10', 'a11',
-			'u1', 'u2', 'u5',
-			'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f11',
-			'c1', 'c4',
-			'r2', 'r3', 'r4'
+			"db",
+			"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g10", "g11", "g12", "g13", "g14",
+			"a1", "a2", "a3", "a7", "a9", "a10", "a11",
+			"u1", "u2", "u5",
+			"f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f11",
+			"c1", "c4",
+			"r2", "r3", "r4"
 		],
 		namespacesNoSpecial: {
-			0: 'Article',
+			0: "Article",
 			1: 'Talk (article)',
-			2: 'User',
+			2: "User",
 			3: 'User talk',
-			4: 'Wikipedia',
+			4: "Wikipedia",
 			5: 'Wikipedia talk',
-			6: 'File',
+			6: "File",
 			7: 'File talk',
-			8: 'MediaWiki',
+			8: "MediaWiki",
 			9: 'MediaWiki talk',
-			10: 'Template',
+			10: "Template",
 			11: 'Template talk',
-			12: 'Help',
+			12: "Help",
 			13: 'Help talk',
-			14: 'Category',
+			14: "Category",
 			15: 'Category talk',
-			100: 'Portal',
+			100: "Portal",
 			101: 'Portal talk',
-			118: 'Draft',
+			118: "Draft",
 			119: 'Draft talk',
-			710: 'TimedText',
+			710: "TimedText",
 			711: 'TimedText talk',
-			828: 'Module',
+			828: "Module",
 			829: 'Module talk'
 		}
 	};
@@ -145,55 +139,55 @@
 	Twinkle.config.sections = [
 		{
 			title: 'عام',
-			module: 'general',
+			module: "general",
 			preferences: [
 				// TwinkleConfig.userTalkPageMode may take arguments:
-				// 'window': open a new window, remember the opened window
-				// 'tab': opens in a new tab, if possible.
-				// 'blank': force open in a new window, even if such a window exists
+				// "window": open a new window, remember the opened window
+				// "tab": opens in a new tab, if possible.
+				// "blank": force open in a new window, even if such a window exists
 				{
-					name: 'userTalkPageMode',
+					name: "userTalkPageMode",
 					label: 'عند فتح صفحة نقاش مستخدم، افتحها',
-					type: 'enum',
+					type: "enum",
 					enumValues: { window: 'في نافذة، تحل محل صفحات النقاش الأخرى', tab: 'في تبويب جديد', blank: 'في نافذة جديدة تمامًا' }
 				},
 
 				// TwinkleConfig.dialogLargeFont (boolean)
 				{
-					name: 'dialogLargeFont',
+					name: "dialogLargeFont",
 					label: 'استخدام نص أكبر في حوارات Twinkle',
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// Twinkle.config.disabledModules (array)
 				{
-					name: 'disabledModules',
+					name: "disabledModules",
 					label: 'إيقاف تشغيل وحدات Twinkle المحددة',
 					helptip: 'أي شيء تختاره هنا لن يكون متاحًا للاستخدام، لذا تصرف بحذر. قم بإلغاء التحديد لإعادة التفعيل.',
-					type: 'set',
-					setValues: { arv: 'ARV', warn: 'تحذير', welcome: 'ترحيب', shared: 'عنوان IP مشترك', talkback: 'رد النقاش', speedy: 'حذف سريع', prod: 'PROD', xfd: 'XfD', image: 'صورة (DI)', protect: 'حماية (RPP)', tag: 'وسم', diff: 'مقارنة التعديلات', unlink: 'إزالة الروابط', rollback: 'استرجاع التعديلات' }
+					type: "set",
+					setValues: { arv: "ARV", warn: 'تحذير', welcome: 'ترحيب', shared: 'عنوان IP مشترك', talkback: 'رد النقاش', speedy: 'حذف سريع', prod: "PROD", xfd: "XfD", image: 'صورة (DI)', protect: 'حماية (RPP)', tag: 'وسم', diff: 'مقارنة التعديلات', unlink: 'إزالة الروابط', rollback: 'استرجاع التعديلات' }
 				},
 
 				// Twinkle.config.disabledSysopModules (array)
 				{
-					name: 'disabledSysopModules',
+					name: "disabledSysopModules",
 					label: 'إيقاف تشغيل الوحدات الخاصة بالإداريين فقط',
 					helptip: 'أي شيء تختاره هنا لن يكون متاحًا للاستخدام، لذا تصرف بحذر. قم بإلغاء التحديد لإعادة التفعيل.',
 					adminOnly: true,
-					type: 'set',
+					type: "set",
 					setValues: { block: 'منع', deprod: 'إلغاء PROD', batchdelete: 'حذف دفعة', batchprotect: 'حماية دفعة', batchundelete: 'استرجاع دفعة' }
 				}
 			]
 		},
 
 		{
-			title: 'ARV',
-			module: 'arv',
+			title: "ARV",
+			module: "arv",
 			preferences: [
 				{
-					name: 'spiWatchReport',
+					name: "spiWatchReport",
 					label: 'إضافة صفحات تقارير الحسابات الوهمية إلى قائمة المراقبة',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				}
 			]
@@ -201,64 +195,64 @@
 
 		{
 			title: 'منع المستخدم',
-			module: 'block',
+			module: "block",
 			adminOnly: true,
 			preferences: [
 				// TwinkleConfig.defaultToBlock64 (boolean)
 				// Whether to default to just blocking the /64 on or off
 				{
-					name: 'defaultToBlock64',
+					name: "defaultToBlock64",
 					label: 'بالنسبة لعناوين IPv6، حدد خيار منع نطاق /64 افتراضيًا',
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// TwinkleConfig.defaultToPartialBlocks (boolean)
 				// Whether to default partial blocks on or off
 				{
-					name: 'defaultToPartialBlocks',
+					name: "defaultToPartialBlocks",
 					label: 'تحديد المنع الجزئي افتراضيًا عند فتح قائمة المنع',
 					helptip: 'إذا كان المستخدم محظورًا بالفعل، فسيتم تجاوز هذا الخيار لصالح نوع المنع الحالي',
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// TwinkleConfig.blankTalkpageOnIndefBlock (boolean)
 				// if true, blank the talk page when issuing an indef block notice (per [[WP:UWUL#Indefinitely blocked users]])
 				{
-					name: 'blankTalkpageOnIndefBlock',
+					name: "blankTalkpageOnIndefBlock",
 					label: 'تفريغ صفحة النقاش عند منع المستخدمين نهائيًا',
 					helptip: 'راجع <a href="' + mw.util.getUrl('Wikipedia:WikiProject_User_warnings/Usage_and_layout#Indefinitely_blocked_users') + '">WP:UWUL</a> لمزيد من المعلومات.',
-					type: 'boolean'
+					type: "boolean"
 				}
 			]
 		},
 
 		{
 			title: 'حذف الصور (DI)',
-			module: 'image',
+			module: "image",
 			preferences: [
 				// TwinkleConfig.notifyUserOnDeli (boolean)
 				// If the user should be notified after placing a file deletion tag
 				{
-					name: 'notifyUserOnDeli',
+					name: "notifyUserOnDeli",
 					label: 'تحديد خيار "إخطار الرافع الأصلي" افتراضيًا',
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// TwinkleConfig.deliWatchPage (string)
 				// The watchlist setting of the page tagged for deletion.
 				{
-					name: 'deliWatchPage',
+					name: "deliWatchPage",
 					label: 'إضافة صفحة الصورة إلى قائمة المراقبة عند وضع وسم الحذف',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 
 				// TwinkleConfig.deliWatchUser (string)
 				// The watchlist setting of the user talk page if a notification is placed.
 				{
-					name: 'deliWatchUser',
+					name: "deliWatchUser",
 					label: 'إضافة صفحة نقاش رافع الصورة الأصلي إلى قائمة المراقبة عند الإخطار',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				}
 			]
@@ -266,26 +260,26 @@
 
 		{
 			title: 'حماية الصفحة ' + (Morebits.userIsSysop ? '(PP)' : '(RPP)'),
-			module: 'protect',
+			module: "protect",
 			preferences: [
 				{
-					name: 'watchRequestedPages',
+					name: "watchRequestedPages",
 					label: 'إضافة الصفحة إلى قائمة المراقبة عند طلب الحماية',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
-					name: 'watchPPTaggedPages',
+					name: "watchPPTaggedPages",
 					label: 'إضافة الصفحة إلى قائمة المراقبة عند وسمها بقالب الحماية',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
-					name: 'watchProtectedPages',
+					name: "watchProtectedPages",
 					label: 'إضافة الصفحة إلى قائمة المراقبة عند حمايتها',
 					helptip: 'إذا تم أيضًا وسم الصفحة بعد الحماية، فسيتم تفضيل هذا الإعداد.',
 					adminOnly: true,
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				}
 			]
@@ -293,45 +287,45 @@
 
 		{
 			title: 'الحذف المقترح (PROD)',
-			module: 'prod',
+			module: "prod",
 			preferences: [
 				// TwinkleConfig.watchProdPages (string)
 				// Watchlist setting when applying prod template to page
 				{
-					name: 'watchProdPages',
+					name: "watchProdPages",
 					label: 'إضافة المقالة إلى قائمة المراقبة عند وسمها',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 
 				// TwinkleConfig.markProdPagesAsPatrolled (boolean)
 				// If, when applying prod template to page, to mark the page as curated/patrolled (if the page was reached from NewPages)
 				{
-					name: 'markProdPagesAsPatrolled',
+					name: "markProdPagesAsPatrolled",
 					label: 'وضع علامة "تمت المراجعة" عند وسم الصفحة (إن أمكن)',
 					helptip: 'يفضل عدم تفعيل هذا الخيار، حيث إنه يخالف التوافق على أفضل الممارسات',
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// TwinkleConfig.prodReasonDefault (string)
 				// The prefilled PROD reason.
 				{
-					name: 'prodReasonDefault',
+					name: "prodReasonDefault",
 					label: 'سبب الحذف المقترح الافتراضي',
-					type: 'string'
+					type: "string"
 				},
 
 				{
-					name: 'logProdPages',
+					name: "logProdPages",
 					label: 'الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي تم وسمها بالحذف المقترح',
 					helptip: 'نظرًا لأن غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، يوفر سجل المستخدم طريقة جيدة لتتبع جميع الصفحات التي تم وسمها بالحذف المقترح باستخدام Twinkle.',
-					type: 'boolean'
+					type: "boolean"
 				},
 				{
-					name: 'prodLogPageName',
+					name: "prodLogPageName",
 					label: 'الاحتفاظ بسجل الحذف المقترح في صفحة فرعية للمستخدم',
 					helptip: 'أدخل اسم الصفحة الفرعية في هذا الحقل. ستجد سجل الحذف المقترح في صفحة المستخدم الخاصة بك على النحو التالي: User:<i>اسم المستخدم</i>/<i>اسم الصفحة الفرعية</i>. يعمل هذا الخيار فقط إذا قمت بتفعيل سجل الحذف المقترح.',
-					type: 'string'
+					type: "string"
 				}
 			]
 		},
@@ -459,8 +453,8 @@
 					name: "watchSpeedyPages",
 					label: "إضافة الصفحة إلى قائمة المراقبة عند استخدام هذه المعايير",
 					type: "set",
-					setValues: "Twinkle.config.commonSets.csdCriteria",
-					setDisplayOrder: "Twinkle.config.commonSets.csdCriteriaDisplayOrder"
+					setValues: Twinkle.config.commonSets.csdCriteria,
+					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaDisplayOrder
 				},
 				// TwinkleConfig.watchSpeedyExpiry
 				// If any of the above items are selected, whether to expire the watch
@@ -519,7 +513,7 @@
 					label: "إخطار منشئ الصفحة عند حذفها وفقًا لهذه المعايير",
 					helptip: "حتى إذا اخترت الإخطار من شاشة CSD، سيتم الإخطار فقط للمعايير المحددة هنا.",
 					adminOnly: true,
-					type: 'set',
+					type: "set",
 					setValues: Twinkle.config.commonSets.csdCriteriaNotification,
 					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaNotificationDisplayOrder
 				},
@@ -529,7 +523,7 @@
 					name: "promptForSpeedyDeletionSummary",
 					label: "السماح بتعديل ملخص الحذف عند الحذف وفقًا لهذه المعايير",
 					adminOnly: true,
-					type: 'set',
+					type: "set",
 					setValues: Twinkle.config.commonSets.csdAndImageDeletionCriteria,
 					setDisplayOrder: Twinkle.config.commonSets.csdAndImageDeletionCriteriaDisplayOrder
 				},
@@ -540,13 +534,13 @@
 					name: "deleteTalkPageOnDelete",
 					label: "تحديد مربع \"حذف صفحة النقاش أيضًا\" بشكل افتراضي",
 					adminOnly: true,
-					type: 'boolean'
+					type: "boolean"
 				},
 				{
 					name: "deleteRedirectsOnDelete",
 					label: "تحديد مربع \"حذف التحويلات أيضًا\" بشكل افتراضي",
 					adminOnly: true,
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// TwinkleConfig.deleteSysopDefaultToDelete (boolean)
@@ -556,7 +550,7 @@
 					label: "تحديد الحذف المباشر كخيار افتراضي بدلاً من وسم الحذف السريع",
 					helptip: "إذا كان هناك وسم CSD موجود مسبقًا، فسيكون وضع \"الحذف\" هو الافتراضي دائمًا.",
 					adminOnly: true,
-					type: 'boolean'
+					type: "boolean"
 				},
 
 				// TwinkleConfig.speedyWindowWidth (integer)
@@ -780,52 +774,52 @@
 
 		{
 			title: 'مرحبًا بالمستخدم',
-			module: 'welcome',
+			module: "welcome",
 			preferences: [
 				{
-					name: 'topWelcomes',
+					name: "topWelcomes",
 					label: 'وضع الترحيبات أعلى المحتوى الموجود في صفحات نقاش المستخدمين',
-					type: 'boolean'
+					type: "boolean"
 				},
 				{
-					name: 'watchWelcomes',
+					name: "watchWelcomes",
 					label: 'إضافة صفحات نقاش المستخدمين إلى قائمة المراقبة عند الترحيب',
 					helptip: 'يضيف ذلك عنصرًا شخصيًا إلى الترحيب بالمستخدم - ستتمكن من رؤية كيفية تأقلمهم كمبتدئين، وربما مساعدتهم.',
-					type: 'enum',
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
-					name: 'insertUsername',
+					name: "insertUsername",
 					label: 'إضافة اسم المستخدم الخاص بك إلى القالب (عند الاقتضاء)',
 					helptip: 'تحتوي بعض قوالب الترحيب على جملة افتتاحية مثل "مرحبًا، أنا &lt;username&gt;. أهلًا وسهلًا" وما إلى ذلك. إذا أوقفت هذا الخيار، فلن تعرض هذه القوالب اسم المستخدم بهذه الطريقة.',
-					type: 'boolean'
+					type: "boolean"
 				},
 				{
-					name: 'quickWelcomeMode',
+					name: "quickWelcomeMode",
 					label: 'النقر على رابط "الترحيب" في صفحة الفرق (والذي يظهر فقط إذا لم يتم إنشاء صفحة نقاش المستخدم بعد) سيؤدي إلى',
 					helptip: 'إذا اخترت الترحيب تلقائيًا، فسيتم استخدام القالب الذي تحدده أدناه.',
-					type: 'enum',
+					type: "enum",
 					enumValues: { auto: 'نشر قالب الترحيب المحدد أدناه فورًا', norm: 'مطالبتك باختيار قالب' }
 				},
 				{
-					name: 'quickWelcomeTemplate',
+					name: "quickWelcomeTemplate",
 					label: 'القالب المستخدم عند الترحيب تلقائيًا',
 					helptip: 'أدخل اسم قالب الترحيب بدون الأقواس المعقوفة. سيتم إضافة رابط إلى المقالة المحددة.',
-					type: 'string'
+					type: "string"
 				},
 				{
-					name: 'customWelcomeList',
+					name: "customWelcomeList",
 					label: 'قوالب الترحيب المخصصة لعرضها',
 					helptip: 'يمكنك إضافة قوالب ترحيب أخرى، أو صفحات فرعية للمستخدم تحتوي على قوالب ترحيب (مسبوقة بـ "User:"). لا تنسَ أن هذه القوالب يتم استبدالها على صفحات نقاش المستخدمين.',
-					type: 'customList',
+					type: "customList",
 					customListValueTitle: 'اسم القالب (بدون أقواس معقوفة)',
 					customListLabelTitle: 'النص المعروض في مربع حوار الترحيب'
 				},
 				{
-					name: 'customWelcomeSignature',
+					name: "customWelcomeSignature",
 					label: 'التوقيع تلقائيًا على قوالب الترحيب المخصصة',
 					helptip: 'إذا كانت قوالب الترحيب المخصصة تحتوي على توقيع مدمج داخل القالب، قم بإيقاف هذا الخيار.',
-					type: 'boolean'
+					type: "boolean"
 				}
 			]
 		},
@@ -852,12 +846,19 @@
 					type: "set",
 					setValues: { afd: "AfD", tfd: "TfD", ffd: "FfD", cfd: "CfD", cfds: "CfD/S", mfd: "MfD", rfd: "RfD", rm: "RM" }
 				},
+
+				// TwinkleConfig.xfdWatchPage (string)
+				// The watchlist setting of the page being nominated for XfD.
 				{
 					name: "xfdWatchPage",
 					label: "إضافة الصفحة المرشحة إلى قائمة المراقبة",
 					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
+
+				// TwinkleConfig.xfdWatchDiscussion (string)
+				// The watchlist setting of the newly created XfD page (for those processes that create discussion pages for each nomination),
+				// or the list page for the other processes.
 				{
 					name: "xfdWatchDiscussion",
 					label: "إضافة صفحة مناقشة الحذف إلى قائمة المراقبة",
@@ -865,6 +866,9 @@
 					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
+
+				// TwinkleConfig.xfdWatchList (string)
+				// The watchlist setting of the XfD list page, *if* the discussion is on a separate page.
 				{
 					name: "xfdWatchList",
 					label: "إضافة صفحة السجل/القائمة اليومية إلى قائمة المراقبة (AfD وMfD)",
@@ -872,12 +876,18 @@
 					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
+
+				// TwinkleConfig.xfdWatchUser (string)
+				// The watchlist setting of the user talk page if they receive a notification.
 				{
 					name: "xfdWatchUser",
 					label: "إضافة صفحة نقاش المستخدم للمساهم الأول إلى قائمة المراقبة (عند الإخطار)",
 					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
+
+				// TwinkleConfig.xfdWatchRelated (string)
+				// The watchlist setting of the target of a redirect being nominated for RfD.
 				{
 					name: "xfdWatchRelated",
 					label: "إضافة صفحة الهدف لعملية إعادة التوجيه إلى قائمة المراقبة (عند الإخطار)",
@@ -894,32 +904,32 @@
 		},
 
 		{
-			title: 'Hidden',
+			title: "Hidden",
 			hidden: true,
 			preferences: [
 				// twinklerollback.js: defines how many revision to query maximum, maximum possible is 50, default is 50
 				{
-					name: 'revertMaxRevisions',
-					type: 'integer'
+					name: "revertMaxRevisions",
+					type: "integer"
 				},
 				// twinklewarn.js: When using the autolevel select option, how many days makes a prior warning stale
 				// Huggle is three days ([[Special:Diff/918980316]] and [[Special:Diff/919417999]]) while ClueBotNG is two:
 				// https://github.com/DamianZaremba/cluebotng/blob/4958e25d6874cba01c75f11debd2e511fd5a2ce5/bot/action_functions.php#L62
 				{
-					name: 'autolevelStaleDays',
-					type: 'integer'
+					name: "autolevelStaleDays",
+					type: "integer"
 				},
 				// How many pages should be queried by deprod and batchdelete/protect/undelete
 				{
-					name: 'batchMax',
-					type: 'integer',
-					adminOnly: false
+					name: "batchMax",
+					type: "integer",
+					adminOnly: true
 				},
 				// How many pages should be processed at a time by deprod and batchdelete/protect/undelete
 				{
-					name: 'batchChunks',
-					type: 'integer',
-					adminOnly: false
+					name: "batchChunks",
+					type: "integer",
+					adminOnly: true
 				}
 			]
 		}
@@ -929,16 +939,16 @@
 	Twinkle.config.init = function twinkleconfigInit() {
 
 		// create the config page at Wikipedia:Twinkle/Preferences
-		if ((mw.config.get('wgNamespaceNumber') === mw.config.get('wgNamespaceIds').project && mw.config.get('wgTitle') === 'Twinkle/Preferences') &&
-			mw.config.get('wgAction') === 'view') {
+		if ((mw.config.get("wgNamespaceNumber") === mw.config.get("wgNamespaceIds").project && mw.config.get("wgTitle") === 'Twinkle/Preferences') &&
+			mw.config.get("wgAction") === "view") {
 
 			if (!document.getElementById('twinkle-config')) {
 				return; // maybe the page is misconfigured, or something - but any attempt to modify it will be pointless
 			}
 
 			// set style to nothing to prevent conflict with external css
-			document.getElementById('twinkle-config').removeAttribute('style');
-			document.getElementById('twinkle-config-titlebar').removeAttribute('style');
+			document.getElementById('twinkle-config').removeAttribute("style");
+			document.getElementById('twinkle-config-titlebar').removeAttribute("style");
 
 			const contentdiv = document.getElementById('twinkle-config-content');
 			contentdiv.textContent = ''; // clear children
@@ -946,42 +956,42 @@
 			// let user know about possible conflict with skin js/common.js file
 			// (settings in that file will still work, but they will be overwritten by twinkleoptions.js settings)
 			if (window.TwinkleConfig || window.FriendlyConfig) {
-				const contentnotice = document.createElement('p');
+				const contentnotice = document.createElement("p");
 				contentnotice.innerHTML = '<table class="plainlinks morebits-ombox morebits-ombox-content"><tr><td class="morebits-mbox-image">' +
 					'<img alt="" src="https://upload.wikimedia.org/wikipedia/commons/3/38/Imbox_content.png" /></td>' +
 					'<td class="morebits-mbox-text"><p><big><b>قبل تعديل إعداداتك هنا،</b> يجب عليك إزالة إعدادات Twinkle و Friendly القديمة من ملف JavaScript الخاص بواجهتك.</big></p>' +
-					'<p>للقيام بذلك، يمكنك <a href="' + mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/' + mw.config.get('skin') +
-						'.js', { action: 'edit' }) + '" target="_blank"><b>تعديل ملف JavaScript الخاص بواجهتك</b></a> أو <a href="' +
-					mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/common.js', { action: 'edit' }) + '" target="_blank"><b>ملف common.js الخاص بك</b></a>، وإزالة جميع سطور التعليمات البرمجية التي تشير إلى <code>TwinkleConfig</code> و <code>FriendlyConfig</code>.</p>' +
+					'<p>للقيام بذلك، يمكنك <a href="' + mw.util.getUrl('User:' + mw.config.get("wgUserName") + '/' + mw.config.get("skin") +
+						'.js', { action: "edit" }) + '" target="_blank"><b>تعديل ملف JavaScript الخاص بواجهتك</b></a> أو <a href="' +
+					mw.util.getUrl('User:' + mw.config.get("wgUserName") + '/common.js', { action: "edit" }) + '" target="_blank"><b>ملف common.js الخاص بك</b></a>، وإزالة جميع سطور التعليمات البرمجية التي تشير إلى <code>TwinkleConfig</code> و <code>FriendlyConfig</code>.</p>' +
 					'</td></tr></table>';
 				contentdiv.appendChild(contentnotice);
 			}
 
 			// start a table of contents
-			const toctable = document.createElement('div');
-			toctable.className = 'toc';
+			const toctable = document.createElement("div");
+			toctable.className = "toc";
 			toctable.style.marginLeft = '0.4em';
 			// create TOC title
-			const toctitle = document.createElement('div');
-			toctitle.id = 'toctitle';
-			const toch2 = document.createElement('h2');
+			const toctitle = document.createElement("div");
+			toctitle.id = "toctitle";
+			const toch2 = document.createElement("h2");
 			toch2.textContent = 'المحتويات ';
 			toctitle.appendChild(toch2);
 			// add TOC show/hide link
-			const toctoggle = document.createElement('span');
-			toctoggle.className = 'toctoggle';
+			const toctoggle = document.createElement("span");
+			toctoggle.className = "toctoggle";
 			toctoggle.appendChild(document.createTextNode('['));
-			const toctogglelink = document.createElement('a');
-			toctogglelink.className = 'internal';
-			toctogglelink.setAttribute('href', '#tw-tocshowhide');
+			const toctogglelink = document.createElement("a");
+			toctogglelink.className = "internal";
+			toctogglelink.setAttribute("href", '#tw-tocshowhide');
 			toctogglelink.textContent = 'إخفاء';
 			toctoggle.appendChild(toctogglelink);
 			toctoggle.appendChild(document.createTextNode(']'));
 			toctitle.appendChild(toctoggle);
 			toctable.appendChild(toctitle);
 			// create item container: this is what we add stuff to
-			const tocul = document.createElement('ul');
-			toctogglelink.addEventListener('click', () => {
+			const tocul = document.createElement("ul");
+			toctogglelink.addEventListener("click", () => {
 				const $tocul = $(tocul);
 				$tocul.toggle();
 				if ($tocul.find(':visible').length) {
@@ -993,12 +1003,12 @@
 			toctable.appendChild(tocul);
 			contentdiv.appendChild(toctable);
 
-			const contentform = document.createElement('form');
-			contentform.setAttribute('action', 'javascript:void(0)'); // was #tw-save - changed to void(0) to work around Chrome issue
-			contentform.addEventListener('submit', Twinkle.config.save, true);
+			const contentform = document.createElement("form");
+			contentform.setAttribute("action", 'javascript:void(0)'); // was #tw-save - changed to void(0) to work around Chrome issue
+			contentform.addEventListener("submit", Twinkle.config.save, true);
 			contentdiv.appendChild(contentform);
 
-			const container = document.createElement('table');
+			const container = document.createElement("table");
 			container.style.width = '100%';
 			contentform.appendChild(container);
 
@@ -1008,18 +1018,18 @@
 				}
 
 				// add to TOC
-				const tocli = document.createElement('li');
+				const tocli = document.createElement("li");
 				tocli.className = 'toclevel-1';
-				const toca = document.createElement('a');
-				toca.setAttribute('href', '#' + section.module);
+				const toca = document.createElement("a");
+				toca.setAttribute("href", '#' + section.module);
 				toca.appendChild(document.createTextNode(section.title));
 				tocli.appendChild(toca);
 				tocul.appendChild(tocli);
 
-				let row = document.createElement('tr');
-				let cell = document.createElement('td');
-				cell.setAttribute('colspan', '3');
-				const heading = document.createElement('h4');
+				let row = document.createElement("tr");
+				let cell = document.createElement("td");
+				cell.setAttribute("colspan", "3");
+				const heading = document.createElement("h4");
 				heading.style.borderBottom = '1px solid gray';
 				heading.style.marginTop = '0.2em';
 				heading.id = section.module;
@@ -1036,90 +1046,90 @@
 						return true; // i.e. "continue" in this context
 					}
 
-					row = document.createElement('tr');
+					row = document.createElement("tr");
 					row.style.marginBottom = '0.2em';
 					// create odd row banding
 					if (rowcount++ % 2 === 0) {
 						row.style.backgroundColor = 'rgba(128, 128, 128, 0.1)';
 					}
-					cell = document.createElement('td');
+					cell = document.createElement("td");
 
 					let label, input;
 					const gotPref = Twinkle.getPref(pref.name);
 					switch (pref.type) {
 
-						case 'boolean': // create a checkbox
-							cell.setAttribute('colspan', '2');
+						case "boolean": // create a checkbox
+							cell.setAttribute("colspan", "2");
 
-							label = document.createElement('label');
-							input = document.createElement('input');
-							input.setAttribute('type', 'checkbox');
-							input.setAttribute('id', pref.name);
-							input.setAttribute('name', pref.name);
+							label = document.createElement("label");
+							input = document.createElement("input");
+							input.setAttribute("type", "checkbox");
+							input.setAttribute("id", pref.name);
+							input.setAttribute("name", pref.name);
 							if (gotPref === true) {
-								input.setAttribute('checked', 'checked');
+								input.setAttribute("checked", "checked");
 							}
 							label.appendChild(input);
 							label.appendChild(document.createTextNode(pref.label));
 							cell.appendChild(label);
 							break;
 
-						case 'string': // create an input box
-						case 'integer':
+						case "string": // create an input box
+						case "integer":
 							// add label to first column
-							cell.style.textAlign = 'right';
+							cell.style.textAlign = "right";
 							cell.style.paddingRight = '0.5em';
-							label = document.createElement('label');
-							label.setAttribute('for', pref.name);
+							label = document.createElement("label");
+							label.setAttribute("for", pref.name);
 							label.appendChild(document.createTextNode(pref.label + ':'));
 							cell.appendChild(label);
 							row.appendChild(cell);
 
 							// add input box to second column
-							cell = document.createElement('td');
-							cell.style.paddingRight = '1em';
-							input = document.createElement('input');
-							input.setAttribute('type', 'text');
-							input.setAttribute('id', pref.name);
-							input.setAttribute('name', pref.name);
-							if (pref.type === 'integer') {
-								input.setAttribute('size', 6);
-								input.setAttribute('type', 'number');
-								input.setAttribute('step', '1'); // integers only
+							cell = document.createElement("td");
+							cell.style.paddingRight = "1em";
+							input = document.createElement("input");
+							input.setAttribute("type", "text");
+							input.setAttribute("id", pref.name);
+							input.setAttribute("name", pref.name);
+							if (pref.type === "integer") {
+								input.setAttribute("size", 6);
+								input.setAttribute("type", "number");
+								input.setAttribute("step", "1"); // integers only
 							}
 							if (gotPref) {
-								input.setAttribute('value', gotPref);
+								input.setAttribute("value", gotPref);
 							}
 							cell.appendChild(input);
 							break;
 
-						case 'enum': // create a combo box
+						case "enum": // create a combo box
 							// add label to first column
 							// note: duplicates the code above, under string/integer
-							cell.style.textAlign = 'right';
+							cell.style.textAlign = "right";
 							cell.style.paddingRight = '0.5em';
-							label = document.createElement('label');
-							label.setAttribute('for', pref.name);
+							label = document.createElement("label");
+							label.setAttribute("for", pref.name);
 							label.appendChild(document.createTextNode(pref.label + ':'));
 							cell.appendChild(label);
 							row.appendChild(cell);
 
 							// add input box to second column
-							cell = document.createElement('td');
-							cell.style.paddingRight = '1em';
-							input = document.createElement('select');
-							input.setAttribute('id', pref.name);
-							input.setAttribute('name', pref.name);
+							cell = document.createElement("td");
+							cell.style.paddingRight = "1em";
+							input = document.createElement("select");
+							input.setAttribute("id", pref.name);
+							input.setAttribute("name", pref.name);
 							$.each(pref.enumValues, (enumvalue, enumdisplay) => {
-								const option = document.createElement('option');
-								option.setAttribute('value', enumvalue);
+								const option = document.createElement("option");
+								option.setAttribute("value", enumvalue);
 								if ((gotPref === enumvalue) ||
 									// Hack to convert old boolean watchlist prefs
 									// to corresponding enums (added in v2.1)
-									(typeof gotPref === 'boolean' &&
-										((gotPref && enumvalue === 'yes') ||
-											(!gotPref && enumvalue === 'no')))) {
-									option.setAttribute('selected', 'selected');
+									(typeof gotPref === "boolean" &&
+										((gotPref && enumvalue === "yes") ||
+											(!gotPref && enumvalue === "no")))) {
+									option.setAttribute("selected", "selected");
 								}
 								option.appendChild(document.createTextNode(enumdisplay));
 								input.appendChild(option);
@@ -1127,30 +1137,30 @@
 							cell.appendChild(input);
 							break;
 
-						case 'set': // create a set of check boxes
+						case "set": // create a set of check boxes
 							// add label first of all
-							cell.setAttribute('colspan', '2');
-							label = document.createElement('label'); // not really necessary to use a label element here, but we do it for consistency of styling
+							cell.setAttribute("colspan", "2");
+							label = document.createElement("label"); // not really necessary to use a label element here, but we do it for consistency of styling
 							label.appendChild(document.createTextNode(pref.label + ':'));
 							cell.appendChild(label);
 
-							var checkdiv = document.createElement('div');
-							checkdiv.style.paddingLeft = '1em';
+							var checkdiv = document.createElement("div");
+							checkdiv.style.paddingLeft = "1em";
 							var worker = function (itemkey, itemvalue) {
-								const checklabel = document.createElement('label');
+								const checklabel = document.createElement("label");
 								checklabel.style.marginRight = '0.7em';
 								checklabel.style.display = 'inline-block';
-								const check = document.createElement('input');
-								check.setAttribute('type', 'checkbox');
-								check.setAttribute('id', pref.name + '_' + itemkey);
-								check.setAttribute('name', pref.name + '_' + itemkey);
+								const check = document.createElement("input");
+								check.setAttribute("type", "checkbox");
+								check.setAttribute("id", pref.name + "_" + itemkey);
+								check.setAttribute("name", pref.name + "_" + itemkey);
 								if (gotPref && gotPref.includes(itemkey)) {
-									check.setAttribute('checked', 'checked');
+									check.setAttribute("checked", "checked");
 								}
 								// cater for legacy integer array values for unlinkNamespaces (this can be removed a few years down the track...)
-								if (pref.name === 'unlinkNamespaces') {
+								if (pref.name === "unlinkNamespaces") {
 									if (gotPref && gotPref.includes(parseInt(itemkey, 10))) {
-										check.setAttribute('checked', 'checked');
+										check.setAttribute("checked", "checked");
 									}
 								}
 								checklabel.appendChild(check);
@@ -1169,24 +1179,24 @@
 							cell.appendChild(checkdiv);
 							break;
 
-						case 'customList':
+						case "customList":
 							// add label to first column
-							cell.style.textAlign = 'right';
+							cell.style.textAlign = "right";
 							cell.style.paddingRight = '0.5em';
-							label = document.createElement('label');
-							label.setAttribute('for', pref.name);
+							label = document.createElement("label");
+							label.setAttribute("for", pref.name);
 							label.appendChild(document.createTextNode(pref.label + ':'));
 							cell.appendChild(label);
 							row.appendChild(cell);
 
 							// add button to second column
-							cell = document.createElement('td');
-							cell.style.paddingRight = '1em';
-							var button = document.createElement('button');
-							button.setAttribute('id', pref.name);
-							button.setAttribute('name', pref.name);
-							button.setAttribute('type', 'button');
-							button.addEventListener('click', Twinkle.config.listDialog.display, false);
+							cell = document.createElement("td");
+							cell.style.paddingRight = "1em";
+							var button = document.createElement("button");
+							button.setAttribute("id", pref.name);
+							button.setAttribute("name", pref.name);
+							button.setAttribute("type", "button");
+							button.addEventListener("click", Twinkle.config.listDialog.display, false);
 							// use jQuery data on the button to store the current config value
 							$(button).data({
 								value: gotPref,
@@ -1203,7 +1213,7 @@
 					row.appendChild(cell);
 
 					// add help tip
-					cell = document.createElement('td');
+					cell = document.createElement("td");
 					cell.className = 'twinkle-config-helptip';
 
 					if (pref.helptip) {
@@ -1212,12 +1222,12 @@
 							'{{<a href="' + mw.util.getUrl('Template:') + '$1" target="_blank">$1</a>}}');
 					}
 					// add reset link (custom lists don't need this, as their config value isn't displayed on the form)
-					if (pref.type !== 'customList') {
-						const resetlink = document.createElement('a');
-						resetlink.setAttribute('href', '#tw-reset');
-						resetlink.setAttribute('id', 'twinkle-config-reset-' + pref.name);
-						resetlink.addEventListener('click', Twinkle.config.resetPrefLink, false);
-						resetlink.style.cssFloat = 'right';
+					if (pref.type !== "customList") {
+						const resetlink = document.createElement("a");
+						resetlink.setAttribute("href", '#tw-reset');
+						resetlink.setAttribute("id", 'twinkle-config-reset-' + pref.name);
+						resetlink.addEventListener("click", Twinkle.config.resetPrefLink, false);
+						resetlink.style.cssFloat = "right";
 						resetlink.style.margin = '0 0.6em';
 						resetlink.appendChild(document.createTextNode('إعادة تعيين'));
 						cell.appendChild(resetlink);
@@ -1230,21 +1240,21 @@
 				return true;
 			});
 
-			const footerbox = document.createElement('div');
-			footerbox.setAttribute('id', 'twinkle-config-buttonpane');
-			const button = document.createElement('button');
-			button.setAttribute('id', 'twinkle-config-submit');
-			button.setAttribute('type', 'submit');
+			const footerbox = document.createElement("div");
+			footerbox.setAttribute("id", 'twinkle-config-buttonpane');
+			const button = document.createElement("button");
+			button.setAttribute("id", 'twinkle-config-submit');
+			button.setAttribute("type", "submit");
 			button.appendChild(document.createTextNode('حفظ التغييرات'));
 			footerbox.appendChild(button);
-			const footerspan = document.createElement('span');
-			footerspan.className = 'plainlinks';
+			const footerspan = document.createElement("span");
+			footerspan.className = "plainlinks";
 			footerspan.style.marginLeft = '2.4em';
 			footerspan.style.fontSize = '90%';
-			const footera = document.createElement('a');
-			footera.setAttribute('href', '#tw-reset-all');
-			footera.setAttribute('id', 'twinkle-config-resetall');
-			footera.addEventListener('click', Twinkle.config.resetAllPrefs, false);
+			const footera = document.createElement("a");
+			footera.setAttribute("href", '#tw-reset-all');
+			footera.setAttribute("id", 'twinkle-config-resetall');
+			footera.addEventListener("click", Twinkle.config.resetAllPrefs, false);
 			footera.appendChild(document.createTextNode('استعادة الافتراضيات'));
 			footerspan.appendChild(footera);
 			footerbox.appendChild(footerspan);
@@ -1257,43 +1267,43 @@
 				window.location.hash = loc;
 			}
 
-		} else if (mw.config.get('wgNamespaceNumber') === mw.config.get('wgNamespaceIds').user &&
-			mw.config.get('wgTitle').indexOf(mw.config.get('wgUserName')) === 0 &&
-			mw.config.get('wgPageName').slice(-3) === '.js') {
+		} else if (mw.config.get("wgNamespaceNumber") === mw.config.get("wgNamespaceIds").user &&
+			mw.config.get("wgTitle").indexOf(mw.config.get("wgUserName")) === 0 &&
+			mw.config.get("wgPageName").slice(-3) === '.js') {
 
-			const box = document.createElement('div');
+			const box = document.createElement("div");
 			// Styled in twinkle.css
-			box.setAttribute('id', 'twinkle-config-headerbox');
+			box.setAttribute("id", 'twinkle-config-headerbox');
 
 			let link;
-			const scriptPageName = mw.config.get('wgPageName').slice(
-				mw.config.get('wgPageName').lastIndexOf('/') + 1,
-				mw.config.get('wgPageName').lastIndexOf('.js')
+			const scriptPageName = mw.config.get("wgPageName").slice(
+				mw.config.get("wgPageName").lastIndexOf('/') + 1,
+				mw.config.get("wgPageName").lastIndexOf('.js')
 			);
 
-			if (scriptPageName === 'twinkleoptions') {
+			if (scriptPageName === "twinkleoptions") {
 				// place "why not try the preference panel" notice
-				box.setAttribute('class', 'config-twopt-box');
+				box.setAttribute("class", 'config-twopt-box');
 
-				if (mw.config.get('wgArticleId') > 0) { // page exists
+				if (mw.config.get("wgArticleId") > 0) { // page exists
 					box.appendChild(document.createTextNode('تحتوي هذه الصفحة على تفضيلات Twinkle الخاصة بك. يمكنك تغييرها باستخدام '));
 				} else { // page does not exist
 					box.appendChild(document.createTextNode('يمكنك تخصيص Twinkle ليناسب تفضيلاتك باستخدام '));
 				}
-				link = document.createElement('a');
-				link.setAttribute('href', mw.util.getUrl(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceIds').project] + ':Twinkle/Preferences'));
+				link = document.createElement("a");
+				link.setAttribute("href", mw.util.getUrl(mw.config.get("wgFormattedNamespaces")[mw.config.get("wgNamespaceIds").project] + ':Twinkle/Preferences'));
 				link.appendChild(document.createTextNode('لوحة تفضيلات Twinkle'));
 				box.appendChild(link);
 				box.appendChild(document.createTextNode('، أو عن طريق تعديل هذه الصفحة.'));
 				$(box).insertAfter($('#contentSub'));
 
-			} else if (['monobook', 'vector', 'vector-2022', 'cologneblue', 'modern', 'timeless', 'minerva', 'common'].includes(scriptPageName)) {
+			} else if (["monobook", "vector", 'vector-2022', "cologneblue", "modern", "timeless", "minerva", "common"].includes(scriptPageName)) {
 				// place "Looking for Twinkle options?" notice
-				box.setAttribute('class', 'config-userskin-box');
+				box.setAttribute("class", 'config-userskin-box');
 
 				box.appendChild(document.createTextNode('إذا كنت ترغب في تعيين تفضيلات Twinkle، يمكنك استخدام '));
-				link = document.createElement('a');
-				link.setAttribute('href', mw.util.getUrl(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceIds').project] + ':Twinkle/Preferences'));
+				link = document.createElement("a");
+				link.setAttribute("href", mw.util.getUrl(mw.config.get("wgFormattedNamespaces")[mw.config.get("wgNamespaceIds").project] + ':Twinkle/Preferences'));
 				link.appendChild(document.createTextNode('لوحة تفضيلات Twinkle'));
 				box.appendChild(link);
 				box.appendChild(document.createTextNode('.'));
@@ -1313,23 +1323,23 @@
 			$contenttr = $('<tr>').append(
 				$('<td>').append(
 					$('<button>')
-						.attr('type', 'button')
-						.on('click', () => {
+						.attr("type", "button")
+						.on("click", () => {
 							$contenttr.remove();
 						})
-						.text('Remove')
+						.text("Remove")
 				),
 				$('<td>').append(
 					$valueInput = $('<input>')
-						.attr('type', 'text')
+						.attr("type", "text")
 						.addClass('twinkle-config-customlist-value')
-						.css('width', '97%')
+						.css("width", '97%')
 				),
 				$('<td>').append(
 					$labelInput = $('<input>')
-						.attr('type', 'text')
+						.attr("type", "text")
 						.addClass('twinkle-config-customlist-label')
-						.css('width', '98%')
+						.css("width", '98%')
 				)
 			)
 		);
@@ -1345,8 +1355,8 @@
 
 	Twinkle.config.listDialog.display = function twinkleconfigListDialogDisplay(e) {
 		const $prefbutton = $(e.target);
-		const curvalue = $prefbutton.data('value');
-		const curpref = $prefbutton.data('pref');
+		const curvalue = $prefbutton.data("value");
+		const curpref = $prefbutton.data("pref");
 
 		const dialog = new Morebits.SimpleWindow(720, 400);
 		dialog.setTitle(curpref.label);
@@ -1357,35 +1367,35 @@
 		dialog.setContent(
 			$('<div>').append(
 				$('<table>')
-					.addClass('wikitable')
+					.addClass("wikitable")
 					.css({
 						margin: '1.4em 1em',
-						width: 'auto'
+						width: "auto"
 					})
 					.append(
 						$dlgtbody = $('<tbody>').append(
 							// header row
 							$('<tr>').append(
 								$('<th>') // top-left cell
-									.css('width', '5%'),
+									.css("width", '5%'),
 								$('<th>') // value column header
-									.css('width', '35%')
-									.text(curpref.customListValueTitle ? curpref.customListValueTitle : 'Value'),
+									.css("width", '35%')
+									.text(curpref.customListValueTitle ? curpref.customListValueTitle : "Value"),
 								$('<th>') // label column header
-									.css('width', '60%')
-									.text(curpref.customListLabelTitle ? curpref.customListLabelTitle : 'Label')
+									.css("width", '60%')
+									.text(curpref.customListLabelTitle ? curpref.customListLabelTitle : "Label")
 							)
 						),
 						$('<tfoot>').append(
 							$('<tr>').append(
 								$('<td>')
-									.attr('colspan', '3')
+									.attr("colspan", "3")
 									.append(
 										$('<button>')
-											.text('Add')
-											.css('min-width', '8em')
-											.attr('type', 'button')
-											.on('click', () => {
+											.text("Add")
+											.css('min-width', "8em")
+											.attr("type", "button")
+											.on("click", () => {
 												Twinkle.config.listDialog.addRow($dlgtbody);
 											})
 									)
@@ -1394,21 +1404,21 @@
 					),
 				$('<button>')
 					.text('Save changes')
-					.attr('type', 'submit') // so Morebits.SimpleWindow puts the button in the button pane
-					.on('click', () => {
+					.attr("type", "submit") // so Morebits.SimpleWindow puts the button in the button pane
+					.on("click", () => {
 						Twinkle.config.listDialog.save($prefbutton, $dlgtbody);
 						dialog.close();
 					}),
 				$('<button>')
-					.text('Reset')
-					.attr('type', 'submit')
-					.on('click', () => {
+					.text("Reset")
+					.attr("type", "submit")
+					.on("click", () => {
 						Twinkle.config.listDialog.reset($prefbutton, $dlgtbody);
 					}),
 				$('<button>')
-					.text('Cancel')
-					.attr('type', 'submit')
-					.on('click', () => {
+					.text("Cancel")
+					.attr("type", "submit")
+					.on("click", () => {
 						dialog.close();
 					})
 			)[0]
@@ -1432,20 +1442,20 @@
 	// old data value again (less surprising behaviour)
 	Twinkle.config.listDialog.reset = function twinkleconfigListDialogReset($button, $tbody) {
 		// reset value on button
-		const curpref = $button.data('pref');
-		const oldvalue = $button.data('value');
+		const curpref = $button.data("pref");
+		const oldvalue = $button.data("value");
 		Twinkle.config.resetPref(curpref);
 
 		// reset form
-		$tbody.find('tr').slice(1).remove(); // all rows except the first (header) row
+		$tbody.find("tr").slice(1).remove(); // all rows except the first (header) row
 		// add the new values
-		const curvalue = $button.data('value');
+		const curvalue = $button.data("value");
 		$.each(curvalue, (k, v) => {
 			Twinkle.config.listDialog.addRow($tbody, v.value, v.label);
 		});
 
 		// save the old value
-		$button.data('value', oldvalue);
+		$button.data("value", oldvalue);
 	};
 
 	Twinkle.config.listDialog.save = function twinkleconfigListDialogSave($button, $tbody) {
@@ -1462,7 +1472,7 @@
 				}
 			}
 		});
-		$button.data('value', result);
+		$button.data("value", result);
 	};
 
 	// reset/restore defaults
@@ -1497,26 +1507,26 @@
 	Twinkle.config.resetPref = function twinkleconfigResetPref(pref) {
 		switch (pref.type) {
 
-			case 'boolean':
+			case "boolean":
 				document.getElementById(pref.name).checked = Twinkle.defaultConfig[pref.name];
 				break;
 
-			case 'string':
-			case 'integer':
-			case 'enum':
+			case "string":
+			case "integer":
+			case "enum":
 				document.getElementById(pref.name).value = Twinkle.defaultConfig[pref.name];
 				break;
 
-			case 'set':
+			case "set":
 				$.each(pref.setValues, (itemkey) => {
-					if (document.getElementById(pref.name + '_' + itemkey)) {
-						document.getElementById(pref.name + '_' + itemkey).checked = Twinkle.defaultConfig[pref.name].includes(itemkey);
+					if (document.getElementById(pref.name + "_" + itemkey)) {
+						document.getElementById(pref.name + "_" + itemkey).checked = Twinkle.defaultConfig[pref.name].includes(itemkey);
 					}
 				});
 				break;
 
-			case 'customList':
-				$(document.getElementById(pref.name)).data('value', Twinkle.defaultConfig[pref.name]);
+			case "customList":
+				$(document.getElementById(pref.name)).data("value", Twinkle.defaultConfig[pref.name]);
 				break;
 
 			default:
@@ -1544,7 +1554,7 @@
 	Twinkle.config.save = function twinkleconfigSave(e) {
 		Morebits.Status.init(document.getElementById('twinkle-config-content'));
 
-		const userjs = mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceIds').user] + ':' + mw.config.get('wgUserName') + '/twinkleoptions.js';
+		const userjs = mw.config.get("wgFormattedNamespaces")[mw.config.get("wgNamespaceIds").user] + ':' + mw.config.get("wgUserName") + '/twinkleoptions.js';
 		const wikipedia_page = new Morebits.wiki.Page(userjs, 'حفظ التفضيلات في ' + userjs);
 		wikipedia_page.setCallbackParameters(e.target);
 		wikipedia_page.load(Twinkle.config.writePrefs);
@@ -1572,7 +1582,7 @@
 				const asort = a.sort(), bsort = b.sort();
 				for (let i = 0; asort[i]; ++i) {
 					// comparison of the two properties of custom lists
-					if ((typeof asort[i] === 'object') && (asort[i].label !== bsort[i].label ||
+					if ((typeof asort[i] === "object") && (asort[i].label !== bsort[i].label ||
 						asort[i].value !== bsort[i].value)) {
 						return false;
 					} else if (asort[i].toString() !== bsort[i].toString()) {
@@ -1598,44 +1608,44 @@
 				if (!pref.adminOnly || Morebits.userIsSysop) {
 					if (!section.hidden) {
 						switch (pref.type) {
-							case 'boolean': // read from the checkbox
+							case "boolean": // read from the checkbox
 								userValue = form[pref.name].checked;
 								break;
 
-							case 'string': // read from the input box or combo box
-							case 'enum':
+							case "string": // read from the input box or combo box
+							case "enum":
 								userValue = form[pref.name].value;
 								break;
 
-							case 'integer': // read from the input box
+							case "integer": // read from the input box
 								userValue = parseInt(form[pref.name].value, 10);
 								if (isNaN(userValue)) {
-									Morebits.Status.warn('حفظ', 'القيمة التي حددتها لـ ' + pref.name + ' (' + pref.value + ') غير صالحة. سيستمر الحفظ، ولكن سيتم تخطي قيمة البيانات غير الصالحة.');
+									Morebits.Status.warn("Saving", 'القيمة التي حددتها لـ ' + pref.name + ' (' + pref.value + ') غير صالحة. سيستمر الحفظ، ولكن سيتم تخطي قيمة البيانات غير الصالحة.');
 									userValue = null;
 								}
 								break;
 
-							case 'set': // read from the set of check boxes
+							case "set": // read from the set of check boxes
 								userValue = [];
 								if (pref.setDisplayOrder) {
 									// read only those keys specified in the display order
 									$.each(pref.setDisplayOrder, (itemkey, item) => {
-										if (form[pref.name + '_' + item].checked) {
+										if (form[pref.name + "_" + item].checked) {
 											userValue.push(item);
 										}
 									});
 								} else {
 									// read all the keys in the list of values
 									$.each(pref.setValues, (itemkey) => {
-										if (form[pref.name + '_' + itemkey].checked) {
+										if (form[pref.name + "_" + itemkey].checked) {
 											userValue.push(itemkey);
 										}
 									});
 								}
 								break;
 
-							case 'customList': // read from the jQuery data stored on the button object
-								userValue = $(form[pref.name]).data('value');
+							case "customList": // read from the jQuery data stored on the button object
+								userValue = $(form[pref.name]).data("value");
 								break;
 
 							default:
@@ -1681,22 +1691,22 @@
 		pageobj.setPageText(text);
 		pageobj.setEditSummary('حفظ تفضيلات Twinkle: تعديل تلقائي من [[:' + Morebits.pageNameNorm + ']]');
 		pageobj.setChangeTags(Twinkle.changeTags);
-		pageobj.setCreateOption('recreate');
+		pageobj.setCreateOption("recreate");
 		pageobj.save(Twinkle.config.saveSuccess);
 	};
 
 	Twinkle.config.saveSuccess = function twinkleconfigSaveSuccess(pageobj) {
 		pageobj.getStatusElement().info('تم الحفظ بنجاح');
 
-		const noticebox = document.createElement('div');
+		const noticebox = document.createElement("div");
 		noticebox.className = 'cdx-message cdx-message--success';
 		noticebox.style.fontSize = '100%';
 		noticebox.innerHTML = '<p><b>تم حفظ تفضيلات Twinkle الخاصة بك.</b> لرؤية التغييرات، ستحتاج إلى مسح ذاكرة التخزين المؤقت للمتصفح بالكامل (راجع <a href="' + mw.util.getUrl('WP:BYPASS') + '" title="WP:BYPASS">WP:BYPASS</a> للحصول على التعليمات).</p>';
 		mw.loader.using('mediawiki.htmlform.codex.styles', () => {
 			Morebits.Status.root.appendChild(noticebox);
 		});
-		const noticeclear = document.createElement('br');
-		noticeclear.style.clear = 'both';
+		const noticeclear = document.createElement("br");
+		noticeclear.style.clear = "both";
 		Morebits.Status.root.appendChild(noticeclear);
 	};
 

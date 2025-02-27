@@ -48,7 +48,7 @@
 	 */
 	Twinkle.defaultConfig = {
 		// General
-		userTalkPageMode: 'تبويب',
+		userTalkPageMode: 'tab',
 		dialogLargeFont: false,
 		disabledModules: [],
 		disabledSysopModules: [],
@@ -68,16 +68,16 @@
 		rollbackInPlace: false,
 		markRevertedPagesAsMinor: ['vand'],
 		watchRevertedPages: ['agf', 'norm', 'vand', 'torev'],
-		watchRevertedExpiry: 'شهر واحد',
+		watchRevertedExpiry: '1 month',
 		offerReasonOnNormalRevert: true,
 		confirmOnRollback: false,
 		confirmOnMobileRollback: true,
-		showRollbackLinks: ['فرق', 'آخرون'],
+		showRollbackLinks: ['diff', 'others'],
 
 		// DI (twinkleimage)
 		notifyUserOnDeli: true,
-		deliWatchPage: 'شهر واحد',
-		deliWatchUser: 'شهر واحد',
+		deliWatchPage: '1 month',
+		deliWatchUser: '1 month',
 
 		// Protect
 		watchRequestedPages: 'yes',
@@ -85,18 +85,18 @@
 		watchProtectedPages: 'default',
 
 		// PROD
-		watchProdPages: 'شهر واحد',
+		watchProdPages: '1 month',
 		markProdPagesAsPatrolled: false,
 		prodReasonDefault: '',
 		logProdPages: false,
 		prodLogPageName: 'سجل اقتراح الحذف',
 
 		// CSD
-		speedySelectionStyle: 'زر النقر',
+		speedySelectionStyle: 'buttonClick',
 		watchSpeedyPages: ['g3', 'g5', 'g10', 'g11', 'g12'],
-		watchSpeedyExpiry: 'شهر واحد',
+		watchSpeedyExpiry: '1 month',
 		markSpeedyPagesAsPatrolled: false,
-		watchSpeedyUser: 'شهر واحد',
+		watchSpeedyUser: '1 month',
 
 		// these next two should probably be identical by default
 		welcomeUserOnSpeedyDeletionNotification: ['db', 'g1', 'g2', 'g3', 'g4', 'g6', 'g10', 'g11', 'g12', 'g13', 'g14', 'a1', 'a2', 'a3', 'a7', 'a9', 'a10', 'a11', 'c1', 'f1', 'f2', 'f3', 'f7', 'f9', 'r3', 'u5'],
@@ -119,7 +119,7 @@
 		defaultWarningGroup: '10',
 		combinedSingletMenus: false,
 		showSharedIPNotice: true,
-		watchWarnings: 'شهر واحد',
+		watchWarnings: '1 month',
 		oldSelect: false,
 		customWarningList: [],
 
@@ -129,9 +129,9 @@
 		noLogOnXfdNomination: [],
 		xfdWatchDiscussion: 'default',
 		xfdWatchList: 'no',
-		xfdWatchPage: 'شهر واحد',
-		xfdWatchUser: 'شهر واحد',
-		xfdWatchRelated: 'شهر واحد',
+		xfdWatchPage: '1 month',
+		xfdWatchUser: '1 month',
+		xfdWatchRelated: '1 month',
 		markXfdPagesAsPatrolled: true,
 
 		// Hidden preferences
@@ -147,22 +147,22 @@
 
 		// Tag
 		groupByDefault: true,
-		watchTaggedVenues: ['مقالات', 'مسودات', 'تحويلات', 'ملفات'],
-		watchTaggedPages: 'شهر واحد',
-		watchMergeDiscussions: 'شهر واحد',
+		watchTaggedVenues: ['articles', 'drafts', 'redirects', 'files'],
+		watchTaggedPages: '1 month',
+		watchMergeDiscussions: '1 month',
 		markTaggedPagesAsMinor: false,
 		markTaggedPagesAsPatrolled: false,
-		tagArticleSortOrder: 'تصنيف',
+		tagArticleSortOrder: 'cat',
 		customTagList: [],
 		customFileTagList: [],
 		customRedirectTagList: [],
 
 		// Welcome
 		topWelcomes: false,
-		watchWelcomes: '3 أشهر',
+		watchWelcomes: '3 months',
 		insertUsername: true,
-		quickWelcomeMode: 'عادي',
-		quickWelcomeTemplate: 'ترحيب',
+		quickWelcomeMode: 'norm',
+		quickWelcomeTemplate: 'welcome',
 		customWelcomeList: [],
 		customWelcomeSignature: true,
 
@@ -397,7 +397,7 @@
 
 		// Hide the lingering space if the TW menu is empty
 		const isVector = mw.config.get('skin') === 'vector' || mw.config.get('skin') === 'vector-2022';
-		if (isVector && Twinkle.getPref('portletType') === 'قائمة' && $('#p-twinkle').length === 0) {
+		if (isVector && Twinkle.getPref('portletType') === 'menu' && $('#p-twinkle').length === 0) {
 			$('#p-cactions').css('margin-right', 'initial');
 		}
 
@@ -414,7 +414,8 @@
 	 */
 
 	// Custom change tag(s) to be applied to all Twinkle actions, create at Special:Tags
-	Twinkle.changeTags = 'twinkle';
+	// Twinkle.changeTags = 'twinkle';
+	Twinkle.changeTags = '';
 	// Available for actions that don’t (yet) support tags
 	// currently: FlaggedRevs and PageTriage
 	Twinkle.summaryAd = ' ([[WP:TW|توينكل]])';

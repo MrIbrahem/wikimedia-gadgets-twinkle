@@ -1918,13 +1918,13 @@
 	 * @property {string} years
 	 */
 	Morebits.date.unitMap = {
-		seconds: 'Seconds',
-		minutes: 'Minutes',
-		hours: 'Hours',
-		days: 'Date',
-		weeks: 'Week', // Not a function but handled in `add` through cunning use of multiplication
-		months: 'Month',
-		years: 'FullYear'
+		seconds: 'ثواني',
+		minutes: 'دقائق',
+		hours: 'ساعات',
+		days: 'أيام',
+		weeks: 'أسابيع', // Not a function but handled in `add` through cunning use of multiplication
+		months: 'أشهر',
+		years: 'سنوات'
 	};
 
 	Morebits.date.prototype = {

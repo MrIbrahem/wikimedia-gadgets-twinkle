@@ -19,13 +19,13 @@
 		// should show on Contributions or Block pages, anywhere there's a relevant user
 		// Ignore ranges wider than the CIDR limit
 		if (Morebits.userIsSysop && relevantUserName && (!Morebits.ip.isRange(relevantUserName) || Morebits.ip.validCIDR(relevantUserName))) {
-			Twinkle.addPortletLink(Twinkle.block.callback, 'حظر', 'tw-block', 'حظر المستخدم ذي الصلة');
+			Twinkle.addPortletLink(Twinkle.block.callback, 'منع', 'tw-block', 'منع المستخدم ذي الصلة');
 		}
 	};
 
 	Twinkle.block.callback = function twinkleblockCallback() {
 		if (relevantUserName === mw.config.get('wgUserName') &&
-			!confirm('أنت على وشك حظر نفسك! هل أنت متأكد من أنك تريد المتابعة؟')) {
+			!confirm('أنت على وشك منع نفسك! هل أنت متأكد من أنك تريد المتابعة؟')) {
 			return;
 		}
 
@@ -35,7 +35,7 @@
 
 		const Window = new Morebits.SimpleWindow(650, 530);
 		// need to be verbose about who we're blocking
-		Window.setTitle('حظر أو إصدار قالب حظر لـ ' + relevantUserName);
+		Window.setTitle('منع أو إصدار قالب منع لـ ' + relevantUserName);
 		Window.setScriptName('Twinkle');
 		Window.addFooterLink('قوالب الحظر', 'Template:Uw-block/doc/Block_templates');
 		Window.addFooterLink('سياسة الحظر', 'WP:BLOCK');
@@ -44,7 +44,7 @@
 		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		// Always added, hidden later if actual user not blocked
-		Window.addFooterLink('إلغاء حظر هذا المستخدم', 'Special:Unblock/' + relevantUserName, true);
+		Window.addFooterLink('إلغاء منع هذا المستخدم', 'Special:Unblock/' + relevantUserName, true);
 
 		const form = new Morebits.QuickForm(Twinkle.block.callback.evaluate);
 		const actionfield = form.append({
@@ -57,21 +57,21 @@
 			event: Twinkle.block.callback.change_action,
 			list: [
 				{
-					label: 'حظر المستخدم',
+					label: 'منع المستخدم',
 					value: 'block',
-					tooltip: 'حظر المستخدم ذي الصلة بالخيارات المحددة. إذا تم إلغاء تحديد الحظر الجزئي ، فسيكون هذا حظرًا على مستوى الموقع.',
+					tooltip: 'منع المستخدم ذي الصلة بالخيارات المحددة. إذا تم إلغاء تحديد الحظر الجزئي ، فسيكون هذا حظرًا على مستوى الموقع.',
 					checked: true
 				},
 				{
-					label: 'حظر جزئي',
+					label: 'منع جزئي',
 					value: 'partial',
 					tooltip: 'تمكين الحظر الجزئي وقوالب الحظر الجزئي.',
 					checked: Twinkle.getPref('defaultToPartialBlocks') // Overridden if already blocked
 				},
 				{
-					label: 'إضافة قالب حظر إلى صفحة نقاش المستخدم',
+					label: 'إضافة قالب منع إلى صفحة نقاش المستخدم',
 					value: 'template',
-					tooltip: 'إذا نسي مدير الحظر إصدار قالب حظر ، أو قمت للتو بحظر المستخدم دون وضع قالب له ، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
+					tooltip: 'إذا نسي مدير الحظر إصدار قالب منع ، أو قمت للتو بحظر المستخدم دون وضع قالب له ، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
 					// Disallow when viewing the block dialog on an IP range
 					checked: !Morebits.ip.isRange(relevantUserName),
 					disabled: Morebits.ip.isRange(relevantUserName)
@@ -95,13 +95,13 @@
 		if (sixtyFour && sixtyFour !== mw.config.get('wgRelevantUserName')) {
 			const block64field = form.append({
 				type: 'field',
-				label: 'تحويل إلى حظر نطاق /64',
+				label: 'تحويل إلى منع نطاق /64',
 				name: 'field_64'
 			});
 			block64field.append({
 				type: 'div',
 				style: 'margin-bottom: 0.5em',
-				label: ['عادة ما يكون الأمر جيدًا ، إن لم يكن أفضل ، أن ', $.parseHTML('<a target="_blank" href="' + mw.util.getUrl('WP:/64') + '">مجرد حظر نطاق /64</a>')[0], ' (',
+				label: ['عادة ما يكون الأمر جيدًا ، إن لم يكن أفضل ، أن ', $.parseHTML('<a target="_blank" href="' + mw.util.getUrl('WP:/64') + '">مجرد منع نطاق /64</a>')[0], ' (',
 					$.parseHTML('<a target="_blank" href="' + mw.util.getUrl('Special:Contributions/' + sixtyFour) + '">' + sixtyFour + '</a>)')[0], ').']
 			});
 			block64field.append({
@@ -110,16 +110,16 @@
 				event: Twinkle.block.callback.change_block64,
 				list: [{
 					checked: Twinkle.getPref('defaultToBlock64'),
-					label: 'حظر /64 بدلاً من ذلك',
+					label: 'منع /64 بدلاً من ذلك',
 					value: 'block64',
 					tooltip: Morebits.ip.isRange(mw.config.get('wgRelevantUserName')) ? 'سوف تتجنب ترك قالب.' : 'سيذهب أي قالب يتم إصداره إلى عنوان IP الأصلي: ' + mw.config.get('wgRelevantUserName')
 				}]
 			});
 		}
 
-		form.append({ type: 'field', label: 'Preset', name: 'field_preset' });
-		form.append({ type: 'field', label: 'Template options', name: 'field_template_options' });
-		form.append({ type: 'field', label: 'Block options', name: 'field_block_options' });
+		form.append({ type: 'field', label: 'إعداد مسبق', name: 'field_preset' });
+		form.append({ type: 'field', label: 'خيارات القالب', name: 'field_template_options' });
+		form.append({ type: 'field', label: 'خيارات المنع', name: 'field_block_options' });
 
 		form.append({ type: 'submit' });
 
@@ -343,7 +343,7 @@
 		Twinkle.block.callback.saveFieldset($('[name=field_template_options]'));
 
 		if (blockBox) {
-			field_preset = new Morebits.QuickForm.Element({ type: 'field', label: 'Preset', name: 'field_preset' });
+			field_preset = new Morebits.QuickForm.Element({ type: 'field', label: 'إعداد مسبق', name: 'field_preset' });
 			field_preset.append({
 				type: 'select',
 				name: 'preset',
@@ -352,7 +352,7 @@
 				list: Twinkle.block.callback.filtered_block_groups(blockGroup)
 			});
 
-			field_block_options = new Morebits.QuickForm.Element({ type: 'field', label: 'Block options', name: 'field_block_options' });
+			field_block_options = new Morebits.QuickForm.Element({ type: 'field', label: 'خيارات المنع', name: 'field_block_options' });
 			field_block_options.append({ type: 'div', name: 'currentblock', label: ' ' });
 			field_block_options.append({ type: 'div', name: 'hasblocklog', label: ' ' });
 			field_block_options.append({
@@ -402,9 +402,9 @@
 					type: 'select',
 					multiple: true,
 					name: 'namespacerestrictions',
-					label: 'حظر المساحات الاسمية',
+					label: 'منع المساحات الاسمية',
 					value: '',
-					tooltip: 'حظر من تعديل هذه المساحات الاسمية.'
+					tooltip: 'منع من تعديل هذه المساحات الاسمية.'
 				});
 				$.each(menuFormattedNamespaces, (number, name) => {
 					// Ignore -1: Special; -2: Media; and 2300-2303: Gadget (talk) and Gadget definition (talk)
@@ -417,7 +417,7 @@
 			const blockoptions = [
 				{
 					checked: Twinkle.block.field_block_options.nocreate,
-					label: 'حظر إنشاء الحساب',
+					label: 'منع إنشاء الحساب',
 					name: 'nocreate',
 					value: '1'
 				},
@@ -439,14 +439,14 @@
 			if (Twinkle.block.isRegistered) {
 				blockoptions.push({
 					checked: Twinkle.block.field_block_options.autoblock,
-					label: 'الحظر التلقائي لأي عناوين IP مستخدمة (حظر صارم)',
+					label: 'الحظر التلقائي لأي عناوين IP مستخدمة (منع صارم)',
 					name: 'autoblock',
 					value: '1'
 				});
 			} else {
 				blockoptions.push({
 					checked: Twinkle.block.field_block_options.hardblock,
-					label: 'منع المستخدمين المسجلين من استخدام عنوان IP هذا (حظر صارم)',
+					label: 'منع المستخدمين المسجلين من استخدام عنوان IP هذا (منع صارم)',
 					name: 'hardblock',
 					value: '1'
 				});
@@ -532,7 +532,7 @@
 			event: Twinkle.block.callback.toggle_ds_reason
 		};
 		if (templateBox) {
-			field_template_options = new Morebits.QuickForm.Element({ type: 'field', label: 'Template options', name: 'field_template_options' });
+			field_template_options = new Morebits.QuickForm.Element({ type: 'field', label: 'خيارات القالب', name: 'field_template_options' });
 			field_template_options.append({
 				type: 'select',
 				name: 'template',
@@ -559,7 +559,7 @@
 				name: 'area',
 				label: 'المنطقة المحظورة من',
 				value: '',
-				tooltip: 'شرح اختياري للصفحات أو المساحات الاسمية التي تم حظر المستخدم من تعديلها.'
+				tooltip: 'شرح اختياري للصفحات أو المساحات الاسمية التي تم منع المستخدم من تعديلها.'
 			});
 
 			if (!blockBox) {
@@ -602,13 +602,13 @@
 							tooltip: 'اجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى صفحة النقاش'
 						},
 						{
-							label: 'تم حظر المستخدم من إرسال بريد إلكتروني',
+							label: 'تم منع المستخدم من إرسال بريد إلكتروني',
 							name: 'noemail_template',
 							checked: Twinkle.block.field_template_options.noemail_template,
 							tooltip: 'إذا لم يتم توفير المنطقة ، فاجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
 						},
 						{
-							label: 'تم حظر المستخدم من إنشاء حسابات',
+							label: 'تم منع المستخدم من إنشاء حسابات',
 							name: 'nocreate_template',
 							checked: Twinkle.block.field_template_options.nocreate_template,
 							tooltip: 'إذا لم يتم توفير المنطقة ، فاجعل قالب الحظر ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
@@ -742,7 +742,7 @@
 				if (sameUser) {
 					statusStr += ' كحظر نطاق';
 				} else {
-					statusStr += ' ضمن' + (Morebits.ip.get64(relevantUserName) === blockedUserName ? ' /64' : '') + ' حظر نطاق';
+					statusStr += ' ضمن' + (Morebits.ip.get64(relevantUserName) === blockedUserName ? ' /64' : '') + ' منع نطاق';
 					// Link to the full range
 					const $rangeblockloglink = $('<span>').append($('<a target="_blank" href="' + mw.util.getUrl('Special:Log', { action: 'view', page: blockedUserName, type: 'block' }) + '">' + blockedUserName + '</a>)'));
 					statusStr += ' (' + $rangeblockloglink.html() + ')';
@@ -759,13 +759,13 @@
 			if (sameUser) {
 				infoStr += ' بتغيير هذا الحظر';
 				if (Twinkle.block.currentBlockInfo.partial === undefined && partialBox) {
-					infoStr += ' ، وتحويله إلى حظر جزئي';
+					infoStr += ' ، وتحويله إلى منع جزئي';
 				} else if (Twinkle.block.currentBlockInfo.partial === '' && !partialBox) {
-					infoStr += ' ، وتحويله إلى حظر على مستوى الموقع';
+					infoStr += ' ، وتحويله إلى منع على مستوى الموقع';
 				}
 				infoStr += '.';
 			} else {
-				infoStr += ' بإضافة ' + (partialBox ? 'جزئي إضافي ' : '') + 'حظر.';
+				infoStr += ' بإضافة ' + (partialBox ? 'جزئي إضافي ' : '') + 'منع.';
 			}
 
 			Morebits.Status.warn(statusStr, infoStr);
@@ -789,7 +789,7 @@
 			}
 
 			Morebits.Status.init($('div[name="hasblocklog"] span').last()[0]);
-			Morebits.Status.warn(Twinkle.block.currentBlockInfo ? 'الحظر السابق' : 'تم حظر هذا ' + (Morebits.ip.isRange(relevantUserName) ? 'نطاق' : 'مستخدم') + ' في الماضي', $blockloglink[0]);
+			Morebits.Status.warn(Twinkle.block.currentBlockInfo ? 'الحظر السابق' : 'تم منع هذا ' + (Morebits.ip.isRange(relevantUserName) ? 'نطاق' : 'مستخدم') + ' في الماضي', $blockloglink[0]);
 		}
 
 		// Make sure all the fields are correct based on initial defaults
@@ -947,7 +947,7 @@
 			nocreate: true,
 			pageParam: true,
 			reasonParam: true,
-			summary: 'تم حظر عنوان IP الخاص بك من التحرير',
+			summary: 'تم منع عنوان IP الخاص بك من التحرير',
 			suppressArticleInSummary: true
 		},
 		'uw-adblock': {
@@ -1079,7 +1079,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			reason: '[[WP:Blocking policy#Evasion of blocks|التهرب من الحظر]]',
-			summary: 'تم حظر عنوان IP الخاص بك من التحرير لأنه تم استخدامه [[WP:EVADE|للتهرب من حظر سابق]]'
+			summary: 'تم منع عنوان IP الخاص بك من التحرير لأنه تم استخدامه [[WP:EVADE|للتهرب من منع سابق]]'
 		},
 		'uw-lblock': {
 			autoblock: true,
@@ -1160,7 +1160,7 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: '[[WP:SOCK|دمية جورب]]',
-			summary: 'تم حظر هذا الحساب باعتباره [[WP:SOCK|دمية جورب]] تم إنشاؤها لانتهاك سياسة ويكيبيديا'
+			summary: 'تم منع هذا الحساب باعتباره [[WP:SOCK|دمية جورب]] تم إنشاؤها لانتهاك سياسة ويكيبيديا'
 		},
 		'uw-talkrevoked': {
 			disabletalk: true,
@@ -1350,10 +1350,10 @@
 			list: [
 				{ label: 'anonblock', value: 'anonblock' },
 				{ label: 'anonblock - من المحتمل أن تكون مدرسة', value: 'anonblock - school' },
-				{ label: 'حظر المدرسة', value: 'school block' },
-				{ label: 'حظر عام (سبب مخصص)', value: 'uw-block' }, // ends up being default for registered users
-				{ label: 'حظر عام (سبب مخصص) - IP', value: 'uw-ablock', selected: true }, // set only when blocking IP
-				{ label: 'حظر عام (سبب مخصص) - غير محدد', value: 'uw-blockindef' },
+				{ label: 'منع المدرسة', value: 'school block' },
+				{ label: 'منع عام (سبب مخصص)', value: 'uw-block' }, // ends up being default for registered users
+				{ label: 'منع عام (سبب مخصص) - IP', value: 'uw-ablock', selected: true }, // set only when blocking IP
+				{ label: 'منع عام (سبب مخصص) - غير محدد', value: 'uw-blockindef' },
 				{ label: 'تحرير تخريبي', value: 'uw-disruptblock' },
 				{ label: 'استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر', value: 'uw-talkrevoked' },
 				{ label: 'ليس هنا لبناء موسوعة', value: 'uw-nothereblock' },
@@ -1373,7 +1373,7 @@
 				{ label: 'إنشاء صفحات عديمة المعنى', value: 'uw-npblock' },
 				{ label: 'متعلق بمرشح التحرير', value: 'uw-efblock' },
 				{ label: 'حرب التحرير', value: 'uw-ewblock' },
-				{ label: 'حظر عام مع إلغاء الوصول إلى صفحة النقاش', value: 'uw-blocknotalk' },
+				{ label: 'منع عام مع إلغاء الوصول إلى صفحة النقاش', value: 'uw-blocknotalk' },
 				{ label: 'مضايقة', value: 'uw-hblock' },
 				{ label: 'تهديدات قانونية', value: 'uw-lblock' },
 				{ label: 'هجمات شخصية أو مضايقة', value: 'uw-pablock' },
@@ -1392,16 +1392,16 @@
 		{
 			label: 'انتهاكات اسم المستخدم',
 			list: [
-				{ label: 'اسم مستخدم روبوت ، حظر خفيف', value: 'uw-botublock' },
-				{ label: 'اسم مستخدم روبوت ، حظر صارم', value: 'uw-botuhblock' },
-				{ label: 'اسم مستخدم ترويجي ، حظر صارم', value: 'uw-spamublock' },
-				{ label: 'اسم مستخدم ترويجي ، حظر خفيف', value: 'uw-softerblock' },
-				{ label: 'اسم مستخدم مشابه ، حظر خفيف', value: 'uw-ublock-double' },
-				{ label: 'انتهاك اسم المستخدم ، حظر خفيف', value: 'uw-ublock' },
-				{ label: 'انتهاك اسم المستخدم ، حظر صارم', value: 'uw-uhblock' },
-				{ label: 'انتحال شخصية اسم المستخدم ، حظر صارم', value: 'uw-uhblock-double' },
-				{ label: 'اسم المستخدم يمثل شخصًا معروفًا ، حظر خفيف', value: 'uw-ublock-wellknown' },
-				{ label: 'اسم المستخدم يمثل مؤسسة غير ربحية ، حظر خفيف', value: 'uw-causeblock' },
+				{ label: 'اسم مستخدم روبوت ، منع خفيف', value: 'uw-botublock' },
+				{ label: 'اسم مستخدم روبوت ، منع صارم', value: 'uw-botuhblock' },
+				{ label: 'اسم مستخدم ترويجي ، منع صارم', value: 'uw-spamublock' },
+				{ label: 'اسم مستخدم ترويجي ، منع خفيف', value: 'uw-softerblock' },
+				{ label: 'اسم مستخدم مشابه ، منع خفيف', value: 'uw-ublock-double' },
+				{ label: 'انتهاك اسم المستخدم ، منع خفيف', value: 'uw-ublock' },
+				{ label: 'انتهاك اسم المستخدم ، منع صارم', value: 'uw-uhblock' },
+				{ label: 'انتحال شخصية اسم المستخدم ، منع صارم', value: 'uw-uhblock-double' },
+				{ label: 'اسم المستخدم يمثل شخصًا معروفًا ، منع خفيف', value: 'uw-ublock-wellknown' },
+				{ label: 'اسم المستخدم يمثل مؤسسة غير ربحية ، منع خفيف', value: 'uw-causeblock' },
 				{ label: 'انتهاك اسم المستخدم ، حساب تخريبي فقط', value: 'uw-vaublock' }
 			]
 		},
@@ -1409,15 +1409,15 @@
 			label: 'الأسباب المقولبة',
 			list: [
 				{ label: 'بروكسي محظور', value: 'blocked proxy' },
-				{ label: 'حظر CheckUser', value: 'CheckUser block' },
+				{ label: 'منع CheckUser', value: 'CheckUser block' },
 				{ label: 'حساب checkuserblock', value: 'checkuserblock-account' },
 				{ label: 'checkuserblock على نطاق واسع', value: 'checkuserblock-wide' },
 				{ label: 'موقع ويب مشترك', value: 'colocationwebhost' },
-				{ label: 'حظر الرقابة', value: 'oversightblock' },
-				{ label: 'حظر النطاق', value: 'rangeblock' }, // Only for IP ranges, selected for non-/64 ranges in filtered_block_groups
-				{ label: 'حظر القائمة السوداء للبريد العشوائي', value: 'spamblacklistblock' },
+				{ label: 'منع الرقابة', value: 'oversightblock' },
+				{ label: 'منع النطاق', value: 'rangeblock' }, // Only for IP ranges, selected for non-/64 ranges in filtered_block_groups
+				{ label: 'منع القائمة السوداء للبريد العشوائي', value: 'spamblacklistblock' },
 				{ label: 'tor', value: 'tor' },
-				{ label: 'حظر مضيف الويب', value: 'webhostblock' },
+				{ label: 'منع مضيف الويب', value: 'webhostblock' },
 				{ label: 'بروكسي الزومبي', value: 'zombie proxy' }
 			]
 		}
@@ -1427,8 +1427,8 @@
 		{
 			label: 'أسباب الحظر الجزئي الشائعة',
 			list: [
-				{ label: 'حظر جزئي عام (سبب مخصص)', value: 'uw-pblock', selected: true },
-				{ label: 'حظر جزئي عام (سبب مخصص) - غير محدد', value: 'uw-pblockindef' },
+				{ label: 'منع جزئي عام (سبب مخصص)', value: 'uw-pblock', selected: true },
+				{ label: 'منع جزئي عام (سبب مخصص) - غير محدد', value: 'uw-pblockindef' },
 				{ label: 'حرب التحرير', value: 'uw-ewpblock' }
 			]
 		},
@@ -1765,7 +1765,7 @@
 				}
 				if (!blockoptions.namespacerestrictions && !blockoptions.pagerestrictions) {
 					if (!blockoptions.noemail && !blockoptions.nocreate) { // Blank entries technically allowed [[phab:T208645]]
-						return alert('لم يتم تحديد أي صفحات أو مساحات اسم ، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب ؛ يرجى تحديد خيار واحد على الأقل لتطبيق حظر جزئي!');
+						return alert('لم يتم تحديد أي صفحات أو مساحات اسم ، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب ؛ يرجى تحديد خيار واحد على الأقل لتطبيق منع جزئي!');
 					} else if ((templateoptions.template !== 'uw-epblock' || $form.find('select[name="preset"]').val() !== 'uw-epblock') &&
 						// Don't require confirmation if email harassment defaults are set
 						!confirm('أنت على وشك الحظر بدون قيود على تحرير الصفحة أو المساحة الاسمية ، هل أنت متأكد من أنك تريد المتابعة؟')) {
@@ -1776,7 +1776,7 @@
 			if (!blockoptions.expiry) {
 				return alert('يرجى تقديم تاريخ انتهاء الصلاحية!');
 			} else if (Morebits.string.isInfinity(blockoptions.expiry) && !Twinkle.block.isRegistered) {
-				return alert("لا يمكن حظر عنوان IP إلى أجل غير مسمى!");
+				return alert("لا يمكن منع عنوان IP إلى أجل غير مسمى!");
 			}
 			if (!blockoptions.reason) {
 				return alert('يرجى تقديم سبب للحظر!');
