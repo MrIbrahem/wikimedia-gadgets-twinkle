@@ -25,51 +25,51 @@
 
 		Twinkle.addPortletLink(() => {
 			Twinkle.arv.callback(username, isIP);
-		}, 'ARV', 'tw-arv', 'Report ' + userType + ' to administrators');
+		}, 'ARV', 'tw-arv', 'الإبلاغ عن ' + userType + ' للمدراء');
 	};
 
 	Twinkle.arv.callback = function (uid, isIP) {
 		const Window = new Morebits.SimpleWindow(600, 500);
-		Window.setTitle('Advance Reporting and Vetting'); // Backronym
+		Window.setTitle('الإبلاغ المتقدم والتدقيق'); // Backronym
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('AIV guide', 'WP:GAIV');
-		Window.addFooterLink('UAA guide', 'WP:UAAI');
-		Window.addFooterLink('SPI guide', 'Wikipedia:Sockpuppet investigations/SPI/Guide to filing cases');
-		Window.addFooterLink('ARV prefs', 'WP:TW/PREF#arv');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#arv');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('دليل AIV', 'WP:GAIV');
+		Window.addFooterLink('دليل UAA', 'WP:UAAI');
+		Window.addFooterLink('دليل SPI', 'Wikipedia:Sockpuppet investigations/SPI/Guide to filing cases');
+		Window.addFooterLink('تفضيلات ARV', 'WP:TW/PREF#arv');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#arv');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.arv.callback.evaluate);
 		const categories = form.append({
 			type: 'select',
 			name: 'category',
-			label: 'Select report type:',
+			label: 'اختر نوع التقرير:',
 			event: Twinkle.arv.callback.changeCategory
 		});
 		categories.append({
 			type: 'option',
-			label: 'Vandalism (WP:AIV)',
+			label: 'تخريب (WP:AIV)',
 			value: 'aiv'
 		});
 		categories.append({
 			type: 'option',
-			label: 'Username (WP:UAA)',
+			label: 'اسم المستخدم (WP:UAA)',
 			value: 'username',
 			disabled: isIP
 		});
 		categories.append({
 			type: 'option',
-			label: 'Sockpuppeteer (WP:SPI)',
+			label: 'مدير دمى جورب (WP:SPI)',
 			value: 'sock'
 		});
 		categories.append({
 			type: 'option',
-			label: 'Sockpuppet (WP:SPI)',
+			label: 'دمية جورب (WP:SPI)',
 			value: 'puppet'
 		});
 		categories.append({
 			type: 'option',
-			label: 'Edit warring (WP:AN3)',
+			label: 'حرب التحرير (WP:AN3)',
 			value: 'an3',
 			disabled: Morebits.ip.isRange(uid) // rvuser template doesn't support ranges
 		});
@@ -82,7 +82,7 @@
 
 		form.append({
 			type: 'field',
-			label: 'Work area',
+			label: 'منطقة العمل',
 			name: 'work_area'
 		});
 		form.append({ type: 'submit' });
@@ -113,9 +113,9 @@
 			if (blocklist.length) {
 				// If an IP is blocked *and* rangeblocked, only use whichever is more recent
 				const block = blocklist[0];
-				let message = (isIP ? 'This IP ' + (Morebits.ip.isRange(uid) ? 'range' : 'address') : 'This account') + ' is ' + (block.partial ? 'partially' : 'already') + ' blocked';
+				let message = (isIP ? 'هذا الـ IP ' + (Morebits.ip.isRange(uid) ? 'نطاق' : 'عنوان') : 'هذا الحساب') + 'هو ' + (block.partial ? 'جزئياً' : 'محظور بالفعل');
 				// Start and end differ, range blocked
-				message += block.rangestart !== block.rangeend ? ' as part of a rangeblock.' : '.';
+				message += block.rangestart !== block.rangeend ? ' كجزء من حظر نطاق.' : '.';
 				if (block.partial) {
 					$('#twinkle-arv-blockwarning').css('color', 'black'); // Less severe
 				}
@@ -141,14 +141,14 @@
 			default:
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Report user for vandalism',
+					label: 'أبلغ عن المستخدم بسبب التخريب',
 					name: 'work_area'
 				});
 				work_area.append({
 					type: 'input',
 					name: 'page',
-					label: 'Primary linked page:',
-					tooltip: 'Leave blank to not link to the page in the report',
+					label: 'الصفحة المرتبطة الأساسية:',
+					tooltip: 'اترك فارغًا لعدم الارتباط بالصفحة في التقرير',
 					value: Twinkle.getPrefill('vanarticle') || '',
 					event: function (e) {
 						const value = e.target.value;
@@ -164,8 +164,8 @@
 				work_area.append({
 					type: 'input',
 					name: 'badid',
-					label: 'Revision ID for target page when vandalised:',
-					tooltip: 'Leave blank for no diff link',
+					label: 'معرف المراجعة للصفحة المستهدفة عند التخريب:',
+					tooltip: 'اترك فارغًا لعدم وجود رابط diff',
 					value: Twinkle.getPrefill('vanarticlerevid') || '',
 					disabled: !Twinkle.getPrefill('vanarticle'),
 					event: function (e) {
@@ -177,8 +177,8 @@
 				work_area.append({
 					type: 'input',
 					name: 'goodid',
-					label: 'Last good revision ID before vandalism of target page:',
-					tooltip: 'Leave blank for diff link to previous revision',
+					label: 'آخر معرف مراجعة جيد قبل تخريب الصفحة المستهدفة:',
+					tooltip: 'اترك فارغًا لعدم وجود رابط diff للمراجعة السابقة',
 					value: Twinkle.getPrefill('vanarticlegoodrevid') || '',
 					disabled: !Twinkle.getPrefill('vanarticle') || Twinkle.getPrefill('vanarticlerevid')
 				});
@@ -187,25 +187,25 @@
 					name: 'arvtype',
 					list: [
 						{
-							label: 'Vandalism after final (level 4 or 4im) warning given',
+							label: 'تخريب بعد التحذير النهائي (المستوى 4 أو 4im)',
 							value: 'final'
 						},
 						{
-							label: 'Vandalism after recent (within 1 day) release of block',
+							label: 'تخريب بعد الإفراج الأخير (خلال يوم واحد) عن الحظر',
 							value: 'postblock'
 						},
 						{
-							label: 'Evidently a vandalism-only account',
+							label: 'من الواضح أنه حساب تخريبي فقط',
 							value: 'vandalonly',
 							disabled: mw.util.isIPAddress(root.uid.value, true)
 						},
 						{
-							label: 'Account is a promotion-only account',
+							label: 'الحساب هو حساب ترويجي فقط',
 							value: 'promoonly',
 							disabled: mw.util.isIPAddress(root.uid.value, true)
 						},
 						{
-							label: 'Account is evidently a spambot or a compromised account',
+							label: 'من الواضح أن الحساب هو برنامج روبوت إرسال رسائل غير مرغوب فيها أو حساب مخترق',
 							value: 'spambot'
 						}
 					]
@@ -213,7 +213,7 @@
 				work_area.append({
 					type: 'textarea',
 					name: 'reason',
-					label: 'Comment:'
+					label: 'تعليق:'
 				});
 				work_area = work_area.render();
 				old_area.parentNode.replaceChild(work_area, old_area);
@@ -221,44 +221,44 @@
 			case 'username':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Report username violation',
+					label: 'أبلغ عن انتهاك اسم المستخدم',
 					name: 'work_area'
 				});
 				work_area.append({
 					type: 'header',
-					label: 'Type(s) of inappropriate username',
-					tooltip: 'Wikipedia does not allow usernames that are misleading, promotional, offensive or disruptive. Domain names and email addresses are likewise prohibited. These criteria apply to both usernames and signatures. Usernames that are inappropriate in another language, or that represent an inappropriate name with misspellings and substitutions, or do so indirectly or by implication, are still considered inappropriate.'
+					label: 'نوع (أنواع) اسم المستخدم غير المناسب',
+					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل ، تحظر أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى ، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات ، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا ، تعتبر غير مناسبة.'
 				});
 				work_area.append({
 					type: 'checkbox',
 					name: 'arvtype',
 					list: [
 						{
-							label: 'Misleading username',
+							label: 'اسم مستخدم مضلل',
 							value: 'misleading',
-							tooltip: 'Misleading usernames imply relevant, misleading things about the contributor. For example, misleading points of fact, an impression of undue authority, or usernames giving the impression of a bot account.'
+							tooltip: 'تتضمن أسماء المستخدمين المضللة أشياء ذات صلة ومضللة حول المساهم. على سبيل المثال ، نقاط واقعية مضللة ، أو انطباع بسلطة لا مبرر لها ، أو أسماء مستخدمين تعطي انطباعًا عن حساب روبوت.'
 						},
 						{
-							label: 'Promotional username',
+							label: 'اسم مستخدم ترويجي',
 							value: 'promotional',
-							tooltip: 'Promotional usernames are advertisements for a company, website or group. Please do not report these names to UAA unless the user has also made promotional edits related to the name.'
+							tooltip: 'أسماء المستخدمين الترويجية هي إعلانات لشركة أو موقع ويب أو مجموعة. يرجى عدم الإبلاغ عن هذه الأسماء إلى UAA ما لم يقم المستخدم أيضًا بإجراء تعديلات ترويجية متعلقة بالاسم.'
 						},
 						{
-							label: 'Offensive username',
+							label: 'اسم مستخدم مسيء',
 							value: 'offensive',
-							tooltip: 'Offensive usernames make harmonious editing difficult or impossible.'
+							tooltip: 'أسماء المستخدمين المسيئة تجعل التحرير المتناغم صعبًا أو مستحيلًا.'
 						},
 						{
-							label: 'Disruptive username',
+							label: 'اسم مستخدم مزعج',
 							value: 'disruptive',
-							tooltip: 'Disruptive usernames include outright trolling or personal attacks, or otherwise show a clear intent to disrupt Wikipedia.'
+							tooltip: 'تتضمن أسماء المستخدمين المعطلة التصيد العلني أو الهجمات الشخصية ، أو تظهر خلاف ذلك نية واضحة لتعطيل ويكيبيديا.'
 						}
 					]
 				});
 				work_area.append({
 					type: 'textarea',
 					name: 'reason',
-					label: 'Comment:'
+					label: 'تعليق:'
 				});
 				work_area = work_area.render();
 				old_area.parentNode.replaceChild(work_area, old_area);
@@ -267,30 +267,30 @@
 			case 'puppet':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Report suspected sockpuppet',
+					label: 'أبلغ عن دمية جورب مشتبه بها',
 					name: 'work_area'
 				});
 				work_area.append(
 					{
 						type: 'input',
 						name: 'sockmaster',
-						label: 'Sockpuppeteer',
-						tooltip: 'The username of the sockpuppeteer (sockmaster) without the "User:" prefix'
+						label: 'مستخدم دمية جورب',
+						tooltip: 'اسم مستخدم مستخدم دمية جورب (sockmaster) بدون البادئة "مستخدم:"'
 					}
 				);
 				work_area.append({
 					type: 'textarea',
-					label: 'Evidence:',
+					label: 'دليل:',
 					name: 'evidence',
-					tooltip: 'Your evidence should make it clear that each of these users is likely to be abusing multiple accounts. Usually this means diffs, page histories or other information that justifies why the users are a) the same and b) disruptive. This should be just evidence and information needed to judge the matter. Avoid all other discussion that is not evidence of sockpuppetry.'
+					tooltip: 'يجب أن يوضح دليلك أن كل مستخدم من هؤلاء من المحتمل أن يسيء استخدام حسابات متعددة. عادةً ما يعني هذا diffs أو سجلات الصفحات أو معلومات أخرى تبرر سبب كون المستخدمين أ) هم نفس الشخص و ب) مدمر. يجب أن يكون هذا مجرد دليل ومعلومات ضرورية للحكم على الأمر. تجنب أي مناقشة أخرى ليست دليلًا على استخدام دمى الجورب.'
 				});
 				work_area.append({
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Request CheckUser',
+							label: 'طلب CheckUser',
 							name: 'checkuser',
-							tooltip: 'CheckUser is a tool used to obtain technical evidence related to a sockpuppetry allegation. It will not be used without good cause, which you must clearly demonstrate. Make sure your evidence explains why using the tool is appropriate. It will not be used to publicly connect user accounts and IP addresses.'
+							tooltip: 'CheckUser هي أداة تستخدم للحصول على أدلة فنية متعلقة بادعاء باستخدام دمية جورب. لن يتم استخدامه بدون سبب وجيه ، والذي يجب عليك إظهاره بوضوح. تأكد من أن دليلك يشرح سبب استخدام الأداة بشكل مناسب. لن يتم استخدامه لتوصيل حسابات المستخدمين وعناوين IP علنًا.'
 						}
 					]
 				});
@@ -300,30 +300,30 @@
 			case 'sock':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Report suspected sockpuppeteer',
+					label: 'أبلغ عن مستخدم دمية جورب مشتبه به',
 					name: 'work_area'
 				});
 				work_area.append(
 					{
 						type: 'dyninput',
 						name: 'sockpuppets',
-						label: 'Sockpuppets',
-						sublabel: 'Sock:',
-						tooltip: 'The username of the sockpuppet without the "User:" prefix',
+						label: 'دمى الجورب',
+						sublabel: 'جورب:',
+						tooltip: 'اسم مستخدم دمية الجورب بدون البادئة "مستخدم:"',
 						min: 2
 					});
 				work_area.append({
 					type: 'textarea',
-					label: 'Evidence:',
+					label: 'دليل:',
 					name: 'evidence',
-					tooltip: 'Your evidence should make it clear that each of these users is likely to be abusing multiple accounts. Usually this means diffs, page histories or other information that justifies why the users are a) the same and b) disruptive. This should be just evidence and information needed to judge the matter. Avoid all other discussion that is not evidence of sockpuppetry.'
+					tooltip: 'يجب أن يوضح دليلك أن كل مستخدم من هؤلاء من المحتمل أن يسيء استخدام حسابات متعددة. عادةً ما يعني هذا diffs أو سجلات الصفحات أو معلومات أخرى تبرر سبب كون المستخدمين أ) هم نفس الشخص و ب) مدمر. يجب أن يكون هذا مجرد دليل ومعلومات ضرورية للحكم على الأمر. تجنب أي مناقشة أخرى ليست دليلًا على استخدام دمى الجورب.'
 				});
 				work_area.append({
 					type: 'checkbox',
 					list: [{
-						label: 'Request CheckUser',
+						label: 'طلب CheckUser',
 						name: 'checkuser',
-						tooltip: 'CheckUser is a tool used to obtain technical evidence related to a sockpuppetry allegation. It will not be used without good cause, which you must clearly demonstrate. Make sure your evidence explains why using the tool is appropriate. It will not be used to publicly connect user accounts and IP addresses.'
+						tooltip: 'CheckUser هي أداة تستخدم للحصول على أدلة فنية متعلقة بادعاء باستخدام دمية جورب. لن يتم استخدامه بدون سبب وجيه ، والذي يجب عليك إظهاره بوضوح. تأكد من أن دليلك يشرح سبب استخدام الأداة بشكل مناسب. لن يتم استخدامه لتوصيل حسابات المستخدمين وعناوين IP علنًا.'
 					}]
 				});
 				work_area = work_area.render();
@@ -332,19 +332,19 @@
 			case 'an3':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Report edit warring',
+					label: 'أبلغ عن حرب التحرير',
 					name: 'work_area'
 				});
 				work_area.append({
 					type: 'input',
 					name: 'page',
-					label: 'Page',
-					tooltip: 'The page being reported'
+					label: 'صفحة',
+					tooltip: 'الصفحة التي يتم الإبلاغ عنها'
 				});
 				work_area.append({
 					type: 'button',
 					name: 'load',
-					label: 'Load',
+					label: 'تحميل',
 					event: function (e) {
 						const root = e.target.form;
 
@@ -369,7 +369,7 @@
 								const pageid = data.query.pageids[0];
 								const page = data.query.pages[pageid];
 								if (!page.revisions) {
-									$('<span class="entry">None found</span>').appendTo($field);
+									$('<span class="entry">لم يتم العثور على شيء</span>').appendTo($field);
 								} else {
 									for (let i = 0; i < page.revisions.length; ++i) {
 										const rev = page.revisions[i];
@@ -386,11 +386,11 @@
 										let comment = '<span>';
 										// revdel/os
 										if (typeof rev.commenthidden === 'string') {
-											comment += '(comment hidden)';
+											comment += '(التعليق مخفي)';
 										} else {
 											comment += '"' + rev.parsedcomment + '"';
 										}
-										comment += ' at <a href="' + mw.config.get('wgScript') + '?diff=' + rev.revid + '">' + new Morebits.Date(rev.timestamp).calendar() + '</a></span>';
+										comment += ' في <a href="' + mw.config.get('wgScript') + '?diff=' + rev.revid + '">' + new Morebits.Date(rev.timestamp).calendar() + '</a></span>';
 										$entry.append(comment).appendTo($field);
 									}
 								}
@@ -407,12 +407,12 @@
 
 									const $free_label = $('<label>', {
 										for: 's_resolves_free',
-										html: 'URL link of diff with additional discussions: '
+										html: 'رابط URL لـ diff مع مناقشات إضافية: '
 									});
 									$free_entry.append($free_label).append($free_input).appendTo($field);
 								}
 							}).fail(() => {
-								$('<span class="entry">API failure, reload page and try again</span>').appendTo($field);
+								$('<span class="entry">فشل API ، أعد تحميل الصفحة وحاول مرة أخرى</span>').appendTo($field);
 							});
 						};
 
@@ -439,25 +439,25 @@
 				work_area.append({
 					type: 'field',
 					name: 'diffs',
-					label: 'User\'s reverts (within last 48 hours)',
-					tooltip: 'Select the edits you believe are reverts'
+					label: 'تراجعات المستخدم (خلال الـ 48 ساعة الماضية)',
+					tooltip: 'حدد التعديلات التي تعتقد أنها تراجعات'
 				});
 				work_area.append({
 					type: 'field',
 					name: 'warnings',
-					label: 'Warnings given to subject',
-					tooltip: 'You must have warned the subject before reporting'
+					label: 'تحذيرات موجهة إلى الموضوع',
+					tooltip: 'يجب أن تكون قد حذرت الموضوع قبل الإبلاغ'
 				});
 				work_area.append({
 					type: 'field',
 					name: 'resolves',
-					label: 'Resolution initiatives',
-					tooltip: 'You should have tried to resolve the issue on the talk page first'
+					label: 'مبادرات القرار',
+					tooltip: 'يجب أن تكون قد حاولت حل المشكلة في صفحة النقاش أولاً'
 				});
 
 				work_area.append({
 					type: 'textarea',
-					label: 'Comment:',
+					label: 'تعليق:',
 					name: 'comment'
 				});
 
@@ -483,7 +483,7 @@
 				reason = Twinkle.arv.callback.getAivReasonWikitext(input);
 
 				if (reason === null) {
-					alert('You must specify some reason');
+					alert('يجب عليك تحديد بعض الأسباب');
 					return;
 				}
 
@@ -491,9 +491,9 @@
 				Morebits.Status.init(form);
 
 				Morebits.wiki.actionCompleted.redirect = 'Wikipedia:Administrator intervention against vandalism';
-				Morebits.wiki.actionCompleted.notice = 'Reporting complete';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الإبلاغ';
 
-				var aivPage = new Morebits.wiki.Page('Wikipedia:Administrator intervention against vandalism', 'Processing AIV request');
+				var aivPage = new Morebits.wiki.Page('Wikipedia:Administrator intervention against vandalism', 'معالجة طلب AIV');
 				aivPage.setPageSection(1);
 				aivPage.setFollowRedirect(true);
 
@@ -503,31 +503,31 @@
 
 					// check if user has already been reported
 					if (new RegExp('\\{\\{\\s*(?:(?:[Ii][Pp])?[Vv]andal|[Uu]serlinks)\\s*\\|\\s*(?:1=)?\\s*' + Morebits.string.escapeRegExp(input.uid) + '\\s*\\}\\}').test(text)) {
-						aivPage.getStatusElement().error('Report already present, will not add a new one');
-						Morebits.Status.printUserText(reason, 'The comments you typed are provided below, in case you wish to manually post them under the existing report for this user at ' + $aivLink + ':');
+						aivPage.getStatusElement().error('التقرير موجود بالفعل ، ولن تتم إضافة تقرير جديد');
+						Morebits.Status.printUserText(reason, 'التعليقات التي كتبتها مذكورة أدناه ، في حال كنت ترغب في نشرها يدويًا أسفل التقرير الحالي لهذا المستخدم في ' + $aivLink + ':');
 						return;
 					}
 
 					// then check for any bot reports
-					const tb2Page = new Morebits.wiki.Page('Wikipedia:Administrator intervention against vandalism/TB2', 'Checking bot reports');
+					const tb2Page = new Morebits.wiki.Page('Wikipedia:Administrator intervention against vandalism/TB2', 'جارٍ التحقق من تقارير الروبوت');
 					tb2Page.load(() => {
 						const tb2Text = tb2Page.getPageText();
 						const tb2statelem = tb2Page.getStatusElement();
 
 						if (new RegExp('\\{\\{\\s*(?:(?:[Ii][Pp])?[Vv]andal|[Uu]serlinks)\\s*\\|\\s*(?:1=)?\\s*' + Morebits.string.escapeRegExp(input.uid) + '\\s*\\}\\}').test(tb2Text)) {
-							if (confirm('The user ' + input.uid + ' has already been reported by a bot. Do you wish to make the report anyway?')) {
-								tb2statelem.info('Proceeded despite bot report');
+							if (confirm('المستخدم ' + input.uid + ' تم الإبلاغ عنه بالفعل بواسطة روبوت. هل ترغب في تقديم التقرير على أي حال؟')) {
+								tb2statelem.info('تم المتابعة على الرغم من تقرير الروبوت');
 							} else {
-								tb2statelem.error('Report from a bot is already present, stopping');
-								Morebits.Status.printUserText(reason, 'The comments you typed are provided below, in case you wish to manually post them at ' + $aivLink + ':');
+								tb2statelem.error('تقرير من روبوت موجود بالفعل ، يتم الإيقاف');
+								Morebits.Status.printUserText(reason, 'التعليقات التي كتبتها مذكورة أدناه ، في حال كنت ترغب في نشرها يدويًا في ' + $aivLink + ':');
 								return;
 							}
 						} else {
-							tb2statelem.info('No conflicting bot reports');
+							tb2statelem.info('لا توجد تقارير روبوت متعارضة');
 						}
 
-						aivPage.getStatusElement().status('Adding new report...');
-						aivPage.setEditSummary('Reporting [[Special:Contributions/' + input.uid + '|' + input.uid + ']].');
+						aivPage.getStatusElement().status('إضافة تقرير جديد...');
+						aivPage.setEditSummary('الإبلاغ عن [[Special:Contributions/' + input.uid + '|' + input.uid + ']].');
 						aivPage.setChangeTags(Twinkle.changeTags);
 						aivPage.setAppendText(Twinkle.arv.callback.buildAivReport(input));
 						aivPage.append();
@@ -545,9 +545,9 @@
 				Morebits.Status.init(form);
 
 				Morebits.wiki.actionCompleted.redirect = 'Wikipedia:Usernames for administrator attention';
-				Morebits.wiki.actionCompleted.notice = 'Reporting complete';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الإبلاغ';
 
-				var uaaPage = new Morebits.wiki.Page('Wikipedia:Usernames for administrator attention', 'Processing UAA request');
+				var uaaPage = new Morebits.wiki.Page('Wikipedia:Usernames for administrator attention', 'معالجة طلب UAA');
 				uaaPage.setFollowRedirect(true);
 
 				uaaPage.load(() => {
@@ -555,13 +555,13 @@
 
 					// check if user has already been reported
 					if (new RegExp('\\{\\{\\s*user-uaa\\s*\\|\\s*(1\\s*=\\s*)?' + Morebits.string.escapeRegExp(input.uid) + '\\s*(\\||\\})').test(text)) {
-						uaaPage.getStatusElement().error('User is already listed.');
+						uaaPage.getStatusElement().error('المستخدم مدرج بالفعل.');
 						const $uaaLink = '<a target="_blank" href="/wiki/WP:UAA">WP:UAA</a>';
-						Morebits.Status.printUserText(reason, 'The comments you typed are provided below, in case you wish to manually post them under the existing report for this user at ' + $uaaLink + ':');
+						Morebits.Status.printUserText(reason, 'التعليقات التي كتبتها مذكورة أدناه ، في حال كنت ترغب في نشرها يدويًا أسفل التقرير الحالي لهذا المستخدم في ' + $uaaLink + ':');
 						return;
 					}
-					uaaPage.getStatusElement().status('Adding new report...');
-					uaaPage.setEditSummary('Reporting ' + (censorUsername ? 'an offensive username.' : '[[Special:Contributions/' + input.uid + '|' + input.uid + ']].'));
+					uaaPage.getStatusElement().status('إضافة تقرير جديد...');
+					uaaPage.setEditSummary('الإبلاغ عن ' + (censorUsername ? 'اسم مستخدم مسيء.' : '[[Special:Contributions/' + input.uid + '|' + input.uid + ']].'));
 					uaaPage.setChangeTags(Twinkle.changeTags);
 
 					// Blank newline per [[Special:Permalink/996949310#Spacing]]; see also [[WP:LISTGAP]] and [[WP:INDENTGAP]]
@@ -589,11 +589,11 @@
 				var reportpage = 'Wikipedia:Sockpuppet investigations/' + reportData.sockmaster;
 
 				Morebits.wiki.actionCompleted.redirect = reportpage;
-				Morebits.wiki.actionCompleted.notice = 'Reporting complete';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الإبلاغ';
 
-				var spiPage = new Morebits.wiki.page(reportpage, 'Retrieving discussion page');
+				var spiPage = new Morebits.wiki.page(reportpage, 'استرداد صفحة المناقشة');
 				spiPage.setFollowRedirect(true);
-				spiPage.setEditSummary('Adding new report for [[Special:Contributions/' + reportData.sockmaster + '|' + reportData.sockmaster + ']].');
+				spiPage.setEditSummary('إضافة تقرير جديد لـ [[Special:Contributions/' + reportData.sockmaster + '|' + reportData.sockmaster + ']].');
 				spiPage.setChangeTags(Twinkle.changeTags);
 				spiPage.setAppendText(reportData.wikitext);
 				spiPage.setWatchlist(Twinkle.getPref('spiWatchReport'));
@@ -605,13 +605,13 @@
 			case 'an3':
 				var diffs = $.map($('input:checkbox[name=s_diffs]:checked', form), (o) => $(o).data('revinfo'));
 
-				if (diffs.length < 3 && !confirm('You have selected fewer than three offending edits. Do you wish to make the report anyway?')) {
+				if (diffs.length < 3 && !confirm('لقد اخترت أقل من ثلاثة تعديلات مسيئة. هل ترغب في تقديم التقرير على أي حال؟')) {
 					return;
 				}
 
 				var warnings = $.map($('input:checkbox[name=s_warnings]:checked', form), (o) => $(o).data('revinfo'));
 
-				if (!warnings.length && !confirm('You have not selected any edits where you warned the offender. Do you wish to make the report anyway?')) {
+				if (!warnings.length && !confirm('لم تحدد أي تعديلات قمت فيها بتحذير المخالف. هل ترغب في تقديم التقرير على أي حال؟')) {
 					return;
 				}
 
@@ -619,7 +619,7 @@
 				var free_resolves = $('input[name=s_resolves_free]').val();
 
 				var an3_next = function (free_resolves) {
-					if (!resolves.length && !free_resolves && !confirm('You have not selected any edits where you tried to resolve the issue. Do you wish to make the report anyway?')) {
+					if (!resolves.length && !free_resolves && !confirm('لم تحدد أي تعديلات حاولت فيها حل المشكلة. هل ترغب في تقديم التقرير على أي حال؟')) {
 						return;
 					}
 
@@ -741,23 +741,23 @@
 		type = type.map((v) => {
 			switch (v) {
 				case 'final':
-					return 'vandalism after final warning';
+					return 'تخريب بعد التحذير النهائي';
 				case 'postblock':
-					return 'vandalism after recent release of block';
+					return 'تخريب بعد الإفراج الأخير عن الحظر';
 				case 'vandalonly':
-					return 'actions evidently indicate a vandalism-only account';
+					return 'تشير الإجراءات بوضوح إلى حساب تخريبي فقط';
 				case 'promoonly':
-					return 'account is being used only for promotional purposes';
+					return 'يستخدم الحساب فقط لأغراض ترويجية';
 				case 'spambot':
-					return 'account is evidently a spambot or a compromised account';
+					return 'من الواضح أن الحساب هو برنامج روبوت إرسال رسائل غير مرغوب فيها أو حساب مخترق';
 				default:
-					return 'unknown reason';
+					return 'سبب غير معروف';
 			}
 		}).join('; ');
 
 		if (input.page !== '') {
 			// Allow links to redirects, files, and categories
-			text = 'On {{No redirect|:' + input.page + '}}';
+			text = 'في {{No redirect|:' + input.page + '}}';
 			if (input.badid !== '') {
 				text += ' ({{diff|' + input.page + '|' + input.badid + '|' + input.goodid + '|diff}})';
 			}
@@ -806,9 +806,9 @@
 			adjective = 'an';
 		}
 
-		let text = '*{{user-uaa|1=' + input.uid + '}} &ndash; ';
+		let text = '*{{user-uaa|1=' + input.uid + '}} – ';
 		if (input.arvtype.length) {
-			text += 'Violation of the username policy as ' + adjective + ' ' + input.arvtype + ' username. ';
+			text += 'انتهاك لسياسة اسم المستخدم كاسم مستخدم ' + adjective + ' ' + input.arvtype + '. ';
 		}
 		if (input.reason !== '') {
 			text += Morebits.string.toUpperCaseFirstChar(input.reason);
@@ -832,9 +832,9 @@
 		}
 
 		if (isPuppetReport && !input.sockmaster) {
-			return { error: 'You have not entered a sockmaster account for this puppet. Consider reporting this account as a sockpuppeteer instead.' };
+			return { error: 'لم تدخل حساب sockmaster لهذه الدمية. ضع في اعتبارك الإبلاغ عن هذا الحساب كمدير للدمى بدلاً من ذلك.' };
 		} else if (!isPuppetReport && input.sockpuppets.length === 0) {
-			return { error: 'You have not entered any sockpuppet account(s) for this sockmaster. Consider reporting this account as a sockpuppet instead.' };
+			return { error: 'لم تدخل أي حساب (حسابات) دمية جورب لمدير الدمى هذا. ضع في اعتبارك الإبلاغ عن هذا الحساب كدمية جورب بدلاً من ذلك.' };
 		}
 
 		input.sockmaster = input.sockmaster || input.uid;
@@ -879,7 +879,7 @@
 			// In case an edit summary was revdel'd
 			const hasHiddenComment = function (rev) {
 				if (!rev.comment && typeof rev.commenthidden === 'string') {
-					return '(comment hidden)';
+					return '(التعليق مخفي)';
 				}
 				return '"' + rev.comment + '"';
 
@@ -923,7 +923,7 @@
 				if (sub.length >= 2) {
 					const last = sub[0];
 					const first = sub.slice(-1)[0];
-					const label = 'Consecutive edits made from ' + new Morebits.Date(first.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) to ' + new Morebits.Date(last.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)';
+					const label = 'تعديلات متتالية تم إجراؤها من ' + new Morebits.Date(first.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(last.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)';
 					ret = '# {{diff|oldid=' + first.parentid + '|diff=' + last.revid + '|label=' + label + '}}\n';
 				}
 				ret += sub.reverse().map((v) => (sub.length >= 2 ? '#' : '') + '# {{diff2|' + v.revid + '|' + new Morebits.Date(v.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)}} ' + hasHiddenComment(v)).join('\n');
@@ -935,17 +935,17 @@
 			if (params.free_resolves) {
 				const page = params.free_resolves;
 				if (page.compare) {
-					resolvetext += '\n#  {{diff|oldid=' + page.compare.fromrevid + '|diff=' + page.compare.torevid + '|label=Consecutive edits on ' + page.compare.totitle + '}}';
+					resolvetext += '\n#  {{diff|oldid=' + page.compare.fromrevid + '|diff=' + page.compare.torevid + '|label=تعديلات متتالية في ' + page.compare.totitle + '}}';
 				} else if (page.revisions) {
 					const revCount = page.revisions.length;
 					let rev;
 					if (revCount < 3) { // diff=prev or next
 						rev = revCount === 1 ? page.revisions[0] : page.revisions[1];
-						resolvetext += '\n#  {{diff2|' + rev.revid + '|' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) on ' + page.title + '}} ' + hasHiddenComment(rev);
+						resolvetext += '\n#  {{diff2|' + rev.revid + '|' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) في ' + page.title + '}} ' + hasHiddenComment(rev);
 					} else { // diff and oldid are nonconsecutive
 						rev = page.revisions[0];
 						const revLatest = page.revisions[revCount - 1];
-						const label = 'Consecutive edits made from ' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) to ' + new Morebits.Date(revLatest.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) on ' + page.title;
+						const label = 'تعديلات متتالية تم إجراؤها من ' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(revLatest.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) في ' + page.title;
 						resolvetext += '\n# {{diff|oldid=' + rev.revid + '|diff=' + revLatest.revid + '|label=' + label + '}}\n';
 					}
 				}
@@ -962,11 +962,11 @@
 			const reportpage = 'Wikipedia:Administrators\' noticeboard/Edit warring';
 
 			Morebits.wiki.actionCompleted.redirect = reportpage;
-			Morebits.wiki.actionCompleted.notice = 'Reporting complete';
+			Morebits.wiki.actionCompleted.notice = 'اكتمل الإبلاغ';
 
-			const an3Page = new Morebits.wiki.Page(reportpage, 'Retrieving discussion page');
+			const an3Page = new Morebits.wiki.Page(reportpage, 'استرداد صفحة المناقشة');
 			an3Page.setFollowRedirect(true);
-			an3Page.setEditSummary('Adding new report for [[Special:Contributions/' + params.uid + '|' + params.uid + ']].');
+			an3Page.setEditSummary('إضافة تقرير جديد لـ [[Special:Contributions/' + params.uid + '|' + params.uid + ']].');
 			an3Page.setChangeTags(Twinkle.changeTags);
 			an3Page.setAppendText(text);
 			an3Page.append();
@@ -975,15 +975,15 @@
 
 			const notifyText = '\n\n{{subst:an3-notice|1=' + mw.util.wikiUrlencode(params.uid) + '|auto=1}} ~~~~';
 
-			const talkPage = new Morebits.wiki.Page('User talk:' + params.uid, 'Notifying edit warrior');
+			const talkPage = new Morebits.wiki.Page('User talk:' + params.uid, 'إخطار محارب التحرير');
 			talkPage.setFollowRedirect(true);
-			talkPage.setEditSummary('Notifying about edit warring noticeboard discussion.');
+			talkPage.setEditSummary('إخطار بشأن مناقشة لوحة إعلانات حرب التحرير.');
 			talkPage.setChangeTags(Twinkle.changeTags);
 			talkPage.setAppendText(notifyText);
 			talkPage.append();
 			Morebits.wiki.removeCheckpoint(); // all page updates have been started
 		}).fail((data) => {
-			console.log('API failed :(', data); // eslint-disable-line no-console
+			console.log('فشل API :(', data); // eslint-disable-line no-console
 		});
 	};
 

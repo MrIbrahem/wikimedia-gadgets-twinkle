@@ -15,11 +15,11 @@
 		// redirect tagging (exclude category redirects, which are all soft redirects and so shouldn't be tagged with rcats)
 		if (Morebits.isPageRedirect() && mw.config.get('wgNamespaceNumber') !== 14) {
 			Twinkle.tag.mode = 'redirect';
-			Twinkle.addPortletLink(Twinkle.tag.callback, 'Tag', 'twinkle-tag', 'Tag redirect');
+			Twinkle.addPortletLink(Twinkle.tag.callback, 'Tag', 'twinkle-tag', 'ضع قالب على التحويل');
 			// file tagging
 		} else if (mw.config.get('wgNamespaceNumber') === 6 && !document.getElementById('mw-sharedupload') && document.getElementById('mw-imagepage-section-filehistory')) {
 			Twinkle.tag.mode = 'file';
-			Twinkle.addPortletLink(Twinkle.tag.callback, 'Tag', 'twinkle-tag', 'Add maintenance tags to file');
+			Twinkle.addPortletLink(Twinkle.tag.callback, 'Tag', 'twinkle-tag', 'أضف قوالب صيانة إلى الملف');
 			// article/draft article tagging
 		} else if ([0, 118].includes(mw.config.get('wgNamespaceNumber')) && mw.config.get('wgCurRevisionId')) {
 			Twinkle.tag.mode = 'article';
@@ -28,7 +28,7 @@
 				// Disabled on latest diff because the diff slider could be used to slide
 				// away from the latest diff without causing the script to reload
 				!mw.config.get('wgDiffNewId');
-			Twinkle.addPortletLink(Twinkle.tag.callback, 'Tag', 'twinkle-tag', 'Add or remove article maintenance tags');
+			Twinkle.addPortletLink(Twinkle.tag.callback, 'Tag', 'twinkle-tag', 'أضف أو أزل قوالب صيانة المقالات');
 		}
 	};
 
@@ -66,7 +66,7 @@
 						type: 'checkbox',
 						list: [
 							{
-								label: 'Mark the page as patrolled/reviewed',
+								label: 'ضع علامة على الصفحة على أنها تم فحصها/مراجعتها',
 								value: 'patrol',
 								name: 'patrol',
 								checked: Twinkle.getPref('markTaggedPagesAsPatrolled')
@@ -81,7 +81,7 @@
 
 		form.append({
 			type: 'input',
-			label: 'Filter tag list:',
+			label: 'تصفية قائمة القوالب:',
 			name: 'quickfilter',
 			size: '30',
 			event: function twinkletagquickfilter() {
@@ -122,7 +122,7 @@
 
 		switch (Twinkle.tag.mode) {
 			case 'article':
-				Window.setTitle('Article maintenance tagging');
+				Window.setTitle('وضع قوالب صيانة المقالات');
 
 				// Build sorting and lookup object flatObject, which is always
 				// needed but also used to generate the alphabetical list
@@ -142,18 +142,18 @@
 				form.append({
 					type: 'select',
 					name: 'sortorder',
-					label: 'View this list:',
-					tooltip: 'You can change the default view order in your Twinkle preferences (WP:TWPREFS).',
+					label: 'عرض هذه القائمة:',
+					tooltip: 'يمكنك تغيير ترتيب العرض الافتراضي في تفضيلات Twinkle الخاصة بك (WP:TWPREFS).',
 					event: Twinkle.tag.updateSortOrder,
 					list: [
-						{ type: 'option', value: 'cat', label: 'By categories', selected: Twinkle.getPref('tagArticleSortOrder') === 'cat' },
-						{ type: 'option', value: 'alpha', label: 'In alphabetical order', selected: Twinkle.getPref('tagArticleSortOrder') === 'alpha' }
+						{ type: 'option', value: 'cat', label: 'حسب الفئات', selected: Twinkle.getPref('tagArticleSortOrder') === 'cat' },
+						{ type: 'option', value: 'alpha', label: 'بالترتيب الأبجدي', selected: Twinkle.getPref('tagArticleSortOrder') === 'alpha' }
 					]
 				});
 
 				if (!Twinkle.tag.canRemove) {
 					const divElement = document.createElement('div');
-					divElement.innerHTML = 'For removal of existing tags, please open Tag menu from the current version of article';
+					divElement.innerHTML = 'لإزالة القوالب الموجودة، يرجى فتح قائمة القوالب من النسخة الحالية للمقال';
 					form.append({
 						type: 'div',
 						name: 'untagnotice',
@@ -172,10 +172,10 @@
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Group inside {{multiple issues}} if possible',
+							label: 'تجميع داخل {{قضايا متعددة}} إن أمكن',
 							value: 'group',
 							name: 'group',
-							tooltip: 'If applying two or more templates supported by {{multiple issues}} and this box is checked, all supported templates will be grouped inside a {{multiple issues}} template.',
+							tooltip: 'إذا تم تطبيق قالبين أو أكثر مدعومين بواسطة {{قضايا متعددة}} وتم تحديد هذا المربع، فسيتم تجميع جميع القوالب المدعومة داخل قالب {{قضايا متعددة}}.',
 							checked: Twinkle.getPref('groupByDefault')
 						}
 					]
@@ -183,16 +183,16 @@
 
 				form.append({
 					type: 'input',
-					label: 'Reason',
+					label: 'السبب',
 					name: 'reason',
-					tooltip: 'Optional reason to be appended in edit summary. Recommended when removing tags.',
+					tooltip: 'سبب اختياري لإضافته في ملخص التعديل. يوصى به عند إزالة القوالب.',
 					size: '60'
 				});
 
 				break;
 
 			case 'file':
-				Window.setTitle('File maintenance tagging');
+				Window.setTitle('وضع قوالب صيانة الملفات');
 
 				$.each(Twinkle.tag.fileList, (groupName, group) => {
 					form.append({ type: 'header', label: groupName });
@@ -200,13 +200,13 @@
 				});
 
 				if (Twinkle.getPref('customFileTagList').length) {
-					form.append({ type: 'header', label: 'Custom tags' });
+					form.append({ type: 'header', label: 'قوالب مخصصة' });
 					form.append({ type: 'checkbox', name: 'tags', list: Twinkle.getPref('customFileTagList') });
 				}
 				break;
 
 			case 'redirect':
-				Window.setTitle('Redirect tagging');
+				Window.setTitle('وضع قوالب التحويلات');
 
 				// If a tag has a restriction for this namespace or title, return true, so that we know not to display it in the list of check boxes.
 				var isRestricted = function (item) {
@@ -260,7 +260,7 @@
 				});
 
 				if (Twinkle.getPref('customRedirectTagList').length) {
-					form.append({ type: 'header', label: 'Custom tags' });
+					form.append({ type: 'header', label: 'قوالب مخصصة' });
 					form.append({ type: 'checkbox', name: 'tags', list: Twinkle.getPref('customRedirectTagList') });
 				}
 				break;
@@ -380,7 +380,7 @@
 		};
 
 		const makeCheckboxesForAlreadyPresentTags = function () {
-			container.append({ type: 'header', id: 'tagHeader0', label: 'Tags already present' });
+			container.append({ type: 'header', id: 'tagHeader0', label: 'القوالب الموجودة بالفعل' });
 			const subdiv = container.append({ type: 'div', id: 'tagSubdiv0' });
 			const checkboxes = [];
 			const unCheckedTags = e.target.form.getUnchecked('existingTags');
@@ -438,7 +438,7 @@
 		} else { // alphabetical sort order
 			if (Twinkle.tag.alreadyPresentTags.length > 0) {
 				makeCheckboxesForAlreadyPresentTags();
-				container.append({ type: 'header', id: 'tagHeader1', label: 'Available tags' });
+				container.append({ type: 'header', id: 'tagHeader1', label: 'القوالب المتاحة' });
 			}
 
 			// Avoid repeatedly resorting
@@ -458,7 +458,7 @@
 
 		// append any custom tags
 		if (Twinkle.getPref('customTagList').length) {
-			container.append({ type: 'header', label: 'Custom tags' });
+			container.append({ type: 'header', label: 'قوالب مخصصة' });
 			container.append({
 				type: 'checkbox', name: 'tags',
 				list: Twinkle.getPref('customTagList').map((el) => {
@@ -495,8 +495,8 @@
 				Twinkle.tag.status.numRemoved += this.checked ? -1 : 1;
 			}
 
-			const firstPart = 'Adding ' + Twinkle.tag.status.numAdded + ' tag' + (Twinkle.tag.status.numAdded > 1 ? 's' : '');
-			const secondPart = 'Removing ' + Twinkle.tag.status.numRemoved + ' tag' + (Twinkle.tag.status.numRemoved > 1 ? 's' : '');
+			const firstPart = 'إضافة ' + Twinkle.tag.status.numAdded + ' قالب' + (Twinkle.tag.status.numAdded > 1 ? 's' : '');
+			const secondPart = 'إزالة ' + Twinkle.tag.status.numRemoved + ' قالب' + (Twinkle.tag.status.numRemoved > 1 ? 's' : '');
 			statusNode.textContent =
 				(Twinkle.tag.status.numAdded ? '  ' + firstPart : '') +
 				(Twinkle.tag.status.numRemoved ? (Twinkle.tag.status.numAdded ? '; ' : '  ') + secondPart : '');
@@ -529,35 +529,35 @@
 			name: 'translationLanguage',
 			parameter: '1',
 			type: 'input',
-			label: 'Language of article (if known):',
-			tooltip: 'Consider looking at [[WP:LRC]] for help. If listing the article at PNT, please try to avoid leaving this box blank, unless you are completely unsure.'
+			label: 'لغة المقال (إذا كانت معروفة):',
+			tooltip: 'يرجى الاطلاع على [[WP:LRC]] للحصول على المساعدة. إذا كنت تدرج المقال في PNT، فيرجى محاولة تجنب ترك هذا المربع فارغًا، ما لم تكن غير متأكد تمامًا.'
 		}
 	].concat(mw.config.get('wgNamespaceNumber') === 0 ? [
 		{
 			type: 'checkbox',
 			list: [{
 				name: 'translationPostAtPNT',
-				label: 'List this article at Wikipedia:Pages needing translation into English (PNT)',
+				label: 'أدرج هذا المقال في ويكيبيديا:صفحات تحتاج إلى ترجمة إلى الإنجليزية (PNT)',
 				checked: true
 			}]
 		},
 		{
 			name: 'translationComments',
 			type: 'textarea',
-			label: 'Additional comments to post at PNT',
-			tooltip: 'Optional, and only relevant if "List this article ..." above is checked.'
+			label: 'تعليقات إضافية لنشرها في PNT',
+			tooltip: 'اختياري، وذو صلة فقط إذا تم تحديد "أدرج هذا المقال ..." أعلاه.'
 		}
 	] : []);
 
 	// Subgroups for {{merge}}, {{merge-to}} and {{merge-from}}
 	const getMergeSubgroups = function (tag) {
-		let otherTagName = 'Merge';
+		let otherTagName = 'دمج';
 		switch (tag) {
 			case 'Merge from':
-				otherTagName = 'Merge to';
+				otherTagName = 'دمج إلى';
 				break;
 			case 'Merge to':
-				otherTagName = 'Merge from';
+				otherTagName = 'دمج من';
 				break;
 			// no default
 		}
@@ -565,8 +565,8 @@
 			{
 				name: 'mergeTarget',
 				type: 'input',
-				label: 'Other article(s):',
-				tooltip: 'If specifying multiple articles, separate them with pipe characters: Article one|Article two',
+				label: 'مقالات أخرى:',
+				tooltip: 'إذا كنت تحدد مقالات متعددة، فافصل بينها بأحرف الأنابيب: مقال واحد|مقال اثنان',
 				required: true
 			},
 			{
@@ -574,18 +574,18 @@
 				list: [
 					{
 						name: 'mergeTagOther',
-						label: 'Tag the other article with a {{' + otherTagName + '}} tag',
+						label: 'ضع قالبًا على المقال الآخر بقالب {{' + otherTagName + '}}',
 						checked: true,
-						tooltip: 'Only available if a single article name is entered.'
+						tooltip: 'متاح فقط إذا تم إدخال اسم مقال واحد.'
 					}
 				]
 			}
 		].concat(mw.config.get('wgNamespaceNumber') === 0 ? {
 			name: 'mergeReason',
 			type: 'textarea',
-			label: 'Rationale for merge (will be posted on ' +
-				(tag === 'Merge to' ? 'the other article\'s' : 'this article\'s') + ' talk page):',
-			tooltip: 'Optional, but strongly recommended. Leave blank if not wanted. Only available if a single article name is entered.'
+			label: 'مبررات الدمج (سيتم نشرها في صفحة نقاش ' +
+				(tag === 'Merge to' ? 'المقال الآخر' : 'هذا المقال') + '):',
+			tooltip: 'اختياري، ولكنه موصى به بشدة. اتركه فارغًا إذا لم يكن مطلوبًا. متاح فقط إذا تم إدخال اسم مقال واحد.'
 		} : []);
 	};
 
@@ -594,119 +594,119 @@
 	// excludeMI: true indicate a tag that *does not* work inside {{multiple issues}}
 	// Add new categories with discretion - the list is long enough as is!
 	Twinkle.tag.article.tagList = {
-		'Cleanup and maintenance tags': {
-			'General cleanup': [
+		'قوالب التنظيف والصيانة': {
+			'تنظيف عام': [
 				{
-					tag: 'Cleanup', description: 'requires cleanup',
+					tag: 'Cleanup', description: 'يتطلب تنظيف',
 					subgroup: {
 						name: 'cleanup',
 						parameter: 'reason',
 						type: 'input',
-						label: 'Specific reason why cleanup is needed:',
-						tooltip: 'Required.',
+						label: 'سبب محدد لضرورة التنظيف:',
+						tooltip: 'مطلوب.',
 						size: 35,
 						required: true
 					}
 				}, // has a subgroup with text input
 				{
 					tag: 'Cleanup rewrite',
-					description: "needs to be rewritten entirely to comply with Wikipedia's quality standards"
+					description: 'يحتاج إلى إعادة كتابته بالكامل ليتوافق مع معايير الجودة في ويكيبيديا'
 				},
 				{
 					tag: 'Copy edit',
-					description: 'requires copy editing for grammar, style, cohesion, tone, or spelling',
+					description: 'يتطلب تحريرًا لغويًا للقواعد أو الأسلوب أو التماسك أو اللهجة أو الإملاء',
 					subgroup: {
 						name: 'copyEdit',
 						parameter: 'for',
 						type: 'input',
-						label: '"This article may require copy editing for..."',
-						tooltip: 'e.g. "consistent spelling". Optional.',
+						label: '"قد يتطلب هذا المقال تحريرًا لغويًا من أجل..."',
+						tooltip: 'على سبيل المثال "إملاء متناسق". اختياري.',
 						size: 35
 					}
 				} // has a subgroup with text input
 			],
-			'Potentially unwanted content': [
+			'محتوى غير مرغوب فيه': [
 				{
 					tag: 'Close paraphrasing',
-					description: 'contains close paraphrasing of a non-free copyrighted source',
+					description: 'يحتوي على إعادة صياغة دقيقة لمصدر محمي بحقوق الطبع والنشر غير مجاني',
 					subgroup: {
 						name: 'closeParaphrasing',
 						parameter: 'source',
 						type: 'input',
-						label: 'Source:',
-						tooltip: 'Source that has been closely paraphrased'
+						label: 'المصدر:',
+						tooltip: 'المصدر الذي تمت إعادة صياغته بدقة'
 					}
 				},
 				{
 					tag: 'Copypaste',
-					description: 'appears to have been copied and pasted from another location',
+					description: 'يبدو أنه تم نسخه ولصقه من موقع آخر',
 					excludeMI: true,
 					subgroup: {
 						name: 'copypaste',
 						parameter: 'url',
 						type: 'input',
-						label: 'Source URL:',
-						tooltip: 'If known.',
+						label: 'عنوان URL للمصدر:',
+						tooltip: 'إذا كان معروفًا.',
 						size: 50
 					}
 				}, // has a subgroup with text input
-				{ tag: 'AI-generated', description: 'content appears to be generated by a large language model' },
-				{ tag: 'External links', description: 'external links may not follow content policies or guidelines' },
-				{ tag: 'Non-free', description: 'may contain excessive or improper use of copyrighted materials' }
+				{ tag: 'AI-generated', description: 'يبدو أن المحتوى تم إنشاؤه بواسطة نموذج لغوي كبير' },
+				{ tag: 'External links', description: 'قد لا تتبع الروابط الخارجية سياسات المحتوى أو الإرشادات' },
+				{ tag: 'Non-free', description: 'قد يحتوي على استخدام مفرط أو غير لائق للمواد المحمية بحقوق الطبع والنشر' }
 			],
-			'Structure, formatting, and lead section': [
-				{ tag: 'Cleanup reorganize', description: "needs reorganization to comply with Wikipedia's layout guidelines" },
-				{ tag: 'Lead missing', description: 'no lead section' },
-				{ tag: 'Lead rewrite', description: 'lead section needs to be rewritten to comply with guidelines' },
-				{ tag: 'Lead too long', description: 'lead section is too long for the length of the article' },
-				{ tag: 'Lead too short', description: 'lead section is too short and should be expanded to summarize key points' },
-				{ tag: 'Sections', description: 'needs to be divided into sections by topic' },
-				{ tag: 'Too many sections', description: 'too many section headers dividing up content, should be condensed' },
-				{ tag: 'Very long', description: 'too long to read and navigate comfortably' }
+			'التركيب والتنسيق والمقدمة': [
+				{ tag: 'Cleanup reorganize', description: 'يحتاج إلى إعادة تنظيم ليتوافق مع إرشادات التخطيط في ويكيبيديا' },
+				{ tag: 'Lead missing', description: 'لا توجد مقدمة' },
+				{ tag: 'Lead rewrite', description: 'تحتاج المقدمة إلى إعادة كتابتها للامتثال للإرشادات' },
+				{ tag: 'Lead too long', description: 'المقدمة طويلة جدًا بالنسبة لطول المقال' },
+				{ tag: 'Lead too short', description: 'المقدمة قصيرة جدًا ويجب توسيعها لتلخيص النقاط الرئيسية' },
+				{ tag: 'Sections', description: 'يحتاج إلى تقسيم إلى أقسام حسب الموضوع' },
+				{ tag: 'Too many sections', description: 'عدد كبير جدًا من رؤوس الأقسام التي تقسم المحتوى، يجب تكثيفها' },
+				{ tag: 'Very long', description: 'طويل جدًا بحيث لا يمكن قراءته والتنقل فيه بشكل مريح' }
 			],
-			'Fiction-related cleanup': [
-				{ tag: 'All plot', description: 'almost entirely a plot summary' },
-				{ tag: 'Fiction', description: 'fails to distinguish between fact and fiction' },
-				{ tag: 'In-universe', description: 'subject is fictional and needs rewriting to provide a non-fictional perspective' },
-				{ tag: 'Long plot', description: 'plot summary is too long or excessively detailed' },
-				{ tag: 'More plot', description: 'plot summary is too short' },
-				{ tag: 'No plot', description: 'needs a plot summary' }
+			'تنظيف متعلق بالخيال': [
+				{ tag: 'All plot', description: 'ملخص الحبكة بالكامل تقريبًا' },
+				{ tag: 'Fiction', description: 'يفشل في التمييز بين الحقيقة والخيال' },
+				{ tag: 'In-universe', description: 'الموضوع خيالي ويحتاج إلى إعادة كتابة لتقديم منظور غير خيالي' },
+				{ tag: 'Long plot', description: 'ملخص الحبكة طويل جدًا أو مفصل بشكل مفرط' },
+				{ tag: 'More plot', description: 'ملخص الحبكة قصير جدًا' },
+				{ tag: 'No plot', description: 'يحتاج إلى ملخص الحبكة' }
 			]
 		},
-		'General content issues': {
-			'Importance and notability': [
+		'مشاكل المحتوى العامة': {
+			'الأهمية والملاحظة': [
 				{
-					tag: 'Notability', description: 'subject may not meet the general notability guideline',
+					tag: 'Notability', description: 'قد لا يفي الموضوع بالإرشادات العامة للملاحظة',
 					subgroup: {
 						name: 'notability',
 						parameter: '1',
 						type: 'select',
 						list: [
-							{ label: "{{notability}}: article's subject may not meet the general notability guideline", value: '' },
-							{ label: '{{notability|Academics}}: notability guideline for academics', value: 'Academics' },
-							{ label: '{{notability|Astro}}: notability guideline for astronomical objects', value: 'Astro' },
-							{ label: '{{notability|Biographies}}: notability guideline for biographies', value: 'Biographies' },
-							{ label: '{{notability|Books}}: notability guideline for books', value: 'Books' },
-							{ label: '{{notability|Companies}}: notability guideline for companies', value: 'Companies' },
-							{ label: '{{notability|Events}}: notability guideline for events', value: 'Events' },
-							{ label: '{{notability|Films}}: notability guideline for films', value: 'Films' },
-							{ label: '{{notability|Geographic}}: notability guideline for geographic features', value: 'Geographic' },
-							{ label: '{{notability|Lists}}: notability guideline for stand-alone lists', value: 'Lists' },
-							{ label: '{{notability|Music}}: notability guideline for music', value: 'Music' },
-							{ label: '{{notability|Neologisms}}: notability guideline for neologisms', value: 'Neologisms' },
-							{ label: '{{notability|Numbers}}: notability guideline for numbers', value: 'Numbers' },
-							{ label: '{{notability|Organizations}}: notability guideline for organizations', value: 'Organizations' },
-							{ label: '{{notability|Products}}: notability guideline for products and services', value: 'Products' },
-							{ label: '{{notability|Sports}}: notability guideline for sports and athletics', value: 'Sports' },
-							{ label: '{{notability|Television}}: notability guideline for television shows', value: 'Television' },
-							{ label: '{{notability|Web}}: notability guideline for web content', value: 'Web' }
+							{ label: "{{notability}}: قد لا يفي موضوع المقال بالإرشادات العامة للملاحظة", value: '' },
+							{ label: '{{notability|Academics}}: إرشادات الملاحظة للأكاديميين', value: 'Academics' },
+							{ label: '{{notability|Astro}}: إرشادات الملاحظة للأجرام الفلكية', value: 'Astro' },
+							{ label: '{{notability|Biographies}}: إرشادات الملاحظة للسير الذاتية', value: 'Biographies' },
+							{ label: '{{notability|Books}}: إرشادات الملاحظة للكتب', value: 'Books' },
+							{ label: '{{notability|Companies}}: إرشادات الملاحظة للشركات', value: 'Companies' },
+							{ label: '{{notability|Events}}: إرشادات الملاحظة للأحداث', value: 'Events' },
+							{ label: '{{notability|Films}}: إرشادات الملاحظة للأفلام', value: 'Films' },
+							{ label: '{{notability|Geographic}}: إرشادات الملاحظة للمعالم الجغرافية', value: 'Geographic' },
+							{ label: '{{notability|Lists}}: إرشادات الملاحظة للقوائم المستقلة', value: 'Lists' },
+							{ label: '{{notability|Music}}: إرشادات الملاحظة للموسيقى', value: 'Music' },
+							{ label: '{{notability|Neologisms}}: إرشادات الملاحظة للكلمات الجديدة', value: 'Neologisms' },
+							{ label: '{{notability|Numbers}}: إرشادات الملاحظة للأرقام', value: 'Numbers' },
+							{ label: '{{notability|Organizations}}: إرشادات الملاحظة للمنظمات', value: 'Organizations' },
+							{ label: '{{notability|Products}}: إرشادات الملاحظة للمنتجات والخدمات', value: 'Products' },
+							{ label: '{{notability|Sports}}: إرشادات الملاحظة للرياضة وألعاب القوى', value: 'Sports' },
+							{ label: '{{notability|Television}}: إرشادات الملاحظة للبرامج التلفزيونية', value: 'Television' },
+							{ label: '{{notability|Web}}: إرشادات الملاحظة لمحتوى الويب', value: 'Web' }
 						]
 					}
 				}
 			],
-			'Style of writing': [
+			'أسلوب الكتابة': [
 				{
-					tag: 'Cleanup press release', description: 'reads like a press release or news article',
+					tag: 'Cleanup press release', description: 'يشبه البيان الصحفي أو المقال الإخباري',
 					subgroup: {
 						type: 'hidden',
 						name: 'cleanupPR1',
@@ -714,94 +714,94 @@
 						value: 'article'
 					}
 				},
-				{ tag: 'Cleanup tense', description: 'does not follow guidelines on use of different tenses.' },
-				{ tag: 'Essay-like', description: 'written like a personal reflection, personal essay, or argumentative essay' },
-				{ tag: 'Fanpov', description: "written from a fan's point of view" },
-				{ tag: 'Inappropriate person', description: 'uses first-person or second-person inappropiately' },
-				{ tag: 'Manual', description: 'written like a manual or guidebook' },
-				{ tag: 'Over-quotation', description: 'too many or too-lengthy quotations for an encyclopedic entry' },
-				{ tag: 'Promotional', description: 'contains promotional content or is written like an advertisement' },
-				{ tag: 'Prose', description: 'written in a list format but may read better as prose' },
-				{ tag: 'Resume-like', description: 'written like a resume' },
-				{ tag: 'Technical', description: 'too technical for most readers to understand' },
-				{ tag: 'Tone', description: 'tone or style may not reflect the encyclopedic tone used on Wikipedia' }
+				{ tag: 'Cleanup tense', description: 'لا يتبع الإرشادات الخاصة باستخدام الأزمنة المختلفة.' },
+				{ tag: 'Essay-like', description: 'مكتوب مثل انعكاس شخصي أو مقال شخصي أو مقال جدلي' },
+				{ tag: 'Fanpov', description: 'مكتوب من وجهة نظر أحد المعجبين' },
+				{ tag: 'Inappropriate person', description: 'يستخدم ضمير المتكلم أو المخاطب بشكل غير لائق' },
+				{ tag: 'Manual', description: 'مكتوب مثل دليل أو كتاب إرشادات' },
+				{ tag: 'Over-quotation', description: 'يوجد الكثير جدًا من الاقتباسات أو الاقتباسات الطويلة جدًا لإدخال موسوعي' },
+				{ tag: 'Promotional', description: 'يحتوي على محتوى ترويجي أو مكتوب مثل إعلان' },
+				{ tag: 'Prose', description: 'مكتوب بتنسيق قائمة ولكنه قد يقرأ بشكل أفضل كنثر' },
+				{ tag: 'Resume-like', description: 'مكتوب مثل سيرة ذاتية' },
+				{ tag: 'Technical', description: 'تقني جدًا بحيث لا يستطيع معظم القراء فهمه' },
+				{ tag: 'Tone', description: 'قد لا تعكس اللهجة أو الأسلوب اللهجة الموسوعية المستخدمة في ويكيبيديا' }
 			],
-			'Sense (or lack thereof)': [
-				{ tag: 'Confusing', description: 'confusing or unclear' },
-				{ tag: 'Incomprehensible', description: 'very hard to understand or incomprehensible' },
-				{ tag: 'Unfocused', description: 'lacks focus or is about more than one topic' }
+			'الحس (أو عدم وجوده)': [
+				{ tag: 'Confusing', description: 'مربك أو غير واضح' },
+				{ tag: 'Incomprehensible', description: 'من الصعب جدًا فهمه أو غير مفهوم' },
+				{ tag: 'Unfocused', description: 'يفتقر إلى التركيز أو يدور حول أكثر من موضوع واحد' }
 			],
-			'Information and detail': [
-				{ tag: 'Context', description: 'insufficient context for those unfamiliar with the subject' },
-				{ tag: 'Excessive examples', description: 'may contain indiscriminate, excessive, or irrelevant examples' },
+			'المعلومات والتفاصيل': [
+				{ tag: 'Context', description: 'سياق غير كافٍ لأولئك غير المألوفين بالموضوع' },
+				{ tag: 'Excessive examples', description: 'قد يحتوي على أمثلة عشوائية أو مفرطة أو غير ذات صلة' },
 				{
-					tag: 'Expert needed', description: 'needs attention from an expert on the subject',
+					tag: 'Expert needed', description: 'يحتاج إلى اهتمام من خبير في هذا الموضوع',
 					subgroup: [
 						{
 							name: 'expertNeeded',
 							parameter: '1',
 							type: 'input',
-							label: 'Name of relevant WikiProject:',
-							tooltip: 'Optionally, enter the name of a WikiProject which might be able to help recruit an expert. Don\'t include the "WikiProject" prefix.'
+							label: 'اسم ويكي للمشروع ذي الصلة:',
+							tooltip: 'اختياريًا، أدخل اسم ويكي للمشروع الذي قد يكون قادرًا على المساعدة في تجنيد خبير. لا تقم بتضمين البادئة "WikiProject".'
 						},
 						{
 							name: 'expertNeededReason',
 							parameter: 'reason',
 							type: 'input',
-							label: 'Reason:',
-							tooltip: 'Short explanation describing the issue. Either Reason or Talk link is required.'
+							label: 'السبب:',
+							tooltip: 'شرح موجز يصف المشكلة. إما السبب أو رابط المناقشة مطلوب.'
 						},
 						{
 							name: 'expertNeededTalk',
 							parameter: 'talk',
 							type: 'input',
-							label: 'Talk discussion:',
-							tooltip: 'Name of the section of this article\'s talk page where the issue is being discussed. Do not give a link, just the name of the section. Either Reason or Talk link is required.'
+							label: 'مناقشة النقاش:',
+							tooltip: 'اسم قسم صفحة نقاش هذا المقال حيث تتم مناقشة المشكلة. لا تعط رابطًا، فقط اسم القسم. إما السبب أو رابط المناقشة مطلوب.'
 						}
 					]
 				},
-				{ tag: 'Overly detailed', description: 'excessive amount of intricate detail' },
-				{ tag: 'Undue weight', description: 'lends undue weight to certain ideas, incidents, or controversies' }
+				{ tag: 'Overly detailed', description: 'كمية مفرطة من التفاصيل المعقدة' },
+				{ tag: 'Undue weight', description: 'يميل إلى إعطاء وزن غير مبرر لأفكار أو حوادث أو خلافات معينة' }
 			],
 			Timeliness: [
-				{ tag: 'Current', description: 'documents a current event', excludeMI: true }, // Works but not intended for use in MI
-				{ tag: 'Current related', description: 'documents a topic affected by a current event', excludeMI: true }, // Works but not intended for use in MI
+				{ tag: 'Current', description: 'يوثق حدثًا حاليًا', excludeMI: true }, // Works but not intended for use in MI
+				{ tag: 'Current related', description: 'يوثق موضوعًا متأثرًا بحدث حالي', excludeMI: true }, // Works but not intended for use in MI
 				{
-					tag: 'Update', description: 'needs additional up-to-date information added',
+					tag: 'Update', description: 'يحتاج إلى إضافة معلومات محدثة إضافية',
 					subgroup: [
 						{
 							name: 'updatePart',
 							parameter: 'part',
 							type: 'input',
-							label: 'What part of the article:',
-							tooltip: 'Part that needs updating',
+							label: 'ما هو جزء المقال:',
+							tooltip: 'الجزء الذي يحتاج إلى تحديث',
 							size: '45'
 						},
 						{
 							name: 'updateReason',
 							parameter: 'reason',
 							type: 'input',
-							label: 'Reason:',
-							tooltip: 'Explanation why the article is out of date',
+							label: 'السبب:',
+							tooltip: 'شرح سبب قدم المقال',
 							size: '55'
 						}
 					]
 				}
 			],
-			'Neutrality, bias, and factual accuracy': [
-				{ tag: 'Autobiography', description: 'autobiography and may not be written neutrally' },
+			'الحياد والتحيز والدقة الواقعية': [
+				{ tag: 'Autobiography', description: 'سيرة ذاتية وقد لا تكون مكتوبة بحيادية' },
 				{
-					tag: 'COI', description: 'creator or major contributor may have a conflict of interest', subgroup: mw.config.get('wgNamespaceNumber') === 0 ? {
+					tag: 'COI', description: 'قد يكون للمنشئ أو المساهم الرئيسي تضارب في المصالح', subgroup: mw.config.get('wgNamespaceNumber') === 0 ? {
 						name: 'coiReason',
 						type: 'textarea',
-						label: 'Explanation for COI tag (will be posted on this article\'s talk page):',
-						tooltip: 'Optional, but strongly recommended. Leave blank if not wanted.'
+						label: 'شرح لقالب COI (سيتم نشره في صفحة نقاش هذا المقال):',
+						tooltip: 'اختياري، ولكنه موصى به بشدة. اتركه فارغًا إذا لم يكن مطلوبًا.'
 					} : []
 				},
-				{ tag: 'Disputed', description: 'questionable factual accuracy' },
-				{ tag: 'Fringe theories', description: 'presents fringe theories as mainstream views' },
+				{ tag: 'Disputed', description: 'دقة واقعية مشكوك فيها' },
+				{ tag: 'Fringe theories', description: 'يعرض النظريات الهامشية على أنها آراء سائدة' },
 				{
-					tag: 'Globalize', description: 'may not represent a worldwide view of the subject',
+					tag: 'Globalize', description: 'قد لا يمثل وجهة نظر عالمية للموضوع',
 					subgroup: [
 						{
 							type: 'hidden',
@@ -812,65 +812,65 @@
 							name: 'globalizeRegion',
 							parameter: '2',
 							type: 'input',
-							label: 'Over-represented country or region'
+							label: 'البلد أو المنطقة الممثلة بشكل مفرط'
 						}
 					]
 				},
-				{ tag: 'Hoax', description: 'may partially or completely be a hoax' },
-				{ tag: 'Paid contributions', description: 'contains paid contributions, and may therefore require cleanup' },
-				{ tag: 'Peacock', description: 'contains wording that promotes the subject in a subjective manner without adding information' },
-				{ tag: 'POV', description: 'does not maintain a neutral point of view' },
-				{ tag: 'Recentism', description: 'slanted towards recent events' },
-				{ tag: 'Too few opinions', description: 'may not include all significant viewpoints' },
-				{ tag: 'Undisclosed paid', description: 'may have been created or edited in return for undisclosed payments' },
-				{ tag: 'Weasel', description: 'neutrality or verifiability is compromised by the use of weasel words' }
+				{ tag: 'Hoax', description: 'قد يكون جزئيًا أو كليًا خدعة' },
+				{ tag: 'Paid contributions', description: 'يحتوي على مساهمات مدفوعة، وبالتالي قد يتطلب تنظيفًا' },
+				{ tag: 'Peacock', description: 'يحتوي على صيغة تعزز الموضوع بطريقة ذاتية دون إضافة معلومات' },
+				{ tag: 'POV', description: 'لا يحافظ على وجهة نظر محايدة' },
+				{ tag: 'Recentism', description: 'يميل نحو الأحداث الأخيرة' },
+				{ tag: 'Too few opinions', description: 'قد لا يتضمن جميع وجهات النظر الهامة' },
+				{ tag: 'Undisclosed paid', description: 'ربما تم إنشاؤه أو تعديله مقابل مدفوعات غير معلنة' },
+				{ tag: 'Weasel', description: 'الحياد أو إمكانية التحقق معرضة للخطر بسبب استخدام كلمات ملتوية' }
 			],
-			'Verifiability and sources': [
-				{ tag: 'BLP no footnotes', description: 'BLP that lacks inline citations' },
-				{ tag: 'BLP one source', description: 'BLP that relies largely or entirely on a single source' },
-				{ tag: 'BLP sources', description: 'BLP that needs additional references or sources for verification' },
-				{ tag: 'BLP unreferenced', description: 'BLP does not cite any sources at all (use BLP PROD instead for new articles)' },
-				{ tag: 'More citations needed', description: 'needs additional references or sources for verification' },
-				{ tag: 'No significant coverage', description: 'does not cite any sources containing significant coverage' },
-				{ tag: 'No significant coverage (sports)', description: 'sports biography that does not cite any sources containing significant coverage' },
-				{ tag: 'One source', description: 'relies largely or entirely on a single source' },
-				{ tag: 'Original research', description: 'contains original research' },
-				{ tag: 'Primary sources', description: 'relies too much on references to primary sources, and needs secondary sources' },
-				{ tag: 'Self-published', description: 'contains excessive or inappropriate references to self-published sources' },
-				{ tag: 'Sources exist', description: 'notable topic, sources are available that could be added to article' },
-				{ tag: 'Third-party', description: 'relies too heavily on sources too closely associated with the subject' },
-				{ tag: 'Unreferenced', description: 'does not cite any sources at all' },
-				{ tag: 'Unreliable sources', description: 'some references may not be reliable' },
-				{ tag: 'User-generated', description: 'contains many references to user-generated (self-published) content' }
+			'إمكانية التحقق والمصادر': [
+				{ tag: 'BLP no footnotes', description: 'سيرة شخصية تفتقر إلى الاستشهادات المضمنة' },
+				{ tag: 'BLP one source', description: 'سيرة شخصية تعتمد بشكل كبير أو كلي على مصدر واحد' },
+				{ tag: 'BLP sources', description: 'سيرة شخصية تحتاج إلى مراجع أو مصادر إضافية للتحقق' },
+				{ tag: 'BLP unreferenced', description: 'سيرة شخصية لا تستشهد بأي مصادر على الإطلاق (استخدم BLP PROD بدلاً من ذلك للمقالات الجديدة)' },
+				{ tag: 'More citations needed', description: 'يحتاج إلى مراجع أو مصادر إضافية للتحقق' },
+				{ tag: 'No significant coverage', description: 'لا يذكر أي مصادر تحتوي على تغطية كبيرة' },
+				{ tag: 'No significant coverage (sports)', description: 'سيرة رياضية لا تذكر أي مصادر تحتوي على تغطية كبيرة' },
+				{ tag: 'One source', description: 'يعتمد بشكل كبير أو كلي على مصدر واحد' },
+				{ tag: 'Original research', description: 'يحتوي على بحث أصلي' },
+				{ tag: 'Primary sources', description: 'يعتمد كثيرًا على الإشارات إلى المصادر الأولية، ويحتاج إلى مصادر ثانوية' },
+				{ tag: 'Self-published', description: 'يحتوي على مراجع مفرطة أو غير مناسبة للمصادر المنشورة ذاتيًا' },
+				{ tag: 'Sources exist', description: 'موضوع جدير بالملاحظة، تتوفر مصادر يمكن إضافتها إلى المقال' },
+				{ tag: 'Third-party', description: 'يعتمد بشكل كبير جدًا على المصادر المرتبطة ارتباطًا وثيقًا بالموضوع' },
+				{ tag: 'Unreferenced', description: 'لا يذكر أي مصادر على الإطلاق' },
+				{ tag: 'Unreliable sources', description: 'قد لا تكون بعض المراجع موثوقة' },
+				{ tag: 'User-generated', description: 'يحتوي على العديد من المراجع إلى المحتوى الذي أنشأه المستخدم (المنشور ذاتيًا)' }
 			]
 		},
-		'Specific content issues': {
+		'مشاكل محتوى محددة': {
 			Accessibility: [
-				{ tag: 'Cleanup colors', description: 'uses color as only way to convey information' },
-				{ tag: 'Overcoloured', description: 'overuses color' }
+				{ tag: 'Cleanup colors', description: 'يستخدم اللون كوسيلة وحيدة لنقل المعلومات' },
+				{ tag: 'Overcoloured', description: 'يستخدم اللون بإفراط' }
 			],
 			Language: [
 				{
-					tag: 'Not English', description: 'written in a language other than English and needs translation',
+					tag: 'Not English', description: 'مكتوب بلغة أخرى غير الإنجليزية ويحتاج إلى ترجمة',
 					excludeMI: true,
 					subgroup: translationSubgroups.slice(0, 1).concat([{
 						type: 'checkbox',
 						list: [
 							{
 								name: 'translationNotify',
-								label: 'Notify article creator',
+								label: 'إخطار منشئ المقال',
 								checked: true,
-								tooltip: "Places {{uw-notenglish}} on the creator's talk page."
+								tooltip: "يضع {{uw-notenglish}} في صفحة نقاش المنشئ."
 							}
 						]
 					}]).concat(translationSubgroups.slice(1))
 				},
 				{
-					tag: 'Rough translation', description: 'poor translation from another language', excludeMI: true,
+					tag: 'Rough translation', description: 'ترجمة سيئة من لغة أخرى', excludeMI: true,
 					subgroup: translationSubgroups
 				},
 				{
-					tag: 'Expand language', description: 'should be expanded with text translated from a foreign-language article',
+					tag: 'Expand language', description: 'يجب توسيعه بنص مترجم من مقال بلغة أجنبية',
 					excludeMI: true,
 					subgroup: [{
 						type: 'hidden',
@@ -882,83 +882,83 @@
 						name: 'expandLanguageLangCode',
 						parameter: 'langcode',
 						type: 'input',
-						label: 'Language code:',
-						tooltip: 'Language code of the language from which article is to be expanded from',
+						label: 'رمز اللغة:',
+						tooltip: 'رمز اللغة التي سيتم توسيع المقال منها',
 						required: true
 					}, {
 						name: 'expandLanguageArticle',
 						parameter: 'otherarticle',
 						type: 'input',
-						label: 'Name of article:',
-						tooltip: 'Name of article to be expanded from, without the interwiki prefix'
+						label: 'اسم المقال:',
+						tooltip: 'اسم المقال المراد التوسع منه، بدون بادئة الإنترويكي'
 					}]
 				}
 			],
 			Links: [
-				{ tag: 'Dead end', description: 'article has no links to other articles' },
-				{ tag: 'Orphan', description: 'linked to from no other articles' },
-				{ tag: 'Overlinked', description: 'too many duplicate and/or irrelevant links to other articles' },
-				{ tag: 'Underlinked', description: 'needs more wikilinks to other articles' }
+				{ tag: 'Dead end', description: 'المقال ليس لديه روابط لمقالات أخرى' },
+				{ tag: 'Orphan', description: 'المرتبطة من أي مقالات أخرى' },
+				{ tag: 'Overlinked', description: 'يوجد الكثير جدًا من الروابط المكررة و/أو غير ذات الصلة لمقالات أخرى' },
+				{ tag: 'Underlinked', description: 'يحتاج إلى المزيد من الروابط التشعبية إلى مقالات أخرى' }
 			],
-			'Referencing technique': [
-				{ tag: 'Citation style', description: 'unclear or inconsistent citation style' },
-				{ tag: 'Cleanup bare URLs', description: 'uses bare URLs for references, which are prone to link rot' },
-				{ tag: 'More footnotes needed', description: 'has some references, but insufficient inline citations' },
-				{ tag: 'No footnotes', description: 'has references, but lacks inline citations' },
-				{ tag: 'Parenthetical referencing', description: 'uses parenthetical referencing, which is deprecated on Wikipedia' }
+			'تقنية الإسناد': [
+				{ tag: 'Citation style', description: 'أسلوب اقتباس غير واضح أو غير متناسق' },
+				{ tag: 'Cleanup bare URLs', description: 'يستخدم عناوين URL مجردة للمراجع، والتي تكون عرضة لتعفن الارتباط' },
+				{ tag: 'More footnotes needed', description: 'لديه بعض المراجع، ولكن استشهادات مضمنة غير كافية' },
+				{ tag: 'No footnotes', description: 'لديه مراجع، لكنه يفتقر إلى الاستشهادات المضمنة' },
+				{ tag: 'Parenthetical referencing', description: 'يستخدم الإسناد بين قوسين، وهو أمر مهمل في ويكيبيديا' }
 			],
 			Categories: [
-				{ tag: 'Improve categories', description: 'needs additional or more specific categories', excludeMI: true },
-				{ tag: 'Uncategorized', description: 'not added to any categories', excludeMI: true }
+				{ tag: 'Improve categories', description: 'يحتاج إلى فئات إضافية أو أكثر تحديدًا', excludeMI: true },
+				{ tag: 'Uncategorized', description: 'لم تتم إضافته إلى أي فئات', excludeMI: true }
 			]
 		},
 		Merging: [
 			{
 				tag: 'History merge',
-				description: 'another page should be history merged into this one',
+				description: 'يجب دمج صفحة أخرى في هذا',
 				excludeMI: true,
 				subgroup: [
 					{
 						name: 'histmergeOriginalPage',
 						parameter: 'originalpage',
 						type: 'input',
-						label: 'Other article:',
-						tooltip: 'Name of the page that should be merged into this one (required).',
+						label: 'مقال آخر:',
+						tooltip: 'اسم الصفحة التي يجب دمجها في هذا (مطلوب).',
 						required: true
 					},
 					{
 						name: 'histmergeReason',
 						parameter: 'reason',
 						type: 'input',
-						label: 'Reason:',
-						tooltip: 'Short explanation describing the reason a history merge is needed. Should probably begin with "because" and end with a period.'
+						label: 'السبب:',
+						tooltip: 'شرح موجز يصف سبب الحاجة إلى دمج التاريخ. ربما يجب أن تبدأ بـ "لأن" وتنتهي بنقطة.'
 					},
 					{
 						name: 'histmergeSysopDetails',
 						parameter: 'details',
 						type: 'input',
-						label: 'Extra details:',
-						tooltip: 'For complex cases, provide extra instructions for the reviewing administrator.'
+						label: 'تفاصيل إضافية:',
+						tooltip: 'بالنسبة للحالات المعقدة، قدم تعليمات إضافية للمسؤول المراجع.'
 					}
 				]
 			},
 			{
-				tag: 'Merge', description: 'should be merged with another given article', excludeMI: true,
+				tag: 'Merge', description: 'يجب دمجها مع مقال آخر معين', excludeMI: true,
 				subgroup: getMergeSubgroups('Merge')
 			},
 			{
-				tag: 'Merge from', description: 'another given article should be merged into this one', excludeMI: true,
+				tag: 'Merge from', description: 'يجب دمج مقال آخر معين في هذا المقال', excludeMI: true,
 				subgroup: getMergeSubgroups('Merge from')
 			},
 			{
-				tag: 'Merge to', description: 'should be merged into another given article', excludeMI: true,
+				tag: 'Merge to', description: 'يجب دمجها في مقال آخر معين', excludeMI: true,
 				subgroup: getMergeSubgroups('Merge to')
 			}
 		],
 		Informational: [
-			{ tag: 'GOCEinuse', description: 'currently undergoing a major copy edit by the Guild of Copy Editors', excludeMI: true },
-			{ tag: 'In use', description: 'undergoing a major edit for a short while', excludeMI: true },
-			{ tag: 'Under construction', description: 'in the process of an expansion or major restructuring', excludeMI: true }
+			{ tag: 'GOCEinuse', description: 'يخضع حاليًا لعملية تحرير لغوي كبيرة من قبل نقابة المحررين اللغويين', excludeMI: true },
+			{ tag: 'In use', description: 'يخضع لتحرير رئيسي لفترة قصيرة', excludeMI: true },
+			{ tag: 'Under construction', description: 'في طور التوسع أو إعادة الهيكلة الرئيسية', excludeMI: true }
 		]
 	};
 
@@ -966,202 +966,202 @@
 	// Not by policy, but the list roughly approximates items with >500
 	// transclusions from Template:R template index
 	Twinkle.tag.redirectList = {
-		'Grammar, punctuation, and spelling': {
-			Abbreviation: [
-				{ tag: 'R from acronym', description: 'redirect from an acronym (e.g. POTUS) to its expanded form', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from airport code', description: 'redirect from an airport\'s IATA or ICAO code to that airport\'s article', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from airline code', description: 'redirect from an airline\'s IATA or ICAO code to that airline\'s article', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from initialism', description: 'redirect from an initialism (e.g. AGF) to its expanded form', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from MathSciNet abbreviation', description: 'redirect from MathSciNet publication title abbreviation to the unabbreviated title', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from NLM abbreviation', description: 'redirect from a NLM publication title abbreviation to the unabbreviated title', restriction: 'insideMainspaceOnly' }
+		"القواعد وعلامات الترقيم والإملاء": {
+			"الاختصار": [
+				{ tag: 'R from acronym', description: 'تحويل من اختصار (مثل POTUS) إلى شكله الموسع', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from airport code', description: 'تحويل من رمز IATA أو ICAO للمطار إلى مقال المطار هذا', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from airline code', description: 'تحويل من رمز IATA أو ICAO لشركة الطيران إلى مقال شركة الطيران هذا', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from initialism', description: 'تحويل من حرف استهلالي (مثل AGF) إلى شكله الموسع', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from MathSciNet abbreviation', description: 'تحويل من اختصار عنوان منشور MathSciNet إلى العنوان غير المختصر', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from NLM abbreviation', description: 'تحويل من اختصار عنوان منشور NLM إلى العنوان غير المختصر', restriction: 'insideMainspaceOnly' }
 			],
-			Capitalisation: [
-				{ tag: 'R from CamelCase', description: 'redirect from a CamelCase title' },
-				{ tag: 'R from other capitalisation', description: 'redirect from a title with another method of capitalisation', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from miscapitalisation', description: 'redirect from a capitalisation error' }
+			"التهجئة": [
+				{ tag: 'R from CamelCase', description: 'تحويل من عنوان CamelCase' },
+				{ tag: 'R from other capitalisation', description: 'تحويل من عنوان بطريقة أخرى من التهجئة', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from miscapitalisation', description: 'تحويل من خطأ في التهجئة' }
 			],
-			'Grammar & punctuation': [
-				{ tag: 'R from modification', description: 'redirect from a modification of the target\'s title, such as with words rearranged' },
-				{ tag: 'R from plural', description: 'redirect from a plural word to the singular equivalent', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R to plural', description: 'redirect from a singular noun to its plural form', restriction: 'insideMainspaceOnly' }
+			"القواعد وعلامات الترقيم": [
+				{ tag: 'R from modification', description: 'تحويل من تعديل لعنوان الهدف، مثل الكلمات المعاد ترتيبها' },
+				{ tag: 'R from plural', description: 'تحويل من كلمة جمع إلى المكافئ المفرد', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R to plural', description: 'تحويل من اسم مفرد إلى صيغة الجمع', restriction: 'insideMainspaceOnly' }
 			],
-			'Parts of speech': [
-				{ tag: 'R from verb', description: 'redirect from an English-language verb or verb phrase', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from adjective', description: 'redirect from an adjective (word or phrase that describes a noun)', restriction: 'insideMainspaceOnly' }
+			"أجزاء من الكلام": [
+				{ tag: 'R from verb', description: 'تحويل من فعل أو عبارة فعلية باللغة الإنجليزية', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from adjective', description: 'تحويل من صفة (كلمة أو عبارة تصف الاسم)', restriction: 'insideMainspaceOnly' }
 			],
-			Spelling: [
-				{ tag: 'R from alternative spelling', description: 'redirect from a title with a different spelling' },
-				{ tag: 'R from alternative transliteration', description: 'redirect from an alternative English transliteration to a more common variation' },
-				{ tag: 'R from ASCII-only', description: 'redirect from a title in only basic ASCII to the formal title, with differences that are not diacritical marks or ligatures' },
-				{ tag: 'R to ASCII-only', description: 'redirect to a title in only basic ASCII from the formal title, with differences that are not diacritical marks or ligatures' },
-				{ tag: 'R from diacritic', description: 'redirect from a page name that has diacritical marks (accents, umlauts, etc.)' },
-				{ tag: 'R to diacritic', description: 'redirect to the article title with diacritical marks (accents, umlauts, etc.)' },
-				{ tag: 'R from misspelling', description: 'redirect from a misspelling or typographical error' }
+			"الإملاء": [
+				{ tag: 'R from alternative spelling', description: 'تحويل من عنوان بإملاء بديل' },
+				{ tag: 'R from alternative transliteration', description: 'تحويل من ترجمة صوتية إنجليزية بديلة إلى صيغة أكثر شيوعًا' },
+				{ tag: 'R from ASCII-only', description: 'تحويل من عنوان بأحرف ASCII الأساسية فقط إلى العنوان الرسمي، مع اختلافات ليست علامات تشكيل أو وصلات' },
+				{ tag: 'R to ASCII-only', description: 'تحويل إلى عنوان بأحرف ASCII الأساسية فقط من العنوان الرسمي، مع اختلافات ليست علامات تشكيل أو وصلات' },
+				{ tag: 'R from diacritic', description: 'تحويل من اسم صفحة يحتوي على علامات التشكيل (النبرات، النقاط، إلخ)' },
+				{ tag: 'R to diacritic', description: 'تحويل إلى عنوان المقال مع علامات التشكيل (النبرات، النقاط، إلخ)' },
+				{ tag: 'R from misspelling', description: 'تحويل من خطأ إملائي أو خطأ مطبعي' }
 			]
 		},
-		'Alternative names': {
-			General: [
+		"أسماء بديلة": {
+			"عام": [
 				{
 					tag: 'R from alternative language',
-					description: 'redirect from or to a title in another language',
+					description: 'تحويل من أو إلى عنوان بلغة أخرى',
 					subgroup: [
 						{
 							name: 'altLangFrom',
 							type: 'input',
-							label: 'From language (two-letter code):',
-							tooltip: 'Enter the two-letter code of the language the redirect name is in; such as en for English, de for German'
+							label: 'من لغة (رمز مكون من حرفين):',
+							tooltip: 'أدخل رمزًا مكونًا من حرفين للغة التي يوجد بها اسم التحويل؛ مثل en للإنجليزية، de للألمانية'
 						},
 						{
 							name: 'altLangTo',
 							type: 'input',
-							label: 'To language (two-letter code):',
-							tooltip: 'Enter the two-letter code of the language the target name is in; such as en for English, de for German'
+							label: 'إلى لغة (رمز مكون من حرفين):',
+							tooltip: 'أدخل رمزًا مكونًا من حرفين للغة التي يوجد بها الاسم المستهدف؛ مثل en للإنجليزية، de للألمانية'
 						},
 						{
 							name: 'altLangInfo',
 							type: 'div',
-							label: $.parseHTML('<p>For a list of language codes, see <a href="/wiki/Wp:Template_messages/Redirect_language_codes">Wikipedia:Template messages/Redirect language codes</a></p>')
+							label: $.parseHTML('<p>للحصول على قائمة برموز اللغات، انظر <a href="/wiki/Wp:Template_messages/Redirect_language_codes">Wikipedia:Template messages/Redirect language codes</a></p>')
 						}
 					]
 				},
-				{ tag: 'R from alternative name', description: 'redirect from a title that is another name, a pseudonym, a nickname, or a synonym' },
-				{ tag: 'R from ambiguous sort name', description: 'redirect from an ambiguous sort name to a page or list that disambiguates it' },
-				{ tag: 'R from former name', description: 'redirect from a former or historic name or a working title', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from incomplete name', description: 'R from incomplete name' },
-				{ tag: 'R from incorrect name', description: 'redirect from an erroneus name that is unsuitable as a title' },
-				{ tag: 'R from less specific name', description: 'redirect from a less specific title to a more specific, less general one' },
-				{ tag: 'R from long name', description: 'redirect from a more complete title' },
-				{ tag: 'R from more specific name', description: 'redirect from a more specific title to a less specific, more general one' },
-				{ tag: 'R from non-neutral name', description: 'redirect from a title that contains a non-neutral, pejorative, controversial, or offensive word, phrase, or name' },
-				{ tag: 'R from short name', description: 'redirect from a title that is a shortened form of a person\'s full name, a book title, or other more complete title' },
-				{ tag: 'R from sort name', description: 'redirect from the target\'s sort name, such as beginning with their surname rather than given name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from synonym', description: 'redirect from a semantic synonym of the target page title' }
+				{ tag: 'R from alternative name', description: 'تحويل من عنوان هو اسم آخر أو اسم مستعار أو لقب أو مرادف' },
+				{ tag: 'R from ambiguous sort name', description: 'تحويل من اسم فرز غامض إلى صفحة أو قائمة تزيل الغموض عنه' },
+				{ tag: 'R from former name', description: 'تحويل من اسم سابق أو تاريخي أو عنوان عمل', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from incomplete name', description: 'تحويل من اسم غير مكتمل' },
+				{ tag: 'R from incorrect name', description: 'تحويل من اسم خاطئ غير مناسب كعنوان' },
+				{ tag: 'R from less specific name', description: 'تحويل من عنوان أقل تحديدًا إلى عنوان أكثر تحديدًا وأقل عمومية' },
+				{ tag: 'R from long name', description: 'تحويل من عنوان أكثر اكتمالاً' },
+				{ tag: 'R from more specific name', description: 'تحويل من عنوان أكثر تحديدًا إلى عنوان أقل تحديدًا وأكثر عمومية' },
+				{ tag: 'R from non-neutral name', description: 'تحويل من عنوان يحتوي على كلمة أو عبارة أو اسم غير محايد أو مهين أو مثير للجدل أو مسيء' },
+				{ tag: 'R from short name', description: 'تحويل من عنوان هو شكل مختصر من الاسم الكامل للشخص أو عنوان الكتاب أو أي عنوان أكثر اكتمالاً' },
+				{ tag: 'R from sort name', description: 'تحويل من اسم فرز الهدف، مثل البدء بلقبه بدلاً من اسمه الأول', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from synonym', description: 'تحويل من مرادف دلالي لعنوان الصفحة المستهدف' }
 			],
-			People: [
-				{ tag: 'R from birth name', description: 'redirect from a person\'s birth name to a more common name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from given name', description: 'redirect from a person\'s given name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from married name', description: 'redirect from a person\'s married name to a more common name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from name with title', description: 'redirect from a person\'s name preceded or followed by a title to the name with no title or with the title in parentheses', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from person', description: 'redirect from a person or persons to a related article', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from personal name', description: 'redirect from an individual\'s personal name to an article titled with their professional or other better known moniker', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from pseudonym', description: 'redirect from a pseudonym', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from surname', description: 'redirect from a title that is a surname', restriction: 'insideMainspaceOnly' }
+			"أشخاص": [
+				{ tag: 'R from birth name', description: 'تحويل من اسم ميلاد شخص إلى اسم أكثر شيوعًا', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from given name', description: 'تحويل من اسم شخص', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from married name', description: 'تحويل من اسم زواج شخص إلى اسم أكثر شيوعًا', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from name with title', description: 'تحويل من اسم شخص مسبوقًا أو متبوعًا بلقب إلى الاسم بدون لقب أو مع اللقب بين قوسين', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from person', description: 'تحويل من شخص أو أشخاص إلى مقال ذي صلة', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from personal name', description: 'تحويل من اسم شخص فردي إلى مقال بعنوان باسمه المهني أو باسمه المعروف', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from pseudonym', description: 'تحويل من اسم مستعار', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from surname', description: 'تحويل من عنوان هو لقب', restriction: 'insideMainspaceOnly' }
 			],
-			Technical: [
-				{ tag: 'R from drug trade name', description: 'redirect from (or to) the trade name of a drug to (or from) the international nonproprietary name (INN)' },
-				{ tag: 'R from filename', description: 'redirect from a title that is a filename of the target', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from molecular formula', description: 'redirect from a molecular/chemical formula to its technical or trivial name' },
+			"تقني": [
+				{ tag: 'R from drug trade name', description: 'تحويل من (أو إلى) الاسم التجاري لدواء إلى (أو من) الاسم الدولي غير المسجل الملكية (INN)' },
+				{ tag: 'R from filename', description: 'تحويل من عنوان هو اسم ملف للهدف', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from molecular formula', description: 'تحويل من صيغة جزيئية/كيميائية إلى اسمها التقني أو التافه' },
 
-				{ tag: 'R from gene symbol', description: 'redirect from a Human Genome Organisation (HUGO) symbol for a gene to an article about the gene', restriction: 'insideMainspaceOnly' }
+				{ tag: 'R from gene symbol', description: 'تحويل من رمز منظمة الجينوم البشري (HUGO) لجين إلى مقال حول الجين', restriction: 'insideMainspaceOnly' }
 			],
-			Organisms: [
-				{ tag: 'R to scientific name', description: 'redirect from the common name to the scientific name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from scientific name', description: 'redirect from the scientific name to the common name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from alternative scientific name', description: 'redirect from an alternative scientific name to the accepted scientific name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from scientific abbreviation', description: 'redirect from a scientific abbreviation', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R to monotypic taxon', description: 'redirect from the only lower-ranking member of a monotypic taxon to its monotypic taxon', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from monotypic taxon', description: 'redirect from a monotypic taxon to its only lower-ranking member', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R taxon with possibilities', description: 'redirect from a title related to a living organism that potentially could be expanded into an article', restriction: 'insideMainspaceOnly' }
+			"كائنات حية": [
+				{ tag: 'R to scientific name', description: 'تحويل من الاسم الشائع إلى الاسم العلمي', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from scientific name', description: 'تحويل من الاسم العلمي إلى الاسم الشائع', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from alternative scientific name', description: 'تحويل من اسم علمي بديل إلى الاسم العلمي المقبول', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from scientific abbreviation', description: 'تحويل من اختصار علمي', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R to monotypic taxon', description: 'تحويل من العضو الوحيد ذي الرتبة الأدنى من تصنيف أحادي النمط إلى تصنيفه الأحادي النمط', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from monotypic taxon', description: 'تحويل من تصنيف أحادي النمط إلى عضوه الوحيد ذي الرتبة الأدنى', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R taxon with possibilities', description: 'تحويل من عنوان متعلق بكائن حي يحتمل أن يتم توسيعه في مقال', restriction: 'insideMainspaceOnly' }
 			],
-			Geography: [
-				{ tag: 'R from name and country', description: 'redirect from the specific name to the briefer name', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from more specific geographic name', description: 'redirect from a geographic location that includes extraneous identifiers such as the county or region of a city', restriction: 'insideMainspaceOnly' }
+			"جغرافية": [
+				{ tag: 'R from name and country', description: 'تحويل من الاسم المحدد إلى الاسم المختصر', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from more specific geographic name', description: 'تحويل من موقع جغرافي يتضمن معرفات خارجية مثل المقاطعة أو المنطقة من المدينة', restriction: 'insideMainspaceOnly' }
 			]
 		},
-		'Navigation aids': {
-			Navigation: [
-				{ tag: 'R to anchor', description: 'redirect from a topic that does not have its own page to an anchored part of a page on the subject' },
+		"أدوات التنقل": {
+			"الملاحة": [
+				{ tag: 'R to anchor', description: 'تحويل من موضوع ليس له صفحة خاصة به إلى جزء مثبت من صفحة حول الموضوع' },
 				{
 					tag: 'R avoided double redirect',
-					description: 'redirect from an alternative title for another redirect',
+					description: 'تحويل من عنوان بديل لتحويل آخر',
 					subgroup: {
 						name: 'doubleRedirectTarget',
 						type: 'input',
-						label: 'Redirect target name',
-						tooltip: 'Enter the page this redirect would target if the page wasn\'t also a redirect'
+						label: 'اسم هدف التحويل',
+						tooltip: 'أدخل الصفحة التي سيستهدفها هذا التحويل إذا لم تكن الصفحة أيضًا تحويلًا'
 					}
 				},
-				{ tag: 'R from file metadata link', description: 'redirect of a wikilink created from EXIF, XMP, or other information (i.e. the "metadata" section on some image description pages)', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R to list entry', description: 'redirect to a list which contains brief descriptions of subjects not notable enough to have separate articles', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from file metadata link', description: 'تحويل رابط ويكي تم إنشاؤه من EXIF أو XMP أو معلومات أخرى (على سبيل المثال، قسم "بيانات التعريف" في بعض صفحات وصف الصور)', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R to list entry', description: 'تحويل إلى قائمة تحتوي على أوصاف موجزة للموضوعات غير جديرة بالملاحظة بما يكفي للحصول على مقالات منفصلة', restriction: 'insideMainspaceOnly' },
 
-				{ tag: 'R mentioned in hatnote', description: 'redirect from a title that is mentioned in a hatnote at the redirect target' },
-				{ tag: 'R to section', description: 'similar to {{R to list entry}}, but when list is organized in sections, such as list of characters in a fictional universe' },
-				{ tag: 'R from shortcut', description: 'redirect from a Wikipedia shortcut' },
-				{ tag: 'R to subpage', description: 'redirect to a subpage' }
+				{ tag: 'R mentioned in hatnote', description: 'تحويل من عنوان مذكور في حاشية في رأس التحويل' },
+				{ tag: 'R to section', description: 'مشابه لـ {{R to list entry}}، ولكن عندما يتم تنظيم القائمة في أقسام، مثل قائمة الشخصيات في عالم خيالي' },
+				{ tag: 'R from shortcut', description: 'تحويل من اختصار ويكيبيديا' },
+				{ tag: 'R to subpage', description: 'تحويل إلى صفحة فرعية' }
 			],
-			Disambiguation: [
-				{ tag: 'R from ambiguous term', description: 'redirect from an ambiguous page name to a page that disambiguates it. This template should never appear on a page that has "(disambiguation)" in its title, use R to disambiguation page instead' },
-				{ tag: 'R to disambiguation page', description: 'redirect to a disambiguation page', restriction: 'disambiguationPagesOnly' },
-				{ tag: 'R from incomplete disambiguation', description: 'redirect from a page name that is too ambiguous to be the title of an article and should redirect to an appropriate disambiguation page' },
-				{ tag: 'R from incorrect disambiguation', description: 'redirect from a page name with incorrect disambiguation due to an error or previous editorial misconception' },
-				{ tag: 'R from other disambiguation', description: 'redirect from a page name with an alternative disambiguation qualifier' },
-				{ tag: 'R from unnecessary disambiguation', description: 'redirect from a page name that has an unneeded disambiguation qualifier' }
+			"توضيح": [
+				{ tag: 'R from ambiguous term', description: 'تحويل من اسم صفحة غامض إلى صفحة تزيل الغموض عنه. يجب ألا يظهر هذا القالب أبدًا على صفحة تحتوي على "(توضيح)" في عنوانها، استخدم R to disambiguation page بدلاً من ذلك' },
+				{ tag: 'R to disambiguation page', description: 'تحويل إلى صفحة توضيح', restriction: 'disambiguationPagesOnly' },
+				{ tag: 'R from incomplete disambiguation', description: 'تحويل من اسم صفحة غامض جدًا بحيث لا يمكن أن يكون عنوانًا لمقال ويجب أن يتم تحويله إلى صفحة توضيح مناسبة' },
+				{ tag: 'R from incorrect disambiguation', description: 'تحويل من اسم صفحة بتوضيح غير صحيح بسبب خطأ أو مفهوم تحريري سابق' },
+				{ tag: 'R from other disambiguation', description: 'تحويل من اسم صفحة مع مؤهل توضيح بديل' },
+				{ tag: 'R from unnecessary disambiguation', description: 'تحويل من اسم صفحة يحتوي على مؤهل توضيح غير ضروري' }
 			],
-			'Merge, duplicate & move': [
-				{ tag: 'R from duplicated article', description: 'redirect to a similar article in order to preserve its edit history' },
-				{ tag: 'R with history', description: 'redirect from a page containing substantive page history, kept to preserve content and attributions' },
-				{ tag: 'R from move', description: 'redirect from a page that has been moved/renamed' },
-				{ tag: 'R from merge', description: 'redirect from a merged page in order to preserve its edit history' }
+			"الدمج والتكرار والنقل": [
+				{ tag: 'R from duplicated article', description: 'تحويل إلى مقال مشابه من أجل الحفاظ على تاريخ التحرير الخاص به' },
+				{ tag: 'R with history', description: 'تحويل من صفحة تحتوي على سجل صفحة جوهري، يتم الاحتفاظ به للحفاظ على المحتوى والإسناد' },
+				{ tag: 'R from move', description: 'تحويل من صفحة تم نقلها/إعادة تسميتها' },
+				{ tag: 'R from merge', description: 'تحويل من صفحة مدمجة من أجل الحفاظ على تاريخ التحرير الخاص بها' }
 			],
-			Namespace: [
-				{ tag: 'R from remote talk page', description: 'redirect from a talk page in any talk namespace to a corresponding page that is more heavily watched', restriction: 'insideTalkNamespaceOnly' },
-				{ tag: 'R to category namespace', description: 'redirect from a page outside the category namespace to a category page' },
-				{ tag: 'R to help namespace', description: 'redirect from any page inside or outside of help namespace to a page in that namespace' },
-				{ tag: 'R to main namespace', description: 'redirect from a page outside the main-article namespace to an article in mainspace' },
-				{ tag: 'R to portal namespace', description: 'redirect from any page inside or outside of portal space to a page in that namespace' },
-				{ tag: 'R to project namespace', description: 'redirect from any page inside or outside of project (Wikipedia: or WP:) space to any page in the project namespace' },
-				{ tag: 'R to user namespace', description: 'redirect from a page outside the user namespace to a user page (not to a user talk page)', restriction: 'outsideUserspaceOnly' }
+			"نطاق": [
+				{ tag: 'R from remote talk page', description: 'تحويل من صفحة نقاش في أي نطاق نقاش إلى صفحة مقابلة تتم مشاهدتها بشكل مكثف', restriction: 'insideTalkNamespaceOnly' },
+				{ tag: 'R to category namespace', description: 'تحويل من صفحة خارج نطاق الفئة إلى صفحة فئة' },
+				{ tag: 'R to help namespace', description: 'تحويل من أي صفحة داخل أو خارج نطاق المساعدة إلى صفحة في هذا النطاق' },
+				{ tag: 'R to main namespace', description: 'تحويل من صفحة خارج نطاق المقالات الرئيسية إلى مقال في النطاق الرئيسي' },
+				{ tag: 'R to portal namespace', description: 'تحويل من أي صفحة داخل أو خارج نطاق المدخل إلى صفحة في هذا النطاق' },
+				{ tag: 'R to project namespace', description: 'تحويل من أي صفحة داخل أو خارج نطاق المشروع (Wikipedia: أو WP:) إلى أي صفحة في نطاق المشروع' },
+				{ tag: 'R to user namespace', description: 'تحويل من صفحة خارج نطاق المستخدم إلى صفحة مستخدم (ليس إلى صفحة نقاش المستخدم)', restriction: 'outsideUserspaceOnly' }
 			]
 		},
-		Media: {
-			General: [
-				{ tag: 'R from album', description: 'redirect from an album to a related topic such as the recording artist or a list of albums', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from band name', description: 'redirect from a musical band or musical group name that redirects an article on a single person, i.e. the band or group leader' },
-				{ tag: 'R from book', description: 'redirect from a book title to a more general, relevant article', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from cover song', description: 'redirect from a cover version of a song to the article about the original song this version covers' },
-				{ tag: 'R from film', description: 'redirect from a film title that is a subtopic of the redirect target or a title in an alternative language that has been produced in that language', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from journal', description: 'redirect from a trade or professional journal article a more general, relevant Wikipedia article, such as the author or publisher of the article or to the title in an alternative language' },
-				{ tag: 'R from lyric', description: 'redirect from a lyric to a song or other source that describes the lyric' },
-				{ tag: 'R from meme', description: 'redirect from a name of an internet meme or other pop culture phenomenon that is a subtopic of the redirect target' },
-				{ tag: 'R from song', description: 'redirect from a song title to a more general, relevant article' },
-				{ tag: 'R from television episode', description: 'redirect from a television episode title to a related work or lists of episodes', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from television program', description: 'redirect from a title of television program, television series or web series that is a subtopic of the redirect target' },
-				{ tag: 'R from upcoming film', description: 'redirect from a title that potentially could be expanded into a new article or other type of associated page such as a new template.' },
-				{ tag: 'R from work', description: 'redirect from a creative work a related topic such as the author/artist, publisher, or a subject related to the work' }
+		"وسائط": {
+			"عام": [
+				{ tag: 'R from album', description: 'تحويل من ألبوم إلى موضوع ذي صلة مثل فنان التسجيل أو قائمة الألبومات', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from band name', description: 'تحويل من اسم فرقة موسيقية أو مجموعة موسيقية يعيد توجيه مقال حول شخص واحد، أي قائد الفرقة أو المجموعة' },
+				{ tag: 'R from book', description: 'تحويل من عنوان كتاب إلى مقال عام ذي صلة', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from cover song', description: 'تحويل من نسخة غلاف لأغنية إلى المقال حول الأغنية الأصلية التي تغطيها هذه النسخة' },
+				{ tag: 'R from film', description: 'تحويل من عنوان فيلم هو موضوع فرعي للهدف أو عنوان بلغة بديلة تم إنتاجه بتلك اللغة', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from journal', description: 'تحويل من مقال في مجلة تجارية أو مهنية إلى مقال ويكيبيديا عام ذي صلة، مثل مؤلف المقال أو ناشره أو إلى العنوان بلغة بديلة' },
+				{ tag: 'R from lyric', description: 'تحويل من كلمات أغنية إلى أغنية أو مصدر آخر يصف الكلمات' },
+				{ tag: 'R from meme', description: 'تحويل من اسم ميم إنترنت أو ظاهرة ثقافة شعبية أخرى وهي موضوع فرعي لهدف التحويل' },
+				{ tag: 'R from song', description: 'تحويل من عنوان أغنية إلى مقال عام ذي صلة' },
+				{ tag: 'R from television episode', description: 'تحويل من عنوان حلقة تلفزيونية إلى عمل ذي صلة أو قوائم حلقات', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from television program', description: 'تحويل من عنوان برنامج تلفزيوني أو مسلسل تلفزيوني أو مسلسل ويب وهو موضوع فرعي لهدف التحويل' },
+				{ tag: 'R from upcoming film', description: 'تحويل من عنوان يمكن توسيعه ليصبح مقالًا جديدًا أو نوعًا آخر من الصفحات المرتبطة مثل قالب جديد.' },
+				{ tag: 'R from work', description: 'تحويل من عمل إبداعي موضوع ذي صلة مثل المؤلف/الفنان أو الناشر أو موضوع متعلق بالعمل' }
 			],
-			Fiction: [
-				{ tag: 'R from fictional character', description: 'redirect from a fictional character to a related fictional work or list of characters', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from fictional element', description: 'redirect from a fictional element (such as an object or concept) to a related fictional work or list of similar elements', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from fictional location', description: 'redirect from a fictional location or setting to a related fictional work or list of places', restriction: 'insideMainspaceOnly' }
+			"خيال": [
+				{ tag: 'R from fictional character', description: 'تحويل من شخصية خيالية إلى عمل خيالي ذي صلة أو قائمة شخصيات', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from fictional element', description: 'تحويل من عنصر خيالي (مثل كائن أو مفهوم) إلى عمل خيالي ذي صلة أو قائمة بالعناصر المماثلة', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from fictional location', description: 'تحويل من موقع أو إعداد خيالي إلى عمل خيالي ذي صلة أو قائمة بالأماكن', restriction: 'insideMainspaceOnly' }
 			]
 		},
-		Miscellaneous: {
-			'Related information': [
-				{ tag: 'R to article without mention', description: 'redirect to an article without any mention of the redirected word or phrase', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R to decade', description: 'redirect from a year to the decade article', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from domain name', description: 'redirect from a domain name to an article about a website', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from emoji', description: 'redirect from an emoji to an article describing the depicted concept or the emoji itself' },
-				{ tag: 'R from phrase', description: 'redirect from a phrase to a more general relevant article covering the topic' },
-				{ tag: 'R from list topic', description: 'redirect from the topic of a list to the equivalent list' },
-				{ tag: 'R from member', description: 'redirect from a member of a group to a related topic such as the group or organization' },
-				{ tag: 'R to related topic', description: 'redirect to an article about a similar topic', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from related word', description: 'redirect from a related word' },
-				{ tag: 'R from school', description: 'redirect from a school article that had very little information', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from subtopic', description: 'redirect from a title that is a subtopic of the target article', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R to subtopic', description: 'redirect to a subtopic of the redirect\'s title', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from Unicode character', description: 'redirect from a single Unicode character to an article or Wikipedia project page that infers meaning for the symbol', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from Unicode code', description: 'redirect from a Unicode code point to an article about the character it represents', restriction: 'insideMainspaceOnly' }
+		"متفرقات": {
+			"معلومات ذات صلة": [
+				{ tag: 'R to article without mention', description: 'تحويل إلى مقال بدون أي ذكر للكلمة أو العبارة المعاد توجيهها', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R to decade', description: 'تحويل من سنة إلى مقال العقد', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from domain name', description: 'تحويل من اسم نطاق إلى مقال حول موقع ويب', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from emoji', description: 'تحويل من رمز تعبيري إلى مقال يصف المفهوم المصور أو الرمز التعبيري نفسه' },
+				{ tag: 'R from phrase', description: 'تحويل من عبارة إلى مقال عام ذي صلة يغطي الموضوع' },
+				{ tag: 'R from list topic', description: 'تحويل من موضوع قائمة إلى القائمة المكافئة' },
+				{ tag: 'R from member', description: 'تحويل من عضو في مجموعة إلى موضوع ذي صلة مثل المجموعة أو المنظمة' },
+				{ tag: 'R to related topic', description: 'تحويل إلى مقال حول موضوع مشابه', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from related word', description: 'تحويل من كلمة ذات صلة' },
+				{ tag: 'R from school', description: 'تحويل من مقال مدرسي يحتوي على معلومات قليلة جدًا', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from subtopic', description: 'تحويل من عنوان هو موضوع فرعي للمقال المستهدف', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R to subtopic', description: 'تحويل إلى موضوع فرعي لعنوان التحويل', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from Unicode character', description: 'تحويل من حرف Unicode واحد إلى مقال أو صفحة مشروع ويكيبيديا تستنتج معنى للرمز', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from Unicode code', description: 'تحويل من نقطة رمز Unicode إلى مقال حول الحرف الذي تمثله', restriction: 'insideMainspaceOnly' }
 			],
-			'With possibilities': [
-				{ tag: 'R with possibilities', description: 'redirect from a specific title to a more general, less detailed article (something which can and should be expanded)' }
+			"مع إمكانيات": [
+				{ tag: 'R with possibilities', description: 'تحويل من عنوان معين إلى مقال عام أقل تفصيلاً (شيء يمكن وينبغي توسيعه)' }
 			],
-			'ISO codes': [
-				{ tag: 'R from ISO 4 abbreviation', description: 'redirect from an ISO 4 publication title abbreviation to the unabbreviated title', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from ISO 639 code', description: 'redirect from a title that is an ISO 639 language code to an article about the language', restriction: 'insideMainspaceOnly' }
+			"رموز ISO": [
+				{ tag: 'R from ISO 4 abbreviation', description: 'تحويل من اختصار عنوان منشور ISO 4 إلى العنوان غير المختصر', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from ISO 639 code', description: 'تحويل من عنوان هو رمز لغة ISO 639 إلى مقال حول اللغة', restriction: 'insideMainspaceOnly' }
 			],
-			Printworthiness: [
-				{ tag: 'R printworthy', description: 'redirect from a title that would be helpful in a printed or CD/DVD version of Wikipedia', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R unprintworthy', description: 'redirect from a title that would NOT be helpful in a printed or CD/DVD version of Wikipedia', restriction: 'insideMainspaceOnly' }
+			"جدارة النشر": [
+				{ tag: 'R printworthy', description: 'تحويل من عنوان سيكون مفيدًا في نسخة مطبوعة أو CD/DVD من ويكيبيديا', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R unprintworthy', description: 'تحويل من عنوان لن يكون مفيدًا في نسخة مطبوعة أو CD/DVD من ويكيبيديا', restriction: 'insideMainspaceOnly' }
 			]
 		}
 	};
@@ -1169,137 +1169,137 @@
 	// maintenance tags for FILES start here
 
 	Twinkle.tag.fileList = {
-		'License and sourcing problem tags': [
-			{ label: '{{Better source requested}}: source info consists of bare image URL/generic base URL only', value: 'Better source requested' },
-			{ label: '{{Maybe free media}}: currently tagged under non-free license, but free license may be available ', value: 'Maybe free media' },
-			{ label: '{{Non-free reduce}}: non-low-resolution fair use image (or too-long audio clip, etc)', value: 'Non-free reduce' },
-			{ label: '{{Orphaned non-free revisions}}: fair use media with old revisions that need to be deleted', value: 'Orphaned non-free revisions' }
+		"قوالب مشاكل الترخيص والمصدر": [
+			{ label: '{{Better source requested}}: تتكون معلومات المصدر من عنوان URL لصورة مجردة/عنوان URL أساسي عام فقط', value: 'Better source requested' },
+			{ label: '{{Maybe free media}}: تم وضع علامة حاليًا بموجب ترخيص غير مجاني، ولكن قد يتوفر ترخيص مجاني', value: 'Maybe free media' },
+			{ label: '{{Non-free reduce}}: صورة استخدام عادل غير منخفضة الدقة (أو مقطع صوتي طويل جدًا، إلخ)', value: 'Non-free reduce' },
+			{ label: '{{Orphaned non-free revisions}}: وسائط استخدام عادل مع مراجعات قديمة تحتاج إلى حذف', value: 'Orphaned non-free revisions' }
 		],
-		'Wikimedia Commons-related tags': [
-			{ label: '{{Copy to Commons}}: free media that should be copied to Commons', value: 'Copy to Commons' },
+		"قوالب متعلقة بويكيميديا كومنز": [
+			{ label: '{{Copy to Commons}}: وسائط مجانية يجب نسخها إلى كومنز', value: 'Copy to Commons' },
 			{
-				label: '{{Deleted on Commons}}: file has previously been deleted from Commons',
+				label: '{{Deleted on Commons}}: تم حذف الملف مسبقًا من كومنز',
 				value: 'Deleted on Commons',
 				subgroup: {
 					type: 'input',
 					name: 'deletedOnCommonsName',
-					label: 'Name on Commons:',
-					tooltip: 'Name of the image on Commons (if different from local name), excluding the File: prefix'
+					label: 'الاسم في كومنز:',
+					tooltip: 'اسم الصورة في كومنز (إذا كان مختلفًا عن الاسم المحلي)، باستثناء البادئة File:'
 				}
 			},
 			{
-				label: '{{Do not move to Commons}}: file not suitable for moving to Commons',
+				label: '{{Do not move to Commons}}: الملف غير مناسب للنقل إلى كومنز',
 				value: 'Do not move to Commons',
 				subgroup: [
 					{
 						type: 'input',
 						name: 'DoNotMoveToCommons_reason',
-						label: 'Reason:',
-						tooltip: 'Enter the reason why this image should not be moved to Commons (required). If the file is PD in the US but not in country of origin, enter "US only"',
+						label: 'السبب:',
+						tooltip: 'أدخل السبب الذي يمنع نقل هذه الصورة إلى كومنز (مطلوب). إذا كان الملف ملكية عامة في الولايات المتحدة ولكن ليس في بلد المنشأ، فأدخل "US only"',
 						required: true
 					},
 					{
 						type: 'number',
 						name: 'DoNotMoveToCommons_expiry',
-						label: 'Expiration year:',
+						label: 'سنة انتهاء الصلاحية:',
 						min: new Morebits.Date().getFullYear(),
-						tooltip: 'If this file can be moved to Commons beginning in a certain year, you can enter it here (optional).'
+						tooltip: 'إذا كان من الممكن نقل هذا الملف إلى كومنز بدءًا من سنة معينة، فيمكنك إدخالها هنا (اختياري).'
 					}
 				]
 			},
 			{
-				label: '{{Keep local}}: request to keep local copy of a Commons file',
+				label: '{{Keep local}}: طلب الاحتفاظ بنسخة محلية من ملف كومنز',
 				value: 'Keep local',
 				subgroup: {
 					type: 'input',
 					name: 'keeplocalName',
-					label: 'Commons image name if different:',
-					tooltip: 'Name of the image on Commons (if different from local name), excluding the File: prefix:'
+					label: 'اسم صورة كومنز إذا كان مختلفًا:',
+					tooltip: 'اسم الصورة في كومنز (إذا كان مختلفًا عن الاسم المحلي)، باستثناء البادئة File:'
 				}
 			},
 			{
-				label: '{{Nominated for deletion on Commons}}: file is nominated for deletion on Commons',
+				label: '{{Nominated for deletion on Commons}}: تم ترشيح الملف للحذف في كومنز',
 				value: 'Nominated for deletion on Commons',
 				subgroup: {
 					type: 'input',
 					name: 'nominatedOnCommonsName',
-					label: 'Name on Commons:',
-					tooltip: 'Name of the image on Commons (if different from local name), excluding the File: prefix:'
+					label: 'الاسم في كومنز:',
+					tooltip: 'اسم الصورة في كومنز (إذا كان مختلفًا عن الاسم المحلي)، باستثناء البادئة File:'
 				}
 			}
 		],
-		'Cleanup tags': [
-			{ label: '{{Artifacts}}: PNG contains residual compression artifacts', value: 'Artifacts' },
-			{ label: '{{Bad font}}: SVG uses fonts not available on the thumbnail server', value: 'Bad font' },
-			{ label: '{{Bad format}}: PDF/DOC/... file should be converted to a more useful format', value: 'Bad format' },
-			{ label: '{{Bad GIF}}: GIF that should be PNG, JPEG, or SVG', value: 'Bad GIF' },
-			{ label: '{{Bad JPEG}}: JPEG that should be PNG or SVG', value: 'Bad JPEG' },
-			{ label: '{{Bad SVG}}: SVG with a mix of raster and vector graphics', value: 'Bad SVG' },
-			{ label: '{{Bad trace}}: auto-traced SVG requiring cleanup', value: 'Bad trace' },
+		"قوالب التنظيف": [
+			{ label: '{{Artifacts}}: يحتوي PNG على بقايا ضغط', value: 'Artifacts' },
+			{ label: '{{Bad font}}: يستخدم SVG خطوطًا غير متوفرة على خادم الصور المصغرة', value: 'Bad font' },
+			{ label: '{{Bad format}}: يجب تحويل ملف PDF/DOC/... إلى تنسيق أكثر فائدة', value: 'Bad format' },
+			{ label: '{{Bad GIF}}: GIF يجب أن يكون PNG أو JPEG أو SVG', value: 'Bad GIF' },
+			{ label: '{{Bad JPEG}}: JPEG يجب أن يكون PNG أو SVG', value: 'Bad JPEG' },
+			{ label: '{{Bad SVG}}: SVG مع مزيج من رسومات نقطية ومتجهة', value: 'Bad SVG' },
+			{ label: '{{Bad trace}}: SVG تم تتبعه تلقائيًا ويتطلب تنظيفًا', value: 'Bad trace' },
 			{
-				label: '{{Cleanup image}}: general cleanup', value: 'Cleanup image',
+				label: '{{Cleanup image}}: تنظيف عام', value: 'Cleanup image',
 				subgroup: {
 					type: 'input',
 					name: 'cleanupimageReason',
-					label: 'Reason:',
-					tooltip: 'Enter the reason for cleanup (required)',
+					label: 'السبب:',
+					tooltip: 'أدخل سبب التنظيف (مطلوب)',
 					required: true
 				}
 			},
-			{ label: '{{ClearType}}: image (not screenshot) with ClearType anti-aliasing', value: 'ClearType' },
-			{ label: '{{Fake SVG}}: SVG solely containing raster graphics without true vector content', value: 'Fake SVG' },
-			{ label: '{{Imagewatermark}}: image contains visible or invisible watermarking', value: 'Imagewatermark' },
-			{ label: '{{NoCoins}}: image using coins to indicate scale', value: 'NoCoins' },
-			{ label: '{{Overcompressed JPEG}}: JPEG with high levels of artifacts', value: 'Overcompressed JPEG' },
-			{ label: '{{Opaque}}: opaque background should be transparent', value: 'Opaque' },
-			{ label: '{{Remove border}}: unneeded border, white space, etc.', value: 'Remove border' },
+			{ label: '{{ClearType}}: صورة (ليست لقطة شاشة) مع ClearType anti-aliasing', value: 'ClearType' },
+			{ label: '{{Fake SVG}}: SVG تحتوي فقط على رسومات نقطية بدون محتوى متجه حقيقي', value: 'Fake SVG' },
+			{ label: '{{Imagewatermark}}: تحتوي الصورة على علامة مائية مرئية أو غير مرئية', value: 'Imagewatermark' },
+			{ label: '{{NoCoins}}: صورة تستخدم عملات معدنية للإشارة إلى المقياس', value: 'NoCoins' },
+			{ label: '{{Overcompressed JPEG}}: JPEG مع مستويات عالية من القطع الأثرية', value: 'Overcompressed JPEG' },
+			{ label: '{{Opaque}}: يجب أن تكون الخلفية غير الشفافة شفافة', value: 'Opaque' },
+			{ label: '{{Remove border}}: حدود غير ضرورية، مساحة بيضاء، إلخ.', value: 'Remove border' },
 			{
-				label: '{{Rename media}}: file should be renamed according to the criteria at [[WP:FMV]]',
+				label: '{{Rename media}}: يجب إعادة تسمية الملف وفقًا للمعايير في [[WP:FMV]]',
 				value: 'Rename media',
 				subgroup: [
 					{
 						type: 'input',
 						name: 'renamemediaNewname',
-						label: 'New name:',
-						tooltip: 'Enter the new name for the image (optional)'
+						label: 'اسم جديد:',
+						tooltip: 'أدخل الاسم الجديد للصورة (اختياري)'
 					},
 					{
 						type: 'input',
 						name: 'renamemediaReason',
-						label: 'Reason:',
-						tooltip: 'Enter the reason for the rename (optional)'
+						label: 'السبب:',
+						tooltip: 'أدخل سبب إعادة التسمية (اختياري)'
 					}
 				]
 			},
-			{ label: '{{Should be PNG}}: GIF or JPEG should be lossless', value: 'Should be PNG' },
+			{ label: '{{Should be PNG}}: يجب أن يكون GIF أو JPEG بدون فقدان للبيانات', value: 'Should be PNG' },
 			{
-				label: '{{Should be SVG}}: PNG, GIF or JPEG should be vector graphics', value: 'Should be SVG',
+				label: '{{Should be SVG}}: يجب أن يكون PNG أو GIF أو JPEG رسومات متجهة', value: 'Should be SVG',
 				subgroup: {
 					name: 'svgCategory',
 					type: 'select',
 					list: [
 						{ label: '{{Should be SVG|other}}', value: 'other' },
-						{ label: '{{Should be SVG|alphabet}}: character images, font examples, etc.', value: 'alphabet' },
-						{ label: '{{Should be SVG|chemical}}: chemical diagrams, etc.', value: 'chemical' },
-						{ label: '{{Should be SVG|circuit}}: electronic circuit diagrams, etc.', value: 'circuit' },
-						{ label: '{{Should be SVG|coat of arms}}: coats of arms', value: 'coat of arms' },
-						{ label: '{{Should be SVG|diagram}}: diagrams that do not fit any other subcategory', value: 'diagram' },
-						{ label: '{{Should be SVG|emblem}}: emblems, free/libre logos, insignias, etc.', value: 'emblem' },
-						{ label: '{{Should be SVG|fair use}}: fair-use images, fair-use logos', value: 'fair use' },
-						{ label: '{{Should be SVG|flag}}: flags', value: 'flag' },
-						{ label: '{{Should be SVG|graph}}: visual plots of data', value: 'graph' },
-						{ label: '{{Should be SVG|logo}}: logos', value: 'logo' },
-						{ label: '{{Should be SVG|map}}: maps', value: 'map' },
-						{ label: '{{Should be SVG|music}}: musical scales, notes, etc.', value: 'music' },
-						{ label: '{{Should be SVG|physical}}: "realistic" images of physical objects, people, etc.', value: 'physical' },
-						{ label: '{{Should be SVG|symbol}}: miscellaneous symbols, icons, etc.', value: 'symbol' }
+						{ label: '{{Should be SVG|alphabet}}: صور الأحرف، أمثلة الخطوط، إلخ.', value: 'alphabet' },
+						{ label: '{{Should be SVG|chemical}}: مخططات كيميائية، إلخ.', value: 'chemical' },
+						{ label: '{{Should be SVG|circuit}}: مخططات الدوائر الإلكترونية، إلخ.', value: 'circuit' },
+						{ label: '{{Should be SVG|coat of arms}}: شعارات النبالة', value: 'coat of arms' },
+						{ label: '{{Should be SVG|diagram}}: الرسوم البيانية التي لا تتناسب مع أي فئة فرعية أخرى', value: 'diagram' },
+						{ label: '{{Should be SVG|emblem}}: الشعارات، الشعارات الحرة/المفتوحة المصدر، الشارات، إلخ.', value: 'emblem' },
+						{ label: '{{Should be SVG|fair use}}: صور الاستخدام العادل، شعارات الاستخدام العادل', value: 'fair use' },
+						{ label: '{{Should be SVG|flag}}: أعلام', value: 'flag' },
+						{ label: '{{Should be SVG|graph}}: مخططات مرئية للبيانات', value: 'graph' },
+						{ label: '{{Should be SVG|logo}}: الشعارات', value: 'logo' },
+						{ label: '{{Should be SVG|map}}: الخرائط', value: 'map' },
+						{ label: '{{Should be SVG|music}}: المقاييس الموسيقية، النوتات، إلخ.', value: 'music' },
+						{ label: '{{Should be SVG|physical}}: صور "واقعية" للأشياء المادية، الناس، إلخ.', value: 'physical' },
+						{ label: '{{Should be SVG|symbol}}: رموز مختلفة، أيقونات، إلخ.', value: 'symbol' }
 					]
 				}
 			},
-			{ label: '{{Should be text}}: image should be represented as text, tables, or math markup', value: 'Should be text' }
+			{ label: '{{Should be text}}: يجب تمثيل الصورة كنص أو جداول أو ترميز رياضي', value: 'Should be text' }
 		],
-		'Image quality tags': [
-			{ label: '{{Image hoax}}: Image may be manipulated or constitute a hoax', value: 'Image hoax' },
+		"قوالب جودة الصورة": [
+			{ label: '{{Image hoax}}: قد يتم التلاعب بالصورة أو تشكل خدعة', value: 'Image hoax' },
 			{ label: '{{Image-blownout}}', value: 'Image-blownout' },
 			{ label: '{{Image-out-of-focus}}', value: 'Image-out-of-focus' },
 			{
@@ -1307,34 +1307,35 @@
 				subgroup: {
 					type: 'input',
 					name: 'ImagePoorQualityReason',
-					label: 'Reason:',
-					tooltip: 'Enter the reason why this image is so bad (required)',
+					label: 'السبب:',
+					tooltip: 'أدخل سبب سوء هذه الصورة (مطلوب)',
 					required: true
 				}
 			},
 			{ label: '{{Image-underexposure}}', value: 'Image-underexposure' },
 			{
-				label: '{{Low quality chem}}: disputed chemical structures', value: 'Low quality chem',
+				label: '{{Low quality chem}}: هياكل كيميائية متنازع عليها', value: 'Low quality chem',
 				subgroup: {
 					type: 'input',
 					name: 'lowQualityChemReason',
-					label: 'Reason:',
-					tooltip: 'Enter the reason why the diagram is disputed (required)',
+					label: 'السبب:',
+					tooltip: 'أدخل سبب النزاع حول الرسم التخطيطي (مطلوب)',
 					required: true
 				}
 			}
 		],
-		'Replacement tags': [
-			{ label: '{{Obsolete}}: improved version available', value: 'Obsolete' },
+		"قوالب الاستبدال": [
+			{ label: '{{Obsolete}}: نسخة محسنة متاحة', value: 'Obsolete' },
 			{ label: '{{PNG version available}}', value: 'PNG version available' },
 			{ label: '{{Vector version available}}', value: 'Vector version available' }
 		]
 	};
-	Twinkle.tag.fileList['Replacement tags'].forEach((el) => {
+
+	Twinkle.tag.fileList["قوالب الاستبدال"].forEach((el) => {
 		el.subgroup = {
 			type: 'input',
-			label: 'Replacement file:',
-			tooltip: 'Enter the name of the file which replaces this one (required)',
+			label: 'ملف الاستبدال:',
+			tooltip: 'أدخل اسم الملف الذي يحل محل هذا الملف (مطلوب)',
 			name: el.value.replace(/ /g, '_') + 'File',
 			required: true
 		};
@@ -1381,12 +1382,12 @@
 				const addedTags = params.tags.map(makeTemplateLink);
 				const removedTags = params.tagsToRemove.map(makeTemplateLink);
 				if (addedTags.length) {
-					summaryText = 'Added ' + makeSentence(addedTags);
-					summaryText += removedTags.length ? '; and removed ' + makeSentence(removedTags) : '';
+					summaryText = 'تمت إضافة ' + makeSentence(addedTags);
+					summaryText += removedTags.length ? '; وتمت إزالة ' + makeSentence(removedTags) : '';
 				} else {
-					summaryText = 'Removed ' + makeSentence(removedTags);
+					summaryText = 'تمت إزالة ' + makeSentence(removedTags);
 				}
-				summaryText += ' tag' + (addedTags.length + removedTags.length > 1 ? 's' : '');
+				summaryText += ' قالب' + (addedTags.length + removedTags.length > 1 ? 's' : '');
 				if (params.reason) {
 					summaryText += ': ' + params.reason;
 				}
@@ -1406,9 +1407,9 @@
 				pageobj.save(() => {
 					// COI: Start the discussion on the talk page (mainspace only)
 					if (params.coiReason) {
-						const coiTalkPage = new Morebits.wiki.Page('Talk:' + Morebits.pageNameNorm, 'Starting discussion on talk page');
+						const coiTalkPage = new Morebits.wiki.Page('Talk:' + Morebits.pageNameNorm, 'بدء مناقشة في صفحة النقاش');
 						coiTalkPage.setNewSectionText(params.coiReason + ' ~~~~');
-						coiTalkPage.setNewSectionTitle('COI tag (' + new Morebits.Date(pageobj.getLoadTime()).format('MMMM Y', 'utc') + ')');
+						coiTalkPage.setNewSectionTitle('قالب COI (' + new Morebits.Date(pageobj.getLoadTime()).format('MMMM Y', 'utc') + ')');
 						coiTalkPage.setChangeTags(Twinkle.changeTags);
 						coiTalkPage.setCreateOption('recreate');
 						coiTalkPage.newSection();
@@ -1417,7 +1418,7 @@
 					// Special functions for merge tags
 					// Post a rationale on the talk page (mainspace only)
 					if (params.mergeReason) {
-						const mergeTalkPage = new Morebits.wiki.Page('Talk:' + params.discussArticle, 'Posting rationale on talk page');
+						const mergeTalkPage = new Morebits.wiki.Page('Talk:' + params.discussArticle, 'نشر الأساس المنطقي في صفحة النقاش');
 						mergeTalkPage.setNewSectionText(params.mergeReason.trim() + ' ~~~~');
 						mergeTalkPage.setNewSectionTitle(params.talkDiscussionTitleLinked);
 						mergeTalkPage.setChangeTags(Twinkle.changeTags);
@@ -1442,7 +1443,7 @@
 							talkDiscussionTitle: params.talkDiscussionTitle,
 							talkDiscussionTitleLinked: params.talkDiscussionTitleLinked
 						};
-						const otherpage = new Morebits.wiki.Page(params.mergeTarget, 'Tagging other page (' +
+						const otherpage = new Morebits.wiki.Page(params.mergeTarget, 'وضع قالب على صفحة أخرى (' +
 							params.mergeTarget + ')');
 						otherpage.setChangeTags(Twinkle.changeTags);
 						otherpage.setCallbackParameters(newParams);
@@ -1453,7 +1454,7 @@
 					// Post at WP:PNT (mainspace only)
 					if (params.translationPostAtPNT) {
 						const pntPage = new Morebits.wiki.Page('Wikipedia:Pages needing translation into English',
-							'Listing article at Wikipedia:Pages needing translation into English');
+							'إدراج مقال في ويكيبيديا:صفحات تحتاج إلى ترجمة إلى الإنجليزية');
 						pntPage.setFollowRedirect(true);
 						pntPage.load((pageobj) => {
 							const oldText = pageobj.getPageText();
@@ -1469,18 +1470,18 @@
 									(lang || 'uncertain') + '|Comments=' + reason.trim() + '}} ~~~~';
 								// Place in section == Translated pages that could still use some cleanup ==
 								text = oldText + '\n\n' + templateText;
-								summary = 'Translation cleanup requested on ';
+								summary = 'تم طلب تنظيف الترجمة على ';
 							} else if (params.tags.includes('Not English')) {
 								templateText = '{{subst:Translation request|pg=' + Morebits.pageNameNorm + '|Language=' +
 									(lang || 'uncertain') + '|Comments=' + reason.trim() + '}} ~~~~';
 								// Place in section == Pages for consideration ==
 								text = oldText.replace(/\n+(==\s?Translated pages that could still use some cleanup\s?==)/,
 									'\n\n' + templateText + '\n\n$1');
-								summary = 'Translation' + (lang ? ' from ' + lang : '') + ' requested on ';
+								summary = 'الترجمة' + (lang ? ' من ' + lang : '') + ' تم طلبها على ';
 							}
 
 							if (text === oldText) {
-								pageobj.getStatusElement().error('failed to find target spot for the discussion');
+								pageobj.getStatusElement().error('فشل العثور على المكان المستهدف للمناقشة');
 								return;
 							}
 							pageobj.setPageText(text);
@@ -1497,16 +1498,16 @@
 
 							// Disallow warning yourself
 							if (initialContrib === mw.config.get('wgUserName')) {
-								innerPageobj.getStatusElement().warn('You (' + initialContrib + ') created this page; skipping user notification');
+								innerPageobj.getStatusElement().warn('أنت (' + initialContrib + ') أنشأت هذه الصفحة؛ تخطي إشعار المستخدم');
 								return;
 							}
 
 							const userTalkPage = new Morebits.wiki.Page('User talk:' + initialContrib,
-								'Notifying initial contributor (' + initialContrib + ')');
-							userTalkPage.setNewSectionTitle('Your article [[' + Morebits.pageNameNorm + ']]');
+								'إخطار المساهم الأولي (' + initialContrib + ')');
+							userTalkPage.setNewSectionTitle('مقالك [[' + Morebits.pageNameNorm + ']]');
 							userTalkPage.setNewSectionText('{{subst:uw-notenglish|1=' + Morebits.pageNameNorm +
 								(params.translationPostAtPNT ? '' : '|nopnt=yes') + '}} ~~~~');
-							userTalkPage.setEditSummary('Notice: Please use English when contributing to the English Wikipedia.');
+							userTalkPage.setEditSummary('إشعار: يرجى استخدام اللغة الإنجليزية عند المساهمة في ويكيبيديا الإنجليزية.');
 							userTalkPage.setChangeTags(Twinkle.changeTags);
 							userTalkPage.setCreateOption('recreate');
 							userTalkPage.setFollowRedirect(true, false);
@@ -1531,7 +1532,7 @@
 					return;
 				}
 
-				Morebits.Status.info('Info', 'Removing deselected tags that were already present');
+				Morebits.Status.info('معلومات', 'إزالة القوالب التي تم إلغاء تحديدها والتي كانت موجودة بالفعل');
 
 				const getRedirectsFor = [];
 
@@ -1577,8 +1578,8 @@
 							}
 						});
 						if (!removed) {
-							Morebits.Status.warn('Info', 'Failed to find {{' +
-								page.title.slice(9) + '}} on the page... excluding');
+							Morebits.Status.warn('معلومات', 'فشل العثور على {{' +
+								page.title.slice(9) + '}} في الصفحة... باستثناء');
 						}
 
 					});
@@ -1708,8 +1709,8 @@
 					if (tag === 'Merge from' || tag === 'History merge') {
 						tags.push(tag);
 					} else {
-						Morebits.Status.warn('Info', 'Found {{' + tag +
-							'}} on the article already...excluding');
+						Morebits.Status.warn('معلومات', 'تم العثور على {{' + tag +
+							'}} في المقال بالفعل... باستثناء');
 						// don't do anything else with merge tags
 						if (['Merge', 'Merge to'].includes(tag)) {
 							params.mergeTarget = params.mergeReason = params.mergeTagOther = null;
@@ -1729,7 +1730,7 @@
 			const miTest = /\{\{(multiple ?issues|article ?issues|mi)(?!\s*\|\s*section\s*=)[^}]+\{/im.exec(pageText);
 
 			if (miTest && groupableTags.length > 0) {
-				Morebits.Status.info('Info', 'Adding supported tags inside existing {{multiple issues}} tag');
+				Morebits.Status.info('معلومات', 'إضافة قوالب مدعومة داخل قالب {{قضايا متعددة}} موجود');
 
 				tagText = '';
 				$.each(groupableTags, addTag);
@@ -1741,9 +1742,9 @@
 				addUngroupedTags();
 
 			} else if (params.group && !miTest && (groupableExistingTags.length + groupableTags.length) >= 2) {
-				Morebits.Status.info('Info', 'Grouping supported tags inside {{multiple issues}}');
+				Morebits.Status.info('معلومات', 'تجميع القوالب المدعومة داخل {{قضايا متعددة}}');
 
-				tagText += '{{Multiple issues|\n';
+				tagText += '{{قضايا متعددة|\n';
 
 				/**
 				 * Adds newly added tags to MI
@@ -1798,8 +1799,8 @@
 							}
 						});
 						if (!found) {
-							Morebits.Status.warn('Info', 'Failed to find the existing {{' +
-								page.title.slice(9) + '}} on the page... skip repositioning');
+							Morebits.Status.warn('معلومات', 'فشل العثور على {{' +
+								page.title.slice(9) + '}} الموجود في الصفحة... تخطي إعادة تحديد الموضع');
 						}
 					});
 					addNewTagsToMI();
@@ -1817,7 +1818,7 @@
 				tags = [];
 			let pageText = pageobj.getPageText(),
 				tagRe, tagText = '',
-				summaryText = 'Added',
+				summaryText = 'تمت إضافة',
 				i;
 
 			for (i = 0; i < params.tags.length; i++) {
@@ -1825,8 +1826,8 @@
 				if (!tagRe.exec(pageText)) {
 					tags.push(params.tags[i]);
 				} else {
-					Morebits.Status.warn('Info', 'Found {{' + params.tags[i] +
-						'}} on the redirect already...excluding');
+					Morebits.Status.warn('معلومات', 'تم العثور على {{' + params.tags[i] +
+						'}} في التحويل بالفعل... باستثناء');
 				}
 			}
 
@@ -1846,9 +1847,9 @@
 
 				if (tagIndex > 0) {
 					if (tagIndex === (tags.length - 1)) {
-						summaryText += ' and';
+						summaryText += ' و';
 					} else if (tagIndex < (tags.length - 1)) {
-						summaryText += ',';
+						summaryText += '،';
 					}
 				}
 
@@ -1856,7 +1857,7 @@
 			};
 
 			if (!tags.length) {
-				Morebits.Status.warn('Info', 'No tags remaining to apply');
+				Morebits.Status.warn('معلومات', 'لا توجد قوالب متبقية لتطبيقها');
 			}
 
 			tags.sort();
@@ -1882,7 +1883,7 @@
 				pageText = pageText.trim() + '\n\n{{Redirect category shell|' + tagText + oldPageTags + '\n}}';
 			}
 
-			summaryText += (tags.length > 0 ? ' tag' + (tags.length > 1 ? 's' : ' ') : ' {{[[Template:Redirect category shell|Redirect category shell]]}}') + ' to redirect';
+			summaryText += (tags.length > 0 ? ' قالب' + (tags.length > 1 ? 's' : ' ') : ' {{[[Template:Redirect category shell|Redirect category shell]]}}') + ' إلى التحويل';
 
 			// avoid truncated summaries
 			if (summaryText.length > 499) {
@@ -1907,7 +1908,7 @@
 		file: function twinkletagCallbacksFile(pageobj) {
 			let text = pageobj.getPageText();
 			const params = pageobj.getCallbackParameters();
-			let summary = 'Adding ';
+			let summary = 'إضافة ';
 
 			// Add maintenance tags
 			if (params.tags.length) {
@@ -1994,7 +1995,7 @@
 				});
 
 				if (!tagtext) {
-					pageobj.getStatusElement().warn('User canceled operation; nothing to do');
+					pageobj.getStatusElement().warn('ألغى المستخدم العملية؛ لا يوجد شيء للقيام به');
 					return;
 				}
 
@@ -2029,7 +2030,7 @@
 		const count = incompatibleTags.filter((tag) => tagsToCheck.includes(tag)).length;
 		if (count > 1) {
 			const incompatibleTagsString = '{{' + incompatibleTags.join('}}, {{') + '}}';
-			let message = 'Please select only one of: ' + incompatibleTagsString + '.';
+			let message = 'الرجاء تحديد قالب واحد فقط من: ' + incompatibleTagsString + '.';
 			message += extraMessage ? ' ' + extraMessage : '';
 			alert(message);
 			return true;
@@ -2052,11 +2053,11 @@
 
 				if ((params.tags.includes('Merge')) || (params.tags.includes('Merge from')) ||
 					(params.tags.includes('Merge to'))) {
-					if (Twinkle.tag.checkIncompatible(['Merge', 'Merge from', 'Merge to'], params.tags, 'If several merges are required, use {{Merge}} and separate the article names with pipes (although in this case Twinkle cannot tag the other articles automatically).')) {
+					if (Twinkle.tag.checkIncompatible(['Merge', 'Merge from', 'Merge to'], params.tags, 'إذا كانت هناك حاجة إلى عدة عمليات دمج، فاستخدم {{Merge}} وافصل أسماء المقالات بأحرف الأنابيب (على الرغم من أنه في هذه الحالة لا يمكن لـ Twinkle وضع علامة على المقالات الأخرى تلقائيًا).')) {
 						return;
 					}
 					if ((params.mergeTagOther || params.mergeReason) && params.mergeTarget.includes('|')) {
-						alert('Tagging multiple articles in a merge, and starting a discussion for multiple articles, is not supported at the moment. Please turn off "tag other article", and/or clear out the "reason" box, and try again.');
+						alert('وضع علامة على مقالات متعددة في عملية دمج، وبدء مناقشة لمقالات متعددة، غير مدعوم في الوقت الحالي. يرجى إيقاف تشغيل "وضع علامة على مقال آخر"، و/أو مسح مربع "السبب"، والمحاولة مرة أخرى.');
 						return;
 					}
 				}
@@ -2097,38 +2098,38 @@
 
 					// {{Bad GIF|JPEG|SVG}}, {{Fake SVG}}
 					if (extensionUpper !== 'GIF' && params.tags.includes('Bad GIF')) {
-						alert('This appears to be a ' + extension + ' file, so {{Bad GIF}} is inappropriate.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Bad GIF}} غير مناسب.');
 						return;
 					} else if (extensionUpper !== 'JPEG' && params.tags.includes('Bad JPEG')) {
-						alert('This appears to be a ' + extension + ' file, so {{Bad JPEG}} is inappropriate.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Bad JPEG}} غير مناسب.');
 						return;
 					} else if (extensionUpper !== 'SVG' && params.tags.includes('Bad SVG')) {
-						alert('This appears to be a ' + extension + ' file, so {{Bad SVG}} is inappropriate.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Bad SVG}} غير مناسب.');
 						return;
 					} else if (extensionUpper !== 'SVG' && params.tags.includes('Fake SVG')) {
-						alert('This appears to be a ' + extension + ' file, so {{Fake SVG}} is inappropriate.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Fake SVG}} غير مناسب.');
 						return;
 					}
 
 					// {{Should be PNG|SVG}}
 					if (params.tags.includes('Should be ' + extensionUpper)) {
-						alert('This is already a ' + extension + ' file, so {{Should be ' + extensionUpper + '}} is inappropriate.');
+						alert('هذا بالفعل ملف ' + extension + '، لذا فإن {{Should be ' + extensionUpper + '}} غير مناسب.');
 						return;
 					}
 
 					// {{Overcompressed JPEG}}
 					if (params.tags.includes('Overcompressed JPEG') && extensionUpper !== 'JPEG') {
-						alert('This appears to be a ' + extension + ' file, so {{Overcompressed JPEG}} probably doesn\'t apply.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{Overcompressed JPEG}}.');
 						return;
 					}
 
 					// {{Bad trace}} and {{Bad font}}
 					if (extensionUpper !== 'SVG') {
 						if (params.tags.includes('Bad trace')) {
-							alert('This appears to be a ' + extension + ' file, so {{Bad trace}} probably doesn\'t apply.');
+							alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{Bad trace}}.');
 							return;
 						} else if (params.tags.includes('Bad font')) {
-							alert('This appears to be a ' + extension + ' file, so {{Bad font}} probably doesn\'t apply.');
+							alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{Bad font}}.');
 							return;
 						}
 					}
@@ -2143,7 +2144,7 @@
 						parseInt(params.DoNotMoveToCommons_expiry, 10) <= new Date().getFullYear()
 					)
 				) {
-					alert('Must be a valid future year.');
+					alert('يجب أن تكون سنة مستقبلية صالحة.');
 					return;
 				}
 
@@ -2176,7 +2177,7 @@
 		// File/redirect: return if no tags selected
 		// Article: return if no tag is selected and no already present tag is deselected
 		if (params.tags.length === 0 && (Twinkle.tag.mode !== 'article' || params.tagsToRemove.length === 0)) {
-			alert('You must select at least one tag!');
+			alert('يجب عليك تحديد قالب واحد على الأقل!');
 			return;
 		}
 
@@ -2184,17 +2185,18 @@
 		Morebits.Status.init(form);
 
 		Morebits.wiki.actionCompleted.redirect = Morebits.pageNameNorm;
-		Morebits.wiki.actionCompleted.notice = 'Tagging complete, reloading article in a few seconds';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل وضع العلامات، إعادة تحميل المقال في غضون ثوان قليلة';
 		if (Twinkle.tag.mode === 'redirect') {
 			Morebits.wiki.actionCompleted.followRedirect = false;
 		}
 
-		const wikipediaPage = new Morebits.wiki.Page(Morebits.pageNameNorm, 'Tagging ' + Twinkle.tag.mode);
+		const wikipediaPage = new Morebits.wiki.Page(Morebits.pageNameNorm, 'وضع علامات ' + Twinkle.tag.mode);
 		wikipediaPage.setCallbackParameters(params);
 		wikipediaPage.setChangeTags(Twinkle.changeTags); // Here to apply to triage
 		wikipediaPage.load(Twinkle.tag.callbacks[Twinkle.tag.mode]);
 
 	};
+
 
 	Twinkle.addInitCallback(Twinkle.tag, 'tag');
 }());

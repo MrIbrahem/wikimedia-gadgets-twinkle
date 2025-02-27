@@ -112,8 +112,8 @@
 			const normNode = document.createElement('span');
 			const vandNode = document.createElement('span');
 
-			const normLink = Twinkle.rollback.linkBuilder.buildLink('SteelBlue', 'rollback');
-			const vandLink = Twinkle.rollback.linkBuilder.buildLink('Red', 'vandalism');
+			const normLink = Twinkle.rollback.linkBuilder.buildLink('SteelBlue', 'استرجاع');
+			const vandLink = Twinkle.rollback.linkBuilder.buildLink('Red', 'تخريب');
 
 			normLink.style.fontWeight = 'bold';
 			vandLink.style.fontWeight = 'bold';
@@ -140,7 +140,7 @@
 
 			if (!inline) {
 				const agfNode = document.createElement('span');
-				const agfLink = Twinkle.rollback.linkBuilder.buildLink('DarkOliveGreen', 'rollback (AGF)');
+				const agfLink = Twinkle.rollback.linkBuilder.buildLink('DarkOliveGreen', 'استرجاع (AGF)');
 				$(agfLink).on('click', (e) => {
 					e.preventDefault();
 					Twinkle.rollback.revert('agf', vandal, rev, page);
@@ -169,7 +169,7 @@
 			revertToRevisionNode.setAttribute('id', 'tw-revert-to-' + revisionRef);
 			revertToRevisionNode.style.fontWeight = 'bold';
 
-			const revertToRevisionLink = Twinkle.rollback.linkBuilder.buildLink('SaddleBrown', 'restore this version');
+			const revertToRevisionLink = Twinkle.rollback.linkBuilder.buildLink('SaddleBrown', 'استعادة هذه النسخة');
 			$(revertToRevisionLink).on('click', (e) => {
 				e.preventDefault();
 				Twinkle.rollback.revertToRevision(revisionRef);
@@ -362,7 +362,7 @@
 			const notifyStatus = document.createElement('span');
 			mw.notify(notifyStatus, {
 				autoHide: false,
-				title: 'Rollback on ' + page,
+				title: 'استرجاع على ' + page,
 				tag: 'twinklerollback_' + rev // Shouldn't be necessary given disableLink
 			});
 			Morebits.Status.init(notifyStatus);
@@ -392,7 +392,7 @@
 			type: 'csrf',
 			format: 'json'
 		};
-		const wikipedia_api = new Morebits.wiki.Api('Grabbing data of earlier revisions', query, Twinkle.rollback.callbacks.main);
+		const wikipedia_api = new Morebits.wiki.Api('جلب بيانات المراجعات السابقة', query, Twinkle.rollback.callbacks.main);
 		wikipedia_api.params = params;
 		wikipedia_api.post();
 	};
@@ -414,7 +414,7 @@
 			type: 'csrf',
 			format: 'json'
 		};
-		const wikipedia_api = new Morebits.wiki.Api('Grabbing data of the earlier revision', query, Twinkle.rollback.callbacks.toRevision);
+		const wikipedia_api = new Morebits.wiki.Api('جلب بيانات المراجعة السابقة', query, Twinkle.rollback.callbacks.toRevision);
 		wikipedia_api.params = { rev: oldrev };
 		wikipedia_api.post();
 	};
@@ -436,17 +436,17 @@
 			const revertToUserHidden = !!rev.userhidden;
 
 			if (revertToRevID !== apiobj.params.rev) {
-				apiobj.statelem.error('The retrieved revision does not match the requested revision. Stopping revert.');
+				apiobj.statelem.error('المراجعة المستردة لا تتطابق مع المراجعة المطلوبة. إيقاف الاسترجاع.');
 				return;
 			}
 
-			const optional_summary = prompt('Please specify a reason for the revert:                                ', ''); // padded out to widen prompt in Firefox
+			const optional_summary = prompt('الرجاء تحديد سبب للاسترجاع:                                ', ''); // padded out to widen prompt in Firefox
 			if (optional_summary === null) {
-				apiobj.statelem.error('Aborted by user.');
+				apiobj.statelem.error('تم الإحباط من قبل المستخدم.');
 				return;
 			}
 
-			const summary = Twinkle.rollback.formatSummary('Restored revision ' + revertToRevID + ' by $USER',
+			const summary = Twinkle.rollback.formatSummary('تم استعادة المراجعة ' + revertToRevID + ' بواسطة $USER',
 				revertToUserHidden ? null : revertToUser, optional_summary);
 
 			const query = {
@@ -480,9 +480,9 @@
 			}
 
 			Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-			Morebits.wiki.actionCompleted.notice = 'Reversion completed';
+			Morebits.wiki.actionCompleted.notice = 'اكتمل الاسترجاع';
 
-			const wikipedia_api = new Morebits.wiki.Api('Saving reverted contents', query, Twinkle.rollback.callbacks.complete, apiobj.statelem);
+			const wikipedia_api = new Morebits.wiki.Api('حفظ المحتويات المستعادة', query, Twinkle.rollback.callbacks.complete, apiobj.statelem);
 			wikipedia_api.params = apiobj.params;
 			wikipedia_api.post();
 		},
@@ -494,7 +494,7 @@
 
 			const page = response.query.pages[0];
 			if (!page.actions.edit) {
-				apiobj.statelem.error("Unable to edit the page, it's probably protected.");
+				apiobj.statelem.error("غير قادر على تحرير الصفحة ، ربما تكون محمية.");
 				return;
 			}
 
@@ -507,14 +507,14 @@
 			const params = apiobj.params;
 
 			if (revs.length < 1) {
-				statelem.error('We have less than one additional revision, thus impossible to revert.');
+				statelem.error('لدينا أقل من مراجعة إضافية واحدة ، وبالتالي من المستحيل الاسترجاع.');
 				return;
 			}
 			const top = revs[0];
 			const lastuser = top.user;
 
 			if (lastrevid < params.revid) {
-				Morebits.Status.error('Error', ['The most recent revision ID received from the server, ', Morebits.htmlNode('strong', lastrevid), ', is less than the ID of the displayed revision. This could indicate that the current revision has been deleted, the server is lagging, or that bad data has been received. Stopping revert.']);
+				Morebits.Status.error('خطأ', ['معرف المراجعة الأخير الذي تم استلامه من الخادم، ', Morebits.htmlNode('strong', lastrevid), '، أقل من معرف المراجعة المعروضة. قد يشير هذا إلى أنه تم حذف المراجعة الحالية، أو أن الخادم متخلف، أو أنه تم استلام بيانات غير صحيحة. إيقاف الاسترجاع.']);
 				return;
 			}
 
@@ -522,20 +522,20 @@
 			let userNorm = params.user || Twinkle.rollback.hiddenName;
 			let index = 1;
 			if (params.revid !== lastrevid) {
-				Morebits.Status.warn('Warning', ['Latest revision ', Morebits.htmlNode('strong', lastrevid), ' doesn\'t equal our revision ', Morebits.htmlNode('strong', params.revid)]);
+				Morebits.Status.warn('تحذير', ['المراجعة الأخيرة ', Morebits.htmlNode('strong', lastrevid), ' لا تساوي مراجعتنا ', Morebits.htmlNode('strong', params.revid)]);
 				// Treat ipv6 users on same 64 block as the same
 				if (lastuser === params.user || (mw.util.isIPv6Address(params.user) && Morebits.ip.get64(lastuser) === Morebits.ip.get64(params.user))) {
 					switch (params.type) {
 						case 'vand':
 							var diffUser = lastuser !== params.user;
-							Morebits.Status.info('Info', ['Latest revision was ' + (diffUser ? '' : 'also ') + 'made by ', Morebits.htmlNode('strong', userNorm),
-							diffUser ? ', which is on the same /64 subnet' : '', '. As we assume vandalism, we will proceed to revert.']);
+							Morebits.Status.info('معلومات', ['المراجعة الأخيرة كانت ' + (diffUser ? '' : 'أيضًا ') + 'صنع بواسطة ', Morebits.htmlNode('strong', userNorm),
+							diffUser ? ', وهو على نفس الشبكة الفرعية /64' : '', '. نظرًا لأننا نفترض التخريب ، فسنشرع في الاسترجاع.']);
 							break;
 						case 'agf':
-							Morebits.Status.warn('Warning', ['Latest revision was made by ', Morebits.htmlNode('strong', userNorm), '. As we assume good faith, we will stop the revert, as the problem might have been fixed.']);
+							Morebits.Status.warn('تحذير', ['المراجعة الأخيرة تمت بواسطة ', Morebits.htmlNode('strong', userNorm), '. نظرًا لأننا نفترض حسن النية ، فسوف نوقف الاسترجاع ، حيث ربما تم إصلاح المشكلة.']);
 							return;
 						default:
-							Morebits.Status.warn('Notice', ['Latest revision was made by ', Morebits.htmlNode('strong', userNorm), ', but we will stop the revert.']);
+							Morebits.Status.warn('ملاحظة', ['المراجعة الأخيرة تمت بواسطة ', Morebits.htmlNode('strong', userNorm), '، لكننا سنوقف الاسترجاع.']);
 							return;
 					}
 				} else if (params.type === 'vand' &&
@@ -543,10 +543,10 @@
 					// Besides, none of the trusted bots are going to be revdel'd
 					Twinkle.rollback.trustedBots.includes(top.user) && revs.length > 1 &&
 					revs[1].revid === params.revid) {
-					Morebits.Status.info('Info', ['Latest revision was made by ', Morebits.htmlNode('strong', lastuser), ', a trusted bot, and the revision before was made by our vandal, so we will proceed with the revert.']);
+					Morebits.Status.info('معلومات', ['تم إجراء المراجعة الأخيرة بواسطة ', Morebits.htmlNode('strong', lastuser), ' ، روبوت موثوق به ، وكانت المراجعة السابقة من قبل المخرب الخاص بنا ، لذلك سنشرع في الاسترجاع.']);
 					index = 2;
 				} else {
-					Morebits.Status.error('Error', ['Latest revision was made by ', Morebits.htmlNode('strong', lastuser), ', so it might have already been reverted, we will stop the revert.']);
+					Morebits.Status.error('خطأ', ['تم إجراء المراجعة الأخيرة بواسطة ', Morebits.htmlNode('strong', lastuser), '، لذلك ربما تم استرجاعه بالفعل ، وسوف نوقف الاسترجاع.']);
 					return;
 				}
 
@@ -560,26 +560,26 @@
 			if (Twinkle.rollback.trustedBots.includes(params.user)) {
 				switch (params.type) {
 					case 'vand':
-						Morebits.Status.info('Info', ['Vandalism revert was chosen on ', Morebits.htmlNode('strong', userNorm), '. As this is a trusted bot, we assume you wanted to revert vandalism made by the previous user instead.']);
+						Morebits.Status.info('معلومات', ['تم اختيار استرجاع التخريب على ', Morebits.htmlNode('strong', userNorm), '. نظرًا لأن هذا روبوت موثوق به ، فإننا نفترض أنك أردت استرجاع التخريب الذي قام به المستخدم السابق بدلاً من ذلك.']);
 						index = 2;
 						params.user = revs[1].user;
 						params.userHidden = !!revs[1].userhidden;
 						break;
 					case 'agf':
-						Morebits.Status.warn('Notice', ['Good faith revert was chosen on ', Morebits.htmlNode('strong', userNorm), '. This is a trusted bot and thus AGF rollback will not proceed.']);
+						Morebits.Status.warn('ملاحظة', ['تم اختيار استرجاع حسن النية على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به وبالتالي لن يتم متابعة استرجاع AGF.']);
 						return;
 					case 'norm':
 					/* falls through */
 					default:
-						var cont = confirm('Normal revert was chosen, but the most recent edit was made by a trusted bot (' + userNorm + '). Do you want to revert the revision before instead?');
+						var cont = confirm('تم اختيار الاسترجاع العادي ، ولكن التعديل الأخير تم إجراؤه بواسطة روبوت موثوق به (' + userNorm + '). هل تريد استرجاع المراجعة السابقة بدلاً من ذلك؟');
 						if (cont) {
-							Morebits.Status.info('Info', ['Normal revert was chosen on ', Morebits.htmlNode('strong', userNorm), '. This is a trusted bot, and per confirmation, we\'ll revert the previous revision instead.']);
+							Morebits.Status.info('معلومات', ['تم اختيار استرجاع عادي على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به ، وبناءً على التأكيد ، سنقوم باسترجاع المراجعة السابقة بدلاً من ذلك.']);
 							index = 2;
 							params.user = revs[1].user;
 							params.userHidden = !!revs[1].userhidden;
 							userNorm = params.user || Twinkle.rollback.hiddenName;
 						} else {
-							Morebits.Status.warn('Notice', ['Normal revert was chosen on ', Morebits.htmlNode('strong', userNorm), '. This is a trusted bot, but per confirmation, revert on selected revision will proceed.']);
+							Morebits.Status.warn('ملاحظة', ['تم اختيار استرجاع عادي على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به ، ولكن بناءً على التأكيد ، سيتم المتابعة في استرجاع المراجعة المحددة.']);
 						}
 						break;
 				}
@@ -594,7 +594,7 @@
 					// Treat ipv6 users on same 64 block as the same
 					if (mw.util.isIPv6Address(revs[i].user) && Morebits.ip.get64(revs[i].user) === Morebits.ip.get64(params.user)) {
 						if (!seen64) {
-							new Morebits.Status('Note', 'Treating consecutive IPv6 addresses in the same /64 as the same user');
+							new Morebits.Status('ملاحظة', 'معاملة عناوين IPv6 المتتالية في نفس /64 كمستخدم واحد');
 							seen64 = true;
 						}
 						continue;
@@ -605,20 +605,20 @@
 			}
 
 			if (!found) {
-				statelem.error(['No previous revision found. Perhaps ', Morebits.htmlNode('strong', userNorm), ' is the only contributor, or they have made more than ' + mw.language.convertNumber(Twinkle.getPref('revertMaxRevisions')) + ' edits in a row.']);
+				statelem.error(['لم يتم العثور على مراجعة سابقة. ربما ', Morebits.htmlNode('strong', userNorm), ' هو المساهم الوحيد ، أو قاموا بإجراء أكثر من ' + mw.language.convertNumber(Twinkle.getPref('revertMaxRevisions')) + ' تعديلات على التوالي.']);
 				return;
 			}
 
 			if (!count) {
-				Morebits.Status.error('Error', 'As it is not possible to revert zero revisions, we will stop this revert. It could be that the edit has already been reverted, but the revision ID was still the same.');
+				Morebits.Status.error('خطأ', 'نظرًا لأنه لا يمكن استرجاع صفر من المراجعات ، فسوف نوقف هذا الاسترجاع. قد يكون التعديل قد تم استرجاعه بالفعل ، لكن معرف المراجعة كان لا يزال كما هو.');
 				return;
 			}
 
 			const good_revision = revs[found];
 			let userHasAlreadyConfirmedAction = false;
 			if (params.type !== 'vand' && count > 1) {
-				if (!confirm(userNorm + ' has made ' + mw.language.convertNumber(count) + ' edits in a row. Are you sure you want to revert them all?')) {
-					Morebits.Status.info('Notice', 'Stopping revert.');
+				if (!confirm(userNorm + ' قام بإجراء ' + mw.language.convertNumber(count) + ' تعديلات على التوالي. هل أنت متأكد أنك تريد استرجاعها كلها؟')) {
+					Morebits.Status.info('ملاحظة', 'إيقاف الاسترجاع.');
 					return;
 				}
 				userHasAlreadyConfirmedAction = true;
@@ -630,24 +630,24 @@
 			params.gooduser = good_revision.user;
 			params.gooduserHidden = !!good_revision.userhidden;
 
-			statelem.status([' revision ', Morebits.htmlNode('strong', params.goodid), ' that was made ', Morebits.htmlNode('strong', mw.language.convertNumber(count)), ' revisions ago by ', Morebits.htmlNode('strong', params.gooduserHidden ? Twinkle.rollback.hiddenName : params.gooduser)]);
+			statelem.status([' المراجعة ', Morebits.htmlNode('strong', params.goodid), ' التي تم إجراؤها ', Morebits.htmlNode('strong', mw.language.convertNumber(count)), ' مراجعات مضت بواسطة ', Morebits.htmlNode('strong', params.gooduserHidden ? Twinkle.rollback.hiddenName : params.gooduser)]);
 
 			let summary, extra_summary;
 			switch (params.type) {
 				case 'agf':
-					extra_summary = prompt('An optional comment for the edit summary:                              ', ''); // padded out to widen prompt in Firefox
+					extra_summary = prompt('تعليق اختياري لملخص التحرير:                              ', ''); // padded out to widen prompt in Firefox
 					if (extra_summary === null) {
-						statelem.error('Aborted by user.');
+						statelem.error('تم الإحباط من قبل المستخدم.');
 						return;
 					}
 					userHasAlreadyConfirmedAction = true;
 
-					summary = Twinkle.rollback.formatSummary('Reverted [[WP:AGF|good faith]] edits by $USER',
+					summary = Twinkle.rollback.formatSummary('تم استرجاع تعديلات [[WP:AGF|حسن النية]] بواسطة $USER',
 						params.userHidden ? null : params.user, extra_summary);
 					break;
 
 				case 'vand':
-					summary = Twinkle.rollback.formatSummary('Reverted ' + params.count + (params.count > 1 ? ' edits' : ' edit') + ' by $USER to last revision by ' +
+					summary = Twinkle.rollback.formatSummary('تم استرجاع ' + params.count + (params.count > 1 ? ' تعديلات' : ' تعديل') + ' بواسطة $USER إلى آخر مراجعة بواسطة ' +
 						(params.gooduserHidden ? Twinkle.rollback.hiddenName : params.gooduser), params.userHidden ? null : params.user);
 					break;
 
@@ -655,15 +655,15 @@
 				/* falls through */
 				default:
 					if (Twinkle.getPref('offerReasonOnNormalRevert')) {
-						extra_summary = prompt('An optional comment for the edit summary:                              ', ''); // padded out to widen prompt in Firefox
+						extra_summary = prompt('تعليق اختياري لملخص التحرير:                              ', ''); // padded out to widen prompt in Firefox
 						if (extra_summary === null) {
-							statelem.error('Aborted by user.');
+							statelem.error('تم الإحباط من قبل المستخدم.');
 							return;
 						}
 						userHasAlreadyConfirmedAction = true;
 					}
 
-					summary = Twinkle.rollback.formatSummary('Reverted ' + params.count + (params.count > 1 ? ' edits' : ' edit') + ' by $USER',
+					summary = Twinkle.rollback.formatSummary('تم استرجاع ' + params.count + (params.count > 1 ? ' تعديلات' : ' تعديل') + ' بواسطة $USER',
 						params.userHidden ? null : params.user, extra_summary);
 					break;
 			}
@@ -679,8 +679,8 @@
 				) &&
 				!userHasAlreadyConfirmedAction;
 
-			if (needToDisplayConfirmation && !confirm('Reverting page: are you sure?')) {
-				statelem.error('Aborted by user.');
+			if (needToDisplayConfirmation && !confirm('استرجاع الصفحة: هل أنت متأكد؟')) {
+				statelem.error('تم الإحباط من قبل المستخدم.');
 				return;
 			}
 
@@ -735,9 +735,9 @@
 			if (!Twinkle.rollback.rollbackInPlace) {
 				Morebits.wiki.actionCompleted.redirect = params.pagename;
 			}
-			Morebits.wiki.actionCompleted.notice = 'Reversion completed';
+			Morebits.wiki.actionCompleted.notice = 'اكتمل الاسترجاع';
 
-			const wikipedia_api = new Morebits.wiki.Api('Saving reverted contents', query, Twinkle.rollback.callbacks.complete, statelem);
+			const wikipedia_api = new Morebits.wiki.Api('حفظ المحتويات المسترجعة', query, Twinkle.rollback.callbacks.complete, statelem);
 			wikipedia_api.params = params;
 			wikipedia_api.post();
 
@@ -748,15 +748,15 @@
 			const edit = response.edit;
 
 			if (edit.captcha) {
-				apiobj.statelem.error('Could not rollback, because the wiki server wanted you to fill out a CAPTCHA.');
+				apiobj.statelem.error('تعذر الاسترجاع ، لأن خادم الويكي أراد منك ملء اختبار CAPTCHA.');
 			} else if (edit.nochange) {
-				apiobj.statelem.error('Revision we are reverting to is identical to current revision, stopping revert.');
+				apiobj.statelem.error('المراجعة التي نعود إليها مطابقة للمراجعة الحالية ، يتم إيقاف الاسترجاع.');
 			} else {
-				apiobj.statelem.info('done');
+				apiobj.statelem.info('تم');
 				const params = apiobj.params;
 
 				if (params.notifyUser && !params.userHidden) { // notifyUser only from main, not from toRevision
-					Morebits.Status.info('Info', ['Opening user talk page edit form for user ', Morebits.htmlNode('strong', params.user)]);
+					Morebits.Status.info('معلومات', ['فتح نموذج تحرير صفحة نقاش المستخدم للمستخدم ', Morebits.htmlNode('strong', params.user)]);
 
 					const url = mw.util.getUrl('User talk:' + params.user, {
 						action: 'edit',
@@ -800,10 +800,10 @@
 						action: 'review',
 						revid: edit.newrevid,
 						token: apiobj.params.csrftoken,
-						comment: 'Automatically reviewing reversion' + Twinkle.summaryAd // until the below
+						comment: 'مراجعة الترجيع تلقائيًا' + Twinkle.summaryAd // until the below
 						// 'tags': Twinkle.changeTags // flaggedrevs tag support: [[phab:T247721]]
 					};
-					const wikipedia_api = new Morebits.wiki.Api('Automatically accepting your changes', query);
+					const wikipedia_api = new Morebits.wiki.Api('قبول تغييراتك تلقائيًا', query);
 					wikipedia_api.post();
 				}
 			}
@@ -829,7 +829,7 @@
 				const contribsLink = '[[Special:Contributions/' + userName + '|' + userName + ']]';
 				const contribsLen = unescape(encodeURIComponent(contribsLink)).length;
 				if (resultLen + contribsLen <= 499) {
-					const talkLink = ' ([[User talk:' + userName + '|talk]])';
+					const talkLink = ' ([[User talk:' + userName + '|نقاش]])';
 					if (resultLen + contribsLen + unescape(encodeURIComponent(talkLink)).length <= 499) {
 						result = Morebits.string.safeReplace(result, '$USER', contribsLink + talkLink);
 					} else {

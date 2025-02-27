@@ -13,8 +13,9 @@ async function readFiles(filePaths) {
 	return Promise.all(filePaths.map(path => fs.readFile(__dirname + '/../' + path).then(blob => blob.toString())));
 }
 const server = http.createServer(async (request, response) => {
-	const moduleFiles = (await fs.readdir('./modules')).filter(f => f.endsWith('.js'));
+	const moduleFiles = (await fs.readdir(__dirname + '/../modules')).filter(f => f.endsWith('.js'));
 	const jsFiles = ['morebits.js', 'twinkle.js'].concat(moduleFiles.map(f => 'modules/' + f));
+	// console.log(jsFiles);
 	const cssFiles = ['morebits.css', 'twinkle.css'];
 
 	let jsCode = `mw.loader.using(['jquery.ui', 'ext.gadget.select2']).then(function () {\n`;
@@ -84,7 +85,7 @@ server.listen(port, hostname, async () => {
 	// Catch ^C
 	process.on('SIGINT', async () => {
 		try {
-			if ((Date.now() - initTime)/1000/60 >= 15) {
+			if ((Date.now() - initTime) / 1000 / 60 >= 15) {
 				// More than 15 minutes passed, preemptively fetch new token
 				await user.getTokens();
 			}

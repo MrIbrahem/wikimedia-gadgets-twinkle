@@ -16,22 +16,22 @@
 			mw.config.get('wgNamespaceNumber') !== mw.config.get('wgNamespaceIds').project)) {
 			return;
 		}
-		Twinkle.addPortletLink(Twinkle.batchundelete.callback, 'Und-batch', 'tw-batch-undel', "Undelete 'em all");
+		Twinkle.addPortletLink(Twinkle.batchundelete.callback, 'Und-batch', 'tw-batch-undel', "استرجاعهم جميعًا");
 	};
 
 	Twinkle.batchundelete.callback = function twinklebatchundeleteCallback() {
 		const Window = new Morebits.SimpleWindow(600, 400);
 		Window.setScriptName('Twinkle');
-		Window.setTitle('Batch undelete');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#batchundelete');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.setTitle('استرجاع الدفعي');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#batchundelete');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.batchundelete.callback.evaluate);
 		form.append({
 			type: 'checkbox',
 			list: [
 				{
-					label: 'Restore talk pages of undeleted pages if they existed',
+					label: 'استعادة صفحات نقاش الصفحات المسترجعة إذا كانت موجودة',
 					name: 'undel_talk',
 					value: 'undel_talk',
 					checked: true
@@ -41,7 +41,7 @@
 		form.append({
 			type: 'input',
 			name: 'reason',
-			label: 'Reason:',
+			label: 'السبب:',
 			size: 60
 		});
 
@@ -60,7 +60,7 @@
 			gpllimit: Twinkle.getPref('batchMax'),
 			format: 'json'
 		};
-		const statelem = new Morebits.Status('Grabbing list of pages');
+		const statelem = new Morebits.Status('جلب قائمة الصفحات');
 		const wikipedia_api = new Morebits.wiki.Api('loading...', query, ((apiobj) => {
 			const response = apiobj.getResponse();
 			let pages = (response.query && response.query.pages) || [];
@@ -72,24 +72,24 @@
 
 				const title = page.title;
 				list.push({
-					label: title + (editProt ? ' (fully create protected' +
-						(editProt.expiry === 'infinity' ? ' indefinitely' : ', expires ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)') + ')' : ''),
+					label: title + (editProt ? ' (محمي إنشاء بالكامل' +
+						(editProt.expiry === 'infinity' ? ' إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)') + ')' : ''),
 					value: title,
 					checked: true,
 					style: editProt ? 'color:red' : ''
 				});
 			});
-			apiobj.params.form.append({ type: 'header', label: 'Pages to undelete' });
+			apiobj.params.form.append({ type: 'header', label: 'الصفحات المراد استرجاعها' });
 			apiobj.params.form.append({
 				type: 'button',
-				label: 'Select All',
+				label: 'تحديد الكل',
 				event: function (e) {
 					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', true);
 				}
 			});
 			apiobj.params.form.append({
 				type: 'button',
-				label: 'Deselect All',
+				label: 'إلغاء تحديد الكل',
 				event: function (e) {
 					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', false);
 				}
@@ -113,28 +113,28 @@
 	};
 
 	Twinkle.batchundelete.callback.evaluate = function (event) {
-		Morebits.wiki.actionCompleted.notice = 'Batch undeletion is now complete';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الآن استرجاع الدفعي';
 
 		const numProtected = Morebits.QuickForm.getElements(event.target, 'pages').filter((element) => element.checked && element.nextElementSibling.style.color === 'red').length;
-		if (numProtected > 0 && !confirm('You are about to undelete ' + numProtected + ' fully create protected page(s). Are you sure?')) {
+		if (numProtected > 0 && !confirm('أنت على وشك استرجاع ' + numProtected + ' صفحة (صفحات) محمية إنشاء بالكامل. هل أنت متأكد؟')) {
 			return;
 		}
 
 		const input = Morebits.QuickForm.getInputData(event.target);
 
 		if (!input.reason) {
-			alert('You need to give a reason, you cabal crony!');
+			alert('تحتاج إلى إعطاء سبب، أيها المحتال المتآمر!');
 			return;
 		}
 		Morebits.SimpleWindow.setButtonsEnabled(false);
 		Morebits.Status.init(event.target);
 
 		if (!input.pages || !input.pages.length) {
-			Morebits.Status.error('Error', 'nothing to undelete, aborting');
+			Morebits.Status.error('خطأ', 'لا يوجد شيء لاسترجاعه، يتم الإحباط');
 			return;
 		}
 
-		const pageUndeleter = new Morebits.BatchOperation('Undeleting pages');
+		const pageUndeleter = new Morebits.BatchOperation('استرجاع الصفحات');
 		pageUndeleter.setOption('chunkSize', Twinkle.getPref('batchChunks'));
 		pageUndeleter.setOption('preserveIndividualStatusLines', true);
 		pageUndeleter.setPageList(input.pages);
@@ -146,7 +146,7 @@
 				pageUndeleter: pageUndeleter
 			};
 
-			const wikipedia_page = new Morebits.wiki.Page(pageName, 'Undeleting page ' + pageName);
+			const wikipedia_page = new Morebits.wiki.Page(pageName, 'استرجاع الصفحة ' + pageName);
 			wikipedia_page.setCallbackParameters(params);
 			wikipedia_page.setEditSummary(input.reason);
 			wikipedia_page.setChangeTags(Twinkle.changeTags);
@@ -179,7 +179,7 @@
 						titles: talkpagename,
 						format: 'json'
 					};
-					wikipedia_api = new Morebits.wiki.Api('Checking talk page for deleted revisions', query, Twinkle.batchundelete.callbacks.undeleteTalk);
+					wikipedia_api = new Morebits.wiki.Api('التحقق من وجود مراجعات محذوفة في صفحة النقاش', query, Twinkle.batchundelete.callbacks.undeleteTalk);
 					wikipedia_api.params = params;
 					wikipedia_api.params.talkPage = talkpagename;
 					wikipedia_api.post();
@@ -196,8 +196,8 @@
 				return;
 			}
 
-			const talkpage = new Morebits.wiki.Page(apiobj.params.talkPage, 'Undeleting talk page of ' + apiobj.params.page);
-			talkpage.setEditSummary('Undeleting [[Help:Talk page|talk page]] of "' + apiobj.params.page + '"');
+			const talkpage = new Morebits.wiki.Page(apiobj.params.talkPage, 'استرجاع صفحة نقاش ' + apiobj.params.page);
+			talkpage.setEditSummary('استرجاع [[Help:Talk page|صفحة نقاش]] "' + apiobj.params.page + '"');
 			talkpage.setChangeTags(Twinkle.changeTags);
 			talkpage.undeletePage();
 		}

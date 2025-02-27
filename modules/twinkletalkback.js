@@ -9,25 +9,24 @@
 	 * Mode of invocation:     Tab ("TB")
 	 * Active on:              Any page with relevant user name (userspace, contribs, etc.) except IP ranges
 	 */
-
 	Twinkle.talkback = function () {
 		if (!mw.config.exists('wgRelevantUserName') || Morebits.ip.isRange(mw.config.get('wgRelevantUserName'))) {
 			return;
 		}
-		Twinkle.addPortletLink(Twinkle.talkback.callback, 'TB', 'twinkle-talkback', 'Easy talkback');
+		Twinkle.addPortletLink(Twinkle.talkback.callback, 'TB', 'twinkle-talkback', 'Talkback سهل');
 	};
 
 	Twinkle.talkback.callback = function () {
-		if (mw.config.get('wgRelevantUserName') === mw.config.get('wgUserName') && !confirm("Is it really so bad that you're talking back to yourself?")) {
+		if (mw.config.get('wgRelevantUserName') === mw.config.get('wgUserName') && !confirm("هل الأمر سيئ للغاية لدرجة أنك ترد على نفسك؟")) {
 			return;
 		}
 
 		const Window = new Morebits.SimpleWindow(600, 350);
 		Window.setTitle('Talkback');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('Talkback prefs', 'WP:TW/PREF#talkback');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#talkback');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('تفضيلات Talkback', 'WP:TW/PREF#talkback');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#talkback');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.talkback.evaluate);
 
@@ -40,15 +39,15 @@
 					checked: 'true'
 				},
 				{
-					label: 'Please see',
+					label: 'الرجاء الاطلاع',
 					value: 'see'
 				},
 				{
-					label: 'Noticeboard notification',
+					label: 'إشعار لوحة الإعلانات',
 					value: 'notice'
 				},
 				{
-					label: "You've got mail",
+					label: "لديك بريد",
 					value: 'mail'
 				}
 			],
@@ -57,7 +56,7 @@
 
 		form.append({
 			type: 'field',
-			label: 'Work area',
+			label: 'منطقة العمل',
 			name: 'work_area'
 		});
 
@@ -66,7 +65,7 @@
 			Twinkle.talkback.callbacks.preview(result); // |result| is defined below
 		});
 		previewlink.style.cursor = 'pointer';
-		previewlink.textContent = 'Preview';
+		previewlink.textContent = 'معاينة';
 		form.append({ type: 'div', id: 'talkbackpreview', label: [previewlink] });
 		form.append({ type: 'div', id: 'twinkletalkback-previewbox', style: 'display: none' });
 
@@ -91,7 +90,7 @@
 			ellimit: '1',
 			format: 'json'
 		};
-		const wpapi = new Morebits.wiki.Api('Fetching talkback opt-out status', query, Twinkle.talkback.callback.optoutStatus);
+		const wpapi = new Morebits.wiki.Api('جلب حالة إلغاء الاشتراك في talkback', query, Twinkle.talkback.callback.optoutStatus);
 		wpapi.post();
 	};
 
@@ -100,7 +99,7 @@
 	Twinkle.talkback.callback.optoutStatus = function (apiobj) {
 		const el = apiobj.getResponse().query.pages[0].extlinks;
 		if (el && el.length) {
-			Twinkle.talkback.optout = mw.config.get('wgRelevantUserName') + ' prefers not to receive talkbacks';
+			Twinkle.talkback.optout = mw.config.get('wgRelevantUserName') + ' يفضل عدم تلقي talkbacks';
 			const url = el[0].url;
 			const reason = mw.util.getParamValue('reason', url);
 			Twinkle.talkback.optout += reason ? ': ' + reason : '.';
@@ -130,7 +129,7 @@
 
 		let work_area = new Morebits.QuickForm.Element({
 			type: 'field',
-			label: 'Talkback information',
+			label: 'معلومات Talkback',
 			name: 'work_area'
 		});
 
@@ -150,15 +149,15 @@
 				work_area.append({
 					type: 'input',
 					name: 'page',
-					label: 'Page name of the discussion',
-					tooltip: "The page name where the discussion is being held. For example: 'User talk:Jimbo Wales' or Wikipedia talk:Twinkle'. Limited to all talks, Wikipedia-space, and Template-space.",
+					label: 'اسم صفحة المناقشة',
+					tooltip: "اسم الصفحة التي تجري فيها المناقشة. على سبيل المثال: 'User talk:Jimbo Wales' أو Wikipedia talk:Twinkle'. يقتصر على جميع المحادثات ومساحة ويكيبيديا ومساحة القوالب.",
 					value: prev_page || 'User talk:' + mw.config.get('wgUserName')
 				});
 				work_area.append({
 					type: 'input',
 					name: 'section',
-					label: 'Linked section (optional)',
-					tooltip: "The section heading where the discussion is being held. For example: 'Merge proposal'.",
+					label: 'القسم المرتبط (اختياري)',
+					tooltip: "عنوان القسم الذي تجري فيه المناقشة. على سبيل المثال: 'اقتراح دمج'.",
 					value: prev_section
 				});
 				break;
@@ -166,10 +165,10 @@
 				var noticeboard = work_area.append({
 					type: 'select',
 					name: 'noticeboard',
-					label: 'Noticeboard:',
+					label: 'لوحة الإعلانات:',
 					event: function (e) {
 						if (e.target.value === 'afchd') {
-							Morebits.QuickForm.overrideElementLabel(root.section, 'Title of draft (excluding the prefix): ');
+							Morebits.QuickForm.overrideElementLabel(root.section, 'عنوان المسودة (باستثناء البادئة): ');
 							Morebits.QuickForm.setElementTooltipVisibility(root.section, false);
 						} else {
 							Morebits.QuickForm.resetElementLabel(root.section);
@@ -190,8 +189,8 @@
 				work_area.append({
 					type: 'input',
 					name: 'section',
-					label: 'Linked thread',
-					tooltip: 'The heading of the relevant thread on the noticeboard page.',
+					label: 'الخيط المرتبط',
+					tooltip: 'عنوان الموضوع ذي الصلة في صفحة لوحة الإعلانات.',
 					value: prev_section
 				});
 				break;
@@ -199,14 +198,14 @@
 				work_area.append({
 					type: 'input',
 					name: 'section',
-					label: 'Subject of email (optional)',
-					tooltip: 'The subject line of the email you sent.'
+					label: 'موضوع البريد الإلكتروني (اختياري)',
+					tooltip: 'سطر الموضوع في البريد الإلكتروني الذي أرسلته.'
 				});
 				break;
 		}
 
 		if (value !== 'notice') {
-			work_area.append({ type: 'textarea', label: 'Additional message (optional):', name: 'message', tooltip: 'An additional message that you would like to leave below the talkback template. Your signature will be added to the end of the message if you leave one.' });
+			work_area.append({ type: 'textarea', label: 'رسالة إضافية (اختيارية):', name: 'message', tooltip: 'رسالة إضافية تود تركها أسفل قالب talkback. سيتم إضافة توقيعك في نهاية الرسالة إذا تركت واحدة.' });
 		}
 
 		work_area = work_area.render();
@@ -220,87 +219,87 @@
 
 	Twinkle.talkback.noticeboards = {
 		an: {
-			label: "WP:AN (Administrators' noticeboard)",
+			label: "WP:AN (لوحة إعلانات المدراء)",
 			text: '{{subst:AN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Administrators\' noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Administrators\' noticeboard]]'
 		},
 		an3: {
-			label: "WP:AN3 (Administrators' noticeboard/Edit warring)",
+			label: "WP:AN3 (لوحة إعلانات المدراء/حرب التحرير)",
 			text: '{{subst:An3-notice|$SECTION}} ~~~~',
-			editSummary: "Notice of discussion at [[Wikipedia:Administrators' noticeboard/Edit warring]]"
+			editSummary: "إشعار بالمناقشة في [[Wikipedia:Administrators' noticeboard/Edit warring]]"
 		},
 		ani: {
-			label: "WP:ANI (Administrators' noticeboard/Incidents)",
-			text: "== Notice of Administrators' noticeboard/Incidents discussion ==\n" +
+			label: "WP:ANI (لوحة إعلانات المدراء/الحوادث)",
+			text: "== إشعار بمناقشة لوحة إعلانات المدراء/الحوادث ==\n" +
 				'{{subst:ANI-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Administrators\' noticeboard/Incidents]]',
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Administrators\' noticeboard/Incidents]]',
 			defaultSelected: true
 		},
 		// let's keep AN and its cousins at the top
 		afchd: {
-			label: 'WP:AFCHD (Articles for creation/Help desk)',
+			label: 'WP:AFCHD (مقالات لإنشاء/مكتب المساعدة)',
 			text: '{{subst:AFCHD/u|$SECTION}} ~~~~',
-			editSummary: 'You have replies at the [[Wikipedia:AFCHD|Articles for Creation Help Desk]]'
+			editSummary: 'لديك ردود في [[Wikipedia:AFCHD|مكتب مساعدة المقالات للإنشاء]]'
 		},
 		blpn: {
-			label: 'WP:BLPN (Biographies of living persons noticeboard)',
+			label: 'WP:BLPN (لوحة إعلانات السير الذاتية للأشخاص الأحياء)',
 			text: '{{subst:BLPN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Biographies of living persons/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Biographies of living persons/Noticeboard]]'
 		},
 		coin: {
-			label: 'WP:COIN (Conflict of interest noticeboard)',
+			label: 'WP:COIN (لوحة إعلانات تضارب المصالح)',
 			text: '{{subst:Coin-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Conflict of interest/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Conflict of interest/Noticeboard]]'
 		},
 		drn: {
-			label: 'WP:DRN (Dispute resolution noticeboard)',
+			label: 'WP:DRN (لوحة إعلانات حل النزاعات)',
 			text: '{{subst:DRN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Dispute resolution noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Dispute resolution noticeboard]]'
 		},
 		effp: {
-			label: 'WP:EFFP/R (Edit filter false positive report)',
+			label: 'WP:EFFP/R (تقرير إيجابي زائف لمرشح التحرير)',
 			text: '{{EFFPReply|1=$SECTION|2=~~~~}}',
-			editSummary: 'You have replies to your [[Wikipedia:Edit filter/False positives/Reports|edit filter false positive report]]'
+			editSummary: 'لديك ردود على [[Wikipedia:Edit filter/False positives/Reports|تقرير إيجابي زائف لمرشح التحرير]]'
 		},
 		eln: {
-			label: 'WP:ELN (External links noticeboard)',
+			label: 'WP:ELN (لوحة إعلانات الروابط الخارجية)',
 			text: '{{subst:ELN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:External links/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:External links/Noticeboard]]'
 		},
 		ftn: {
-			label: 'WP:FTN (Fringe theories noticeboard)',
+			label: 'WP:FTN (لوحة إعلانات النظريات الهامشية)',
 			text: '{{subst:Ftn-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Fringe theories/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Fringe theories/Noticeboard]]'
 		},
 		hd: {
-			label: 'WP:HD (Help desk)',
-			text: '== Your question at the Help desk ==\n{{helpdeskreply|1=$SECTION|ts=~~~~~}}',
-			editSummary: 'You have replies at the [[Wikipedia:Help desk|Wikipedia help desk]]'
+			label: 'WP:HD (مكتب المساعدة)',
+			text: '== سؤالك في مكتب المساعدة ==\n{{helpdeskreply|1=$SECTION|ts=~~~~~}}',
+			editSummary: 'لديك ردود في [[Wikipedia:Help desk|مكتب المساعدة في ويكيبيديا]]'
 		},
 		norn: {
-			label: 'WP:NORN (No original research noticeboard)',
+			label: 'WP:NORN (لوحة إعلانات لا أبحاث أصلية)',
 			text: '{{subst:Norn-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:No original research/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:No original research/Noticeboard]]'
 		},
 		npovn: {
-			label: 'WP:NPOVN (Neutral point of view noticeboard)',
+			label: 'WP:NPOVN (لوحة إعلانات وجهة النظر المحايدة)',
 			text: '{{subst:NPOVN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Neutral point of view/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Neutral point of view/Noticeboard]]'
 		},
 		rsn: {
-			label: 'WP:RSN (Reliable sources noticeboard)',
+			label: 'WP:RSN (لوحة إعلانات المصادر الموثوقة)',
 			text: '{{subst:RSN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'Notice of discussion at [[Wikipedia:Reliable sources/Noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Reliable sources/Noticeboard]]'
 		},
 		th: {
-			label: 'WP:THQ (Teahouse question forum)',
-			text: "== Teahouse talkback: you've got messages! ==\n{{WP:Teahouse/Teahouse talkback|WP:Teahouse/Questions|$SECTION|ts=~~~~}}",
-			editSummary: 'You have replies at the [[Wikipedia:Teahouse/Questions|Teahouse question board]]'
+			label: 'WP:THQ (منتدى أسئلة Teahouse)',
+			text: "== Teahouse talkback: لديك رسائل! ==\n{{WP:Teahouse/Teahouse talkback|WP:Teahouse/Questions|$SECTION|ts=~~~~}}",
+			editSummary: 'لديك ردود في [[Wikipedia:Teahouse/Questions|لوحة أسئلة Teahouse]]'
 		},
 		vrt: {
-			label: 'WP:VRTN (VRT noticeboard)',
+			label: 'WP:VRTN (لوحة إعلانات VRT)',
 			text: '{{subst:VRTreply|1=$SECTION}}\n~~~~',
-			editSummary: 'You have replies at the [[Wikipedia:VRT noticeboard|VRT noticeboard]]'
+			editSummary: 'لديك ردود في [[Wikipedia:VRT noticeboard|لوحة إعلانات VRT]]'
 		}
 	};
 
@@ -308,24 +307,24 @@
 		const input = Morebits.QuickForm.getInputData(e.target);
 
 		const fullUserTalkPageName = new mw.Title(mw.config.get('wgRelevantUserName'), 3).toText();
-		const talkpage = new Morebits.wiki.Page(fullUserTalkPageName, 'Adding talkback');
+		const talkpage = new Morebits.wiki.Page(fullUserTalkPageName, 'إضافة talkback');
 
 		Morebits.SimpleWindow.setButtonsEnabled(false);
 		Morebits.Status.init(e.target);
 
 		Morebits.wiki.actionCompleted.redirect = fullUserTalkPageName;
-		Morebits.wiki.actionCompleted.notice = 'Talkback complete; reloading talk page in a few seconds';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل Talkback; إعادة تحميل صفحة النقاش في بضع ثوان';
 
 		switch (input.tbtarget) {
 			case 'notice':
 				talkpage.setEditSummary(Twinkle.talkback.noticeboards[input.noticeboard].editSummary);
 				break;
 			case 'mail':
-				talkpage.setEditSummary("Notification: You've got mail");
+				talkpage.setEditSummary("إشعار: لديك بريد");
 				break;
 			case 'see':
 				input.page = Twinkle.talkback.callbacks.normalizeTalkbackPage(input.page);
-				talkpage.setEditSummary('Please check the discussion at [[:' + input.page +
+				talkpage.setEditSummary('الرجاء التحقق من المناقشة في [[:' + input.page +
 					(input.section ? '#' + input.section : '') + ']]');
 				break;
 			default: // talkback

@@ -10,12 +10,11 @@
 	 * Active on:              Any page with relevant user name (userspace, contribs,
 	 *                         etc.) (not IP ranges), as well as the rollback success page
 	 */
-
 	Twinkle.warn = function twinklewarn() {
 
 		// Users and IPs but not IP ranges
 		if (mw.config.exists('wgRelevantUserName') && !Morebits.ip.isRange(mw.config.get('wgRelevantUserName'))) {
-			Twinkle.addPortletLink(Twinkle.warn.callback, 'Warn', 'tw-warn', 'Warn/notify user');
+			Twinkle.addPortletLink(Twinkle.warn.callback, 'Warn', 'tw-warn', 'تحذير / إخطار المستخدم');
 			if (Twinkle.getPref('autoMenuAfterRollback') &&
 				mw.config.get('wgNamespaceNumber') === 3 &&
 				Twinkle.getPrefill('vanarticle') &&
@@ -31,7 +30,7 @@
 			const $vandalTalkLink = $('#mw-rollback-success').find('.mw-usertoollinks a').first();
 			if ($vandalTalkLink.length) {
 				$vandalTalkLink.css('font-weight', 'bold');
-				$vandalTalkLink.wrapInner($('<span>').attr('title', 'If appropriate, you can use Twinkle to warn the user about their edits to this page.'));
+				$vandalTalkLink.wrapInner($('<span>').attr('title', 'إذا كان ذلك مناسبًا ، يمكنك استخدام Twinkle لتحذير المستخدم بشأن تعديلاته على هذه الصفحة.'));
 
 				// Can't provide vanarticlerevid as only wgCurRevisionId is provided
 				const extraParam = 'vanarticle=' + mw.util.rawurlencode(Morebits.pageNameNorm);
@@ -50,59 +49,59 @@
 
 	Twinkle.warn.callback = function twinklewarnCallback() {
 		if (mw.config.get('wgRelevantUserName') === mw.config.get('wgUserName') &&
-			!confirm('You are about to warn yourself! Are you sure you want to proceed?')) {
+			!confirm('أنت على وشك تحذير نفسك! هل أنت متأكد أنك تريد المتابعة؟')) {
 			return;
 		}
 
 		Twinkle.warn.dialog = new Morebits.SimpleWindow(600, 440);
 		const dialog = Twinkle.warn.dialog;
-		dialog.setTitle('Warn/notify user');
+		dialog.setTitle('تحذير / إخطار المستخدم');
 		dialog.setScriptName('Twinkle');
-		dialog.addFooterLink('Choosing a warning level', 'WP:UWUL#Levels');
-		dialog.addFooterLink('Warn prefs', 'WP:TW/PREF#warn');
-		dialog.addFooterLink('Twinkle help', 'WP:TW/DOC#warn');
-		dialog.addFooterLink('Give feedback', 'WT:TW');
+		dialog.addFooterLink('اختيار مستوى التحذير', 'WP:UWUL#Levels');
+		dialog.addFooterLink('تفضيلات التحذير', 'WP:TW/PREF#warn');
+		dialog.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#warn');
+		dialog.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.warn.callback.evaluate);
 		const main_select = form.append({
 			type: 'field',
-			label: 'Choose type of warning/notice to issue',
-			tooltip: 'First choose a main warning group, then the specific warning to issue.'
+			label: 'اختر نوع التحذير / الإشعار المراد إصداره',
+			tooltip: 'اختر أولاً مجموعة تحذير رئيسية ، ثم التحذير المحدد المراد إصداره.'
 		});
 
 		const main_group = main_select.append({
 			type: 'select',
 			name: 'main_group',
-			tooltip: 'You can customize the default selection in your Twinkle preferences',
+			tooltip: 'يمكنك تخصيص التحديد الافتراضي في تفضيلات Twinkle الخاصة بك',
 			event: Twinkle.warn.callback.change_category
 		});
 
 		const defaultGroup = parseInt(Twinkle.getPref('defaultWarningGroup'), 10);
-		main_group.append({ type: 'option', label: 'Auto-select level (1-4)', value: 'autolevel', selected: defaultGroup === 11 });
-		main_group.append({ type: 'option', label: '1: General note', value: 'level1', selected: defaultGroup === 1 });
-		main_group.append({ type: 'option', label: '2: Caution', value: 'level2', selected: defaultGroup === 2 });
-		main_group.append({ type: 'option', label: '3: Warning', value: 'level3', selected: defaultGroup === 3 });
-		main_group.append({ type: 'option', label: '4: Final warning', value: 'level4', selected: defaultGroup === 4 });
-		main_group.append({ type: 'option', label: '4im: Only warning', value: 'level4im', selected: defaultGroup === 5 });
+		main_group.append({ type: 'option', label: 'تحديد المستوى تلقائيًا (1-4)', value: 'autolevel', selected: defaultGroup === 11 });
+		main_group.append({ type: 'option', label: '1: ملاحظة عامة', value: 'level1', selected: defaultGroup === 1 });
+		main_group.append({ type: 'option', label: '2: تحذير', value: 'level2', selected: defaultGroup === 2 });
+		main_group.append({ type: 'option', label: '3: تحذير', value: 'level3', selected: defaultGroup === 3 });
+		main_group.append({ type: 'option', label: '4: تحذير نهائي', value: 'level4', selected: defaultGroup === 4 });
+		main_group.append({ type: 'option', label: '4im: التحذير الوحيد', value: 'level4im', selected: defaultGroup === 5 });
 		if (Twinkle.getPref('combinedSingletMenus')) {
-			main_group.append({ type: 'option', label: 'Single-issue messages', value: 'singlecombined', selected: defaultGroup === 6 || defaultGroup === 7 });
+			main_group.append({ type: 'option', label: 'رسائل ذات إصدار واحد', value: 'singlecombined', selected: defaultGroup === 6 || defaultGroup === 7 });
 		} else {
-			main_group.append({ type: 'option', label: 'Single-issue notices', value: 'singlenotice', selected: defaultGroup === 6 });
-			main_group.append({ type: 'option', label: 'Single-issue warnings', value: 'singlewarn', selected: defaultGroup === 7 });
+			main_group.append({ type: 'option', label: 'إشعارات ذات إصدار واحد', value: 'singlenotice', selected: defaultGroup === 6 });
+			main_group.append({ type: 'option', label: 'تحذيرات ذات إصدار واحد', value: 'singlewarn', selected: defaultGroup === 7 });
 		}
 		if (Twinkle.getPref('customWarningList').length) {
-			main_group.append({ type: 'option', label: 'Custom warnings', value: 'custom', selected: defaultGroup === 9 });
+			main_group.append({ type: 'option', label: 'تحذيرات مخصصة', value: 'custom', selected: defaultGroup === 9 });
 		}
-		main_group.append({ type: 'option', label: 'All warning templates', value: 'kitchensink', selected: defaultGroup === 10 });
+		main_group.append({ type: 'option', label: 'جميع قوالب التحذير', value: 'kitchensink', selected: defaultGroup === 10 });
 
 		main_select.append({ type: 'select', name: 'sub_group', event: Twinkle.warn.callback.change_subcategory }); // Will be empty to begin with.
 
 		form.append({
 			type: 'input',
 			name: 'article',
-			label: 'Linked page',
+			label: 'الصفحة المرتبطة',
 			value: Twinkle.getPrefill('vanarticle') || '',
-			tooltip: 'A page can be linked within the notice, perhaps because it was a revert to said page that dispatched this notice. Leave empty for no page to be linked.'
+			tooltip: 'يمكن ربط صفحة داخل الإشعار ، ربما لأنها كانت استعادة لتلك الصفحة التي أرسلت هذا الإشعار. اترك فارغًا لعدم ربط أي صفحة.'
 		});
 
 		form.append({
@@ -112,19 +111,19 @@
 			id: 'twinkle-warn-warning-messages'
 		});
 
-		const more = form.append({ type: 'field', name: 'reasonGroup', label: 'Warning information' });
-		more.append({ type: 'textarea', label: 'Optional message:', name: 'reason', tooltip: 'Perhaps a reason, or that a more detailed notice must be appended' });
+		const more = form.append({ type: 'field', name: 'reasonGroup', label: 'معلومات التحذير' });
+		more.append({ type: 'textarea', label: 'رسالة اختيارية:', name: 'reason', tooltip: 'ربما سبب ، أو أنه يجب إلحاق إشعار أكثر تفصيلاً' });
 
 		const previewlink = document.createElement('a');
 		$(previewlink).on('click', () => {
 			Twinkle.warn.callbacks.preview(result); // |result| is defined below
 		});
 		previewlink.style.cursor = 'pointer';
-		previewlink.textContent = 'Preview';
+		previewlink.textContent = 'معاينة';
 		more.append({ type: 'div', id: 'warningpreview', label: [previewlink] });
 		more.append({ type: 'div', id: 'twinklewarn-previewbox', style: 'display: none' });
 
-		more.append({ type: 'submit', label: 'Submit' });
+		more.append({ type: 'submit', label: 'إرسال' });
 
 		var result = form.render();
 		dialog.setContent(result);
@@ -151,12 +150,12 @@
 					format: 'json'
 				};
 
-				new Morebits.wiki.Api('Checking if you successfully reverted the page', query, ((apiobj) => {
+				new Morebits.wiki.Api('التحقق مما إذا كنت قد استعدت الصفحة بنجاح', query, ((apiobj) => {
 					const rev = apiobj.getResponse().query.pages[0].revisions;
 					const revertUser = rev && rev[1].user;
 					if (revertUser && revertUser !== mw.config.get('wgUserName')) {
-						message += ' Someone else reverted the page and may have already warned the user.';
-						$('#twinkle-warn-warning-messages').text('Note:' + message);
+						message += ' قام شخص آخر باستعادة الصفحة وربما قام بالفعل بتحذير المستخدم.';
+						$('#twinkle-warn-warning-messages').text('ملاحظة:' + message);
 					}
 				})).post();
 			}
@@ -166,8 +165,8 @@
 				const revDate = new Morebits.Date(vantimestamp);
 				if (vantimestamp && revDate.isValid()) {
 					if (revDate.add(24, 'hours').isBefore(new Date())) {
-						message += ' This edit was made more than 24 hours ago so a warning may be stale.';
-						$('#twinkle-warn-warning-messages').text('Note:' + message);
+						message += ' تم إجراء هذا التعديل منذ أكثر من 24 ساعة ، لذا قد يكون التحذير قديمًا.';
+						$('#twinkle-warn-warning-messages').text('ملاحظة:' + message);
 					}
 				}
 			};
@@ -184,7 +183,7 @@
 					revids: vanrevid,
 					format: 'json'
 				};
-				new Morebits.wiki.Api('Grabbing the revision timestamps', query, ((apiobj) => {
+				new Morebits.wiki.Api('التقاط الطوابع الزمنية للمراجعة', query, ((apiobj) => {
 					const rev = apiobj.getResponse().query.pages[0].revisions;
 					vantimestamp = rev && rev[0].timestamp;
 					checkStale(vantimestamp);
@@ -210,808 +209,808 @@
 			'Common warnings': {
 				'uw-vandalism': {
 					level1: {
-						label: 'Vandalism',
-						summary: 'General note: Unconstructive editing'
+						label: 'تخريب',
+						summary: 'ملاحظة عامة: تحرير غير بناء'
 					},
 					level2: {
-						label: 'Vandalism',
-						summary: 'Caution: Unconstructive editing'
+						label: 'تخريب',
+						summary: 'تحذير: تحرير غير بناء'
 					},
 					level3: {
-						label: 'Vandalism',
-						summary: 'Warning: Vandalism'
+						label: 'تخريب',
+						summary: 'تحذير: تخريب'
 					},
 					level4: {
-						label: 'Vandalism',
-						summary: 'Final warning: Vandalism'
+						label: 'تحذير نهائي: تخريب',
+						summary: 'تحذير نهائي: تخريب'
 					},
 					level4im: {
-						label: 'Vandalism',
-						summary: 'Only warning: Vandalism'
+						label: 'تخريب',
+						summary: 'التحذير الوحيد: تخريب'
 					}
 				},
 				'uw-disruptive': {
 					level1: {
-						label: 'Disruptive editing',
-						summary: 'General note: Unconstructive editing'
+						label: 'تحرير تخريبي',
+						summary: 'ملاحظة عامة: تحرير غير بناء'
 					},
 					level2: {
-						label: 'Disruptive editing',
-						summary: 'Caution: Unconstructive editing'
+						label: 'تحرير تخريبي',
+						summary: 'تحذير: تحرير غير بناء'
 					},
 					level3: {
-						label: 'Disruptive editing',
-						summary: 'Warning: Disruptive editing'
+						label: 'تحرير تخريبي',
+						summary: 'تحذير: تحرير تخريبي'
 					}
 				},
 				'uw-test': {
 					level1: {
-						label: 'Editing tests',
-						summary: 'General note: Editing tests'
+						label: 'اختبارات التحرير',
+						summary: 'ملاحظة عامة: اختبارات التحرير'
 					},
 					level2: {
-						label: 'Editing tests',
-						summary: 'Caution: Editing tests'
+						label: 'اختبارات التحرير',
+						summary: 'تحذير: اختبارات التحرير'
 					},
 					level3: {
-						label: 'Editing tests',
-						summary: 'Warning: Editing tests'
+						label: 'اختبارات التحرير',
+						summary: 'تحذير: اختبارات التحرير'
 					}
 				},
 				'uw-delete': {
 					level1: {
-						label: 'Removal of content, blanking',
-						summary: 'General note: Removal of content, blanking'
+						label: 'إزالة المحتوى ، والتفريغ',
+						summary: 'ملاحظة عامة: إزالة المحتوى ، والتفريغ'
 					},
 					level2: {
-						label: 'Removal of content, blanking',
-						summary: 'Caution: Removal of content, blanking'
+						label: 'إزالة المحتوى ، والتفريغ',
+						summary: 'تحذير: إزالة المحتوى ، والتفريغ'
 					},
 					level3: {
-						label: 'Removal of content, blanking',
-						summary: 'Warning: Removal of content, blanking'
+						label: 'إزالة المحتوى ، والتفريغ',
+						summary: 'تحذير: إزالة المحتوى ، والتفريغ'
 					},
 					level4: {
-						label: 'Removal of content, blanking',
-						summary: 'Final warning: Removal of content, blanking'
+						label: 'إزالة المحتوى ، والتفريغ',
+						summary: 'تحذير نهائي: إزالة المحتوى ، والتفريغ'
 					},
 					level4im: {
-						label: 'Removal of content, blanking',
-						summary: 'Only warning: Removal of content, blanking'
+						label: 'إزالة المحتوى ، والتفريغ',
+						summary: 'التحذير الوحيد: إزالة المحتوى ، والتفريغ'
 					}
 				},
 				'uw-generic': {
 					level4: {
-						label: 'Generic warning (for template series missing level 4)',
-						summary: 'Final warning notice'
+						label: 'تحذير عام (لسلسلة القوالب المفقودة المستوى 4)',
+						summary: 'إشعار التحذير النهائي'
 					}
 				}
 			},
 			'Behavior in articles': {
 				'uw-ai': {
 					level1: {
-						label: 'Using a large language model',
-						summary: 'General note: Using a large language model'
+						label: 'استخدام نموذج لغة كبير',
+						summary: 'ملاحظة عامة: استخدام نموذج لغة كبير'
 					},
 					level2: {
-						label: 'Using a large language model',
-						summary: 'Caution: Using a large language model'
+						label: 'استخدام نموذج لغة كبير',
+						summary: 'تحذير: استخدام نموذج لغة كبير'
 					},
 					level3: {
-						label: 'Using a large language model',
-						summary: 'Warning: Using a large language model'
+						label: 'استخدام نموذج لغة كبير',
+						summary: 'تحذير: استخدام نموذج لغة كبير'
 					},
 					level4: {
-						label: 'Using a large language model',
-						summary: 'Final warning: Using a large language model'
+						label: 'استخدام نموذج لغة كبير',
+						summary: 'تحذير نهائي: استخدام نموذج لغة كبير'
 					}
 				},
 				'uw-biog': {
 					level1: {
-						label: 'Adding unreferenced controversial information about living persons',
-						summary: 'General note: Adding unreferenced controversial information about living persons'
+						label: 'إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء',
+						summary: 'ملاحظة عامة: إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء'
 					},
 					level2: {
-						label: 'Adding unreferenced controversial information about living persons',
-						summary: 'Caution: Adding unreferenced controversial information about living persons'
+						label: 'إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء',
+						summary: 'تحذير: إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء'
 					},
 					level3: {
-						label: 'Adding unreferenced controversial/defamatory information about living persons',
-						summary: 'Warning: Adding unreferenced controversial information about living persons'
+						label: 'إضافة معلومات مثيرة للجدل / تشهيرية غير موثقة حول الأشخاص الأحياء',
+						summary: 'تحذير: إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء'
 					},
 					level4: {
-						label: 'Adding unreferenced defamatory information about living persons',
-						summary: 'Final warning: Adding unreferenced controversial information about living persons'
+						label: 'إضافة معلومات تشهيرية غير موثقة حول الأشخاص الأحياء',
+						summary: 'تحذير نهائي: إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء'
 					},
 					level4im: {
-						label: 'Adding unreferenced defamatory information about living persons',
-						summary: 'Only warning: Adding unreferenced controversial information about living persons'
+						label: 'إضافة معلومات تشهيرية غير موثقة حول الأشخاص الأحياء',
+						summary: 'التحذير الوحيد: إضافة معلومات مثيرة للجدل غير موثقة حول الأشخاص الأحياء'
 					}
 				},
 				'uw-defamatory': {
 					level1: {
-						label: 'Addition of defamatory content',
-						summary: 'General note: Addition of defamatory content'
+						label: 'إضافة محتوى تشهيري',
+						summary: 'ملاحظة عامة: إضافة محتوى تشهيري'
 					},
 					level2: {
-						label: 'Addition of defamatory content',
-						summary: 'Caution: Addition of defamatory content'
+						label: 'إضافة محتوى تشهيري',
+						summary: 'تحذير: إضافة محتوى تشهيري'
 					},
 					level3: {
-						label: 'Addition of defamatory content',
-						summary: 'Warning: Addition of defamatory content'
+						label: 'إضافة محتوى تشهيري',
+						summary: 'تحذير: إضافة محتوى تشهيري'
 					},
 					level4: {
-						label: 'Addition of defamatory content',
-						summary: 'Final warning: Addition of defamatory content'
+						label: 'إضافة محتوى تشهيري',
+						summary: 'تحذير نهائي: إضافة محتوى تشهيري'
 					},
 					level4im: {
-						label: 'Addition of defamatory content',
-						summary: 'Only warning: Addition of defamatory content'
+						label: 'إضافة محتوى تشهيري',
+						summary: 'التحذير الوحيد: إضافة محتوى تشهيري'
 					}
 				},
 				'uw-error': {
 					level1: {
-						label: 'Introducing deliberate factual errors',
-						summary: 'General note: Introducing factual errors'
+						label: 'إدخال أخطاء واقعية متعمدة',
+						summary: 'ملاحظة عامة: إدخال أخطاء واقعية'
 					},
 					level2: {
-						label: 'Introducing deliberate factual errors',
-						summary: 'Caution: Introducing factual errors'
+						label: 'إدخال أخطاء واقعية متعمدة',
+						summary: 'تحذير: إدخال أخطاء واقعية'
 					},
 					level3: {
-						label: 'Introducing deliberate factual errors',
-						summary: 'Warning: Introducing deliberate factual errors'
+						label: 'إدخال أخطاء واقعية متعمدة',
+						summary: 'تحذير: إدخال أخطاء واقعية'
 					},
 					level4: {
-						label: 'Introducing deliberate factual errors',
-						summary: 'Final warning: Introducing deliberate factual errors'
+						label: 'إدخال أخطاء واقعية متعمدة',
+						summary: 'تحذير نهائي: إدخال أخطاء واقعية'
 					}
 				},
 				'uw-fringe': {
 					level1: {
-						label: 'Introducing fringe theories',
-						summary: 'General note: Introducing fringe theories'
+						label: 'إدخال نظريات هامشية',
+						summary: 'ملاحظة عامة: إدخال نظريات هامشية'
 					},
 					level2: {
-						label: 'Introducing fringe theories',
-						summary: 'Caution: Introducing fringe theories'
+						label: 'إدخال نظريات هامشية',
+						summary: 'تحذير: إدخال نظريات هامشية'
 					},
 					level3: {
-						label: 'Introducing fringe theories',
-						summary: 'Warning: Introducing fringe theories'
+						label: 'إدخال نظريات هامشية',
+						summary: 'تحذير: إدخال نظريات هامشية'
 					}
 				},
 				'uw-genre': {
 					level1: {
-						label: 'Frequent or mass changes to genres without consensus or references',
-						summary: 'General note: Frequent or mass changes to genres without consensus or references'
+						label: 'تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مراجع',
+						summary: 'ملاحظة عامة: تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مراجع'
 					},
 					level2: {
-						label: 'Frequent or mass changes to genres without consensus or references',
-						summary: 'Caution: Frequent or mass changes to genres without consensus or references'
+						label: 'تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مراجع',
+						summary: 'تحذير: تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مراجع'
 					},
 					level3: {
-						label: 'Frequent or mass changes to genres without consensus or reference',
-						summary: 'Warning: Frequent or mass changes to genres without consensus or reference'
+						label: 'تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مرجع',
+						summary: 'تحذير: تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مرجع'
 					},
 					level4: {
-						label: 'Frequent or mass changes to genres without consensus or reference',
-						summary: 'Final warning: Frequent or mass changes to genres without consensus or reference'
+						label: 'تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مرجع',
+						summary: 'تحذير نهائي: تغييرات متكررة أو جماعية في الأنواع بدون توافق أو مرجع'
 					}
 				},
 				'uw-image': {
 					level1: {
-						label: 'Image-related vandalism in articles',
-						summary: 'General note: Image-related vandalism in articles'
+						label: 'تخريب متعلق بالصور في المقالات',
+						summary: 'ملاحظة عامة: تخريب متعلق بالصور في المقالات'
 					},
 					level2: {
-						label: 'Image-related vandalism in articles',
-						summary: 'Caution: Image-related vandalism in articles'
+						label: 'تخريب متعلق بالصور في المقالات',
+						summary: 'تحذير: تخريب متعلق بالصور في المقالات'
 					},
 					level3: {
-						label: 'Image-related vandalism in articles',
-						summary: 'Warning: Image-related vandalism in articles'
+						label: 'تخريب متعلق بالصور في المقالات',
+						summary: 'تحذير: تخريب متعلق بالصور في المقالات'
 					},
 					level4: {
-						label: 'Image-related vandalism in articles',
-						summary: 'Final warning: Image-related vandalism in articles'
+						label: 'تخريب متعلق بالصور في المقالات',
+						summary: 'تحذير نهائي: تخريب متعلق بالصور في المقالات'
 					},
 					level4im: {
-						label: 'Image-related vandalism',
-						summary: 'Only warning: Image-related vandalism'
+						label: 'تخريب متعلق بالصور',
+						summary: 'التحذير الوحيد: تخريب متعلق بالصور'
 					}
 				},
 				'uw-joke': {
 					level1: {
-						label: 'Using improper humor in articles',
-						summary: 'General note: Using improper humor in articles'
+						label: 'استخدام فكاهة غير لائقة في المقالات',
+						summary: 'ملاحظة عامة: استخدام فكاهة غير لائقة في المقالات'
 					},
 					level2: {
-						label: 'Using improper humor in articles',
-						summary: 'Caution: Using improper humor in articles'
+						label: 'استخدام فكاهة غير لائقة في المقالات',
+						summary: 'تحذير: استخدام فكاهة غير لائقة في المقالات'
 					},
 					level3: {
-						label: 'Using improper humor in articles',
-						summary: 'Warning: Using improper humor in articles'
+						label: 'استخدام فكاهة غير لائقة في المقالات',
+						summary: 'تحذير: استخدام فكاهة غير لائقة في المقالات'
 					},
 					level4: {
-						label: 'Using improper humor in articles',
-						summary: 'Final warning: Using improper humor in articles'
+						label: 'استخدام فكاهة غير لائقة في المقالات',
+						summary: 'تحذير نهائي: استخدام فكاهة غير لائقة في المقالات'
 					},
 					level4im: {
-						label: 'Using improper humor',
-						summary: 'Only warning: Using improper humor'
+						label: 'استخدام فكاهة غير لائقة',
+						summary: 'التحذير الوحيد: استخدام فكاهة غير لائقة'
 					}
 				},
 				'uw-nor': {
 					level1: {
-						label: 'Adding original research',
-						summary: 'General note: Adding original research'
+						label: 'إضافة بحث أصلي',
+						summary: 'ملاحظة عامة: إضافة بحث أصلي'
 					},
 					level2: {
-						label: 'Adding original research',
-						summary: 'Caution: Adding original research'
+						label: 'إضافة بحث أصلي',
+						summary: 'تحذير: إضافة بحث أصلي'
 					},
 					level3: {
-						label: 'Adding original research',
-						summary: 'Warning: Adding original research'
+						label: 'إضافة بحث أصلي',
+						summary: 'تحذير: إضافة بحث أصلي'
 					},
 					level4: {
-						label: 'Adding original research',
-						summary: 'Final warning: Adding original research'
+						label: 'إضافة بحث أصلي',
+						summary: 'تحذير نهائي: إضافة بحث أصلي'
 					}
 				},
 				'uw-notcensored': {
 					level1: {
-						label: 'Censorship of material',
-						summary: 'General note: Censorship of material'
+						label: 'الرقابة على المواد',
+						summary: 'ملاحظة عامة: الرقابة على المواد'
 					},
 					level2: {
-						label: 'Censorship of material',
-						summary: 'Caution: Censorship of material'
+						label: 'الرقابة على المواد',
+						summary: 'تحذير: الرقابة على المواد'
 					},
 					level3: {
-						label: 'Censorship of material',
-						summary: 'Warning: Censorship of material'
+						label: 'الرقابة على المواد',
+						summary: 'تحذير: الرقابة على المواد'
 					}
 				},
 				'uw-own': {
 					level1: {
-						label: 'Ownership of articles',
-						summary: 'General note: Ownership of articles'
+						label: 'ملكية المقالات',
+						summary: 'ملاحظة عامة: ملكية المقالات'
 					},
 					level2: {
-						label: 'Ownership of articles',
-						summary: 'Caution: Ownership of articles'
+						label: 'ملكية المقالات',
+						summary: 'تحذير: ملكية المقالات'
 					},
 					level3: {
-						label: 'Ownership of articles',
-						summary: 'Warning: Ownership of articles'
+						label: 'ملكية المقالات',
+						summary: 'تحذير: ملكية المقالات'
 					},
 					level4: {
-						label: 'Ownership of articles',
-						summary: 'Final warning: Ownership of articles'
+						label: 'ملكية المقالات',
+						summary: 'تحذير نهائي: ملكية المقالات'
 					},
 					level4im: {
-						label: 'Ownership of articles',
-						summary: 'Only warning: Ownership of articles'
+						label: 'ملكية المقالات',
+						summary: 'التحذير الوحيد: ملكية المقالات'
 					}
 				},
 				'uw-pronouns': {
 					level1: {
-						label: 'Introducing incorrect pronouns',
-						summary: 'General note: Introducing incorrect pronouns'
+						label: 'إدخال ضمائر غير صحيحة',
+						summary: 'ملاحظة عامة: إدخال ضمائر غير صحيحة'
 					},
 					level2: {
-						label: 'Introducing incorrect pronouns',
-						summary: 'Caution: Introducing incorrect pronouns'
+						label: 'إدخال ضمائر غير صحيحة',
+						summary: 'تحذير: إدخال ضمائر غير صحيحة'
 					},
 					level3: {
-						label: 'Introducing incorrect pronouns',
-						summary: 'Warning: Introducing incorrect pronouns'
+						label: 'إدخال ضمائر غير صحيحة',
+						summary: 'تحذير: إدخال ضمائر غير صحيحة'
 					}
 				},
 				'uw-subtle': {
 					level1: {
-						label: 'Subtle vandalism',
-						summary: 'General note: Possible unconstructive editing'
+						label: 'تخريب دقيق',
+						summary: 'ملاحظة عامة: تحرير غير بناء محتمل'
 					},
 					level2: {
-						label: 'Subtle vandalism',
-						summary: 'Caution: Likely unconstructive editing'
+						label: 'تخريب دقيق',
+						summary: 'تحذير: تحرير غير بناء محتمل'
 					},
 					level3: {
-						label: 'Subtle vandalism',
-						summary: 'Warning: Subtle vandalism'
+						label: 'تخريب دقيق',
+						summary: 'تحذير: تخريب دقيق'
 					},
 					level4: {
-						label: 'Subtle vandalism',
-						summary: 'Final warning: Subtle vandalism'
+						label: 'تخريب دقيق',
+						summary: 'تحذير نهائي: تخريب دقيق'
 					}
 				},
 				'uw-talkinarticle': {
 					level1: {
-						label: 'Adding commentary to an article',
-						summary: 'General note: Adding commentary to an article'
+						label: 'إضافة تعليق إلى مقالة',
+						summary: 'ملاحظة عامة: إضافة تعليق إلى مقالة'
 					},
 					level2: {
-						label: 'Adding commentary to an article',
-						summary: 'Caution: Adding commentary to an article'
+						label: 'إضافة تعليق إلى مقالة',
+						summary: 'تحذير: إضافة تعليق إلى مقالة'
 					},
 					level3: {
-						label: 'Adding commentary to an article',
-						summary: 'Warning: Adding commentary to an article'
+						label: 'إضافة تعليق إلى مقالة',
+						summary: 'تحذير: إضافة تعليق إلى مقالة'
 					}
 				},
 				'uw-tdel': {
 					level1: {
-						label: 'Removal of maintenance templates',
-						summary: 'General note: Removal of maintenance templates'
+						label: 'إزالة قوالب الصيانة',
+						summary: 'ملاحظة عامة: إزالة قوالب الصيانة'
 					},
 					level2: {
-						label: 'Removal of maintenance templates',
-						summary: 'Caution: Removal of maintenance templates'
+						label: 'إزالة قوالب الصيانة',
+						summary: 'تحذير: إزالة قوالب الصيانة'
 					},
 					level3: {
-						label: 'Removal of maintenance templates',
-						summary: 'Warning: Removal of maintenance templates'
+						label: 'إزالة قوالب الصيانة',
+						summary: 'تحذير: إزالة قوالب الصيانة'
 					},
 					level4: {
-						label: 'Removal of maintenance templates',
-						summary: 'Final warning: Removal of maintenance templates'
+						label: 'إزالة قوالب الصيانة',
+						summary: 'تحذير نهائي: إزالة قوالب الصيانة'
 					}
 				},
 				'uw-unsourced': {
 					level1: {
-						label: 'Addition of unsourced or improperly cited material',
-						summary: 'General note: Addition of unsourced or improperly cited material'
+						label: 'إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح',
+						summary: 'ملاحظة عامة: إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح'
 					},
 					level2: {
-						label: 'Addition of unsourced or improperly cited material',
-						summary: 'Caution: Addition of unsourced or improperly cited material'
+						label: 'إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح',
+						summary: 'تحذير: إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح'
 					},
 					level3: {
-						label: 'Addition of unsourced or improperly cited material',
-						summary: 'Warning: Addition of unsourced or improperly cited material'
+						label: 'إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح',
+						summary: 'تحذير: إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح'
 					},
 					level4: {
-						label: 'Addition of unsourced or improperly cited material',
-						summary: 'Final warning: Addition of unsourced or improperly cited material'
+						label: 'إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح',
+						summary: 'تحذير نهائي: إضافة مواد غير موثقة أو مستشهد بها بشكل غير صحيح'
 					}
 				}
 			},
 			'Promotions and spam': {
 				'uw-advert': {
 					level1: {
-						label: 'Using Wikipedia for advertising or promotion',
-						summary: 'General note: Using Wikipedia for advertising or promotion'
+						label: 'استخدام ويكيبيديا للإعلان أو الترويج',
+						summary: 'ملاحظة عامة: استخدام ويكيبيديا للإعلان أو الترويج'
 					},
 					level2: {
-						label: 'Using Wikipedia for advertising or promotion',
-						summary: 'Caution: Using Wikipedia for advertising or promotion'
+						label: 'استخدام ويكيبيديا للإعلان أو الترويج',
+						summary: 'تحذير: استخدام ويكيبيديا للإعلان أو الترويج'
 					},
 					level3: {
-						label: 'Using Wikipedia for advertising or promotion',
-						summary: 'Warning: Using Wikipedia for advertising or promotion'
+						label: 'استخدام ويكيبيديا للإعلان أو الترويج',
+						summary: 'تحذير: استخدام ويكيبيديا للإعلان أو الترويج'
 					},
 					level4: {
-						label: 'Using Wikipedia for advertising or promotion',
-						summary: 'Final warning: Using Wikipedia for advertising or promotion'
+						label: 'استخدام ويكيبيديا للإعلان أو الترويج',
+						summary: 'تحذير نهائي: استخدام ويكيبيديا للإعلان أو الترويج'
 					},
 					level4im: {
-						label: 'Using Wikipedia for advertising or promotion',
-						summary: 'Only warning: Using Wikipedia for advertising or promotion'
+						label: 'استخدام ويكيبيديا للإعلان أو الترويج',
+						summary: 'التحذير الوحيد: استخدام ويكيبيديا للإعلان أو الترويج'
 					}
 				},
 				'uw-npov': {
 					level1: {
-						label: 'Not adhering to neutral point of view',
-						summary: 'General note: Not adhering to neutral point of view'
+						label: 'عدم الالتزام بوجهة نظر محايدة',
+						summary: 'ملاحظة عامة: عدم الالتزام بوجهة نظر محايدة'
 					},
 					level2: {
-						label: 'Not adhering to neutral point of view',
-						summary: 'Caution: Not adhering to neutral point of view'
+						label: 'عدم الالتزام بوجهة نظر محايدة',
+						summary: 'تحذير: عدم الالتزام بوجهة نظر محايدة'
 					},
 					level3: {
-						label: 'Not adhering to neutral point of view',
-						summary: 'Warning: Not adhering to neutral point of view'
+						label: 'عدم الالتزام بوجهة نظر محايدة',
+						summary: 'تحذير: عدم الالتزام بوجهة نظر محايدة'
 					},
 					level4: {
-						label: 'Not adhering to neutral point of view',
-						summary: 'Final warning: Not adhering to neutral point of view'
+						label: 'عدم الالتزام بوجهة نظر محايدة',
+						summary: 'تحذير نهائي: عدم الالتزام بوجهة نظر محايدة'
 					}
 				},
 				'uw-paid': {
 					level1: {
-						label: 'Paid editing without disclosure under the Wikimedia Terms of Use',
-						summary: 'General note: Disclosure requirements for paid editing under the Wikimedia Terms of Use'
+						label: 'تحرير مدفوع الأجر دون إفصاح بموجب شروط استخدام ويكيميديا',
+						summary: 'ملاحظة عامة: متطلبات الإفصاح عن التحرير مدفوع الأجر بموجب شروط استخدام ويكيميديا'
 					},
 					level2: {
-						label: 'Paid editing without disclosure under the Wikimedia Terms of Use',
-						summary: 'Caution: Disclosure requirements for paid editing under the Wikimedia Terms of Use'
+						label: 'تحرير مدفوع الأجر دون إفصاح بموجب شروط استخدام ويكيميديا',
+						summary: 'تحذير: متطلبات الإفصاح عن التحرير مدفوع الأجر بموجب شروط استخدام ويكيميديا'
 					},
 					level3: {
-						label: 'Paid editing without disclosure under the Wikimedia Terms of Use',
-						summary: 'Warning: Disclosure requirements for paid editing under the Wikimedia Terms of Use'
+						label: 'تحرير مدفوع الأجر دون إفصاح بموجب شروط استخدام ويكيميديا',
+						summary: 'تحذير: متطلبات الإفصاح عن التحرير مدفوع الأجر بموجب شروط استخدام ويكيميديا'
 					},
 					level4: {
-						label: 'Paid editing without disclosure under the Wikimedia Terms of Use',
-						summary: 'Final warning: Disclosure requirements for paid editing under the Wikimedia Terms of Use'
+						label: 'تحرير مدفوع الأجر دون إفصاح بموجب شروط استخدام ويكيميديا',
+						summary: 'تحذير نهائي: متطلبات الإفصاح عن التحرير مدفوع الأجر بموجب شروط استخدام ويكيميديا'
 					}
 				},
 				'uw-spam': {
 					level1: {
-						label: 'Adding inappropriate external links',
-						summary: 'General note: Adding inappropriate external links'
+						label: 'إضافة روابط خارجية غير لائقة',
+						summary: 'ملاحظة عامة: إضافة روابط خارجية غير لائقة'
 					},
 					level2: {
-						label: 'Adding spam links',
-						summary: 'Caution: Adding spam links'
+						label: 'إضافة روابط غير مرغوب فيها',
+						summary: 'تحذير: إضافة روابط غير مرغوب فيها'
 					},
 					level3: {
-						label: 'Adding spam links',
-						summary: 'Warning: Adding spam links'
+						label: 'إضافة روابط غير مرغوب فيها',
+						summary: 'تحذير: إضافة روابط غير مرغوب فيها'
 					},
 					level4: {
-						label: 'Adding spam links',
-						summary: 'Final warning: Adding spam links'
+						label: 'إضافة روابط غير مرغوب فيها',
+						summary: 'تحذير نهائي: إضافة روابط غير مرغوب فيها'
 					},
 					level4im: {
-						label: 'Adding spam links',
-						summary: 'Only warning: Adding spam links'
+						label: 'إضافة روابط غير مرغوب فيها',
+						summary: 'التحذير الوحيد: إضافة روابط غير مرغوب فيها'
 					}
 				}
 			},
 			'Behavior towards other editors': {
 				'uw-agf': {
 					level1: {
-						label: 'Not assuming good faith',
-						summary: 'General note: Not assuming good faith'
+						label: 'عدم افتراض حسن النية',
+						summary: 'ملاحظة عامة: عدم افتراض حسن النية'
 					},
 					level2: {
-						label: 'Not assuming good faith',
-						summary: 'Caution: Not assuming good faith'
+						label: 'عدم افتراض حسن النية',
+						summary: 'تحذير: عدم افتراض حسن النية'
 					},
 					level3: {
-						label: 'Not assuming good faith',
-						summary: 'Warning: Not assuming good faith'
+						label: 'عدم افتراض حسن النية',
+						summary: 'تحذير: عدم افتراض حسن النية'
 					}
 				},
 				'uw-harass': {
 					level1: {
-						label: 'Harassment of other users',
-						summary: 'General note: Harassment of other users'
+						label: 'مضايقة المستخدمين الآخرين',
+						summary: 'ملاحظة عامة: مضايقة المستخدمين الآخرين'
 					},
 					level2: {
-						label: 'Harassment of other users',
-						summary: 'Caution: Harassment of other users'
+						label: 'مضايقة المستخدمين الآخرين',
+						summary: 'تحذير: مضايقة المستخدمين الآخرين'
 					},
 					level3: {
-						label: 'Harassment of other users',
-						summary: 'Warning: Harassment of other users'
+						label: 'مضايقة المستخدمين الآخرين',
+						summary: 'تحذير: مضايقة المستخدمين الآخرين'
 					},
 					level4: {
-						label: 'Harassment of other users',
-						summary: 'Final warning: Harassment of other users'
+						label: 'مضايقة المستخدمين الآخرين',
+						summary: 'تحذير نهائي: مضايقة المستخدمين الآخرين'
 					},
 					level4im: {
-						label: 'Harassment of other users',
-						summary: 'Only warning: Harassment of other users'
+						label: 'مضايقة المستخدمين الآخرين',
+						summary: 'التحذير الوحيد: مضايقة المستخدمين الآخرين'
 					}
 				},
 				'uw-npa': {
 					level1: {
-						label: 'Personal attack directed at a specific editor',
-						summary: 'General note: Personal attack directed at a specific editor'
+						label: 'هجوم شخصي موجه إلى محرر معين',
+						summary: 'ملاحظة عامة: هجوم شخصي موجه إلى محرر معين'
 					},
 					level2: {
-						label: 'Personal attack directed at a specific editor',
-						summary: 'Caution: Personal attack directed at a specific editor'
+						label: 'هجوم شخصي موجه إلى محرر معين',
+						summary: 'تحذير: هجوم شخصي موجه إلى محرر معين'
 					},
 					level3: {
-						label: 'Personal attack directed at a specific editor',
-						summary: 'Warning: Personal attack directed at a specific editor'
+						label: 'هجوم شخصي موجه إلى محرر معين',
+						summary: 'تحذير: هجوم شخصي موجه إلى محرر معين'
 					},
 					level4: {
-						label: 'Personal attack directed at a specific editor',
-						summary: 'Final warning: Personal attack directed at a specific editor'
+						label: 'هجوم شخصي موجه إلى محرر معين',
+						summary: 'تحذير نهائي: هجوم شخصي موجه إلى محرر معين'
 					},
 					level4im: {
-						label: 'Personal attack directed at a specific editor',
-						summary: 'Only warning: Personal attack directed at a specific editor'
+						label: 'هجوم شخصي موجه إلى محرر معين',
+						summary: 'التحذير الوحيد: هجوم شخصي موجه إلى محرر معين'
 					}
 				},
 				'uw-tempabuse': {
 					level1: {
-						label: 'Improper use of warning or blocking template',
-						summary: 'General note: Improper use of warning or blocking template'
+						label: 'استخدام غير لائق لقالب التحذير أو الحظر',
+						summary: 'ملاحظة عامة: استخدام غير لائق لقالب التحذير أو الحظر'
 					},
 					level2: {
-						label: 'Improper use of warning or blocking template',
-						summary: 'Caution: Improper use of warning or blocking template'
+						label: 'استخدام غير لائق لقالب التحذير أو الحظر',
+						summary: 'تحذير: استخدام غير لائق لقالب التحذير أو الحظر'
 					}
 				}
 			},
 			'Removal of deletion tags': {
 				'uw-afd': {
 					level1: {
-						label: 'Removing {{afd}} templates',
-						summary: 'General note: Removing {{afd}} templates'
+						label: 'إزالة قوالب {{afd}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{afd}}'
 					},
 					level2: {
-						label: 'Removing {{afd}} templates',
-						summary: 'Caution: Removing {{afd}} templates'
+						label: 'إزالة قوالب {{afd}}',
+						summary: 'تحذير: إزالة قوالب {{afd}}'
 					},
 					level3: {
-						label: 'Removing {{afd}} templates',
-						summary: 'Warning: Removing {{afd}} templates'
+						label: 'إزالة قوالب {{afd}}',
+						summary: 'تحذير: إزالة قوالب {{afd}}'
 					},
 					level4: {
-						label: 'Removing {{afd}} templates',
-						summary: 'Final warning: Removing {{afd}} templates'
+						label: 'إزالة قوالب {{afd}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{afd}}'
 					}
 				},
 				'uw-blpprod': {
 					level1: {
-						label: 'Removing {{blp prod}} templates',
-						summary: 'General note: Removing {{blp prod}} templates'
+						label: 'إزالة قوالب {{blp prod}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{blp prod}}'
 					},
 					level2: {
-						label: 'Removing {{blp prod}} templates',
-						summary: 'Caution: Removing {{blp prod}} templates'
+						label: 'إزالة قوالب {{blp prod}}',
+						summary: 'تحذير: إزالة قوالب {{blp prod}}'
 					},
 					level3: {
-						label: 'Removing {{blp prod}} templates',
-						summary: 'Warning: Removing {{blp prod}} templates'
+						label: 'إزالة قوالب {{blp prod}}',
+						summary: 'تحذير: إزالة قوالب {{blp prod}}'
 					},
 					level4: {
-						label: 'Removing {{blp prod}} templates',
-						summary: 'Final warning: Removing {{blp prod}} templates'
+						label: 'إزالة قوالب {{blp prod}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{blp prod}}'
 					}
 				},
 				'uw-idt': {
 					level1: {
-						label: 'Removing file deletion tags',
-						summary: 'General note: Removing file deletion tags'
+						label: 'إزالة علامات حذف الملفات',
+						summary: 'ملاحظة عامة: إزالة علامات حذف الملفات'
 					},
 					level2: {
-						label: 'Removing file deletion tags',
-						summary: 'Caution: Removing file deletion tags'
+						label: 'إزالة علامات حذف الملفات',
+						summary: 'تحذير: إزالة علامات حذف الملفات'
 					},
 					level3: {
-						label: 'Removing file deletion tags',
-						summary: 'Warning: Removing file deletion tags'
+						label: 'إزالة علامات حذف الملفات',
+						summary: 'تحذير: إزالة علامات حذف الملفات'
 					},
 					level4: {
-						label: 'Removing file deletion tags',
-						summary: 'Final warning: Removing file deletion tags'
+						label: 'إزالة علامات حذف الملفات',
+						summary: 'تحذير نهائي: إزالة علامات حذف الملفات'
 					}
 				},
 				'uw-tfd': {
 					level1: {
-						label: 'Removing {{tfd}} templates',
-						summary: 'General note: Removing {{tfd}} templates'
+						label: 'إزالة قوالب {{tfd}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{tfd}}'
 					},
 					level2: {
-						label: 'Removing {{tfd}} templates',
-						summary: 'Caution: Removing {{tfd}} templates'
+						label: 'إزالة قوالب {{tfd}}',
+						summary: 'تحذير: إزالة قوالب {{tfd}}'
 					},
 					level3: {
-						label: 'Removing {{tfd}} templates',
-						summary: 'Warning: Removing {{tfd}} templates'
+						label: 'إزالة قوالب {{tfd}}',
+						summary: 'تحذير: إزالة قوالب {{tfd}}'
 					},
 					level4: {
-						label: 'Removing {{tfd}} templates',
-						summary: 'Final warning: Removing {{tfd}} templates'
+						label: 'إزالة قوالب {{tfd}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{tfd}}'
 					}
 				},
 				'uw-speedy': {
 					level1: {
-						label: 'Removing speedy deletion tags',
-						summary: 'General note: Removing speedy deletion tags'
+						label: 'إزالة علامات الحذف السريع',
+						summary: 'ملاحظة عامة: إزالة علامات الحذف السريع'
 					},
 					level2: {
-						label: 'Removing speedy deletion tags',
-						summary: 'Caution: Removing speedy deletion tags'
+						label: 'إزالة علامات الحذف السريع',
+						summary: 'تحذير: إزالة علامات الحذف السريع'
 					},
 					level3: {
-						label: 'Removing speedy deletion tags',
-						summary: 'Warning: Removing speedy deletion tags'
+						label: 'إزالة علامات الحذف السريع',
+						summary: 'تحذير: إزالة علامات الحذف السريع'
 					},
 					level4: {
-						label: 'Removing speedy deletion tags',
-						summary: 'Final warning: Removing speedy deletion tags'
+						label: 'إزالة علامات الحذف السريع',
+						summary: 'تحذير نهائي: إزالة علامات الحذف السريع'
 					}
 				}
 			},
 			Other: {
 				'uw-attempt': {
 					level1: {
-						label: 'Triggering the edit filter',
-						summary: 'General note: Triggering the edit filter'
+						label: 'تشغيل مرشح التحرير',
+						summary: 'ملاحظة عامة: تشغيل مرشح التحرير'
 					},
 					level2: {
-						label: 'Triggering the edit filter',
-						summary: 'Caution: Triggering the edit filter'
+						label: 'تشغيل مرشح التحرير',
+						summary: 'تحذير: تشغيل مرشح التحرير'
 					},
 					level3: {
-						label: 'Triggering the edit filter',
-						summary: 'Warning: Triggering the edit filter'
+						label: 'تشغيل مرشح التحرير',
+						summary: 'تحذير: تشغيل مرشح التحرير'
 					},
 					level4: {
-						label: 'Triggering the edit filter',
-						summary: 'Final warning: Triggering the edit filter'
+						label: 'تشغيل مرشح التحرير',
+						summary: 'تحذير نهائي: تشغيل مرشح التحرير'
 					},
 					level4im: {
-						label: 'Triggering the edit filter',
-						summary: 'Only warning: Triggering the edit filter'
+						label: 'تشغيل مرشح التحرير',
+						summary: 'التحذير الوحيد: تشغيل مرشح التحرير'
 					}
 				},
 				'uw-chat': {
 					level1: {
-						label: 'Using talk page as forum',
-						summary: 'General note: Using talk page as forum'
+						label: 'استخدام صفحة النقاش كمنتدى',
+						summary: 'ملاحظة عامة: استخدام صفحة النقاش كمنتدى'
 					},
 					level2: {
-						label: 'Using talk page as forum',
-						summary: 'Caution: Using talk page as forum'
+						label: 'استخدام صفحة النقاش كمنتدى',
+						summary: 'تحذير: استخدام صفحة النقاش كمنتدى'
 					},
 					level3: {
-						label: 'Using talk page as forum',
-						summary: 'Warning: Using talk page as forum'
+						label: 'استخدام صفحة النقاش كمنتدى',
+						summary: 'تحذير: استخدام صفحة النقاش كمنتدى'
 					},
 					level4: {
-						label: 'Using talk page as forum',
-						summary: 'Final warning: Using talk page as forum'
+						label: 'استخدام صفحة النقاش كمنتدى',
+						summary: 'تحذير نهائي: استخدام صفحة النقاش كمنتدى'
 					}
 				},
 				'uw-create': {
 					level1: {
-						label: 'Creating inappropriate pages',
-						summary: 'General note: Creating inappropriate pages'
+						label: 'إنشاء صفحات غير لائقة',
+						summary: 'ملاحظة عامة: إنشاء صفحات غير لائقة'
 					},
 					level2: {
-						label: 'Creating inappropriate pages',
-						summary: 'Caution: Creating inappropriate pages'
+						label: 'إنشاء صفحات غير لائقة',
+						summary: 'تحذير: إنشاء صفحات غير لائقة'
 					},
 					level3: {
-						label: 'Creating inappropriate pages',
-						summary: 'Warning: Creating inappropriate pages'
+						label: 'إنشاء صفحات غير لائقة',
+						summary: 'تحذير: إنشاء صفحات غير لائقة'
 					},
 					level4: {
-						label: 'Creating inappropriate pages',
-						summary: 'Final warning: Creating inappropriate pages'
+						label: 'إنشاء صفحات غير لائقة',
+						summary: 'تحذير نهائي: إنشاء صفحات غير لائقة'
 					},
 					level4im: {
-						label: 'Creating inappropriate pages',
-						summary: 'Only warning: Creating inappropriate pages'
+						label: 'إنشاء صفحات غير لائقة',
+						summary: 'التحذير الوحيد: إنشاء صفحات غير لائقة'
 					}
 				},
 				'uw-fv': {
 					level1: {
-						label: 'Added statement had source, but it did not verify content',
-						summary: 'General note: Added statement had source, but it did not verify content'
+						label: 'كان للعبارة المضافة مصدر ، لكنها لم تتحقق من المحتوى',
+						summary: 'ملاحظة عامة: كان للعبارة المضافة مصدر ، لكنها لم تتحقق من المحتوى'
 					}
 				},
 				'uw-mislead': {
 					level1: {
-						label: 'Using misleading edit summaries',
-						summary: 'General note: Using misleading edit summaries'
+						label: 'استخدام ملخصات تعديل مضللة',
+						summary: 'ملاحظة عامة: استخدام ملخصات تعديل مضللة'
 					},
 					level2: {
-						label: 'Using misleading edit summaries',
-						summary: 'Caution: Using misleading edit summaries'
+						label: 'استخدام ملخصات تعديل مضللة',
+						summary: 'تحذير: استخدام ملخصات تعديل مضللة'
 					},
 					level3: {
-						label: 'Using misleading edit summaries',
-						summary: 'Warning: Using misleading edit summaries'
+						label: 'استخدام ملخصات تعديل مضللة',
+						summary: 'تحذير: استخدام ملخصات تعديل مضللة'
 					}
 				},
 				'uw-mos': {
 					level1: {
-						label: 'Manual of style',
-						summary: 'General note: Formatting, date, language, etc (Manual of style)'
+						label: 'دليل الأسلوب',
+						summary: 'ملاحظة عامة: التنسيق والتاريخ واللغة وما إلى ذلك (دليل الأسلوب)'
 					},
 					level2: {
-						label: 'Manual of style',
-						summary: 'Caution: Formatting, date, language, etc (Manual of style)'
+						label: 'دليل الأسلوب',
+						summary: 'تحذير: التنسيق والتاريخ واللغة وما إلى ذلك (دليل الأسلوب)'
 					},
 					level3: {
-						label: 'Manual of style',
-						summary: 'Warning: Formatting, date, language, etc (Manual of style)'
+						label: 'دليل الأسلوب',
+						summary: 'تحذير: التنسيق والتاريخ واللغة وما إلى ذلك (دليل الأسلوب)'
 					},
 					level4: {
-						label: 'Manual of style',
-						summary: 'Final warning: Formatting, date, language, etc (Manual of style)'
+						label: 'دليل الأسلوب',
+						summary: 'تحذير نهائي: التنسيق والتاريخ واللغة وما إلى ذلك (دليل الأسلوب)'
 					}
 				},
 				'uw-move': {
 					level1: {
-						label: 'Page moves against naming conventions or consensus',
-						summary: 'General note: Page moves against naming conventions or consensus'
+						label: 'عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع',
+						summary: 'ملاحظة عامة: عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع'
 					},
 					level2: {
-						label: 'Page moves against naming conventions or consensus',
-						summary: 'Caution: Page moves against naming conventions or consensus'
+						label: 'عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع',
+						summary: 'تحذير: عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع'
 					},
 					level3: {
-						label: 'Page moves against naming conventions or consensus',
-						summary: 'Warning: Page moves against naming conventions or consensus'
+						label: 'عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع',
+						summary: 'تحذير: عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع'
 					},
 					level4: {
-						label: 'Page moves against naming conventions or consensus',
-						summary: 'Final warning: Page moves against naming conventions or consensus'
+						label: 'عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع',
+						summary: 'تحذير نهائي: عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع'
 					},
 					level4im: {
-						label: 'Page moves against naming conventions or consensus',
-						summary: 'Only warning: Page moves against naming conventions or consensus'
+						label: 'عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع',
+						summary: 'التحذير الوحيد: عمليات نقل الصفحة تتعارض مع اصطلاحات التسمية أو الإجماع'
 					}
 				},
 				'uw-redirect': {
 					level1: {
-						label: 'Creating inappropriate redirects',
-						summary: 'General note: Creating inappropriate redirects'
+						label: 'إنشاء عمليات إعادة توجيه غير لائقة',
+						summary: 'ملاحظة عامة: إنشاء عمليات إعادة توجيه غير لائقة'
 					},
 					level2: {
-						label: 'Creating inappropriate redirects',
-						summary: 'Caution: Creating inappropriate redirects'
+						label: 'إنشاء عمليات إعادة توجيه غير لائقة',
+						summary: 'تحذير: إنشاء عمليات إعادة توجيه غير لائقة'
 					},
 					level3: {
-						label: 'Creating inappropriate redirects',
-						summary: 'Warning: Creating inappropriate redirects'
+						label: 'إنشاء عمليات إعادة توجيه غير لائقة',
+						summary: 'تحذير: إنشاء عمليات إعادة توجيه غير لائقة'
 					},
 					level4: {
-						label: 'Creating inappropriate redirects',
-						summary: 'Final warning: Creating inappropriate redirects'
+						label: 'إنشاء عمليات إعادة توجيه غير لائقة',
+						summary: 'تحذير نهائي: إنشاء عمليات إعادة توجيه غير لائقة'
 					},
 					level4im: {
-						label: 'Creating inappropriate redirects',
-						summary: 'Only warning: Creating inappropriate redirects'
+						label: 'إنشاء عمليات إعادة توجيه غير لائقة',
+						summary: 'التحذير الوحيد: إنشاء عمليات إعادة توجيه غير لائقة'
 					}
 				},
 				'uw-tpv': {
 					level1: {
-						label: "Refactoring others' talk page comments",
-						summary: "General note: Refactoring others' talk page comments"
+						label: "إعادة هيكلة تعليقات صفحة نقاش الآخرين",
+						summary: "ملاحظة عامة: إعادة هيكلة تعليقات صفحة نقاش الآخرين"
 					},
 					level2: {
-						label: "Refactoring others' talk page comments",
-						summary: "Caution: Refactoring others' talk page comments"
+						label: "إعادة هيكلة تعليقات صفحة نقاش الآخرين",
+						summary: "تحذير: إعادة هيكلة تعليقات صفحة نقاش الآخرين"
 					},
 					level3: {
-						label: "Refactoring others' talk page comments",
-						summary: "Warning: Refactoring others' talk page comments"
+						label: "إعادة هيكلة تعليقات صفحة نقاش الآخرين",
+						summary: "تحذير: إعادة هيكلة تعليقات صفحة نقاش الآخرين"
 					},
 					level4: {
-						label: "Refactoring others' talk page comments",
-						summary: "Final warning: Refactoring others' talk page comments"
+						label: "إعادة هيكلة تعليقات صفحة نقاش الآخرين",
+						summary: "تحذير نهائي: إعادة هيكلة تعليقات صفحة نقاش الآخرين"
 					},
 					level4im: {
-						label: "Refactoring others' talk page comments",
-						summary: "Only warning: Refactoring others' talk page comments"
+						label: "إعادة هيكلة تعليقات صفحة نقاش الآخرين",
+						summary: "التحذير الوحيد: إعادة هيكلة تعليقات صفحة نقاش الآخرين"
 					}
 				},
 				'uw-upload': {
 					level1: {
-						label: 'Uploading unencyclopedic images',
-						summary: 'General note: Uploading unencyclopedic images'
+						label: 'تحميل صور غير موسوعية',
+						summary: 'ملاحظة عامة: تحميل صور غير موسوعية'
 					},
 					level2: {
-						label: 'Uploading unencyclopedic images',
-						summary: 'Caution: Uploading unencyclopedic images'
+						label: 'تحميل صور غير موسوعية',
+						summary: 'تحذير: تحميل صور غير موسوعية'
 					},
 					level3: {
-						label: 'Uploading unencyclopedic images',
-						summary: 'Warning: Uploading unencyclopedic images'
+						label: 'تحميل صور غير موسوعية',
+						summary: 'تحذير: تحميل صور غير موسوعية'
 					},
 					level4: {
-						label: 'Uploading unencyclopedic images',
-						summary: 'Final warning: Uploading unencyclopedic images'
+						label: 'تحميل صور غير موسوعية',
+						summary: 'تحذير نهائي: تحميل صور غير موسوعية'
 					},
 					level4im: {
-						label: 'Uploading unencyclopedic images',
-						summary: 'Only warning: Uploading unencyclopedic images'
+						label: 'تحميل صور غير موسوعية',
+						summary: 'التحذير الوحيد: تحميل صور غير موسوعية'
 					}
 				}
 			}
@@ -1019,337 +1018,337 @@
 
 		singlenotice: {
 			'uw-agf-sock': {
-				label: 'Use of multiple accounts (assuming good faith)',
-				summary: 'Notice: Using multiple accounts'
+				label: 'استخدام حسابات متعددة (بافتراض حسن النية)',
+				summary: 'إشعار: استخدام حسابات متعددة'
 			},
 			'uw-aiv': {
-				label: 'Bad AIV report',
-				summary: 'Notice: Bad AIV report'
+				label: 'تقرير AIV سيئ',
+				summary: 'إشعار: تقرير AIV سيئ'
 			},
 			'uw-articletodraft': {
-				label: 'Article moved to draftspace',
-				summary: 'Notice: Article moved to draftspace',
+				label: 'تم نقل المقالة إلى مساحة المسودة',
+				summary: 'إشعار: تم نقل المقالة إلى مساحة المسودة',
 				hideReason: true
 			},
 			'uw-autobiography': {
-				label: 'Creating autobiographies',
-				summary: 'Notice: Creating autobiographies'
+				label: 'إنشاء سير ذاتية',
+				summary: 'إشعار: إنشاء سير ذاتية'
 			},
 			'uw-badcat': {
-				label: 'Adding incorrect categories',
-				summary: 'Notice: Adding incorrect categories'
+				label: 'إضافة فئات غير صحيحة',
+				summary: 'إشعار: إضافة فئات غير صحيحة'
 			},
 			'uw-badlistentry': {
-				label: 'Adding inappropriate entries to lists',
-				summary: 'Notice: Adding inappropriate entries to lists'
+				label: 'إضافة إدخالات غير مناسبة إلى القوائم',
+				summary: 'إشعار: إضافة إدخالات غير مناسبة إلى القوائم'
 			},
 			'uw-bareurl': {
-				label: 'Adding a bare URL',
-				summary: 'Notice: Adding a bare URL'
+				label: 'إضافة عنوان URL مجرد',
+				summary: 'إشعار: إضافة عنوان URL مجرد'
 			},
 			'uw-bite': {
-				label: '"Biting" newcomers',
-				summary: 'Notice: "Biting" newcomers',
+				label: 'عض القادمين الجدد',
+				summary: 'إشعار: عض القادمين الجدد',
 				suppressArticleInSummary: true // non-standard (user name, not article), and not necessary
 			},
 			'uw-blar': {
-				label: 'Article blanked and redirected',
-				summary: 'Notice: Article blanked and redirected',
+				label: 'تم تفريغ المقالة وإعادة توجيهها',
+				summary: 'إشعار: تم تفريغ المقالة وإعادة توجيهها',
 				hideReason: true
 			},
 			'uw-circular': {
-				label: 'Using circular sources',
-				summary: 'Notice: Using circular sources'
+				label: 'استخدام مصادر دائرية',
+				summary: 'إشعار: استخدام مصادر دائرية'
 			},
 			'uw-coi': {
-				label: 'Conflict of interest',
-				summary: 'Notice: Conflict of interest',
-				heading: 'Managing a conflict of interest'
+				label: 'تضارب المصالح',
+				summary: 'إشعار: تضارب المصالح',
+				heading: 'إدارة تضارب المصالح'
 			},
 			'uw-controversial': {
-				label: 'Introducing controversial material',
-				summary: 'Notice: Introducing controversial material'
+				label: 'إدخال مواد مثيرة للجدل',
+				summary: 'إشعار: إدخال مواد مثيرة للجدل'
 			},
 			'uw-copying': {
-				label: 'Copying text to another page',
-				summary: 'Notice: Copying text to another page'
+				label: 'نسخ نص إلى صفحة أخرى',
+				summary: 'إشعار: نسخ نص إلى صفحة أخرى'
 			},
 			'uw-crystal': {
-				label: 'Adding speculative or unconfirmed information',
-				summary: 'Notice: Adding speculative or unconfirmed information'
+				label: 'إضافة معلومات تخمينية أو غير مؤكدة',
+				summary: 'إشعار: إضافة معلومات تخمينية أو غير مؤكدة'
 			},
 			'uw-c&pmove': {
-				label: 'Cut and paste moves',
-				summary: 'Notice: Cut and paste moves'
+				label: 'نقل القص واللصق',
+				summary: 'إشعار: نقل القص واللصق'
 			},
 			'uw-dab': {
-				label: 'Incorrect edit to a disambiguation page',
-				summary: 'Notice: Incorrect edit to a disambiguation page'
+				label: 'تعديل غير صحيح لصفحة توضيح',
+				summary: 'إشعار: تعديل غير صحيح لصفحة توضيح'
 			},
 			'uw-date': {
-				label: 'Unnecessarily changing date formats',
-				summary: 'Notice: Unnecessarily changing date formats'
+				label: 'تغيير تنسيقات التاريخ دون داع',
+				summary: 'إشعار: تغيير تنسيقات التاريخ دون داع'
 			},
 			'uw-deadlink': {
-				label: 'Removing proper sources containing dead links',
-				summary: 'Notice: Removing proper sources containing dead links'
+				label: 'إزالة المصادر المناسبة التي تحتوي على روابط معطلة',
+				summary: 'إشعار: إزالة المصادر المناسبة التي تحتوي على روابط معطلة'
 			},
 			'uw-displaytitle': {
-				label: 'Incorrect use of DISPLAYTITLE',
-				summary: 'Notice: Incorrect use of DISPLAYTITLE'
+				label: 'استخدام غير صحيح لـ DISPLAYTITLE',
+				summary: 'إشعار: استخدام غير صحيح لـ DISPLAYTITLE'
 			},
 			'uw-draftfirst': {
-				label: 'User should draft in userspace without the risk of speedy deletion',
-				summary: 'Notice: Consider drafting your article in [[Help:Userspace draft|userspace]]'
+				label: 'يجب على المستخدم الصياغة في مساحة المستخدم دون التعرض لخطر الحذف السريع',
+				summary: 'إشعار: ضع في اعتبارك صياغة مقالتك في [[Help:Userspace draft|مساحة المستخدم]]'
 			},
 			'uw-editsummary': {
-				label: 'New user not using edit summary',
-				summary: 'Notice: Not using edit summary'
+				label: 'مستخدم جديد لا يستخدم ملخص التعديل',
+				summary: 'إشعار: عدم استخدام ملخص التعديل'
 			},
 			'uw-editsummary2': {
-				label: 'Experienced user not using edit summary',
-				summary: 'Notice: Not using edit summary',
+				label: 'مستخدم متمرس لا يستخدم ملخص التعديل',
+				summary: 'إشعار: عدم استخدام ملخص التعديل',
 				hideLinkedPage: true,
 				hideReason: true
 			},
 			'uw-elinbody': {
-				label: 'Adding external links to the body of an article',
-				summary: 'Notice: Keep external links to External links sections at the bottom of an article'
+				label: 'إضافة روابط خارجية إلى نص المقالة',
+				summary: 'إشعار: احتفظ بالروابط الخارجية في أقسام الروابط الخارجية في أسفل المقالة'
 			},
 			'uw-english': {
-				label: 'Not communicating in English',
-				summary: 'Notice: Not communicating in English'
+				label: 'عدم التواصل باللغة الإنجليزية',
+				summary: 'إشعار: عدم التواصل باللغة الإنجليزية'
 			},
 			'uw-hasty': {
-				label: 'Hasty addition of speedy deletion tags',
-				summary: 'Notice: Allow creators time to improve their articles before tagging them for deletion'
+				label: 'إضافة متسرعة لعلامات الحذف السريع',
+				summary: 'إشعار: امنح المبدعين وقتًا لتحسين مقالاتهم قبل وضع علامة عليها للحذف'
 			},
 			'uw-islamhon': {
-				label: 'Use of Islamic honorifics',
-				summary: 'Notice: Use of Islamic honorifics'
+				label: 'استخدام التكريمات الإسلامية',
+				summary: 'إشعار: استخدام التكريمات الإسلامية'
 			},
 			'uw-italicize': {
-				label: 'Italicize books, films, albums, magazines, TV series, etc within articles',
-				summary: 'Notice: Italicize books, films, albums, magazines, TV series, etc within articles'
+				label: 'كتابة الكتب والأفلام والألبومات والمجلات والمسلسلات التلفزيونية وما إلى ذلك بخط مائل داخل المقالات',
+				summary: 'إشعار: كتابة الكتب والأفلام والألبومات والمجلات والمسلسلات التلفزيونية وما إلى ذلك بخط مائل داخل المقالات'
 			},
 			'uw-lang': {
-				label: 'Unnecessarily changing between British and American English',
-				summary: 'Notice: Unnecessarily changing between British and American English',
-				heading: 'National varieties of English'
+				label: 'تغيير غير ضروري بين الإنجليزية البريطانية والأمريكية',
+				summary: 'إشعار: تغيير غير ضروري بين الإنجليزية البريطانية والأمريكية',
+				heading: 'اللهجات الوطنية للغة الإنجليزية'
 			},
 			'uw-linking': {
-				label: 'Excessive addition of redlinks or repeated blue links',
-				summary: 'Notice: Excessive addition of redlinks or repeated blue links'
+				label: 'إضافة مفرطة للروابط الحمراء أو الروابط الزرقاء المتكررة',
+				summary: 'إشعار: إضافة مفرطة للروابط الحمراء أو الروابط الزرقاء المتكررة'
 			},
 			'uw-longsd': {
-				label: 'Insertion of long short description',
-				summary: 'Notice: Insertion of long short description'
+				label: 'إدراج وصف قصير طويل',
+				summary: 'إشعار: إدراج وصف قصير طويل'
 			},
 			'uw-minor': {
-				label: 'Incorrect use of minor edits check box',
-				summary: 'Notice: Incorrect use of minor edits check box'
+				label: 'استخدام غير صحيح لمربع اختيار التعديلات الطفيفة',
+				summary: 'إشعار: استخدام غير صحيح لمربع اختيار التعديلات الطفيفة'
 			},
 			'uw-multiple-accts': {
-				label: 'Inappropriate use of alternative accounts',
-				summary: 'Notice: Inappropriate use of alternative accounts'
+				label: 'استخدام غير لائق للحسابات البديلة',
+				summary: 'إشعار: استخدام غير لائق للحسابات البديلة'
 			},
 			'uw-notenglish': {
-				label: 'Creating non-English articles',
-				summary: 'Notice: Creating non-English articles'
+				label: 'إنشاء مقالات غير إنجليزية',
+				summary: 'إشعار: إنشاء مقالات غير إنجليزية'
 			},
 			'uw-notenglishedit': {
-				label: 'Adding non-English content to articles',
-				summary: 'Notice: Adding non-English content to articles'
+				label: 'إضافة محتوى غير إنجليزي إلى المقالات',
+				summary: 'إشعار: إضافة محتوى غير إنجليزي إلى المقالات'
 			},
 			'uw-notvote': {
-				label: 'We use consensus, not voting',
-				summary: 'Notice: We use consensus, not voting'
+				label: 'نحن نستخدم الإجماع ، وليس التصويت',
+				summary: 'إشعار: نحن نستخدم الإجماع ، وليس التصويت'
 			},
 			'uw-plagiarism': {
-				label: 'Copying from public domain sources without attribution',
-				summary: 'Notice: Copying from public domain sources without attribution'
+				label: 'النسخ من مصادر المجال العام دون إسناد',
+				summary: 'إشعار: النسخ من مصادر المجال العام دون إسناد'
 			},
 			'uw-preview': {
-				label: 'Use preview button to avoid mistakes',
-				summary: 'Notice: Use preview button to avoid mistakes'
+				label: 'استخدم زر المعاينة لتجنب الأخطاء',
+				summary: 'إشعار: استخدم زر المعاينة لتجنب الأخطاء'
 			},
 			'uw-redlink': {
-				label: 'Indiscriminate removal of redlinks',
-				summary: 'Notice: Be careful when removing redlinks'
+				label: 'الإزالة العشوائية للروابط الحمراء',
+				summary: 'إشعار: كن حذرًا عند إزالة الروابط الحمراء'
 			},
 			'uw-refspam': {
-				label: 'Adding citations to research published by a small group of researchers',
-				summary: 'Notice: Adding citations to research published by a small group of researchers',
+				label: 'إضافة استشهادات لبحث نشرته مجموعة صغيرة من الباحثين',
+				summary: 'إشعار: إضافة استشهادات لبحث نشرته مجموعة صغيرة من الباحثين',
 				hideLinkedPage: true,
 				hideReason: true
 			},
 			'uw-selfrevert': {
-				label: 'Self-reverted editing tests',
-				summary: 'Notice: Self-reverted editing tests'
+				label: 'اختبارات التحرير التي تم الرجوع عنها ذاتيًا',
+				summary: 'إشعار: اختبارات التحرير التي تم الرجوع عنها ذاتيًا'
 			},
 			'uw-socialnetwork': {
-				label: 'Wikipedia is not a social network',
-				summary: 'Notice: Wikipedia is not a social network'
+				label: 'ويكيبيديا ليست شبكة اجتماعية',
+				summary: 'إشعار: ويكيبيديا ليست شبكة اجتماعية'
 			},
 			'uw-sofixit': {
-				label: 'Be bold and fix things yourself',
-				summary: 'Notice: You can be bold and fix things yourself'
+				label: 'كن جريئًا وقم بإصلاح الأشياء بنفسك',
+				summary: 'إشعار: يمكنك أن تكون جريئًا وتقوم بإصلاح الأشياء بنفسك'
 			},
 			'uw-spoiler': {
-				label: 'Adding spoiler alerts or removing spoilers from appropriate sections',
-				summary: "Notice: Don't delete or flag potential 'spoilers' in Wikipedia articles"
+				label: 'إضافة تنبيهات المفسدين أو إزالة المفسدين من الأقسام المناسبة',
+				summary: "إشعار: لا تحذف أو تضع علامة على 'المفسدين' المحتملين في مقالات ويكيبيديا"
 			},
 			'uw-talkinarticle': {
-				label: 'Talk in article',
-				summary: 'Notice: Talk in article'
+				label: 'تحدث في المقالة',
+				summary: 'إشعار: تحدث في المقالة'
 			},
 			'uw-tilde': {
-				label: 'Not signing posts',
-				summary: 'Notice: Not signing posts'
+				label: 'عدم توقيع المشاركات',
+				summary: 'إشعار: عدم توقيع المشاركات'
 			},
 			'uw-toppost': {
-				label: 'Posting at the top of talk pages',
-				summary: 'Notice: Posting at the top of talk pages'
+				label: 'النشر في أعلى صفحات النقاش',
+				summary: 'إشعار: النشر في أعلى صفحات النقاش'
 			},
 			'uw-translation': {
-				label: 'Adding translations without proper attribution',
-				summary: 'Notice: Attribution required when translating articles'
+				label: 'إضافة ترجمات بدون إسناد مناسب',
+				summary: 'إشعار: مطلوب إسناد عند ترجمة المقالات'
 			},
 			'uw-unattribcc': {
-				label: 'Copying from compatibly-licensed sources without attribution',
-				summary: 'Notice: Copying from compatibly-licensed sources without attribution'
+				label: 'النسخ من مصادر مرخصة بشكل متوافق دون إسناد',
+				summary: 'إشعار: النسخ من مصادر مرخصة بشكل متوافق دون إسناد'
 			},
 			'uw-userspace draft finish': {
-				label: 'Stale userspace draft',
-				summary: 'Notice: Stale userspace draft'
+				label: 'مسودة مساحة مستخدم قديمة',
+				summary: 'إشعار: مسودة مساحة مستخدم قديمة'
 			},
 			'uw-usertalk': {
-				label: 'Misuse of user talk page',
-				summary: 'Notice: Misuse of user talk page',
+				label: 'إساءة استخدام صفحة نقاش المستخدم',
+				summary: 'إشعار: إساءة استخدام صفحة نقاش المستخدم',
 				hideLinkedPage: true
 			},
 			'uw-vgscope': {
-				label: 'Adding video game walkthroughs, cheats or instructions',
-				summary: 'Notice: Adding video game walkthroughs, cheats or instructions'
+				label: 'إضافة إرشادات أو غش أو تعليمات لألعاب الفيديو',
+				summary: 'إشعار: إضافة إرشادات أو غش أو تعليمات لألعاب الفيديو'
 			},
 			'uw-warn': {
-				label: 'Place user warning templates when reverting vandalism',
-				summary: 'Notice: You can use user warning templates when reverting vandalism'
+				label: 'ضع قوالب تحذير المستخدم عند الرجوع عن التخريب',
+				summary: 'إشعار: يمكنك استخدام قوالب تحذير المستخدم عند الرجوع عن التخريب'
 			},
 			'uw-wrongsummary': {
-				label: 'Using inaccurate or inappropriate edit summaries',
-				summary: 'Notice: Using inaccurate or inappropriate edit summaries'
+				label: 'استخدام ملخصات تعديل غير دقيقة أو غير مناسبة',
+				summary: 'إشعار: استخدام ملخصات تعديل غير دقيقة أو غير مناسبة'
 			}
 		},
 
 		singlewarn: {
 			'uw-3rr': {
-				label: 'Potential three-revert rule violation; see also uw-ew',
-				summary: 'Warning: Three-revert rule'
+				label: 'انتهاك محتمل لقاعدة الثلاثة استرجاعات ؛ انظر أيضًا uw-ew',
+				summary: 'تحذير: قاعدة الثلاثة استرجاعات'
 			},
 			'uw-affiliate': {
-				label: 'Affiliate marketing',
-				summary: 'Warning: Affiliate marketing'
+				label: 'التسويق بالعمولة',
+				summary: 'تحذير: التسويق بالعمولة'
 			},
 			'uw-attack': {
-				label: 'Creating attack pages',
-				summary: 'Warning: Creating attack pages',
+				label: 'إنشاء صفحات هجوم',
+				summary: 'تحذير: إنشاء صفحات هجوم',
 				suppressArticleInSummary: true
 			},
 			'uw-botun': {
-				label: 'Bot username',
-				summary: 'Warning: Bot username'
+				label: 'اسم مستخدم الروبوت',
+				summary: 'تحذير: اسم مستخدم الروبوت'
 			},
 			'uw-canvass': {
-				label: 'Canvassing',
-				summary: 'Warning: Canvassing'
+				label: 'التجنيد',
+				summary: 'تحذير: التجنيد'
 			},
 			'uw-copyright': {
-				label: 'Copyright violation',
-				summary: 'Warning: Copyright violation'
+				label: 'انتهاك حقوق النشر',
+				summary: 'تحذير: انتهاك حقوق النشر'
 			},
 			'uw-copyright-link': {
-				label: 'Linking to copyrighted works violation',
-				summary: 'Warning: Linking to copyrighted works violation'
+				label: 'ربط انتهاك الأعمال المحمية بحقوق النشر',
+				summary: 'تحذير: ربط انتهاك الأعمال المحمية بحقوق النشر'
 			},
 			'uw-copyright-new': {
-				label: 'Copyright violation (with explanation for new users)',
-				summary: 'Notice: Avoiding copyright problems',
-				heading: 'Wikipedia and copyright'
+				label: 'انتهاك حقوق النشر (مع شرح للمستخدمين الجدد)',
+				summary: 'إشعار: تجنب مشاكل حقوق النشر',
+				heading: 'ويكيبيديا وحقوق النشر'
 			},
 			'uw-copyright-remove': {
-				label: 'Removing {{copyvio}} template from articles',
-				summary: 'Warning: Removing {{copyvio}} templates'
+				label: 'إزالة قالب {{copyvio}} من المقالات',
+				summary: 'تحذير: إزالة قوالب {{copyvio}}'
 			},
 			'uw-derogatory': {
-				label: 'Addition of derogatory/hateful content',
-				summary: 'Warning: Addition of derogatory content'
+				label: 'إضافة محتوى مهين / بغيض',
+				summary: 'تحذير: إضافة محتوى مهين'
 			},
 			'uw-efsummary': {
-				label: 'Edit summary triggering the edit filter',
-				summary: 'Warning: Edit summary triggering the edit filter'
+				label: 'ملخص التحرير الذي يؤدي إلى تشغيل مرشح التحرير',
+				summary: 'تحذير: ملخص التحرير الذي يؤدي إلى تشغيل مرشح التحرير'
 			},
 			'uw-ew': {
-				label: 'Edit warring (stronger wording)',
-				summary: 'Warning: Edit warring'
+				label: 'حرب التحرير (صياغة أقوى)',
+				summary: 'تحذير: حرب التحرير'
 			},
 			'uw-ewsoft': {
-				label: 'Edit warring (softer wording for newcomers)',
-				summary: 'Warning: Edit warring'
+				label: 'حرب التحرير (صياغة أكثر ليونة للقادمين الجدد)',
+				summary: 'تحذير: حرب التحرير'
 			},
 			'uw-hijacking': {
-				label: 'Hijacking articles',
-				summary: 'Warning: Hijacking articles'
+				label: 'اختطاف المقالات',
+				summary: 'تحذير: اختطاف المقالات'
 			},
 			'uw-hoax': {
-				label: 'Creating hoaxes',
-				summary: 'Warning: Creating hoaxes'
+				label: 'إنشاء خدع',
+				summary: 'تحذير: إنشاء خدع'
 			},
 			'uw-legal': {
-				label: 'Making legal threats',
-				summary: 'Warning: Making legal threats'
+				label: 'إطلاق تهديدات قانونية',
+				summary: 'تحذير: إطلاق تهديدات قانونية'
 			},
 			'uw-login': {
-				label: 'Editing while logged out',
-				summary: 'Warning: Editing while logged out'
+				label: 'التحرير أثناء تسجيل الخروج',
+				summary: 'تحذير: التحرير أثناء تسجيل الخروج'
 			},
 			'uw-multipleIPs': {
-				label: 'Usage of multiple IPs',
-				summary: 'Warning: Vandalism using multiple IPs'
+				label: 'استخدام عناوين IP متعددة',
+				summary: 'تحذير: التخريب باستخدام عناوين IP متعددة'
 			},
 			'uw-paraphrase': {
-				label: 'Close paraphrasing',
-				summary: 'Warning: Close paraphrasing'
+				label: 'إعادة الصياغة الوثيقة',
+				summary: 'تحذير: إعادة الصياغة الوثيقة'
 			},
 			'uw-pinfo': {
-				label: 'Personal info (outing)',
-				summary: 'Warning: Personal info'
+				label: 'معلومات شخصية (الكشف)',
+				summary: 'تحذير: معلومات شخصية'
 			},
 			'uw-salt': {
-				label: 'Recreating salted articles under a different title',
-				summary: 'Notice: Recreating creation-protected articles under a different title'
+				label: 'إعادة إنشاء مقالات مملحة تحت عنوان مختلف',
+				summary: 'إشعار: إعادة إنشاء مقالات محمية الإنشاء تحت عنوان مختلف'
 			},
 			'uw-socksuspect': {
-				label: 'Sockpuppetry',
-				summary: 'Warning: You are a suspected [[WP:SOCK|sockpuppet]]' // of User:...
+				label: 'استخدام دمى الجورب',
+				summary: 'تحذير: أنت [[WP:SOCK|جورب]] مشتبه به' // of User:...
 			},
 			'uw-upv': {
-				label: 'Userpage vandalism',
-				summary: 'Warning: Userpage vandalism'
+				label: 'تخريب صفحة المستخدم',
+				summary: 'تحذير: تخريب صفحة المستخدم'
 			},
 			'uw-username': {
-				label: 'Username is against policy',
-				summary: 'Warning: Your username might be against policy',
+				label: 'اسم المستخدم مخالف للسياسة',
+				summary: 'تحذير: قد يكون اسم المستخدم الخاص بك مخالفًا للسياسة',
 				suppressArticleInSummary: true // not relevant for this template
 			},
 			'uw-coi-username': {
-				label: 'Username is against policy, and conflict of interest',
-				summary: 'Warning: Username and conflict of interest',
-				heading: 'Your username'
+				label: 'اسم المستخدم مخالف للسياسة ، وتضارب مصالح',
+				summary: 'تحذير: اسم المستخدم وتضارب المصالح',
+				heading: 'اسم المستخدم الخاص بك'
 			},
 			'uw-userpage': {
-				label: 'Userpage or subpage is against policy',
-				summary: 'Warning: Userpage or subpage is against policy'
+				label: 'صفحة المستخدم أو الصفحة الفرعية مخالفة للسياسة',
+				summary: 'تحذير: صفحة المستخدم أو الصفحة الفرعية مخالفة للسياسة'
 			}
 		}
 	};
@@ -1426,7 +1425,7 @@
 			if (wrapInOptgroup && $.client.profile().platform === 'iphone') {
 				let wrapperOptgroup = new Morebits.QuickForm.Element({
 					type: 'optgroup',
-					label: 'Available templates'
+					label: 'القوالب المتاحة'
 				});
 				wrapperOptgroup = wrapperOptgroup.render();
 				container.appendChild(wrapperOptgroup);
@@ -1485,12 +1484,12 @@
 			case 'kitchensink':
 				['level1', 'level2', 'level3', 'level4', 'level4im'].forEach((lvl) => {
 					$.each(Twinkle.warn.messages.levels, (levelGroupLabel, levelGroup) => {
-						createGroup(levelGroup, 'Level ' + lvl.slice(5) + ': ' + levelGroupLabel, true, lvl);
+						createGroup(levelGroup, 'المستوى ' + lvl.slice(5) + ': ' + levelGroupLabel, true, lvl);
 					});
 				});
-				createGroup(Twinkle.warn.messages.singlenotice, 'Single-issue notices');
-				createGroup(Twinkle.warn.messages.singlewarn, 'Single-issue warnings');
-				createGroup(Twinkle.getPref('customWarningList'), 'Custom warnings');
+				createGroup(Twinkle.warn.messages.singlenotice, 'إشعارات ذات إصدار واحد');
+				createGroup(Twinkle.warn.messages.singlewarn, 'تحذيرات ذات إصدار واحد');
+				createGroup(Twinkle.getPref('customWarningList'), 'تحذيرات مخصصة');
 				break;
 			case 'level1':
 			case 'level2':
@@ -1528,7 +1527,7 @@
 				if (Twinkle.warn.talkpageObj) {
 					autolevelProc();
 				} else {
-					const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'Loading previous warnings');
+					const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
 					usertalk_page.setFollowRedirect(true, false);
 					usertalk_page.load((pageobj) => {
 						Twinkle.warn.talkpageObj = pageobj; // Update talkpageObj
@@ -1538,7 +1537,7 @@
 						// most likely because it's a cross-namespace redirect
 						// Supersedes the typical $autolevelMessage added in autolevelParseWikitext
 						const $noTalkPageNode = $('<strong>', {
-							text: 'Unable to load user talk page; it might be a cross-namespace redirect.  Autolevel detection will not work.',
+							text: 'تعذر تحميل صفحة نقاش المستخدم. قد تكون عملية إعادة توجيه عبر مساحات الأسماء. لن يعمل الكشف التلقائي عن المستوى.',
 							id: 'twinkle-warn-autolevel-message',
 							css: { color: 'red' }
 						});
@@ -1550,7 +1549,7 @@
 				}
 				break;
 			default:
-				alert('Unknown warning group in twinklewarn');
+				alert('مجموعة تحذير غير معروفة في twinklewarn');
 				break;
 		}
 
@@ -1627,11 +1626,11 @@
 		// Tags that don't take a linked article, but something else (often a username).
 		// The value of each tag is the label next to the input field
 		const notLinkedArticle = {
-			'uw-agf-sock': 'Optional username of other account (without User:) ',
-			'uw-bite': "Username of 'bitten' user (without User:) ",
-			'uw-socksuspect': 'Username of sock master, if known (without User:) ',
-			'uw-username': 'Username violates policy because... ',
-			'uw-aiv': 'Optional username that was reported (without User:) '
+			'uw-agf-sock': 'اسم المستخدم الاختياري للحساب الآخر (بدون المستخدم:) ',
+			'uw-bite': "اسم المستخدم للمستخدم 'المعضوض' (بدون المستخدم:) ",
+			'uw-socksuspect': 'اسم مستخدم مدير الجورب ، إذا كان معروفًا (بدون المستخدم:) ',
+			'uw-username': 'اسم المستخدم ينتهك السياسة بسبب... ',
+			'uw-aiv': 'اسم المستخدم الاختياري الذي تم الإبلاغ عنه (بدون المستخدم:) '
 		};
 
 		const hasLevel = ['singlenotice', 'singlewarn', 'singlecombined', 'kitchensink'].includes(selected_main_group);
@@ -1661,14 +1660,14 @@
 		$('#tw-warn-red-notice').remove();
 		let $redWarning;
 		if (selected_template === 'uw-username') {
-			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>{{uw-username}} should <b>not</b> be used for <b>blatant</b> username policy violations. " +
-				"Blatant violations should be reported directly to UAA (via Twinkle's ARV tab). " +
-				'{{uw-username}} should only be used in edge cases in order to engage in discussion with the user.</div>');
+			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
+				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في Twinkle). " +
+				'يجب استخدام {{uw-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		} else if (selected_template === 'uw-coi-username') {
-			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>{{uw-coi-username}} should <b>not</b> be used for <b>blatant</b> username policy violations. " +
-				"Blatant violations should be reported directly to UAA (via Twinkle's ARV tab). " +
-				'{{uw-coi-username}} should only be used in edge cases in order to engage in discussion with the user.</div>');
+			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-coi-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
+				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في Twinkle). " +
+				'يجب استخدام {{uw-coi-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		}
 	};
@@ -1718,7 +1717,7 @@
 		preview: function (form) {
 			if (form.main_group.value === 'autolevel') {
 				// Always get a new, updated talkpage for autolevel processing
-				const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'Loading previous warnings');
+				const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
 				usertalk_page.setFollowRedirect(true, false);
 				// Will fail silently if the talk page is a cross-ns redirect,
 				// removal of the preview box handled when loading the menu
@@ -1814,7 +1813,7 @@
 			if (isNaN(level)) { // No prior warnings found, this is the first
 				level = 1;
 			} else if (level > 4 || level < 1) { // Shouldn't happen
-				const message = 'Unable to parse previous warning level, please manually select a warning level.';
+				const message = 'تعذر تحليل مستوى التحذير السابق ، يرجى تحديد مستوى التحذير يدويًا.';
 				if (statelem) {
 					statelem.error(message);
 				} else {
@@ -1832,7 +1831,7 @@
 						if (!statelem) {
 							const $link = $('<a>', {
 								href: '#',
-								text: 'click here to open the ARV tool.',
+								text: 'انقر هنا لفتح أداة ARV.',
 								css: { fontWeight: 'bold' },
 								click: function () {
 									Morebits.wiki.actionCompleted.redirect = null;
@@ -1843,7 +1842,7 @@
 								}
 							});
 							const $statusNode = $('<div>', {
-								text: mw.config.get('wgRelevantUserName') + ' recently received a level 4 warning (' + latest.type + ') so it might be better to report them instead; ',
+								text: mw.config.get('wgRelevantUserName') + ' تلقى مؤخرًا تحذيرًا من المستوى 4 (' + latest.type + ') لذلك قد يكون من الأفضل الإبلاغ عنه بدلاً من ذلك ؛ ',
 								css: { color: 'red' }
 							});
 							$statusNode.append($link[0]);
@@ -1857,7 +1856,7 @@
 				}
 			}
 
-			$autolevelMessage.prepend($('<div>Will issue a <span style="font-weight: bold;">level ' + level + '</span> template.</div>'));
+			$autolevelMessage.prepend($('<div>سيصدر قالب <span style="font-weight: bold;">مستوى ' + level + '</span>.</div>'));
 			// Place after the stale and other-user-reverted (text-only) messages
 			$('#twinkle-warn-autolevel-message').remove(); // clean slate
 			$autolevelMessage.insertAfter($('#twinkle-warn-warning-messages'));
@@ -1889,8 +1888,8 @@
 				const templateAndLevel = Twinkle.warn.callbacks.autolevelParseWikitext(text, params, latest, now, statelem);
 
 				// Only if there's a change from the prior display/load
-				if (params.sub_group !== templateAndLevel[0] && !confirm('Will issue a {{' + templateAndLevel[0] + '}} template to the user, okay?')) {
-					statelem.error('aborted per user request');
+				if (params.sub_group !== templateAndLevel[0] && !confirm('سيصدر قالب {{' + templateAndLevel[0] + '}} للمستخدم ، هل هذا صحيح؟')) {
+					statelem.error('تم الإحباط بناءً على طلب المستخدم');
 					return;
 				}
 				// Update params now that we've selected a warning
@@ -1898,8 +1897,8 @@
 				messageData = params.messageData['level' + templateAndLevel[1]];
 			} else if (params.sub_group in history) {
 				if (new Morebits.Date(history[params.sub_group]).add(1, 'day').isAfter(now)) {
-					if (!confirm('An identical ' + params.sub_group + ' has been issued in the last 24 hours.  \nWould you still like to add this warning/notice?')) {
-						statelem.error('aborted per user request');
+					if (!confirm('تم إصدار ' + params.sub_group + ' مطابق في آخر 24 ساعة. \nهل ما زلت ترغب في إضافة هذا التحذير / الإشعار؟')) {
+						statelem.error('تم الإحباط بناءً على طلب المستخدم');
 						return;
 					}
 				}
@@ -1908,8 +1907,8 @@
 			latest.date.add(1, 'minute'); // after long debate, one minute is max
 
 			if (latest.date.isAfter(now)) {
-				if (!confirm('A ' + latest.type + ' has been issued in the last minute.  \nWould you still like to add this warning/notice?')) {
-					statelem.error('aborted per user request');
+				if (!confirm('تم إصدار ' + latest.type + ' في الدقيقة الأخيرة. \nهل ما زلت ترغب في إضافة هذا التحذير / الإشعار؟')) {
+					statelem.error('تم الإحباط بناءً على طلب المستخدم');
 					return;
 				}
 			}
@@ -1921,25 +1920,25 @@
 				let prefix;
 				switch (template.slice(-1)) {
 					case '1':
-						prefix = 'General note';
+						prefix = 'ملاحظة عامة';
 						break;
 					case '2':
-						prefix = 'Caution';
+						prefix = 'تحذير';
 						break;
 					case '3':
-						prefix = 'Warning';
+						prefix = 'تحذير';
 						break;
 					case '4':
-						prefix = 'Final warning';
+						prefix = 'تحذير نهائي';
 						break;
 					case 'm':
 						if (template.slice(-3) === '4im') {
-							prefix = 'Only warning';
+							prefix = 'التحذير الوحيد';
 							break;
 						}
 					// falls through
 					default:
-						prefix = 'Notice';
+						prefix = 'إشعار';
 						break;
 				}
 				return prefix + ': ' + Morebits.string.toUpperCaseFirstChar(messageData.label);
@@ -1970,9 +1969,9 @@
 					if (params.sub_group === 'uw-agf-sock' ||
 						params.sub_group === 'uw-socksuspect' ||
 						params.sub_group === 'uw-aiv') { // these templates require a username
-						summary += ' of [[:User:' + params.article + ']]';
+						summary += ' من [[:User:' + params.article + ']]';
 					} else {
-						summary += ' on [[:' + params.article + ']]';
+						summary += ' في [[:' + params.article + ']]';
 					}
 				}
 			}
@@ -1985,7 +1984,7 @@
 			let warningText = Twinkle.warn.callbacks.getWarningWikitext(params.sub_group, params.article,
 				params.reason, params.main_group === 'custom');
 			if (Twinkle.getPref('showSharedIPNotice') && mw.util.isIPAddress(mw.config.get('wgTitle'))) {
-				Morebits.Status.info('Info', 'Adding a shared IP notice');
+				Morebits.Status.info('معلومات', 'إضافة إشعار IP مشترك');
 				warningText += '\n{{subst:Shared IP advice}}';
 			}
 
@@ -2011,7 +2010,7 @@
 				if (messageData.heading) { // create new section
 					pageobj.setNewSectionTitle(messageData.heading);
 				} else {
-					Morebits.Status.info('Info', 'Will create a new talk page section for this month, as none was found');
+					Morebits.Status.info('معلومات', 'سيتم إنشاء قسم صفحة نقاش جديد لهذا الشهر ، حيث لم يتم العثور على أي قسم');
 					pageobj.setNewSectionTitle(now.monthHeader(0));
 				}
 				pageobj.setNewSectionText(warningText);
@@ -2028,7 +2027,7 @@
 
 		// Check that a reason was filled in if uw-username was selected
 		if (params.sub_group === 'uw-username' && !params.article) {
-			alert('You must supply a reason for the {{uw-username}} template.');
+			alert('يجب عليك تقديم سبب لقالب {{uw-username}}.');
 			return;
 		}
 
@@ -2047,9 +2046,9 @@
 		Morebits.Status.init(e.target);
 
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'Warning complete, reloading talk page in a few seconds';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل التحذير ، ويتم إعادة تحميل صفحة النقاش في بضع ثوانٍ';
 
-		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'User talk page modification');
+		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.setFollowRedirect(true, false);
 		wikipedia_page.load(Twinkle.warn.callbacks.main);

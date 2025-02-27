@@ -19,28 +19,28 @@
 			return;
 		}
 
-		let tooltip = 'Start a discussion for deleting';
+		let tooltip = 'بدء مناقشة لحذف';
 		if (mw.config.get('wgIsRedirect')) {
-			tooltip += ' or retargeting this redirect';
+			tooltip += ' أو إعادة توجيه هذا التحويل';
 		} else {
 			switch (mw.config.get('wgNamespaceNumber')) {
 				case 0:
-					tooltip += ' or moving this article';
+					tooltip += ' أو نقل هذه المقالة';
 					break;
 				case 10:
-					tooltip += ' or merging this template';
+					tooltip += ' أو دمج هذا القالب';
 					break;
 				case 828:
-					tooltip += ' or merging this module';
+					tooltip += ' أو دمج هذه الوحدة النمطية';
 					break;
 				case 6:
-					tooltip += ' this file';
+					tooltip += ' هذا الملف';
 					break;
 				case 14:
-					tooltip += ', merging or renaming this category';
+					tooltip += ' أو دمج أو إعادة تسمية هذه الفئة';
 					break;
 				default:
-					tooltip += ' this page';
+					tooltip += ' هذه الصفحة';
 					break;
 			}
 		}
@@ -52,8 +52,8 @@
 		num2order: function (num) {
 			switch (num) {
 				case 1: return '';
-				case 2: return '2nd';
-				case 3: return '3rd';
+				case 2: return 'الثاني';
+				case 3: return 'الثالث';
 				default: return num + 'th';
 			}
 		},
@@ -109,7 +109,7 @@
 	// error callback on Morebits.Status.object
 	Twinkle.xfd.printRationale = function twinklexfdPrintRationale() {
 		if (Twinkle.xfd.currentRationale) {
-			Morebits.Status.printUserText(Twinkle.xfd.currentRationale, 'Your deletion rationale is provided below, which you can copy and paste into a new XFD dialog if you wish to try again:');
+			Morebits.Status.printUserText(Twinkle.xfd.currentRationale, 'يتم توفير الأساس المنطقي للحذف الخاص بك أدناه ، والذي يمكنك نسخه ولصقه في مربع حوار XFD جديد إذا كنت ترغب في المحاولة مرة أخرى:');
 			// only need to print the rationale once
 			Twinkle.xfd.currentRationale = null;
 		}
@@ -117,68 +117,68 @@
 
 	Twinkle.xfd.callback = function twinklexfdCallback() {
 		const Window = new Morebits.SimpleWindow(700, 400);
-		Window.setTitle('Start a deletion discussion (XfD)');
+		Window.setTitle('بدء مناقشة حول الحذف (XfD)');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('About deletion discussions', 'WP:XFD');
-		Window.addFooterLink('XfD prefs', 'WP:TW/PREF#xfd');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#xfd');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('حول مناقشات الحذف', 'WP:XFD');
+		Window.addFooterLink('تفضيلات XfD', 'WP:TW/PREF#xfd');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#xfd');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.xfd.callback.evaluate);
 		const categories = form.append({
 			type: 'select',
 			name: 'venue',
-			label: 'Deletion discussion venue:',
-			tooltip: 'When activated, a default choice is made, based on what namespace you are in. This default should be the most appropriate.',
+			label: 'مكان مناقشة الحذف:',
+			tooltip: 'عند التنشيط ، يتم تحديد خيار افتراضي ، بناءً على مساحة الاسم التي تتواجد فيها. يجب أن يكون هذا الافتراضي هو الأنسب.',
 			event: Twinkle.xfd.callback.change_category
 		});
 		const namespace = mw.config.get('wgNamespaceNumber');
 
 		categories.append({
 			type: 'option',
-			label: 'AfD (Articles for deletion)',
+			label: 'AfD (مقالات للحذف)',
 			selected: namespace === 0, // Main namespace
 			value: 'afd'
 		});
 		categories.append({
 			type: 'option',
-			label: 'TfD (Templates for discussion)',
+			label: 'TfD (قوالب للمناقشة)',
 			selected: [10, 828].includes(namespace), // Template and module namespaces
 			value: 'tfd'
 		});
 		categories.append({
 			type: 'option',
-			label: 'FfD (Files for discussion)',
+			label: 'FfD (ملفات للمناقشة)',
 			selected: namespace === 6, // File namespace
 			value: 'ffd'
 		});
 		categories.append({
 			type: 'option',
-			label: 'CfD (Categories for discussion)',
+			label: 'CfD (فئات للمناقشة)',
 			selected: namespace === 14 || (namespace === 10 && /-stub$/.test(Morebits.pageNameNorm)), // Category namespace and stub templates
 			value: 'cfd'
 		});
 		categories.append({
 			type: 'option',
-			label: 'CfD/S (Categories for speedy renaming)',
+			label: 'CfD/S (فئات لإعادة التسمية السريعة)',
 			value: 'cfds'
 		});
 		categories.append({
 			type: 'option',
-			label: 'MfD (Miscellany for deletion)',
+			label: 'MfD (متفرقات للحذف)',
 			selected: ![0, 6, 10, 14, 828].includes(namespace) || Morebits.pageNameNorm.indexOf('Template:User ', 0) === 0,
 			// Other namespaces, and userboxes in template namespace
 			value: 'mfd'
 		});
 		categories.append({
 			type: 'option',
-			label: 'RfD (Redirects for discussion)',
+			label: 'RfD (عمليات إعادة التوجيه للمناقشة)',
 			selected: mw.config.get('wgIsRedirect'),
 			value: 'rfd'
 		});
 		categories.append({
 			type: 'option',
-			label: 'RM (Requested moves)',
+			label: 'RM (التحركات المطلوبة)',
 			selected: false,
 			value: 'rm'
 		});
@@ -193,17 +193,17 @@
 			type: 'checkbox',
 			list: [
 				{
-					label: 'Notify page creator if possible',
+					label: 'إعلام مُنشئ الصفحة إذا أمكن',
 					value: 'notify',
 					name: 'notifycreator',
-					tooltip: "A notification template will be placed on the creator's talk page if this is true.",
+					tooltip: "سيتم وضع قالب إشعار في صفحة نقاش المنشئ إذا كان هذا صحيحًا.",
 					checked: true
 				}
 			]
 		});
 		form.append({
 			type: 'field',
-			label: 'Work area',
+			label: 'منطقة العمل',
 			name: 'work_area'
 		});
 
@@ -212,7 +212,7 @@
 			Twinkle.xfd.callbacks.preview(result); // |result| is defined below
 		});
 		previewlink.style.cursor = 'pointer';
-		previewlink.textContent = 'Preview';
+		previewlink.textContent = 'معاينة';
 		form.append({ type: 'div', id: 'xfdpreview', label: [previewlink] });
 		form.append({ type: 'div', id: 'twinklexfd-previewbox', style: 'display: none' });
 
@@ -236,38 +236,38 @@
 		switch (venue) {
 			case 'afd':
 				if (namespace !== 0) {
-					text = 'AfD is generally appropriate only for articles.';
+					text = 'AfD مناسب بشكل عام للمقالات فقط.';
 				} else if (mw.config.get('wgIsRedirect')) {
-					text = 'Please use RfD for redirects.';
+					text = 'الرجاء استخدام RfD لعمليات إعادة التوجيه.';
 				}
 				break;
 			case 'tfd':
 				if (namespace === 10 && /-stub$/.test(Morebits.pageNameNorm)) {
-					text = 'Use CfD for stub templates.';
-				} else if (Morebits.pageNameNorm.indexOf('Template:User ') === 0) {
-					text = 'Please use MfD for userboxes';
+					text = 'استخدم CfD لقوالب بذرة.';
+				} else if (Morebits.pageNameNorm.indexOf('Template:User ', 0) === 0) {
+					text = 'الرجاء استخدام MfD لصناديق المستخدم';
 				}
 				break;
 			case 'cfd':
 				if (![10, 14].includes(namespace)) {
-					text = 'CfD is only for categories and stub templates.';
+					text = 'CfD مخصص فقط للفئات وقوالب البذرة.';
 				}
 				break;
 			case 'cfds':
 				if (namespace !== 14) {
-					text = 'CfDS is only for categories.';
+					text = 'CfDS مخصص فقط للفئات.';
 				}
 				break;
 			case 'ffd':
 				if (namespace !== 6) {
-					text = 'FFD is selected but this page doesn\'t look like a file!';
+					text = 'تم تحديد FFD ولكن هذه الصفحة لا تبدو كملف!';
 				}
 				break;
 			case 'rm':
 				if (namespace === 14) { // category
-					text = 'Please use CfD or CfDS for category renames.';
+					text = 'الرجاء استخدام CfD أو CfDS لإعادة تسمية الفئة.';
 				} else if ([118, 119, 2, 3].includes(namespace)) { // draft, draft talk, user, user talk
-					text = 'RMs are not permitted in draft and userspace, unless they are uncontroversial technical requests.';
+					text = 'لا يُسمح بعمليات RM في المسودة ومساحة المستخدم ، ما لم تكن طلبات فنية غير مثيرة للجدل.';
 				}
 				break;
 
@@ -292,9 +292,9 @@
 			work_area.append({
 				type: 'textarea',
 				name: 'reason',
-				label: 'Reason:',
+				label: 'السبب:',
 				value: oldreason,
-				tooltip: 'You can use wikimarkup in your reason. Twinkle will automatically sign your post.'
+				tooltip: 'يمكنك استخدام ترميز الويكي في السبب الخاص بك. سيوقع Twinkle تلقائيًا على مشاركتك.'
 			});
 		};
 
@@ -306,7 +306,7 @@
 			case 'afd':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Articles for deletion',
+					label: 'مقالات للحذف',
 					name: 'work_area'
 				});
 
@@ -321,30 +321,30 @@
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Wrap deletion tag with &lt;noinclude&gt;',
+							label: 'لف علامة الحذف باستخدام <noinclude>',
 							value: 'noinclude',
 							name: 'noinclude',
-							tooltip: 'Will wrap the deletion tag in &lt;noinclude&gt; tags, so that it won\'t transclude. This option is not normally required.'
+							tooltip: 'سوف يلف علامة الحذف في علامات <noinclude> ، بحيث لا يتم تضمينها. هذا الخيار غير مطلوب بشكل طبيعي.'
 						}
 					]
 				});
 				work_area.append({
 					type: 'select',
 					name: 'xfdcat',
-					label: 'Choose what category this nomination belongs in:',
+					label: 'اختر الفئة التي ينتمي إليها هذا الترشيح:',
 					list: [
-						{ type: 'option', label: 'Unknown', value: '?', selected: true },
-						{ type: 'option', label: 'Media and music', value: 'M' },
-						{ type: 'option', label: 'Organisation, corporation, or product', value: 'O' },
-						{ type: 'option', label: 'Biographical', value: 'B' },
-						{ type: 'option', label: 'Society topics', value: 'S' },
-						{ type: 'option', label: 'Web or internet', value: 'W' },
-						{ type: 'option', label: 'Games or sports', value: 'G' },
-						{ type: 'option', label: 'Science and technology', value: 'T' },
-						{ type: 'option', label: 'Fiction and the arts', value: 'F' },
-						{ type: 'option', label: 'Places and transportation', value: 'P' },
-						{ type: 'option', label: 'Indiscernible or unclassifiable topic', value: 'I' },
-						{ type: 'option', label: 'Debate not yet sorted', value: 'U' }
+						{ type: 'option', label: 'غير معروف', value: '?', selected: true },
+						{ type: 'option', label: 'وسائل الإعلام والموسيقى', value: 'M' },
+						{ type: 'option', label: 'منظمة أو شركة أو منتج', value: 'O' },
+						{ type: 'option', label: 'سيرة ذاتية', value: 'B' },
+						{ type: 'option', label: 'موضوعات المجتمع', value: 'S' },
+						{ type: 'option', label: 'الويب أو الإنترنت', value: 'W' },
+						{ type: 'option', label: 'ألعاب أو رياضات', value: 'G' },
+						{ type: 'option', label: 'العلوم والتكنولوجيا', value: 'T' },
+						{ type: 'option', label: 'الخيال والفنون', value: 'F' },
+						{ type: 'option', label: 'أماكن ومواصلات', value: 'P' },
+						{ type: 'option', label: 'موضوع غير مميز أو غير قابل للتصنيف', value: 'I' },
+						{ type: 'option', label: 'نقاش لم يتم فرزه بعد', value: 'U' }
 					]
 				});
 
@@ -352,12 +352,12 @@
 					type: 'select',
 					multiple: true,
 					name: 'delsortCats',
-					label: 'Choose deletion sorting categories:',
-					tooltip: 'Select a few categories that are specifically relevant to the subject of the article. Be as precise as possible; categories like People and USA should only be used when no other categories apply.'
+					label: 'اختر فئات فرز الحذف:',
+					tooltip: 'حدد بعض الفئات ذات الصلة تحديدًا بموضوع المقالة. كن دقيقًا قدر الإمكان ؛ يجب استخدام فئات مثل الأشخاص والولايات المتحدة الأمريكية فقط في حالة عدم وجود فئات أخرى.'
 				});
 
 				// grab deletion sort categories from en-wiki
-				Morebits.wiki.getCachedJson('Wikipedia:WikiProject_Deletion_sorting/Computer-readable.json').then((delsortCategories) => {
+				Morebits.wiki.getCachedJson('User:Mr. Ibrahem/Computer-readable.json').then((delsortCategories) => {
 					const $select = $('[name="delsortCats"]');
 					$.each(delsortCategories, (groupname, list) => {
 						const $optgroup = $('<optgroup>').attr('label', groupname);
@@ -376,7 +376,7 @@
 				Twinkle.makeFindSourcesDiv('#twinkle-xfd-findsources');
 
 				$(work_area).find('[name=delsortCats]')
-					.attr('data-placeholder', 'Select delsort pages')
+					.attr('data-placeholder', 'حدد صفحات delsort')
 					.select2({
 						theme: 'default select2-morebits',
 						width: '100%',
@@ -414,14 +414,14 @@
 			case 'tfd':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Templates for discussion',
+					label: 'قوالب للمناقشة',
 					name: 'work_area'
 				});
 
 				var templateOrModule = mw.config.get('wgPageContentModel') === 'Scribunto' ? 'module' : 'template';
 				work_area.append({
 					type: 'select',
-					label: 'Choose type of action wanted:',
+					label: 'اختر نوع الإجراء المطلوب:',
 					name: 'xfdcat',
 					event: function (e) {
 						const target = e.target;
@@ -431,8 +431,8 @@
 							tfdtarget = new Morebits.QuickForm.Element({
 								name: 'tfdtarget',
 								type: 'input',
-								label: 'Other ' + templateOrModule + ' to be merged:',
-								tooltip: 'Required. Should not include the ' + Morebits.string.toUpperCaseFirstChar(templateOrModule) + ': namespace prefix.',
+								label: 'الآخر ' + templateOrModule + ' ليتم دمجه:',
+								tooltip: 'مطلوب. يجب ألا يتضمن البادئة ' + Morebits.string.toUpperCaseFirstChar(templateOrModule) + ': لمساحة الاسم.',
 								required: true
 							});
 							target.parentNode.appendChild(tfdtarget.render());
@@ -442,23 +442,23 @@
 						}
 					},
 					list: [
-						{ type: 'option', label: 'Deletion', value: 'tfd', selected: true },
-						{ type: 'option', label: 'Merge', value: 'tfm' }
+						{ type: 'option', label: 'حذف', value: 'tfd', selected: true },
+						{ type: 'option', label: 'دمج', value: 'tfm' }
 					]
 				});
 				work_area.append({
 					type: 'select',
 					name: 'templatetype',
-					label: 'Deletion tag display style:',
-					tooltip: 'Which <code>type=</code> parameter to pass to the TfD tag template.',
+					label: 'نمط عرض علامة الحذف:',
+					tooltip: 'أي معلمة <code>type=</code> لتمريرها إلى قالب علامة TfD.',
 					list: templateOrModule === 'module' ? [
-						{ type: 'option', value: 'module', label: 'Module', selected: true }
+						{ type: 'option', value: 'module', label: 'وحدة نمطية', selected: true }
 					] : [
-						{ type: 'option', value: 'standard', label: 'Standard', selected: true },
-						{ type: 'option', value: 'sidebar', label: 'Sidebar/infobox', selected: $('.infobox').length },
-						{ type: 'option', value: 'inline', label: 'Inline template', selected: $('.mw-parser-output > p .Inline-Template').length },
-						{ type: 'option', value: 'tiny', label: 'Tiny inline' },
-						{ type: 'option', value: 'disabled', label: 'Disabled' }
+						{ type: 'option', value: 'standard', label: 'قياسي', selected: true },
+						{ type: 'option', value: 'sidebar', label: 'الشريط الجانبي/صندوق المعلومات', selected: $('.infobox').length },
+						{ type: 'option', value: 'inline', label: 'قالب مضمن', selected: $('.mw-parser-output > p .Inline-Template').length },
+						{ type: 'option', value: 'tiny', label: 'مضمن صغير' },
+						{ type: 'option', value: 'disabled', label: 'معطل' }
 					]
 				});
 
@@ -466,10 +466,10 @@
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Wrap deletion tag with &lt;noinclude&gt; (for substituted templates only)',
+							label: 'لف علامة الحذف باستخدام <noinclude> (للقوالب المستبدلة فقط)',
 							value: 'noinclude',
 							name: 'noinclude',
-							tooltip: 'Will wrap the deletion tag in &lt;noinclude&gt; tags, so that it won\'t get substituted along with the template.',
+							tooltip: 'سوف يلف علامة الحذف في علامات <noinclude> ، بحيث لا يتم استبدالها مع القالب.',
 							disabled: templateOrModule === 'module',
 							checked: !!$('.box-Subst_only').length // Default to checked if page carries {{subst only}}
 						}
@@ -480,10 +480,10 @@
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Notify talk pages of affected user scripts',
+							label: 'إخطار صفحات نقاش النصوص البرمجية للمستخدم المتأثرة',
 							value: 'devpages',
 							name: 'devpages',
-							tooltip: 'A notification will be sent to Twinkle, AWB, and Ultraviolet\'s talk pages if those user scripts are marked as using this template.',
+							tooltip: 'سيتم إرسال إشعار إلى صفحات نقاش Twinkle و AWB و Ultraviolet إذا تم وضع علامة على هذه النصوص البرمجية للمستخدم على أنها تستخدم هذا القالب.',
 							checked: true
 						}
 					]
@@ -497,7 +497,7 @@
 			case 'mfd':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Miscellany for deletion',
+					label: 'متفرقات للحذف',
 					name: 'work_area'
 				});
 				if (mw.config.get('wgNamespaceNumber') !== 710) { // TimedText cannot be tagged, so asking whether to noinclude the tag is pointless
@@ -505,10 +505,10 @@
 						type: 'checkbox',
 						list: [
 							{
-								label: 'Wrap deletion tag with &lt;noinclude&gt;',
+								label: 'لف علامة الحذف باستخدام <noinclude>',
 								value: 'noinclude',
 								name: 'noinclude',
-								tooltip: 'Will wrap the deletion tag in &lt;noinclude&gt; tags, so that it won\'t transclude. Select this option for userboxes.'
+								tooltip: 'سوف يلف علامة الحذف في علامات <noinclude> ، بحيث لا يتم تضمينها. حدد هذا الخيار لصناديق المستخدم.'
 							}
 						]
 					});
@@ -518,10 +518,10 @@
 						type: 'checkbox',
 						list: [
 							{
-								label: 'Notify owner of userspace (if they are not the page creator)',
+								label: 'إخطار مالك مساحة المستخدم (إذا لم يكن هو مُنشئ الصفحة)',
 								value: 'notifyuserspace',
 								name: 'notifyuserspace',
-								tooltip: 'If the user in whose userspace this page is located is not the page creator (for example, the page is a rescued article stored as a userspace draft), notify the userspace owner as well.',
+								tooltip: 'إذا كان المستخدم الذي تقع في مساحة المستخدم الخاصة به هذه الصفحة ليس هو مُنشئ الصفحة (على سبيل المثال ، الصفحة عبارة عن مقالة تم إنقاذها ومخزنة كمسودة في مساحة المستخدم) ، فقم أيضًا بإخطار مالك مساحة المستخدم.',
 								checked: true
 							}
 						]
@@ -534,7 +534,7 @@
 			case 'ffd':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Discussion venues for files',
+					label: 'أماكن المناقشة للملفات',
 					name: 'work_area'
 				});
 				appendReasonBox();
@@ -545,13 +545,13 @@
 			case 'cfd':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Categories for discussion',
+					label: 'فئات للمناقشة',
 					name: 'work_area'
 				});
 				var isCategory = mw.config.get('wgNamespaceNumber') === 14;
 				work_area.append({
 					type: 'select',
-					label: 'Choose type of action wanted:',
+					label: 'اختر نوع الإجراء المطلوب:',
 					name: 'xfdcat',
 					event: function (e) {
 						const value = e.target.value,
@@ -564,11 +564,11 @@
 						if (isCategory) {
 							// update label
 							if (value === 'cfs') {
-								Morebits.QuickForm.setElementLabel(cfdtarget, 'Target categories: ');
+								Morebits.QuickForm.setElementLabel(cfdtarget, 'الفئات المستهدفة: ');
 							} else if (value === 'cfc') {
-								Morebits.QuickForm.setElementLabel(cfdtarget, 'Target article: ');
+								Morebits.QuickForm.setElementLabel(cfdtarget, 'المقالة المستهدفة: ');
 							} else {
-								Morebits.QuickForm.setElementLabel(cfdtarget, 'Target category: ');
+								Morebits.QuickForm.setElementLabel(cfdtarget, 'الفئة المستهدفة: ');
 							}
 							// add/remove extra input box
 							if (value === 'cfs') {
@@ -587,25 +587,25 @@
 								$(cfdtarget2).hide();
 							}
 						} else { // Update stub template label
-							Morebits.QuickForm.setElementLabel(cfdtarget, 'Target stub template: ');
+							Morebits.QuickForm.setElementLabel(cfdtarget, 'قالب البذرة المستهدف: ');
 						}
 					},
 					list: isCategory ? [
-						{ type: 'option', label: 'Deletion', value: 'cfd', selected: true },
-						{ type: 'option', label: 'Merge', value: 'cfm' },
-						{ type: 'option', label: 'Renaming', value: 'cfr' },
-						{ type: 'option', label: 'Split', value: 'cfs' },
-						{ type: 'option', label: 'Convert into article', value: 'cfc' }
+						{ type: 'option', label: 'حذف', value: 'cfd', selected: true },
+						{ type: 'option', label: 'دمج', value: 'cfm' },
+						{ type: 'option', label: 'إعادة تسمية', value: 'cfr' },
+						{ type: 'option', label: 'تقسيم', value: 'cfs' },
+						{ type: 'option', label: 'تحويل إلى مقالة', value: 'cfc' }
 					] : [
-						{ type: 'option', label: 'Stub Deletion', value: 'sfd-t', selected: true },
-						{ type: 'option', label: 'Stub Renaming', value: 'sfr-t' }
+						{ type: 'option', label: 'حذف البذرة', value: 'sfd-t', selected: true },
+						{ type: 'option', label: 'إعادة تسمية البذرة', value: 'sfr-t' }
 					]
 				});
 
 				work_area.append({
 					type: 'input',
 					name: 'cfdtarget',
-					label: 'Target category:', // default, changed above
+					label: 'الفئة المستهدفة:', // default, changed above
 					disabled: true,
 					required: true, // only when enabled
 					value: ''
@@ -618,28 +618,28 @@
 			case 'cfds':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Categories for speedy renaming',
+					label: 'فئات لإعادة التسمية السريعة',
 					name: 'work_area'
 				});
 				work_area.append({
 					type: 'select',
-					label: 'C2 sub-criterion:',
+					label: 'معيار C2 الفرعي:',
 					name: 'xfdcat',
-					tooltip: 'See WP:CFDS for full explanations.',
+					tooltip: 'راجع WP:CFDS للحصول على تفسيرات كاملة.',
 					list: [
-						{ type: 'option', label: 'C2A: Typographic and spelling fixes', value: 'C2A', selected: true },
-						{ type: 'option', label: 'C2B: Naming conventions and disambiguation', value: 'C2B' },
-						{ type: 'option', label: 'C2C: Consistency with names of similar categories', value: 'C2C' },
-						{ type: 'option', label: 'C2D: Rename to match article name', value: 'C2D' },
-						{ type: 'option', label: 'C2E: Author request', value: 'C2E' },
-						{ type: 'option', label: 'C2F: One eponymous article', value: 'C2F' }
+						{ type: 'option', label: 'C2A: إصلاحات مطبعية وإملائية', value: 'C2A', selected: true },
+						{ type: 'option', label: 'C2B: اتفاقيات التسمية وإزالة الغموض', value: 'C2B' },
+						{ type: 'option', label: 'C2C: الاتساق مع أسماء الفئات المماثلة', value: 'C2C' },
+						{ type: 'option', label: 'C2D: إعادة تسمية لمطابقة اسم المقالة', value: 'C2D' },
+						{ type: 'option', label: 'C2E: طلب المؤلف', value: 'C2E' },
+						{ type: 'option', label: 'C2F: مقالة واحدة مسماة', value: 'C2F' }
 					]
 				});
 
 				work_area.append({
 					type: 'input',
 					name: 'cfdstarget',
-					label: 'New name:',
+					label: 'اسم جديد:',
 					size: 70,
 					value: '',
 					required: true
@@ -652,7 +652,7 @@
 			case 'rfd':
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Redirects for discussion',
+					label: 'عمليات إعادة التوجيه للمناقشة',
 					name: 'work_area'
 				});
 
@@ -660,10 +660,10 @@
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Notify target page if possible',
+							label: 'إخطار الصفحة المستهدفة إذا أمكن',
 							value: 'relatedpage',
 							name: 'relatedpage',
-							tooltip: "A notification template will be placed on the talk page of this redirect's target if this is true.",
+							tooltip: "سيتم وضع قالب إشعار في صفحة نقاش هدف إعادة التوجيه هذه إذا كان هذا صحيحًا.",
 							checked: true
 						}
 					]
@@ -676,17 +676,17 @@
 			case 'rm': {
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Requested moves',
+					label: 'التحركات المطلوبة',
 					name: 'work_area'
 				});
 				work_area.append({
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Uncontroversial technical request',
+							label: 'طلب فني غير مثير للجدل',
 							value: 'rmtr',
 							name: 'rmtr',
-							tooltip: 'Use this option when you are unable to perform this uncontroversial move yourself because of a technical reason (e.g. a page already exists at the new title, or the page is protected)',
+							tooltip: 'استخدم هذا الخيار عندما تكون غير قادر على إجراء هذه الخطوة الفنية غير المثيرة للجدل بنفسك بسبب سبب فني (على سبيل المثال ، توجد صفحة بالفعل في العنوان الجديد ، أو الصفحة محمية)',
 							checked: false,
 							event: function () {
 								$('input[name="newname"]', form).prop('required', this.checked);
@@ -696,10 +696,10 @@
 								type: 'checkbox',
 								list: [
 									{
-										label: 'Opt out of discussion if the request is contested',
+										label: 'الانسحاب من المناقشة إذا كان الطلب متنازع عليه',
 										value: 'rmtr-discuss',
 										name: 'rmtr-discuss',
-										tooltip: 'Use this option if you prefer to withdraw the request if contested, rather than discuss it. This suppresses the "discuss" link, which may be used to convert your request to a discussion on the talk page.',
+										tooltip: 'استخدم هذا الخيار إذا كنت تفضل سحب الطلب إذا تم الاعتراض عليه ، بدلاً من مناقشته. يؤدي هذا إلى قمع ارتباط "المناقشة" ، والذي يمكن استخدامه لتحويل طلبك إلى مناقشة في صفحة النقاش.',
 										checked: false
 									}
 								]
@@ -711,14 +711,14 @@
 					type: 'dyninput',
 					inputs: [
 						{
-							label: 'From:',
+							label: 'من:',
 							name: 'currentname',
 							required: true
 						},
 						{
-							label: 'To:',
+							label: 'إلى:',
 							name: 'newname',
-							tooltip: 'Required for technical requests. Otherwise, if unsure of the appropriate title, you may leave it blank.'
+							tooltip: 'مطلوب للطلبات الفنية. بخلاف ذلك ، إذا لم تكن متأكدًا من العنوان المناسب ، فيمكنك تركه فارغًا.'
 						}
 					],
 					min: 1
@@ -736,7 +736,7 @@
 			default:
 				work_area = new Morebits.QuickForm.Element({
 					type: 'field',
-					label: 'Nothing for anything',
+					label: 'لا شيء لأي شيء',
 					name: 'work_area'
 				});
 				work_area = work_area.render();
@@ -754,16 +754,16 @@
 		autoEditRequest: function (pageobj, params) {
 			const talkName = new mw.Title(pageobj.getPageName()).getTalkPage().toText();
 			if (talkName === pageobj.getPageName()) {
-				pageobj.getStatusElement().error('Page protected and nowhere to add an edit request, aborting');
+				pageobj.getStatusElement().error('الصفحة محمية ولا يوجد مكان لإضافة طلب تحرير ، يتم الإحباط');
 			} else {
-				pageobj.getStatusElement().warn('Page protected, requesting edit');
+				pageobj.getStatusElement().warn('الصفحة محمية، ويتم طلب التحرير');
 
 				const editRequest = '{{subst:Xfd edit protected|page=' + pageobj.getPageName() +
 					'|discussion=' + params.discussionpage + (params.venue === 'rfd' ? '|rfd=yes' : '') +
 					'|tag=<nowiki>' + params.tagText + '\u003C/nowiki>}}'; // U+003C: <
 
-				const talk_page = new Morebits.wiki.Page(talkName, 'Automatically posting edit request on talk page');
-				talk_page.setNewSectionTitle('Edit request to complete ' + utils.toTLACase(params.venue) + ' nomination');
+				const talk_page = new Morebits.wiki.Page(talkName, 'نشر طلب تحرير تلقائيًا في صفحة النقاش');
+				talk_page.setNewSectionTitle('طلب تحرير لإكمال ترشيح ' + utils.toTLACase(params.venue));
 				talk_page.setNewSectionText(editRequest);
 				talk_page.setCreateOption('recreate');
 				talk_page.setWatchlist(Twinkle.getPref('xfdWatchPage'));
@@ -771,13 +771,13 @@
 				talk_page.setChangeTags(Twinkle.changeTags);
 				talk_page.setCallbackParameters(params);
 				talk_page.newSection(null, () => {
-					talk_page.getStatusElement().warn('Unable to add edit request, the talk page may be protected');
+					talk_page.getStatusElement().warn('غير قادر على إضافة طلب تحرير ، قد تكون صفحة النقاش محمية');
 				});
 			}
 		},
 		getDiscussionWikitext: function (venue, params) {
 			if (venue === 'cfds') { // CfD/S takes a completely different style
-				return '* [[:' + Morebits.pageNameNorm + ']] to [[:' + params.cfdstarget + ']]\u00A0\u2013 ' +
+				return '* [[:' + Morebits.pageNameNorm + ']] إلى [[:' + params.cfdstarget + ']]\u00A0\u2013 ' +
 					params.xfdcat + (params.reason ? ': ' + Morebits.string.formatReasonText(params.reason) : '.') + ' ~~~~';
 				// U+00A0 NO-BREAK SPACE; U+2013 EN RULE
 			}
@@ -906,7 +906,7 @@
 			if (targetNS === 3) {
 				// Disallow warning yourself
 				if (usernameOrTarget === mw.config.get('wgUserName')) {
-					Morebits.Status.warn('You (' + usernameOrTarget + ') created this page; skipping user notification');
+					Morebits.Status.warn('أنت (' + usernameOrTarget + ') من أنشأ هذه الصفحة ؛ تخطي إشعار المستخدم');
 
 					// if we thought we would notify someone but didn't,
 					// then jump to logging.
@@ -915,7 +915,7 @@
 				}
 				// Default is notifying the initial contributor, but MfD also
 				// notifies userspace page owner
-				actionName = actionName || 'Notifying initial contributor (' + usernameOrTarget + ')';
+				actionName = actionName || 'إعلام المساهم الأولي (' + usernameOrTarget + ')';
 			}
 
 			let notifytext = '\n{{subst:' + params.venue + ' notice';
@@ -923,7 +923,7 @@
 			switch (params.venue) {
 				case 'afd':
 				case 'mfd':
-					notifytext += params.numbering !== '' ? '|order=&#32;' + params.numbering : '';
+					notifytext += params.numbering !== '' ? '|order= ' + params.numbering : '';
 					break;
 				case 'tfd':
 					if (params.xfdcat === 'tfm') {
@@ -940,15 +940,15 @@
 
 			// Link to the venue; object used here rather than repetitive items in switch
 			const venueNames = {
-				afd: 'Articles for deletion',
-				tfd: 'Templates for discussion',
-				mfd: 'Miscellany for deletion',
-				cfd: 'Categories for discussion',
-				ffd: 'Files for discussion',
-				rfd: 'Redirects for discussion'
+				afd: 'مقالات للحذف',
+				tfd: 'قوالب للمناقشة',
+				mfd: 'متفرقات للحذف',
+				cfd: 'تصنيفات للمناقشة',
+				ffd: 'ملفات للمناقشة',
+				rfd: 'عمليات إعادة التوجيه للمناقشة'
 			};
-			const editSummary = 'Notification: [[' + params.discussionpage + '|listing]] of [[:' +
-				Morebits.pageNameNorm + ']] at [[WP:' + venueNames[params.venue] + ']].';
+			const editSummary = 'إشعار: [[:' + params.discussionpage + '|إدراج]] [[:' +
+				Morebits.pageNameNorm + ']] في [[WP:' + venueNames[params.venue] + ']].';
 
 			const usertalkpage = new Morebits.wiki.Page(notifyTarget, actionName);
 			usertalkpage.setAppendText(notifytext);
@@ -987,32 +987,31 @@
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('xfdLogPageName'));// , 'Adding entry to userspace log');
 
 			usl.initialText =
-				"This is a log of all [[WP:XFD|deletion discussion]] nominations made by this user using [[WP:TW|Twinkle]]'s XfD module.\n\n" +
-				'If you no longer wish to keep this log, you can turn it off using the [[Wikipedia:Twinkle/Preferences|preferences panel]], and ' +
-				'nominate this page for speedy deletion under [[WP:CSD#U1|CSD U1]].' +
-				(Morebits.userIsSysop ? '\n\nThis log does not track XfD-related deletions made using Twinkle.' : '');
+				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل ، فيمكنك إيقاف تشغيله باستخدام [[Wikipedia:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
+				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام Twinkle.' : '');
 
 			let editsummary;
 			if (params.discussionpage) {
-				editsummary = 'Logging [[' + params.discussionpage + '|' + utils.toTLACase(params.venue) + ' nomination]] of [[:' + Morebits.pageNameNorm + ']].';
+				editsummary = 'تسجيل [[' + params.discussionpage + '|ترشيح]] ' + utils.toTLACase(params.venue) + ' لـ [[:' + Morebits.pageNameNorm + ']].';
 			} else {
-				editsummary = 'Logging ' + utils.toTLACase(params.venue) + ' nomination of [[:' + Morebits.pageNameNorm + ']].';
+				editsummary = 'تسجيل ترشيح ' + utils.toTLACase(params.venue) + ' لـ [[:' + Morebits.pageNameNorm + ']].';
 			}
 
 			// If a logged file is deleted but exists on commons, the wikilink will be blue, so provide a link to the log
-			const fileLogLink = mw.config.get('wgNamespaceNumber') === 6 ? ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} log])' : '';
+			const fileLogLink = mw.config.get('wgNamespaceNumber') === 6 ? ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} سجل])' : '';
 			// CFD/S and RM don't have canonical links
-			const nominatedLink = params.discussionpage ? '[[' + params.discussionpage + '|nominated]]' : 'nominated';
+			const nominatedLink = params.discussionpage ? '[[' + params.discussionpage + '|تم الترشيح]]' : 'تم الترشيح';
 
-			let appendText = '# [[:' + Morebits.pageNameNorm + ']]:' + fileLogLink + ' ' + nominatedLink + ' at [[WP:' + params.venue.toUpperCase() + '|' + utils.toTLACase(params.venue) + ']]';
+			let appendText = '# [[:' + Morebits.pageNameNorm + ']]:' + fileLogLink + ' ' + nominatedLink + ' في [[WP:' + params.venue.toUpperCase() + '|' + utils.toTLACase(params.venue) + ']]';
 
 			switch (params.venue) {
 				case 'tfd':
 					if (params.xfdcat === 'tfm') {
-						appendText += ' (merge)';
+						appendText += ' (دمج)';
 						if (params.tfdtarget) {
 							const contentModel = mw.config.get('wgPageContentModel') === 'Scribunto' ? 'Module:' : 'Template:';
-							appendText += '; Other ' + contentModel.toLowerCase() + ' [[';
+							appendText += '; ' + contentModel.toLowerCase() + ' آخر [[';
 							if (!new RegExp('^:?' + Morebits.namespaceRegex([10, 828]) + ':', 'i').test(params.tfdtarget)) {
 								appendText += contentModel;
 							}
@@ -1022,14 +1021,14 @@
 					break;
 				case 'mfd':
 					if (params.notifyuserspace && params.userspaceOwner && params.userspaceOwner !== initialContrib) {
-						appendText += '; notified {{user|1=' + params.userspaceOwner + '}}';
+						appendText += '; تم إعلام {{user|1=' + params.userspaceOwner + '}}';
 					}
 					break;
 				case 'cfd':
 					appendText += ' (' + utils.toTLACase(params.xfdcat) + ')';
 					if (params.cfdtarget) {
 						const categoryOrTemplate = params.xfdcat.charAt(0) === 's' ? 'Template:' : ':Category:';
-						appendText += '; ' + params.action + ' to [[' + categoryOrTemplate + params.cfdtarget + ']]';
+						appendText += '; ' + params.action + ' إلى [[' + categoryOrTemplate + params.cfdtarget + ']]';
 						if (params.xfdcat === 'cfs' && params.cfdtarget2) {
 							appendText += ', [[' + categoryOrTemplate + params.cfdtarget2 + ']]';
 						}
@@ -1039,20 +1038,20 @@
 					appendText += ' (' + utils.toTLACase(params.xfdcat) + ')';
 					// Ensure there's more than just 'Category:'
 					if (params.cfdstarget && params.cfdstarget.length > 9) {
-						appendText += '; New name: [[:' + params.cfdstarget + ']]';
+						appendText += '; الاسم الجديد: [[:' + params.cfdstarget + ']]';
 					}
 					break;
 				case 'rfd':
 					if (params.rfdtarget) {
-						appendText += '; Target: [[:' + params.rfdtarget + ']]';
+						appendText += '; الهدف: [[:' + params.rfdtarget + ']]';
 						if (params.relatedpage) {
-							appendText += ' (notified)';
+							appendText += ' (تم الإعلام)';
 						}
 					}
 					break;
 				case 'rm':
 					appendText = params.currentname
-						.map((currentname, i) => `# [[:${currentname}]]: ${nominatedLink} at [[WP:RM${params.rmtr ? '/TR' : ''}|]]${params.newname[i] ? `; New name: [[:${params.newname[i]}]]` : ''}`)
+						.map((currentname, i) => `# [[:${currentname}]]: ${nominatedLink} at [[WP:RM${params.rmtr ? '/TR' : ''}|]]${params.newname[i] ? `; الاسم الجديد: [[:${params.newname[i]}]]` : ''}`)
 						.join('\n');
 					break;
 
@@ -1061,11 +1060,11 @@
 			}
 
 			if (initialContrib && params.notifycreator) {
-				appendText += '; notified {{user|1=' + initialContrib + '}}';
+				appendText += '; تم إعلام {{user|1=' + initialContrib + '}}';
 			}
 			appendText += ' ~~~~~';
 			if (params.reason) {
-				appendText += "\n#* '''Reason''': " + Morebits.string.formatReasonForLog(params.reason);
+				appendText += "\n#* '''السبب''': " + Morebits.string.formatReasonForLog(params.reason);
 			}
 
 			usl.changeTags = Twinkle.changeTags;
@@ -1110,14 +1109,14 @@
 				}
 				apiobj.params.discussionpage = 'Wikipedia:Articles for deletion/' + Morebits.pageNameNorm + apiobj.params.numbering;
 
-				Morebits.Status.info('Next discussion page', '[[' + apiobj.params.discussionpage + ']]');
+				Morebits.Status.info('صفحة المناقشة التالية', '[[' + apiobj.params.discussionpage + ']]');
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = apiobj.params.discussionpage;
-				Morebits.wiki.actionCompleted.notice = 'Nomination completed, now redirecting to the discussion page';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Tagging article
-				const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Adding deletion tag to article');
+				const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'إضافة علامة حذف إلى المقالة');
 				wikipedia_page.setFollowRedirect(true); // should never be needed, but if the article is moved, we would want to follow the redirect
 				wikipedia_page.setChangeTags(Twinkle.changeTags); // Here to apply to triage
 				wikipedia_page.setCallbackParameters(apiobj.params);
@@ -1130,17 +1129,17 @@
 				const statelem = pageobj.getStatusElement();
 
 				if (!pageobj.exists()) {
-					statelem.error("It seems that the page doesn't exist; perhaps it has already been deleted");
+					statelem.error("يبدو أن الصفحة غير موجودة ؛ ربما تم حذفها بالفعل");
 					return;
 				}
 
 				// Check for existing AfD tag, for the benefit of new page patrollers
 				const textNoAfd = text.replace(/<!--.*AfD.*\n\{\{(?:Article for deletion\/dated|AfDM).*\}\}\n<!--.*(?:\n<!--.*)?AfD.*(?:\s*\n)?/g, '');
 				if (text !== textNoAfd) {
-					if (confirm('An AfD tag was found on this article. Maybe someone beat you to it.  \nClick OK to replace the current AfD tag (not recommended), or Cancel to abandon your nomination.')) {
+					if (confirm('تم العثور على علامة AfD في هذه المقالة. ربما سبقك شخص ما إلى ذلك. \nانقر فوق موافق لاستبدال علامة AfD الحالية (غير مستحسن) ، أو إلغاء الأمر للتخلي عن ترشيحك.')) {
 						text = textNoAfd;
 					} else {
-						statelem.error('Article already tagged with AfD tag, and you chose to abort');
+						statelem.error('المقالة موسومة بالفعل بعلامة AfD ، وقد اخترت الإلغاء');
 						window.location.reload();
 						return;
 					}
@@ -1154,14 +1153,14 @@
 				}
 
 				// Start discussion page, will also handle pagetriage and delsort listings
-				let wikipedia_page = new Morebits.wiki.Page(params.discussionpage, 'Creating article deletion discussion page');
+				let wikipedia_page = new Morebits.wiki.Page(params.discussionpage, 'إنشاء صفحة مناقشة حذف المقالة');
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.afd.discussionPage);
 
 				// Today's list
 				const date = new Morebits.Date(pageobj.getLoadTime());
 				wikipedia_page = new Morebits.wiki.Page('Wikipedia:Articles for deletion/Log/' +
-					date.format('YYYY MMMM D', 'utc'), "Adding discussion to today's list");
+					date.format('YYYY MMMM D', 'utc'), "إضافة مناقشة إلى قائمة اليوم");
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.afd.todaysList);
@@ -1186,7 +1185,7 @@
 					text = text.replace(/\{\{\s*(dated prod|dated prod blp|Prod blp\/dated|Proposed deletion\/dated|prod2|Proposed deletion endorsed|Userspace draft)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/ig, '');
 					// Then, test if there are speedy deletion-related templates on the article.
 					const textNoSd = text.replace(/\{\{\s*(db(-\w*)?|delete|(?:hang|hold)[- ]?on)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/ig, '');
-					if (text !== textNoSd && confirm('A speedy deletion tag was found on this page. Should it be removed?')) {
+					if (text !== textNoSd && confirm('تم العثور على علامة حذف سريع في هذه الصفحة. هل يجب إزالته؟')) {
 						text = textNoSd;
 					}
 
@@ -1195,7 +1194,7 @@
 					text = wikipage.insertAfterTemplates(params.tagText, Twinkle.hatnoteRegex).getText();
 
 					pageobj.setPageText(text);
-					pageobj.setEditSummary('Nominated for deletion; see [[:' + params.discussionpage + ']].');
+					pageobj.setEditSummary('تم الترشيح للحذف ؛ انظر [[:' + params.discussionpage + ']].');
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					pageobj.setCreateOption('nocreate');
 					pageobj.save();
@@ -1207,7 +1206,7 @@
 				const params = pageobj.getCallbackParameters();
 
 				pageobj.setPageText(Twinkle.xfd.callbacks.getDiscussionWikitext('afd', params));
-				pageobj.setEditSummary('Creating deletion discussion page for [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('إنشاء صفحة مناقشة حذف المقالة لـ [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('createonly');
@@ -1219,7 +1218,7 @@
 					// List at deletion sorting pages
 					if (params.delsortCats) {
 						params.delsortCats.forEach((cat) => {
-							const delsortPage = new Morebits.wiki.Page('Wikipedia:WikiProject Deletion sorting/' + cat, 'Adding to list of ' + cat + '-related deletion discussions');
+							const delsortPage = new Morebits.wiki.Page('Wikipedia:WikiProject Deletion sorting/' + cat, 'إضافة إلى قائمة مناقشات الحذف المتعلقة بـ ' + cat);
 							delsortPage.setFollowRedirect(true); // In case a category gets renamed
 							delsortPage.setCallbackParameters({ discussionPage: params.discussionpage });
 							delsortPage.load(Twinkle.xfd.callbacks.afd.delsortListing);
@@ -1244,14 +1243,14 @@
 					if (text === old_text) {
 						const linknode = document.createElement('a');
 						linknode.setAttribute('href', mw.util.getUrl('Wikipedia:Twinkle/Fixing AFD') + '?action=purge');
-						linknode.appendChild(document.createTextNode('How to fix AFD'));
-						statelem.error(['Could not find the target spot for the discussion. To fix this problem, please see ', linknode, '.']);
+						linknode.appendChild(document.createTextNode('كيفية إصلاح AFD'));
+						statelem.error(['تعذر العثور على البقعة المستهدفة للمناقشة. لإصلاح هذه المشكلة ، يرجى الاطلاع على ', linknode, '.']);
 						return;
 					}
 				}
 
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('Adding [[:' + params.discussionpage + ']].');
+				pageobj.setEditSummary('إضافة [[:' + params.discussionpage + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchList'));
 				pageobj.setCreateOption('recreate');
@@ -1261,7 +1260,7 @@
 				const discussionPage = pageobj.getCallbackParameters().discussionPage;
 				const text = pageobj.getPageText().replace('directly below this line -->', 'directly below this line -->\n{{' + discussionPage + '}}');
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('Listing [[:' + discussionPage + ']].');
+				pageobj.setEditSummary('إدراج [[:' + discussionPage + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setCreateOption('nocreate');
 				pageobj.save();
@@ -1335,10 +1334,10 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = "Nomination completed, now redirecting to today's log";
+				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح، يتم الآن إعادة التوجيه إلى سجل اليوم";
 
 				// Adding discussion
-				const wikipedia_page = new Morebits.wiki.Page(params.logpage, "Adding discussion to today's log");
+				const wikipedia_page = new Morebits.wiki.Page(params.logpage, "إضافة مناقشة إلى سجل اليوم");
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.tfd.todaysList);
@@ -1382,7 +1381,7 @@
 					};
 					$.each(categoryNotificationPageMap, (category, page) => {
 						if (inCategories.includes(category)) {
-							Twinkle.xfd.callbacks.notifyUser(params, page, true, 'Notifying ' + page + ' of template nomination');
+							Twinkle.xfd.callbacks.notifyUser(params, page, true, 'إخطار ' + page + ' بترشيح القالب');
 						}
 					});
 				}
@@ -1405,7 +1404,7 @@
 
 				if (pageobj.canEdit() && ['wikitext', 'sanitized-css'].includes(pageobj.getContentModel())) {
 					pageobj.setPageText(params.tagText + text);
-					pageobj.setEditSummary('Nominated for deletion; see [[:' + params.discussionpage + ']].');
+					pageobj.setEditSummary('تم ترشيحه للحذف؛ انظر [[:' + params.discussionpage + ']].');
 					pageobj.setChangeTags(Twinkle.changeTags);
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					if (params.scribunto) {
@@ -1434,7 +1433,7 @@
 
 				if (pageobj.canEdit() && ['wikitext', 'sanitized-css'].includes(pageobj.getContentModel())) {
 					pageobj.setPageText(params.tagText + text);
-					pageobj.setEditSummary('Listed for merging with [[:' + params.otherTemplateName + ']]; see [[:' + params.discussionpage + ']].');
+					pageobj.setEditSummary('مدرج للدمج مع [[:' + params.otherTemplateName + ']]؛ انظر [[:' + params.discussionpage + ']].');
 					pageobj.setChangeTags(Twinkle.changeTags);
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					if (params.scribunto) {
@@ -1460,13 +1459,13 @@
 
 					text = old_text.replace('-->', '-->\n' + added_data);
 					if (text === old_text) {
-						statelem.error('failed to find target spot for the discussion');
+						statelem.error('فشل العثور على المكان المستهدف للمناقشة');
 						return;
 					}
 				}
 
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('/* ' + Morebits.pageNameNorm + ' */ Adding ' + (params.xfdcat === 'tfd' ? 'deletion nomination' : 'merge listing') + ' of [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('/* ' + Morebits.pageNameNorm + ' */ إضافة ' + (params.xfdcat === 'tfd' ? 'ترشيح للحذف' : 'إدراج للدمج') + ' [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('recreate');
@@ -1509,17 +1508,17 @@
 						number = Math.max(number, Number(match[1]));
 					}
 					apiobj.params.number = utils.num2order(parseInt(number, 10) + 1);
-					apiobj.params.numbering = number > 0 ? ' (' + apiobj.params.number + ' nomination)' : '';
+					apiobj.params.numbering = number > 0 ? ' (' + apiobj.params.number + ' ترشيح)' : '';
 				}
 				apiobj.params.discussionpage = 'Wikipedia:Miscellany for deletion/' + Morebits.pageNameNorm + apiobj.params.numbering;
 
-				apiobj.statelem.info('next in order is [[' + apiobj.params.discussionpage + ']]');
+				apiobj.statelem.info('التالي بالترتيب هو [[' + apiobj.params.discussionpage + ']]');
 
 				let wikipedia_page;
 
 				// Tagging page
 				if (mw.config.get('wgNamespaceNumber') !== 710) { // cannot tag TimedText pages
-					wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging page with deletion tag');
+					wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وضع علامة على الصفحة بعلامة الحذف');
 					wikipedia_page.setFollowRedirect(true); // should never be needed, but if the page is moved, we would want to follow the redirect
 					wikipedia_page.setCallbackParameters(apiobj.params);
 					wikipedia_page.load(Twinkle.xfd.callbacks.mfd.taggingPage);
@@ -1527,15 +1526,15 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = apiobj.params.discussionpage;
-				Morebits.wiki.actionCompleted.notice = 'Nomination completed, now redirecting to the discussion page';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Discussion page
-				wikipedia_page = new Morebits.wiki.Page(apiobj.params.discussionpage, 'Creating deletion discussion page');
+				wikipedia_page = new Morebits.wiki.Page(apiobj.params.discussionpage, 'إنشاء صفحة مناقشة الحذف');
 				wikipedia_page.setCallbackParameters(apiobj.params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.mfd.discussionPage);
 
 				// Today's list
-				wikipedia_page = new Morebits.wiki.Page('Wikipedia:Miscellany for deletion', "Adding discussion to today's list");
+				wikipedia_page = new Morebits.wiki.Page('Wikipedia:Miscellany for deletion', "إضافة المناقشة إلى قائمة اليوم");
 				wikipedia_page.setPageSection(2);
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(apiobj.params);
@@ -1568,7 +1567,7 @@
 
 				if (pageobj.canEdit() && ['wikitext', 'javascript', 'css', 'sanitized-css'].includes(pageobj.getContentModel())) {
 					pageobj.setPageText(params.tagText + text);
-					pageobj.setEditSummary('Nominated for deletion; see [[:' + params.discussionpage + ']].');
+					pageobj.setEditSummary('تم ترشيحه للحذف ؛ انظر [[:' + params.discussionpage + ']].');
 					pageobj.setChangeTags(Twinkle.changeTags);
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					pageobj.setCreateOption('nocreate');
@@ -1581,7 +1580,7 @@
 				const params = pageobj.getCallbackParameters();
 
 				pageobj.setPageText(Twinkle.xfd.callbacks.getDiscussionWikitext('mfd', params));
-				pageobj.setEditSummary('Creating deletion discussion page for [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('إنشاء صفحة مناقشة الحذف لـ [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('createonly');
@@ -1600,15 +1599,15 @@
 				const added_data = '{{subst:mfd3|pg=' + Morebits.pageNameNorm + params.numbering + '}}';
 
 				if (date_header_regex.test(text)) { // we have a section already
-					statelem.info('Found today\'s section, proceeding to add new entry');
+					statelem.info('تم العثور على قسم اليوم ، والمضي قدمًا لإضافة إدخال جديد');
 					text = text.replace(date_header_regex, '$1\n' + added_data);
 				} else { // we need to create a new section
-					statelem.info('No section for today found, proceeding to create one');
+					statelem.info('لم يتم العثور على قسم لليوم ، والمضي قدمًا لإنشاء واحد');
 					text = text.replace('===', date_header + added_data + '\n\n===');
 				}
 
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('Adding [[:' + params.discussionpage + ']].');
+				pageobj.setEditSummary('إضافة [[:' + params.discussionpage + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchList'));
 				pageobj.setCreateOption('recreate');
@@ -1628,7 +1627,7 @@
 				if (params.notifyuserspace) {
 					if (params.userspaceOwner !== initialContrib) {
 						// Don't log if notifying creator above, will log then
-						Twinkle.xfd.callbacks.notifyUser(params, params.userspaceOwner, params.notifycreator, 'Notifying owner of userspace (' + params.userspaceOwner + ')');
+						Twinkle.xfd.callbacks.notifyUser(params, params.userspaceOwner, params.notifycreator, 'إعلام مالك مساحة المستخدم (' + params.userspaceOwner + ')');
 					} else if (!params.notifycreator) {
 						// If we thought we would notify the owner but didn't,
 						// then we need to log if we didn't notify the creator
@@ -1653,7 +1652,7 @@
 					text = text.replace(/\{\{(mtc|(copy |move )?to ?commons|move to wikimedia commons|copy to wikimedia commons)[^}]*\}\}/gi, '');
 
 					pageobj.setPageText(params.tagText + text);
-					pageobj.setEditSummary('Listed for discussion at [[:' + params.discussionpage + ']].');
+					pageobj.setEditSummary('مدرج للمناقشة في [[:' + params.discussionpage + ']].');
 					pageobj.setChangeTags(Twinkle.changeTags);
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					pageobj.setCreateOption('recreate'); // it might be possible for a file to exist without a description page
@@ -1664,7 +1663,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = 'Nomination completed, now redirecting to the discussion page';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Contributor specific edits
 				const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'));
@@ -1678,7 +1677,7 @@
 				params.uploader = initialContrib;
 
 				// Adding discussion
-				const wikipedia_page = new Morebits.wiki.Page(params.logpage, "Adding discussion to today's list");
+				const wikipedia_page = new Morebits.wiki.Page(params.logpage, "إضافة مناقشة إلى قائمة اليوم");
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.ffd.todaysList);
@@ -1701,7 +1700,7 @@
 				}
 
 				pageobj.setPageText(text + '\n\n' + Twinkle.xfd.callbacks.getDiscussionWikitext('ffd', params));
-				pageobj.setEditSummary('Adding [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('إضافة [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('recreate');
@@ -1726,10 +1725,10 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = "Nomination completed, now redirecting to today's log";
+				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى سجل اليوم";
 
 				// Adding discussion to list
-				let wikipedia_page = new Morebits.wiki.Page(params.logpage, "Adding discussion to today's list");
+				let wikipedia_page = new Morebits.wiki.Page(params.logpage, "إضافة المناقشة إلى القائمة اليوم");
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.cfd.todaysList);
@@ -1752,13 +1751,13 @@
 
 				params.tagText = '{{subst:' + params.xfdcat;
 				let editsummary = (mw.config.get('wgNamespaceNumber') === 14 ? 'Category' : 'Stub template') +
-					' being considered for ' + params.action;
+					' يتم النظر فيه لـ ' + params.action;
 				switch (params.xfdcat) {
 					case 'cfd':
 					case 'sfd-t':
 						break;
 					case 'cfc':
-						editsummary += ' to an article';
+						editsummary += ' لمقال';
 					// falls through
 					case 'cfm':
 					case 'cfr':
@@ -1773,7 +1772,7 @@
 						break;
 				}
 				params.tagText += '}}\n';
-				editsummary += '; see [[:' + params.discussionpage + ']].';
+				editsummary += '; انظر [[:' + params.discussionpage + ']].';
 
 				if (pageobj.canEdit()) {
 					pageobj.setPageText(params.tagText + text);
@@ -1801,13 +1800,13 @@
 
 					text = old_text.replace('below this line -->', 'below this line -->\n' + added_data);
 					if (text === old_text) {
-						statelem.error('failed to find target spot for the discussion');
+						statelem.error('فشل العثور على المكان المستهدف للمناقشة');
 						return;
 					}
 				}
 
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('Adding ' + params.action + ' nomination of [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('إضافة ' + params.action + ' ترشيح [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('recreate');
@@ -1829,7 +1828,7 @@
 				params.discussionpage = ''; // CFDS is just a bullet in a bulleted list. There's no section to link to, so we set this to blank. Blank will be recognized by both the generate userspace log code and the generate userspace log edit summary code as "don't wikilink to a section".
 				if (pageobj.canEdit()) {
 					pageobj.setPageText(params.tagText + text);
-					pageobj.setEditSummary('Listed for speedy renaming; see [[WP:CFDS|Categories for discussion/Speedy]].');
+					pageobj.setEditSummary('مدرج لإعادة التسمية السريعة ؛ انظر [[WP:CFDS|Categories for discussion/Speedy]].');
 					pageobj.setChangeTags(Twinkle.changeTags);
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					pageobj.setCreateOption('recreate'); // since categories can be populated without an actual page at that title
@@ -1850,12 +1849,12 @@
 
 				const text = old_text.replace('BELOW THIS LINE -->', 'BELOW THIS LINE -->\n' + Twinkle.xfd.callbacks.getDiscussionWikitext('cfds', params));
 				if (text === old_text) {
-					statelem.error('failed to find target spot for the discussion');
+					statelem.error('فشل العثور على المكان المستهدف للمناقشة');
 					return;
 				}
 
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('Adding [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('إضافة [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('recreate');
@@ -1884,7 +1883,7 @@
 					query.titles = mw.config.get('wgPageName');
 					query.redirects = true;
 				}
-				const wikipedia_api = new Morebits.wiki.Api('Finding target of redirect', query, Twinkle.xfd.callbacks.rfd.findTargetCallback(callback));
+				const wikipedia_api = new Morebits.wiki.Api('العثور على الهدف من إعادة التوجيه', query, Twinkle.xfd.callbacks.rfd.findTargetCallback(callback));
 				wikipedia_api.params = params;
 				wikipedia_api.post();
 			},
@@ -1897,9 +1896,9 @@
 					if (!apiobj.params.rfdtarget) { // Not a softredirect
 						const target = response.query.redirects && response.query.redirects[0].to;
 						if (!target) {
-							let message = 'No target found. this page does not appear to be a redirect, aborting';
+							let message = 'لم يتم العثور على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه ، ويتم الإحباط';
 							if (mw.config.get('wgAction') === 'history') {
-								message += '. If this is a soft redirect, try again from the content page, not the page history.';
+								message += '. إذا كانت هذه إعادة توجيه ناعمة ، فحاول مرة أخرى من صفحة المحتوى ، وليس سجل الصفحة.';
 							}
 							apiobj.statelem.error(message);
 							return;
@@ -1917,17 +1916,17 @@
 				params.discussionpage = params.logpage + '#' + Morebits.pageNameNorm;
 
 				// Tagging redirect
-				let wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Adding deletion tag to redirect');
+				let wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'إضافة علامة حذف إلى إعادة التوجيه');
 				wikipedia_page.setFollowRedirect(false);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.rfd.taggingRedirect);
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = "Nomination completed, now redirecting to today's log";
+				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى سجل اليوم";
 
 				// Adding discussion
-				wikipedia_page = new Morebits.wiki.Page(params.logpage, "Adding discussion to today's log");
+				wikipedia_page = new Morebits.wiki.Page(params.logpage, "إضافة مناقشة إلى سجل اليوم");
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.rfd.todaysList);
@@ -1950,7 +1949,7 @@
 
 				if (pageobj.canEdit()) {
 					pageobj.setPageText(params.tagText + text + '\n}}');
-					pageobj.setEditSummary('Listed for discussion at [[:' + params.discussionpage + ']].');
+					pageobj.setEditSummary('مدرج للمناقشة في [[:' + params.discussionpage + ']].');
 					pageobj.setChangeTags(Twinkle.changeTags);
 					pageobj.setWatchlist(Twinkle.getPref('xfdWatchPage'));
 					pageobj.setCreateOption('nocreate');
@@ -1973,13 +1972,13 @@
 					const old_text = pageobj.getPageText();
 					text = old_text.replace(/(<!-- Add new entries directly below this line\.? -->)/, '$1\n' + added_data);
 					if (text === old_text) {
-						statelem.error('failed to find target spot for the discussion');
+						statelem.error('فشل العثور على المكان المستهدف للمناقشة');
 						return;
 					}
 				}
 
 				pageobj.setPageText(text);
-				pageobj.setEditSummary('Adding [[:' + Morebits.pageNameNorm + ']].');
+				pageobj.setEditSummary('إضافة [[:' + Morebits.pageNameNorm + ']].');
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.setWatchlist(Twinkle.getPref('xfdWatchDiscussion'));
 				pageobj.setCreateOption('recreate');
@@ -2003,17 +2002,17 @@
 
 					// On the offchance it's a circular redirect
 					if (params.rfdtarget === mw.config.get('wgPageName')) {
-						statelem.warn('Circular redirect; skipping target page notification');
+						statelem.warn('إعادة توجيه دائرية ؛ تخطي إشعار صفحة الهدف');
 					} else if (document.getElementById('softredirect')) {
-						statelem.warn('Soft redirect; skipping target page notification');
+						statelem.warn('إعادة توجيه ناعمة ؛ تخطي إشعار صفحة الهدف');
 						// Don't issue if target talk is the initial contributor's talk or your own
 					} else if (targetTalk.getNamespaceId() === 3 && targetTalk.getNameText() === initialContrib) {
-						statelem.warn('Target is initial contributor; skipping target page notification');
+						statelem.warn('الهدف هو المساهم الأولي ؛ تخطي إشعار صفحة الهدف');
 					} else if (targetTalk.getNamespaceId() === 3 && targetTalk.getNameText() === mw.config.get('wgUserName')) {
-						statelem.warn('You (' + mw.config.get('wgUserName') + ') are the target; skipping target page notification');
+						statelem.warn('أنت (' + mw.config.get('wgUserName') + ') هو الهدف ؛ تخطي إشعار صفحة الهدف');
 					} else {
 						// Don't log if notifying creator above, will log then
-						Twinkle.xfd.callbacks.notifyUser(params, targetTalk.toText(), params.notifycreator, 'Notifying redirect target of the discussion');
+						Twinkle.xfd.callbacks.notifyUser(params, targetTalk.toText(), params.notifycreator, 'إخطار الهدف من إعادة التوجيه بالمناقشة');
 						return;
 					}
 					// If we thought we would notify the target but didn't,
@@ -2031,8 +2030,8 @@
 				params.discussionpage = pageobj.getPageName();
 
 				pageobj.setAppendText('\n\n' + Twinkle.xfd.callbacks.getDiscussionWikitext('rm', params));
-				pageobj.setEditSummary(`Proposing move of ${params.currentname
-					.map((currentname, i) => `[[:${currentname}]]${params.newname[i] ? ` to [[:${params.newname[i]}]]` : ''}`)
+				pageobj.setEditSummary(`اقتراح نقل ${params.currentname
+					.map((currentname, i) => `[[:${currentname}]]${params.newname[i] ? ` إلى [[:${params.newname[i]}]]` : ''}`)
 					.join(', ')
 					}.`);
 				pageobj.setChangeTags(Twinkle.changeTags);
@@ -2053,11 +2052,11 @@
 				const discussionWikitext = Twinkle.xfd.callbacks.getDiscussionWikitext('rm', params);
 				const newtext = Twinkle.xfd.insertRMTR(text, discussionWikitext);
 				if (text === newtext) {
-					statelem.error('failed to find target spot for the entry');
+					statelem.error('فشل العثور على المكان المستهدف للإدخال');
 					return;
 				}
 				pageobj.setPageText(newtext);
-				pageobj.setEditSummary(`Adding [[:${params.currentname.join(']], [[:')}]].`);
+				pageobj.setEditSummary(`إضافة [[:${params.currentname.join(']], [[:')}]].`);
 				pageobj.setChangeTags(Twinkle.changeTags);
 				pageobj.save(() => {
 					Twinkle.xfd.currentRationale = null; // any errors from now on do not need to print the rationale, as it is safely saved on-wiki
@@ -2076,7 +2075,7 @@
 	 * @return {string} pageWikitext
 	 */
 	Twinkle.xfd.insertRMTR = function (pageWikitext, wikitextToInsert) {
-		const placementRE = /\n{1,}(==== ?Requests to revert undiscussed moves ?====)/i;
+		const placementRE = /\n{1,}(==== ?طلبات التراجع عن عمليات النقل غير المتفق عليها ?====)/i;
 		return pageWikitext.replace(placementRE, '\n' + wikitextToInsert + '\n\n$1');
 	};
 
@@ -2104,7 +2103,7 @@
 					aplimit: 'max', // 500 is max for normal users, 5000 for bots and sysops
 					format: 'json'
 				};
-				wikipedia_api = new Morebits.wiki.Api('Tagging article with deletion tag', query, Twinkle.xfd.callbacks.afd.main);
+				wikipedia_api = new Morebits.wiki.Api('وسم المقالة بعلامة الحذف', query, Twinkle.xfd.callbacks.afd.main);
 				wikipedia_api.params = params;
 				wikipedia_api.post();
 				break;
@@ -2119,17 +2118,17 @@
 				if (params.xfdcat === 'tfm') { // Merge
 					// Tag this template/module
 					if (params.scribunto) {
-						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName') + '/doc', 'Tagging this module documentation with merge tag');
+						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName') + '/doc', 'وسم توثيق الوحدة النمطية هذه بعلامة الدمج');
 						params.otherTemplateName = 'Module:' + params.tfdtarget;
 					} else {
-						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging this template with merge tag');
+						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وسم هذا القالب بعلامة الدمج');
 						params.otherTemplateName = 'Template:' + params.tfdtarget;
 					}
 				} else { // delete
 					if (params.scribunto) {
-						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName') + '/doc', 'Tagging module documentation with deletion tag');
+						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName') + '/doc', 'وسم توثيق الوحدة النمطية بعلامة الحذف');
 					} else {
-						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging template with deletion tag');
+						wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وسم القالب بعلامة الحذف');
 					}
 				}
 				wikipedia_page.setFollowRedirect(true); // should never be needed, but if the page is moved, we would want to follow the redirect
@@ -2147,7 +2146,7 @@
 					aplimit: 'max', // 500 is max for normal users, 5000 for bots and sysops
 					format: 'json'
 				};
-				wikipedia_api = new Morebits.wiki.Api('Looking for prior nominations of this page', query, Twinkle.xfd.callbacks.mfd.main);
+				wikipedia_api = new Morebits.wiki.Api('البحث عن ترشيحات سابقة لهذه الصفحة', query, Twinkle.xfd.callbacks.mfd.main);
 				wikipedia_api.params = params;
 				wikipedia_api.post();
 				break;
@@ -2157,7 +2156,7 @@
 				// A little out of order with this coming before 'main',
 				// but tagging doesn't need the uploader parameter,
 				// while everything else does, so tag then get the uploader
-				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Adding deletion tag to file page');
+				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'إضافة علامة حذف إلى صفحة الملف');
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.ffd.taggingImage);
@@ -2175,18 +2174,18 @@
 
 				// Used for customized actions in edit summaries and the notification template
 				var summaryActions = {
-					cfd: 'deletion',
-					'sfd-t': 'deletion',
-					cfm: 'merging',
-					cfr: 'renaming',
-					'sfr-t': 'renaming',
-					cfs: 'splitting',
-					cfc: 'conversion'
+					cfd: 'حذف',
+					'sfd-t': 'حذف',
+					cfm: 'دمج',
+					cfr: 'إعادة تسمية',
+					'sfr-t': 'إعادة تسمية',
+					cfs: 'تقسيم',
+					cfc: 'تحويل'
 				};
 				params.action = summaryActions[params.xfdcat];
 
 				// Tagging category
-				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging category with ' + params.action + ' tag');
+				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وسم الفئة بعلامة ' + params.action);
 				wikipedia_page.setFollowRedirect(true); // should never be needed, but if the page is moved, we would want to follow the redirect
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.cfd.main);
@@ -2200,16 +2199,16 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = logpage;
-				Morebits.wiki.actionCompleted.notice = 'Nomination completed, now redirecting to the discussion page';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، والآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Tagging category
-				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging category with rename tag');
+				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وسم الفئة بعلامة إعادة التسمية');
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.cfds.taggingCategory);
 
 				// Adding discussion to list
-				wikipedia_page = new Morebits.wiki.Page(logpage, 'Adding discussion to the list');
+				wikipedia_page = new Morebits.wiki.Page(logpage, 'إضافة مناقشة إلى القائمة');
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 				wikipedia_page.load(Twinkle.xfd.callbacks.cfds.addToList);
@@ -2227,9 +2226,9 @@
 					new mw.Title(Morebits.pageNameNorm).getTalkPage().toText();
 
 				Morebits.wiki.actionCompleted.redirect = nomPageName;
-				Morebits.wiki.actionCompleted.notice = 'Nomination completed, now redirecting to the discussion page';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، والآن إعادة التوجيه إلى صفحة المناقشة';
 
-				wikipedia_page = new Morebits.wiki.Page(nomPageName, params.rmtr ? 'Adding entry at WP:RM/TR' : 'Adding entry on talk page');
+				wikipedia_page = new Morebits.wiki.Page(nomPageName, params.rmtr ? 'إضافة إدخال في WP:RM/TR' : 'إضافة إدخال في صفحة النقاش');
 				wikipedia_page.setFollowRedirect(true);
 				wikipedia_page.setCallbackParameters(params);
 
@@ -2242,7 +2241,7 @@
 				break;
 
 			default:
-				alert('twinklexfd: unknown XFD discussion venue');
+				alert('twinklexfd: مكان مناقشة XFD غير معروف');
 				break;
 		}
 	};

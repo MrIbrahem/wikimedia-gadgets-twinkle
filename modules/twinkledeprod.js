@@ -18,18 +18,18 @@
 		) {
 			return;
 		}
-		Twinkle.addPortletLink(Twinkle.deprod.callback, 'Deprod', 'tw-deprod', 'Delete prod pages found in this category');
+		Twinkle.addPortletLink(Twinkle.deprod.callback, 'Deprod', 'tw-deprod', 'حذف صفحات prod الموجودة في هذه الفئة');
 	};
 
 	const concerns = {};
 
 	Twinkle.deprod.callback = function () {
 		const Window = new Morebits.SimpleWindow(800, 400);
-		Window.setTitle('PROD cleaning');
+		Window.setTitle('تنظيف PROD');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('Proposed deletion', 'WP:PROD');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#deprod');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('الحذف المقترح', 'WP:PROD');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#deprod');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(callback_commit);
 
@@ -51,7 +51,7 @@
 			format: 'json'
 		};
 
-		const statelem = new Morebits.Status('Grabbing list of pages');
+		const statelem = new Morebits.Status('جلب قائمة الصفحات');
 		const wikipedia_api = new Morebits.wiki.Api('loading...', query, ((apiobj) => {
 			const response = apiobj.getResponse();
 			const pages = (response.query && response.query.pages) || [];
@@ -72,8 +72,8 @@
 
 				const editProt = page.protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
 				if (editProt) {
-					metadata.push('fully protected' +
-						(editProt.expiry === 'infinity' ? ' indefinitely' : ', expires ' + editProt.expiry));
+					metadata.push('محمي بالكامل' +
+						(editProt.expiry === 'infinity' ? ' إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + editProt.expiry));
 				}
 
 				list.push({
@@ -83,17 +83,17 @@
 					style: editProt ? 'color:red' : ''
 				});
 			});
-			apiobj.params.form.append({ type: 'header', label: 'Pages to delete' });
+			apiobj.params.form.append({ type: 'header', label: 'الصفحات المراد حذفها' });
 			apiobj.params.form.append({
 				type: 'button',
-				label: 'Select All',
+				label: 'تحديد الكل',
 				event: function (e) {
 					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', true);
 				}
 			});
 			apiobj.params.form.append({
 				type: 'button',
-				label: 'Deselect All',
+				label: 'إلغاء تحديد الكل',
 				event: function (e) {
 					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', false);
 				}
@@ -120,7 +120,7 @@
 		const pages = Morebits.QuickForm.getInputData(event.target).pages;
 		Morebits.Status.init(event.target);
 
-		const batchOperation = new Morebits.BatchOperation('Deleting pages');
+		const batchOperation = new Morebits.BatchOperation('حذف الصفحات');
 		batchOperation.setOption('chunkSize', Twinkle.getPref('batchChunks'));
 		batchOperation.setOption('preserveIndividualStatusLines', true);
 		batchOperation.setPageList(pages);
@@ -134,7 +134,7 @@
 				rdlimit: 'max', // 500 is max for normal users, 5000 for bots and sysops
 				format: 'json'
 			};
-			let wikipedia_api = new Morebits.wiki.Api('Grabbing redirects', query, callback_deleteRedirects);
+			let wikipedia_api = new Morebits.wiki.Api('جلب عمليات التحويل', query, callback_deleteRedirects);
 			wikipedia_api.params = params;
 			wikipedia_api.post();
 
@@ -147,14 +147,14 @@
 					titles: pageTitle.toText(),
 					format: 'json'
 				};
-				wikipedia_api = new Morebits.wiki.Api('Checking whether ' + pageName + ' has a talk page', query,
+				wikipedia_api = new Morebits.wiki.Api('التحقق مما إذا كانت ' + pageName + ' لديها صفحة نقاش', query,
 					callback_deleteTalk);
 				wikipedia_api.params = params;
 				wikipedia_api.post();
 			}
 
-			var page = new Morebits.wiki.Page(pageName, 'Deleting page ' + pageName);
-			page.setEditSummary('Expired [[WP:PROD|PROD]], concern was: ' + concerns[pageName]);
+			var page = new Morebits.wiki.Page(pageName, 'حذف الصفحة ' + pageName);
+			page.setEditSummary('منتهي الصلاحية [[WP:PROD|PROD]]، كان السبب: ' + concerns[pageName]);
 			page.setChangeTags(Twinkle.changeTags);
 			page.suppressProtectWarning();
 			page.deletePage(batchOperation.workerSuccess, batchOperation.workerFailure);
@@ -166,8 +166,8 @@
 				return;
 			}
 
-			const page = new Morebits.wiki.Page('Talk:' + apiobj.params.page, 'Deleting talk page of page ' + apiobj.params.page);
-			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|Talk page]] of deleted page [[' + apiobj.params.page + ']]');
+			const page = new Morebits.wiki.Page('Talk:' + apiobj.params.page, 'حذف صفحة نقاش الصفحة ' + apiobj.params.page);
+			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
 			page.setChangeTags(Twinkle.changeTags);
 			page.deletePage();
 		},
@@ -176,8 +176,8 @@
 			const redirects = response.query.pages[0].redirects || [];
 			redirects.forEach((rd) => {
 				const title = rd.title;
-				const page = new Morebits.wiki.Page(title, 'Deleting redirecting page ' + title);
-				page.setEditSummary('[[WP:CSD#G8|G8]]: Redirect to deleted page [[' + apiobj.params.page + ']]');
+				const page = new Morebits.wiki.Page(title, 'حذف صفحة إعادة التوجيه ' + title);
+				page.setEditSummary('[[WP:CSD#G8|G8]]: إعادة توجيه إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
 				page.setChangeTags(Twinkle.changeTags);
 				page.deletePage();
 			});

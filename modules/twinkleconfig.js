@@ -15,13 +15,19 @@
 	Twinkle.config = {};
 
 	Twinkle.config.watchlistEnums = {
-		yes: 'Add to watchlist (indefinitely)',
-		no: "Don't add to watchlist",
-		default: 'Follow your site preferences',
-		'1 week': 'Watch for 1 week',
-		'1 month': 'Watch for 1 month',
-		'3 months': 'Watch for 3 months',
-		'6 months': 'Watch for 6 months'
+		"نعم": 'أضف إلى قائمة المراقبة (بلا تحديد مدة)',
+		yes: 'أضف إلى قائمة المراقبة (بلا تحديد مدة)',
+		no: 'لا تضف إلى قائمة المراقبة',
+		"لا": 'لا تضف إلى قائمة المراقبة',
+		default: 'اتبع تفضيلات موقعك',
+		'1 week': 'راقب لمدة أسبوع واحد',
+		'أسبوع واحد': 'راقب لمدة أسبوع واحد',
+		'1 month': 'راقب لمدة شهر واحد',
+		'شهر واحد': 'راقب لمدة شهر واحد',
+		'3 أشهر': 'راقب لمدة 3 أشهر',
+		'3 months': 'راقب لمدة 3 أشهر',
+		'6 أشهر': 'راقب لمدة 6 أشهر',
+		'6 months': 'راقب لمدة 6 أشهر'
 	};
 
 	Twinkle.config.commonSets = {
@@ -138,7 +144,7 @@
 
 	Twinkle.config.sections = [
 		{
-			title: 'General',
+			title: 'عام',
 			module: 'general',
 			preferences: [
 				// TwinkleConfig.userTalkPageMode may take arguments:
@@ -147,35 +153,35 @@
 				// 'blank': force open in a new window, even if such a window exists
 				{
 					name: 'userTalkPageMode',
-					label: 'When opening a user talk page, open it',
+					label: 'عند فتح صفحة نقاش مستخدم، افتحها',
 					type: 'enum',
-					enumValues: { window: 'In a window, replacing other user talks', tab: 'In a new tab', blank: 'In a totally new window' }
+					enumValues: { window: 'في نافذة، تحل محل صفحات النقاش الأخرى', tab: 'في تبويب جديد', blank: 'في نافذة جديدة تمامًا' }
 				},
 
 				// TwinkleConfig.dialogLargeFont (boolean)
 				{
 					name: 'dialogLargeFont',
-					label: 'Use larger text in Twinkle dialogs',
+					label: 'استخدام نص أكبر في حوارات Twinkle',
 					type: 'boolean'
 				},
 
 				// Twinkle.config.disabledModules (array)
 				{
 					name: 'disabledModules',
-					label: 'Turn off the selected Twinkle modules',
-					helptip: 'Anything you select here will NOT be available for use, so act with care. Uncheck to reactivate.',
+					label: 'إيقاف تشغيل وحدات Twinkle المحددة',
+					helptip: 'أي شيء تختاره هنا لن يكون متاحًا للاستخدام، لذا تصرف بحذر. قم بإلغاء التحديد لإعادة التفعيل.',
 					type: 'set',
-					setValues: { arv: 'ARV', warn: 'Warn', welcome: 'Welcome', shared: 'Shared IP', talkback: 'Talkback', speedy: 'CSD', prod: 'PROD', xfd: 'XfD', image: 'Image (DI)', protect: 'Protect (RPP)', tag: 'Tag', diff: 'Diff', unlink: 'Unlink', rollback: 'Revert and rollback' }
+					setValues: { arv: 'ARV', warn: 'تحذير', welcome: 'ترحيب', shared: 'عنوان IP مشترك', talkback: 'رد النقاش', speedy: 'حذف سريع', prod: 'PROD', xfd: 'XfD', image: 'صورة (DI)', protect: 'حماية (RPP)', tag: 'وسم', diff: 'مقارنة التعديلات', unlink: 'إزالة الروابط', rollback: 'استرجاع التعديلات' }
 				},
 
 				// Twinkle.config.disabledSysopModules (array)
 				{
 					name: 'disabledSysopModules',
-					label: 'Turn off the selected admin-only modules',
-					helptip: 'Anything you select here will NOT be available for use, so act with care. Uncheck to reactivate.',
+					label: 'إيقاف تشغيل الوحدات الخاصة بالإداريين فقط',
+					helptip: 'أي شيء تختاره هنا لن يكون متاحًا للاستخدام، لذا تصرف بحذر. قم بإلغاء التحديد لإعادة التفعيل.',
 					adminOnly: true,
 					type: 'set',
-					setValues: { block: 'Block', deprod: 'DePROD', batchdelete: 'D-batch', batchprotect: 'P-batch', batchundelete: 'Und-batch' }
+					setValues: { block: 'منع', deprod: 'إلغاء PROD', batchdelete: 'حذف دفعة', batchprotect: 'حماية دفعة', batchundelete: 'استرجاع دفعة' }
 				}
 			]
 		},
@@ -186,7 +192,7 @@
 			preferences: [
 				{
 					name: 'spiWatchReport',
-					label: 'Add sockpuppet report pages to watchlist',
+					label: 'إضافة صفحات تقارير الحسابات الوهمية إلى قائمة المراقبة',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				}
@@ -194,7 +200,7 @@
 		},
 
 		{
-			title: 'Block user',
+			title: 'منع المستخدم',
 			module: 'block',
 			adminOnly: true,
 			preferences: [
@@ -202,7 +208,7 @@
 				// Whether to default to just blocking the /64 on or off
 				{
 					name: 'defaultToBlock64',
-					label: 'For IPv6 addresses, select the option to block the /64 range by default',
+					label: 'بالنسبة لعناوين IPv6، حدد خيار منع نطاق /64 افتراضيًا',
 					type: 'boolean'
 				},
 
@@ -210,8 +216,8 @@
 				// Whether to default partial blocks on or off
 				{
 					name: 'defaultToPartialBlocks',
-					label: 'Select partial blocks by default when opening the block menu',
-					helptip: 'If the user is already blocked, this will be overridden in favor of defaulting to the current block type',
+					label: 'تحديد المنع الجزئي افتراضيًا عند فتح قائمة المنع',
+					helptip: 'إذا كان المستخدم محظورًا بالفعل، فسيتم تجاوز هذا الخيار لصالح نوع المنع الحالي',
 					type: 'boolean'
 				},
 
@@ -219,22 +225,22 @@
 				// if true, blank the talk page when issuing an indef block notice (per [[WP:UWUL#Indefinitely blocked users]])
 				{
 					name: 'blankTalkpageOnIndefBlock',
-					label: 'Blank the talk page when indefinitely blocking users',
-					helptip: 'See <a href="' + mw.util.getUrl('Wikipedia:WikiProject_User_warnings/Usage_and_layout#Indefinitely_blocked_users') + '">WP:UWUL</a> for more information.',
+					label: 'تفريغ صفحة النقاش عند منع المستخدمين نهائيًا',
+					helptip: 'راجع <a href="' + mw.util.getUrl('Wikipedia:WikiProject_User_warnings/Usage_and_layout#Indefinitely_blocked_users') + '">WP:UWUL</a> لمزيد من المعلومات.',
 					type: 'boolean'
 				}
 			]
 		},
 
 		{
-			title: 'Image deletion (DI)',
+			title: 'حذف الصور (DI)',
 			module: 'image',
 			preferences: [
 				// TwinkleConfig.notifyUserOnDeli (boolean)
 				// If the user should be notified after placing a file deletion tag
 				{
 					name: 'notifyUserOnDeli',
-					label: 'Check the "notify initial uploader" box by default',
+					label: 'تحديد خيار "إخطار الرافع الأصلي" افتراضيًا',
 					type: 'boolean'
 				},
 
@@ -242,7 +248,7 @@
 				// The watchlist setting of the page tagged for deletion.
 				{
 					name: 'deliWatchPage',
-					label: 'Add image page to watchlist when tagging',
+					label: 'إضافة صفحة الصورة إلى قائمة المراقبة عند وضع وسم الحذف',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				},
@@ -251,7 +257,7 @@
 				// The watchlist setting of the user talk page if a notification is placed.
 				{
 					name: 'deliWatchUser',
-					label: 'Add user talk page of initial uploader to watchlist when notifying',
+					label: 'إضافة صفحة نقاش رافع الصورة الأصلي إلى قائمة المراقبة عند الإخطار',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				}
@@ -259,25 +265,25 @@
 		},
 
 		{
-			title: 'Page protection ' + (Morebits.userIsSysop ? '(PP)' : '(RPP)'),
+			title: 'حماية الصفحة ' + (Morebits.userIsSysop ? '(PP)' : '(RPP)'),
 			module: 'protect',
 			preferences: [
 				{
 					name: 'watchRequestedPages',
-					label: 'Add page to watchlist when requesting protection',
+					label: 'إضافة الصفحة إلى قائمة المراقبة عند طلب الحماية',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
 					name: 'watchPPTaggedPages',
-					label: 'Add page to watchlist when tagging with protection template',
+					label: 'إضافة الصفحة إلى قائمة المراقبة عند وسمها بقالب الحماية',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
 					name: 'watchProtectedPages',
-					label: 'Add page to watchlist when protecting',
-					helptip: 'If also tagging the page after protection, that preference will be favored.',
+					label: 'إضافة الصفحة إلى قائمة المراقبة عند حمايتها',
+					helptip: 'إذا تم أيضًا وسم الصفحة بعد الحماية، فسيتم تفضيل هذا الإعداد.',
 					adminOnly: true,
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
@@ -286,14 +292,14 @@
 		},
 
 		{
-			title: 'Proposed deletion (PROD)',
+			title: 'الحذف المقترح (PROD)',
 			module: 'prod',
 			preferences: [
 				// TwinkleConfig.watchProdPages (string)
 				// Watchlist setting when applying prod template to page
 				{
 					name: 'watchProdPages',
-					label: 'Add article to watchlist when tagging',
+					label: 'إضافة المقالة إلى قائمة المراقبة عند وسمها',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				},
@@ -302,8 +308,8 @@
 				// If, when applying prod template to page, to mark the page as curated/patrolled (if the page was reached from NewPages)
 				{
 					name: 'markProdPagesAsPatrolled',
-					label: 'Mark page as patrolled/reviewed when tagging (if possible)',
-					helptip: 'This should probably not be checked as doing so is against best practice consensus',
+					label: 'وضع علامة "تمت المراجعة" عند وسم الصفحة (إن أمكن)',
+					helptip: 'يفضل عدم تفعيل هذا الخيار، حيث إنه يخالف التوافق على أفضل الممارسات',
 					type: 'boolean'
 				},
 
@@ -311,183 +317,175 @@
 				// The prefilled PROD reason.
 				{
 					name: 'prodReasonDefault',
-					label: 'Prefilled PROD reason',
+					label: 'سبب الحذف المقترح الافتراضي',
 					type: 'string'
 				},
 
 				{
 					name: 'logProdPages',
-					label: 'Keep a log in userspace of all pages you tag for PROD',
-					helptip: 'Since non-admins do not have access to their deleted contributions, the userspace log offers a good way to keep track of all pages you tag for PROD using Twinkle.',
+					label: 'الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي تم وسمها بالحذف المقترح',
+					helptip: 'نظرًا لأن غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، يوفر سجل المستخدم طريقة جيدة لتتبع جميع الصفحات التي تم وسمها بالحذف المقترح باستخدام Twinkle.',
 					type: 'boolean'
 				},
 				{
 					name: 'prodLogPageName',
-					label: 'Keep the PROD userspace log at this user subpage',
-					helptip: 'Enter a subpage name in this box. You will find your PROD log at User:<i>username</i>/<i>subpage name</i>. Only works if you turn on the PROD userspace log.',
+					label: 'الاحتفاظ بسجل الحذف المقترح في صفحة فرعية للمستخدم',
+					helptip: 'أدخل اسم الصفحة الفرعية في هذا الحقل. ستجد سجل الحذف المقترح في صفحة المستخدم الخاصة بك على النحو التالي: User:<i>اسم المستخدم</i>/<i>اسم الصفحة الفرعية</i>. يعمل هذا الخيار فقط إذا قمت بتفعيل سجل الحذف المقترح.',
 					type: 'string'
 				}
 			]
 		},
 
 		{
-			title: 'Revert and rollback',
-			module: 'rollback',
+			title: "التراجع والاسترجاع",
+			module: "rollback",
 			preferences: [
 				// TwinkleConfig.autoMenuAfterRollback (bool)
 				// Option to automatically open the warning menu if the user talk page is opened post-reversion
 				{
-					name: 'autoMenuAfterRollback',
-					label: 'Automatically open the Twinkle warn menu on a user talk page after Twinkle rollback',
-					helptip: 'Only operates if the relevant box is checked below.',
-					type: 'boolean'
+					name: "autoMenuAfterRollback",
+					label: "فتح قائمة التحذير في Twinkle تلقائيًا على صفحة نقاش المستخدم بعد التراجع باستخدام Twinkle",
+					helptip: "يعمل فقط إذا تم تحديد المربع المناسب أدناه.",
+					type: "boolean"
 				},
-
 				// TwinkleConfig.openTalkPage (array)
 				// What types of actions that should result in opening of talk page
 				{
-					name: 'openTalkPage',
-					label: 'Open user talk page after these types of reversions',
-					type: 'set',
-					setValues: { agf: 'AGF rollback', norm: 'Normal rollback', vand: 'Vandalism rollback' }
+					name: "openTalkPage",
+					label: "فتح صفحة نقاش المستخدم بعد هذه الأنواع من التراجعات",
+					type: "set",
+					setValues: { agf: "تراجع حسن النية", norm: "تراجع عادي", vand: "تراجع عن تخريب" }
 				},
 
 				// TwinkleConfig.openTalkPageOnAutoRevert (bool)
 				// Defines if talk page should be opened when calling revert from contribs or recent changes pages. If set to true, openTalkPage defines then if talk page will be opened.
 				{
-					name: 'openTalkPageOnAutoRevert',
-					label: 'Open user talk page when invoking rollback from user contributions or recent changes',
-					helptip: 'When this is on, the desired options must be enabled in the previous setting for this to work.',
-					type: 'boolean'
+					name: "openTalkPageOnAutoRevert",
+					label: "فتح صفحة نقاش المستخدم عند التراجع من مساهمات المستخدم أو أحدث التغييرات",
+					helptip: "عند تفعيل هذا الخيار، يجب تمكين الخيارات المطلوبة في الإعداد السابق لكي يعمل.",
+					type: "boolean"
 				},
 
 				// TwinkleConfig.rollbackInPlace (bool)
 				//
 				{
-					name: 'rollbackInPlace',
-					label: "Don't reload the page when rolling back from contributions or recent changes",
-					helptip: "When this is on, Twinkle won't reload the contributions or recent changes feed after reverting, allowing you to revert more than one edit at a time.",
-					type: 'boolean'
+					name: "rollbackInPlace",
+					label: "عدم إعادة تحميل الصفحة عند التراجع من المساهمات أو أحدث التغييرات",
+					helptip: "عند تفعيل هذا الخيار، لن يقوم Twinkle بإعادة تحميل المساهمات أو أحدث التغييرات بعد التراجع، مما يسمح لك بالتراجع عن أكثر من تعديل في نفس الوقت.",
+					type: "boolean"
 				},
-
 				// TwinkleConfig.markRevertedPagesAsMinor (array)
 				// What types of actions that should result in marking edit as minor
 				{
-					name: 'markRevertedPagesAsMinor',
-					label: 'Mark as minor edit for these types of reversions',
-					type: 'set',
-					setValues: { agf: 'AGF rollback', norm: 'Normal rollback', vand: 'Vandalism rollback', torev: '"Restore this version"' }
+					name: "markRevertedPagesAsMinor",
+					label: "اعتبار التعديلات الطفيفة لهذه الأنواع من التراجعات",
+					type: "set",
+					setValues: { agf: "تراجع حسن النية", norm: "تراجع عادي", vand: "تراجع عن تخريب", torev: "«استرجاع هذا الإصدار»" }
 				},
-
 				// TwinkleConfig.watchRevertedPages (array)
 				// What types of actions that should result in forced addition to watchlist
 				{
-					name: 'watchRevertedPages',
-					label: 'Add pages to watchlist for these types of reversions',
-					type: 'set',
-					setValues: { agf: 'AGF rollback', norm: 'Normal rollback', vand: 'Vandalism rollback', torev: '"Restore this version"' }
+					name: "watchRevertedPages",
+					label: "إضافة الصفحات إلى قائمة المراقبة لهذه الأنواع من التراجعات",
+					type: "set",
+					setValues: { agf: "تراجع حسن النية", norm: "تراجع عادي", vand: "تراجع عن تخريب", torev: "«استرجاع هذا الإصدار»" }
 				},
 				// TwinkleConfig.watchRevertedExpiry
 				// If any of the above items are selected, whether to expire the watch
 				{
-					name: 'watchRevertedExpiry',
-					label: 'When reverting a page, how long to watch it for',
-					type: 'enum',
+					name: "watchRevertedExpiry",
+					label: "مدة مراقبة الصفحة بعد التراجع عنها",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
-
 				// TwinkleConfig.offerReasonOnNormalRevert (boolean)
 				// If to offer a prompt for extra summary reason for normal reverts, default to true
 				{
-					name: 'offerReasonOnNormalRevert',
-					label: 'Prompt for reason for normal rollbacks',
-					helptip: '"Normal" rollbacks are the ones that are invoked from the middle [rollback] link.',
-					type: 'boolean'
+					name: "offerReasonOnNormalRevert",
+					label: "طلب سبب عند التراجع العادي",
+					helptip: "التراجعات «العادية» هي التي يتم تنفيذها من رابط [تراجع] في المنتصف.",
+					type: "boolean"
 				},
-
 				{
-					name: 'confirmOnRollback',
-					label: 'Require confirmation before reverting (all devices)',
-					helptip: 'For users of pen or touch devices, and chronically indecisive people.',
-					type: 'boolean'
+					name: "confirmOnRollback",
+					label: "طلب تأكيد قبل التراجع (جميع الأجهزة)",
+					helptip: "مفيد لمستخدمي الأجهزة التي تعمل بالقلم أو اللمس، وللأشخاص المترددين دائمًا.",
+					type: "boolean"
 				},
-
 				{
-					name: 'confirmOnMobileRollback',
-					label: 'Require confirmation before reverting (mobile devices only)',
-					helptip: 'Avoid accidental reversions when on mobile devices.',
-					type: 'boolean'
+					name: "confirmOnMobileRollback",
+					label: "طلب تأكيد قبل التراجع (الأجهزة المحمولة فقط)",
+					helptip: "تجنب التراجعات غير المقصودة عند استخدام الأجهزة المحمولة.",
+					type: "boolean"
 				},
-
 				// TwinkleConfig.showRollbackLinks (array)
 				// Where Twinkle should show rollback links:
 				// diff, others, mine, contribs, history, recent
 				// Note from TTO: |contribs| seems to be equal to |others| + |mine|, i.e. redundant, so I left it out heres
 				{
-					name: 'showRollbackLinks',
-					label: 'Show rollback links on these pages',
-					type: 'set',
-					setValues: { diff: 'Diff pages', others: 'Contributions pages of other users', mine: 'My contributions page', recent: 'Recent changes and related changes special pages', history: 'History pages' }
+					name: "showRollbackLinks",
+					label: "عرض روابط التراجع في هذه الصفحات",
+					type: "set",
+					setValues: { diff: "صفحات الفروقات", others: "صفحات مساهمات المستخدمين الآخرين", mine: "صفحة مساهماتي", recent: "صفحات أحدث التغييرات والتغييرات ذات الصلة", history: "صفحات التاريخ" }
+				}
+			]
+		},
+		{
+			title: "وسم عناوين IP المشتركة",
+			module: "shared",
+			preferences: [
+				{
+					name: "markSharedIPAsMinor",
+					label: "اعتبار وسم عناوين IP المشتركة تعديلاً طفيفًا",
+					type: "boolean"
 				}
 			]
 		},
 
 		{
-			title: 'Shared IP tagging',
-			module: 'shared',
+			title: "الحذف السريع (CSD)",
+			module: "speedy",
 			preferences: [
 				{
-					name: 'markSharedIPAsMinor',
-					label: 'Mark shared IP tagging as a minor edit',
-					type: 'boolean'
-				}
-			]
-		},
-
-		{
-			title: 'Speedy deletion (CSD)',
-			module: 'speedy',
-			preferences: [
-				{
-					name: 'speedySelectionStyle',
-					label: 'When to go ahead and tag/delete the page',
-					type: 'enum',
-					enumValues: { buttonClick: 'When I click "Submit"', radioClick: 'As soon as I click an option' }
+					name: "speedySelectionStyle",
+					label: "متى يتم وضع الوسم/حذف الصفحة",
+					type: "enum",
+					enumValues: { buttonClick: "عند النقر على \"إرسال\"", radioClick: "بمجرد اختيار الخيار" }
 				},
 
 				// TwinkleConfig.watchSpeedyPages (array)
 				// Whether to add speedy tagged or deleted pages to watchlist
 				{
-					name: 'watchSpeedyPages',
-					label: 'Add page to watchlist when using these criteria',
-					type: 'set',
-					setValues: Twinkle.config.commonSets.csdCriteria,
-					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaDisplayOrder
+					name: "watchSpeedyPages",
+					label: "إضافة الصفحة إلى قائمة المراقبة عند استخدام هذه المعايير",
+					type: "set",
+					setValues: "Twinkle.config.commonSets.csdCriteria",
+					setDisplayOrder: "Twinkle.config.commonSets.csdCriteriaDisplayOrder"
 				},
 				// TwinkleConfig.watchSpeedyExpiry
 				// If any of the above items are selected, whether to expire the watch
 				{
-					name: 'watchSpeedyExpiry',
-					label: 'When tagging a page, how long to watch it for',
-					type: 'enum',
+					name: "watchSpeedyExpiry",
+					label: "مدة مراقبة الصفحة عند وضع وسم الحذف",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 
 				// TwinkleConfig.markSpeedyPagesAsPatrolled (boolean)
 				// If, when applying speedy template to page, to mark the page as triaged/patrolled (if the page was reached from NewPages)
 				{
-					name: 'markSpeedyPagesAsPatrolled',
-					label: 'Mark page as patrolled/reviewed when tagging (if possible)',
-					helptip: 'This should probably not be checked as doing so is against best practice consensus',
-					type: 'boolean'
+					name: "markSpeedyPagesAsPatrolled",
+					label: "وضع علامة مراجعة للصفحة عند وسمها (إن أمكن)",
+					helptip: "يُفضَّل عدم تفعيل هذا الخيار لأنه يتعارض مع أفضل الممارسات المتفق عليها.",
+					type: "boolean"
 				},
 
 				// TwinkleConfig.watchSpeedyUser (string)
 				// The watchlist setting of the user talk page if they receive a notification.
 				{
-					name: 'watchSpeedyUser',
-					label: 'Add user talk page of initial contributor to watchlist (when notifying)',
-					type: 'enum',
+					name: "watchSpeedyUser",
+					label: "إضافة صفحة نقاش المساهم الأصلي إلى قائمة المراقبة (عند الإخطار)",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 
@@ -495,10 +493,10 @@
 				// On what types of speedy deletion notifications shall the user be welcomed
 				// with a "firstarticle" notice if their talk page has not yet been created.
 				{
-					name: 'welcomeUserOnSpeedyDeletionNotification',
-					label: 'Welcome page creator when notifying with these criteria',
-					helptip: 'The welcome is issued only if the user is notified about the deletion, and only if their talk page does not already exist. The template used is {{firstarticle}}.',
-					type: 'set',
+					name: "welcomeUserOnSpeedyDeletionNotification",
+					label: "ترحيب بمنشئ الصفحة عند الإخطار بهذه المعايير",
+					helptip: "يتم الترحيب فقط إذا تم إخطار المستخدم بالحذف، وفقط إذا لم تكن صفحة نقاشه موجودة. القالب المستخدم هو {{firstarticle}}.",
+					type: "set",
 					setValues: Twinkle.config.commonSets.csdCriteriaNotification,
 					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaNotificationDisplayOrder
 				},
@@ -506,10 +504,10 @@
 				// TwinkleConfig.notifyUserOnSpeedyDeletionNomination (array)
 				// What types of actions should result in the author of the page being notified of nomination
 				{
-					name: 'notifyUserOnSpeedyDeletionNomination',
-					label: 'Notify page creator when tagging with these criteria',
-					helptip: 'Even if you choose to notify from the CSD screen, the notification will only take place for those criteria selected here.',
-					type: 'set',
+					name: "notifyUserOnSpeedyDeletionNomination",
+					label: "إخطار منشئ الصفحة عند وسمها بهذه المعايير",
+					helptip: "حتى إذا اخترت الإخطار من شاشة CSD، سيتم الإخطار فقط للمعايير المحددة هنا.",
+					type: "set",
 					setValues: Twinkle.config.commonSets.csdCriteriaNotification,
 					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaNotificationDisplayOrder
 				},
@@ -517,9 +515,9 @@
 				// TwinkleConfig.warnUserOnSpeedyDelete (array)
 				// What types of actions should result in the author of the page being notified of speedy deletion (admin only)
 				{
-					name: 'warnUserOnSpeedyDelete',
-					label: 'Notify page creator when deleting under these criteria',
-					helptip: 'Even if you choose to notify from the CSD screen, the notification will only take place for those criteria selected here.',
+					name: "warnUserOnSpeedyDelete",
+					label: "إخطار منشئ الصفحة عند حذفها وفقًا لهذه المعايير",
+					helptip: "حتى إذا اخترت الإخطار من شاشة CSD، سيتم الإخطار فقط للمعايير المحددة هنا.",
 					adminOnly: true,
 					type: 'set',
 					setValues: Twinkle.config.commonSets.csdCriteriaNotification,
@@ -528,8 +526,8 @@
 
 				// TwinkleConfig.promptForSpeedyDeletionSummary (array of strings)
 				{
-					name: 'promptForSpeedyDeletionSummary',
-					label: 'Allow editing of deletion summary when deleting under these criteria',
+					name: "promptForSpeedyDeletionSummary",
+					label: "السماح بتعديل ملخص الحذف عند الحذف وفقًا لهذه المعايير",
 					adminOnly: true,
 					type: 'set',
 					setValues: Twinkle.config.commonSets.csdAndImageDeletionCriteria,
@@ -539,15 +537,14 @@
 				// TwinkleConfig.deleteTalkPageOnDelete (boolean)
 				// If talk page if exists should also be deleted (CSD G8) when spedying a page (admin only)
 				{
-					name: 'deleteTalkPageOnDelete',
-					label: 'Check the "also delete talk page" box by default',
+					name: "deleteTalkPageOnDelete",
+					label: "تحديد مربع \"حذف صفحة النقاش أيضًا\" بشكل افتراضي",
 					adminOnly: true,
 					type: 'boolean'
 				},
-
 				{
-					name: 'deleteRedirectsOnDelete',
-					label: 'Check the "also delete redirects" box by default',
+					name: "deleteRedirectsOnDelete",
+					label: "تحديد مربع \"حذف التحويلات أيضًا\" بشكل افتراضي",
 					adminOnly: true,
 					type: 'boolean'
 				},
@@ -555,9 +552,9 @@
 				// TwinkleConfig.deleteSysopDefaultToDelete (boolean)
 				// Make the CSD screen default to "delete" instead of "tag" (admin only)
 				{
-					name: 'deleteSysopDefaultToDelete',
-					label: 'Default to outright deletion instead of speedy tagging',
-					helptip: 'If there is a CSD tag already present, Twinkle will always default to "delete" mode',
+					name: "deleteSysopDefaultToDelete",
+					label: "تحديد الحذف المباشر كخيار افتراضي بدلاً من وسم الحذف السريع",
+					helptip: "إذا كان هناك وسم CSD موجود مسبقًا، فسيكون وضع \"الحذف\" هو الافتراضي دائمًا.",
 					adminOnly: true,
 					type: 'boolean'
 				},
@@ -565,36 +562,35 @@
 				// TwinkleConfig.speedyWindowWidth (integer)
 				// Defines the width of the Twinkle SD window in pixels
 				{
-					name: 'speedyWindowWidth',
-					label: 'Width of speedy deletion window (pixels)',
-					type: 'integer'
+					name: "speedyWindowWidth",
+					label: "عرض نافذة الحذف السريع (بالبكسل)",
+					type: "integer"
 				},
 
 				// TwinkleConfig.speedyWindowWidth (integer)
 				// Defines the width of the Twinkle SD window in pixels
 				{
-					name: 'speedyWindowHeight',
-					label: 'Height of speedy deletion window (pixels)',
-					helptip: 'If you have a big monitor, you might like to increase this.',
-					type: 'integer'
-				},
-
-				{
-					name: 'logSpeedyNominations',
-					label: 'Keep a log in userspace of all CSD nominations',
-					helptip: 'Since non-admins do not have access to their deleted contributions, the userspace log offers a good way to keep track of all pages you nominate for CSD using Twinkle. Files tagged using DI are also added to this log.',
-					type: 'boolean'
+					name: "speedyWindowHeight",
+					label: "ارتفاع نافذة الحذف السريع (بالبكسل)",
+					helptip: "إذا كان لديك شاشة كبيرة، قد ترغب في زيادة هذا الرقم.",
+					type: "integer"
 				},
 				{
-					name: 'speedyLogPageName',
-					label: 'Keep the CSD userspace log at this user subpage',
-					helptip: 'Enter a subpage name in this box. You will find your CSD log at User:<i>username</i>/<i>subpage name</i>. Only works if you turn on the CSD userspace log.',
-					type: 'string'
+					name: "logSpeedyNominations",
+					label: "الاحتفاظ بسجل في نطاق المستخدم لجميع طلبات الحذف السريع",
+					helptip: "نظرًا لأن المستخدمين غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، فإن سجل المستخدم يوفر طريقة جيدة لتتبع جميع الصفحات التي تم ترشيحها للحذف السريع باستخدام Twinkle. يتم أيضًا تسجيل الملفات الموسومة باستخدام DI.",
+					type: "boolean"
 				},
 				{
-					name: 'noLogOnSpeedyNomination',
-					label: 'Do not create a userspace log entry when tagging with these criteria',
-					type: 'set',
+					name: "speedyLogPageName",
+					label: "الاحتفاظ بسجل الحذف السريع في هذه الصفحة الفرعية للمستخدم",
+					helptip: "أدخل اسم الصفحة الفرعية في هذا الحقل. ستجد سجل CSD الخاص بك في المستخدم:<i>اسم المستخدم</i>/<i>اسم الصفحة الفرعية</i>. يعمل فقط إذا قمت بتفعيل سجل الحذف السريع في نطاق المستخدم.",
+					type: "string"
+				},
+				{
+					name: "noLogOnSpeedyNomination",
+					label: "عدم إنشاء سجل في نطاق المستخدم عند وسم الصفحات بهذه المعايير",
+					type: "set",
 					setValues: Twinkle.config.commonSets.csdAndImageDeletionCriteria,
 					setDisplayOrder: Twinkle.config.commonSets.csdAndImageDeletionCriteriaDisplayOrder
 				}
@@ -602,320 +598,297 @@
 		},
 
 		{
-			title: 'Tag',
-			module: 'tag',
+			title: "الوسم",
+			module: "tag",
 			preferences: [
 				{
-					name: 'watchTaggedVenues',
-					label: 'Add page to watchlist when tagging these type of pages',
-					type: 'set',
-					setValues: { articles: 'Articles', drafts: 'Drafts', redirects: 'Redirects', files: 'Files' }
+					name: "watchTaggedVenues",
+					label: "إضافة الصفحة إلى قائمة المراقبة عند وسم هذه الأنواع من الصفحات",
+					type: "set",
+					setValues: { articles: "المقالات", drafts: "المسودات", redirects: "التحويلات", files: "الملفات" }
 				},
 				{
-					name: 'watchTaggedPages',
-					label: 'When tagging a page, how long to watch it for',
-					type: 'enum',
+					name: "watchTaggedPages",
+					label: "مدة مراقبة الصفحة عند وسمها",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
-					name: 'watchMergeDiscussions',
-					label: 'Add talk pages to watchlist when starting merge discussions',
-					type: 'enum',
+					name: "watchMergeDiscussions",
+					label: "إضافة صفحات النقاش إلى قائمة المراقبة عند بدء نقاشات الدمج",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
-					name: 'markTaggedPagesAsMinor',
-					label: 'Mark addition of tags as a minor edit',
-					type: 'boolean'
+					name: "markTaggedPagesAsMinor",
+					label: "اعتبار تعديل إضافة الوسوم تعديلاً طفيفًا",
+					type: "boolean"
 				},
 				{
-					name: 'markTaggedPagesAsPatrolled',
-					label: 'Check the "mark page as patrolled/reviewed" box by default',
-					type: 'boolean'
+					name: "markTaggedPagesAsPatrolled",
+					label: "تحديد مربع \"وضع علامة مراجعة\" بشكل افتراضي",
+					type: "boolean"
 				},
 				{
-					name: 'groupByDefault',
-					label: 'Check the "group into {{multiple issues}}" box by default',
-					type: 'boolean'
+					name: "groupByDefault",
+					label: "تحديد مربع \"تجميع في {{مشاكل متعددة}}\" بشكل افتراضي",
+					type: "boolean"
 				},
 				{
-					name: 'tagArticleSortOrder',
-					label: 'Default view order for article tags',
-					type: 'enum',
-					enumValues: { cat: 'By categories', alpha: 'In alphabetical order' }
+					name: "tagArticleSortOrder",
+					label: "ترتيب عرض وسوم المقالات الافتراضي",
+					type: "enum",
+					enumValues: { cat: "حسب الفئات", alpha: "حسب الترتيب الأبجدي" }
 				},
 				{
-					name: 'customTagList',
-					label: 'Custom article/draft maintenance tags to display',
-					helptip: "These appear as additional options at the bottom of the list of tags. For example, you could add new maintenance tags which have not yet been added to Twinkle's defaults.",
-					type: 'customList',
-					customListValueTitle: 'Template name (no curly brackets)',
-					customListLabelTitle: 'Text to show in Tag dialog'
+					name: "customTagList",
+					label: "وسوم صيانة المقالات/المسودات المخصصة للعرض",
+					helptip: "تظهر هذه الوسوم كخيارات إضافية في أسفل قائمة الوسوم. يمكنك إضافة وسوم صيانة جديدة لم تُدرج بعد ضمن وسوم Twinkle الافتراضية.",
+					type: "customList",
+					customListValueTitle: "اسم القالب (بدون أقواس معقوفة)",
+					customListLabelTitle: "النص المعروض في مربع الوسم"
 				},
 				{
-					name: 'customFileTagList',
-					label: 'Custom file maintenance tags to display',
-					helptip: 'Additional tags that you wish to add for files.',
-					type: 'customList',
-					customListValueTitle: 'Template name (no curly brackets)',
-					customListLabelTitle: 'Text to show in Tag dialog'
+					name: "customFileTagList",
+					label: "وسوم صيانة الملفات المخصصة للعرض",
+					helptip: "وسوم إضافية ترغب في إضافتها للملفات.",
+					type: "customList",
+					customListValueTitle: "اسم القالب (بدون أقواس معقوفة)",
+					customListLabelTitle: "النص المعروض في مربع الوسم"
 				},
 				{
-					name: 'customRedirectTagList',
-					label: 'Custom redirect category tags to display',
-					helptip: 'Additional tags that you wish to add for redirects.',
-					type: 'customList',
-					customListValueTitle: 'Template name (no curly brackets)',
-					customListLabelTitle: 'Text to show in Tag dialog'
+					name: "customRedirectTagList",
+					label: "وسوم تصنيف التحويلات المخصصة للعرض",
+					helptip: "وسوم إضافية ترغب في إضافتها للتحويلات.",
+					type: "customList",
+					customListValueTitle: "اسم القالب (بدون أقواس معقوفة)",
+					customListLabelTitle: "النص المعروض في مربع الوسم"
 				}
 			]
 		},
 
 		{
-			title: 'Talkback',
-			module: 'talkback',
+			title: "الرد في صفحات النقاش",
+			module: "talkback",
 			preferences: [
 				{
-					name: 'markTalkbackAsMinor',
-					label: 'Mark talkbacks as minor edits',
-					type: 'boolean'
+					name: "markTalkbackAsMinor",
+					label: "اعتبار الردود في صفحات النقاش تعديلات طفيفة",
+					type: "boolean"
 				},
 				{
-					name: 'insertTalkbackSignature',
-					label: 'Insert signature within talkbacks',
-					type: 'boolean'
+					name: "insertTalkbackSignature",
+					label: "إدراج التوقيع داخل الردود في صفحات النقاش",
+					type: "boolean"
 				},
 				{
-					name: 'talkbackHeading',
-					label: 'Section heading to use for talkback and please see',
-					tooltip: 'Should NOT include the equals signs ("==") used for wikitext formatting',
-					type: 'string'
+					name: "talkbackHeading",
+					label: "عنوان القسم المستخدم في الردود في صفحات النقاش",
+					tooltip: "يجب ألّا يتضمن علامات المساواة (\"==\") المستخدمة في تنسيق ويكي",
+					type: "string"
 				},
 				{
-					name: 'mailHeading',
-					label: "Section heading to use for \"you've got mail\" notices",
-					tooltip: 'Should NOT include the equals signs ("==") used for wikitext formatting',
-					type: 'string'
+					name: "mailHeading",
+					label: "عنوان القسم المستخدم لإشعارات \"لديك رسالة\"",
+					tooltip: "يجب ألّا يتضمن علامات المساواة (\"==\") المستخدمة في تنسيق ويكي",
+					type: "string"
 				}
 			]
 		},
-
 		{
-			title: 'Unlink',
-			module: 'unlink',
+			title: "إلغاء الارتباط",
+			module: "unlink",
 			preferences: [
 				// TwinkleConfig.unlinkNamespaces (array)
 				// In what namespaces unlink should happen, default in 0 (article), 10 (template), 100 (portal), and 118 (draft)
 				{
-					name: 'unlinkNamespaces',
-					label: 'Remove links from pages in these namespaces',
-					helptip: 'Avoid selecting any talk namespaces, as Twinkle might end up unlinking on talk archives (a big no-no).',
-					type: 'set',
+					name: "unlinkNamespaces",
+					label: "إزالة الروابط من الصفحات في هذه النطاقات",
+					helptip: "تجنب تحديد أي نطاقات نقاش، حيث قد يؤدي ذلك إلى إزالة الروابط من الأرشيفات (وهو أمر غير مرغوب فيه).",
+					type: "set",
 					setValues: Twinkle.config.commonSets.namespacesNoSpecial
 				}
 			]
 		},
 
 		{
-			title: 'Warn user',
-			module: 'warn',
+			title: "تحذير المستخدم",
+			module: "warn",
 			preferences: [
 				// TwinkleConfig.defaultWarningGroup (int)
 				// Which level warning should be the default selected group, default is 1
 				{
-					name: 'defaultWarningGroup',
-					label: 'Default warning level',
-					type: 'enum',
+					name: "defaultWarningGroup",
+					label: "مستوى التحذير الافتراضي",
+					type: "enum",
 					enumValues: {
-						1: 'Level 1',
-						2: 'Level 2',
-						3: 'Level 3',
-						4: 'Level 4',
-						5: 'Level 4im',
-						6: 'Single-issue notices',
-						7: 'Single-issue warnings',
-						// 8 was used for block templates before #260
-						9: 'Custom warnings',
-						10: 'All warning templates',
-						11: 'Auto-select level (1-4)'
+						1: "المستوى 1",
+						2: "المستوى 2",
+						3: "المستوى 3",
+						4: "المستوى 4",
+						5: "المستوى 4im",
+						6: "إشعارات القضايا الفردية",
+						7: "تحذيرات القضايا الفردية",
+						9: "تحذيرات مخصصة",
+						10: "جميع قوالب التحذير",
+						11: "تحديد المستوى تلقائيًا (1-4)"
 					}
 				},
-
 				// TwinkleConfig.combinedSingletMenus (boolean)
 				// if true, show one menu with both single-issue notices and warnings instead of two separately
 				{
-					name: 'combinedSingletMenus',
-					label: 'Replace the two separate single-issue menus into one combined menu',
-					helptip: 'Selecting either single-issue notices or single-issue warnings as your default will make this your default if enabled.',
-					type: 'boolean'
+					name: "combinedSingletMenus",
+					label: "دمج قوائم الإشعارات والتحذيرات الفردية في قائمة واحدة",
+					helptip: "إذا اخترت الإشعارات أو التحذيرات الفردية كمستوى افتراضي، فسيتم تعيين هذا الخيار افتراضيًا عند التمكين.",
+					type: "boolean"
 				},
-
 				// TwinkleConfig.showSharedIPNotice may take arguments:
 				// true: to show shared ip notice if an IP address
 				// false: to not print the notice
 				{
-					name: 'showSharedIPNotice',
-					label: 'Add extra notice on shared IP talk pages',
-					helptip: 'Notice used is {{Shared IP advice}}',
-					type: 'boolean'
+					name: "showSharedIPNotice",
+					label: "إضافة إشعار إضافي في صفحات نقاش عناوين IP المشتركة",
+					helptip: "يتم استخدام القالب {{نصائح عنوان IP مشترك}}.",
+					type: "boolean"
 				},
-
 				// TwinkleConfig.watchWarnings (string)
 				// Watchlist setting for the page which has been dispatched an warning or notice
 				{
-					name: 'watchWarnings',
-					label: 'Add user talk page to watchlist when notifying',
-					type: 'enum',
+					name: "watchWarnings",
+					label: "إضافة صفحة نقاش المستخدم إلى قائمة المراقبة عند إرسال تحذير",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
 
 				// TwinkleConfig.oldSelect (boolean)
 				// if true, use the native select menu rather the select2-based one
 				{
-					name: 'oldSelect',
-					label: 'Use the non-searchable classic select menu',
-					type: 'boolean'
+					name: "oldSelect",
+					label: "استخدام القائمة الكلاسيكية غير القابلة للبحث",
+					type: "boolean"
 				},
-
 				{
-					name: 'customWarningList',
-					label: 'Custom warning templates to display',
-					helptip: 'You can add individual templates or user subpages. Custom warnings appear in the "Custom warnings" category within the warning dialog box.',
-					type: 'customList',
-					customListValueTitle: 'Template name (no curly brackets)',
-					customListLabelTitle: 'Text to show in warning list (also used as edit summary)'
+					name: "customWarningList",
+					label: "قوالب تحذير مخصصة للعرض",
+					helptip: "يمكنك إضافة قوالب فردية أو صفحات فرعية للمستخدم. ستظهر التحذيرات المخصصة في فئة \"تحذيرات مخصصة\" داخل مربع الحوار.",
+					type: "customList",
+					customListValueTitle: "اسم القالب (بدون أقواس معقوفة)",
+					customListLabelTitle: "النص المعروض في قائمة التحذيرات (يُستخدم أيضًا كملخص تعديل)"
 				}
 			]
 		},
 
 		{
-			title: 'Welcome user',
+			title: 'مرحبًا بالمستخدم',
 			module: 'welcome',
 			preferences: [
 				{
 					name: 'topWelcomes',
-					label: 'Place welcomes above existing content on user talk pages',
+					label: 'وضع الترحيبات أعلى المحتوى الموجود في صفحات نقاش المستخدمين',
 					type: 'boolean'
 				},
 				{
 					name: 'watchWelcomes',
-					label: 'Add user talk pages to watchlist when welcoming',
-					helptip: 'Doing so adds to the personal element of welcoming a user - you will be able to see how they are coping as a newbie, and possibly help them.',
+					label: 'إضافة صفحات نقاش المستخدمين إلى قائمة المراقبة عند الترحيب',
+					helptip: 'يضيف ذلك عنصرًا شخصيًا إلى الترحيب بالمستخدم - ستتمكن من رؤية كيفية تأقلمهم كمبتدئين، وربما مساعدتهم.',
 					type: 'enum',
 					enumValues: Twinkle.config.watchlistEnums
 				},
 				{
 					name: 'insertUsername',
-					label: 'Add your username to the template (where applicable)',
-					helptip: "Some welcome templates have an opening sentence like \"Hi, I'm &lt;username&gt;. Welcome\" etc. If you turn off this option, these templates will not display your username in that way.",
+					label: 'إضافة اسم المستخدم الخاص بك إلى القالب (عند الاقتضاء)',
+					helptip: 'تحتوي بعض قوالب الترحيب على جملة افتتاحية مثل "مرحبًا، أنا &lt;username&gt;. أهلًا وسهلًا" وما إلى ذلك. إذا أوقفت هذا الخيار، فلن تعرض هذه القوالب اسم المستخدم بهذه الطريقة.',
 					type: 'boolean'
 				},
 				{
 					name: 'quickWelcomeMode',
-					label: 'Clicking the "welcome" link on a diff page (which only appears if the editor\'s user talk page has not been created yet) will',
-					helptip: 'If you choose to welcome automatically, the template you specify below will be used.',
+					label: 'النقر على رابط "الترحيب" في صفحة الفرق (والذي يظهر فقط إذا لم يتم إنشاء صفحة نقاش المستخدم بعد) سيؤدي إلى',
+					helptip: 'إذا اخترت الترحيب تلقائيًا، فسيتم استخدام القالب الذي تحدده أدناه.',
 					type: 'enum',
-					enumValues: { auto: 'immediately post the welcome template specified below', norm: 'prompt you to select a template' }
+					enumValues: { auto: 'نشر قالب الترحيب المحدد أدناه فورًا', norm: 'مطالبتك باختيار قالب' }
 				},
 				{
 					name: 'quickWelcomeTemplate',
-					label: 'Template to use when welcoming automatically',
-					helptip: 'Enter the name of a welcome template, without the curly brackets. A link to the given article will be added.',
+					label: 'القالب المستخدم عند الترحيب تلقائيًا',
+					helptip: 'أدخل اسم قالب الترحيب بدون الأقواس المعقوفة. سيتم إضافة رابط إلى المقالة المحددة.',
 					type: 'string'
 				},
 				{
 					name: 'customWelcomeList',
-					label: 'Custom welcome templates to display',
-					helptip: "You can add other welcome templates, or user subpages that are welcome templates (prefixed with \"User:\"). Don't forget that these templates are substituted onto user talk pages.",
+					label: 'قوالب الترحيب المخصصة لعرضها',
+					helptip: 'يمكنك إضافة قوالب ترحيب أخرى، أو صفحات فرعية للمستخدم تحتوي على قوالب ترحيب (مسبوقة بـ "User:"). لا تنسَ أن هذه القوالب يتم استبدالها على صفحات نقاش المستخدمين.',
 					type: 'customList',
-					customListValueTitle: 'Template name (no curly brackets)',
-					customListLabelTitle: 'Text to show in Welcome dialog'
+					customListValueTitle: 'اسم القالب (بدون أقواس معقوفة)',
+					customListLabelTitle: 'النص المعروض في مربع حوار الترحيب'
 				},
 				{
 					name: 'customWelcomeSignature',
-					label: 'Automatically sign custom welcome templates',
-					helptip: 'If your custom welcome templates contain a built-in signature within the template, turn off this option.',
+					label: 'التوقيع تلقائيًا على قوالب الترحيب المخصصة',
+					helptip: 'إذا كانت قوالب الترحيب المخصصة تحتوي على توقيع مدمج داخل القالب، قم بإيقاف هذا الخيار.',
 					type: 'boolean'
 				}
 			]
 		},
 
 		{
-			title: 'XFD (deletion discussions)',
-			module: 'xfd',
+			title: "XFD (مناقشات الحذف)",
+			module: "xfd",
 			preferences: [
 				{
-					name: 'logXfdNominations',
-					label: 'Keep a log in userspace of all pages you nominate for a deletion discussion (XfD)',
-					helptip: 'The userspace log offers a good way to keep track of all pages you nominate for XfD using Twinkle.',
-					type: 'boolean'
+					name: "logXfdNominations",
+					label: "الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي ترشحها لمناقشة الحذف (XfD)",
+					helptip: "يوفر سجل نطاق المستخدم طريقة جيدة لتتبع جميع الصفحات التي ترشحها لـ XfD باستخدام Twinkle.",
+					type: "boolean"
 				},
 				{
-					name: 'xfdLogPageName',
-					label: 'Keep the deletion discussion userspace log at this user subpage',
-					helptip: 'Enter a subpage name in this box. You will find your XfD log at User:<i>username</i>/<i>subpage name</i>. Only works if you turn on the XfD userspace log.',
-					type: 'string'
+					name: "xfdLogPageName",
+					label: "الاحتفاظ بسجل مناقشة الحذف في هذه الصفحة الفرعية للمستخدم",
+					helptip: "أدخل اسم الصفحة الفرعية في هذا المربع. ستجد سجل XfD الخاص بك في User:<i>اسم المستخدم</i>/<i>اسم الصفحة الفرعية</i>. يعمل فقط إذا قمت بتفعيل سجل XfD في نطاق المستخدم.",
+					type: "string"
 				},
 				{
-					name: 'noLogOnXfdNomination',
-					label: 'Do not create a userspace log entry when nominating at this venue',
-					type: 'set',
-					setValues: { afd: 'AfD', tfd: 'TfD', ffd: 'FfD', cfd: 'CfD', cfds: 'CfD/S', mfd: 'MfD', rfd: 'RfD', rm: 'RM' }
+					name: "noLogOnXfdNomination",
+					label: "عدم إنشاء إدخال في سجل نطاق المستخدم عند الترشيح في هذا المكان",
+					type: "set",
+					setValues: { afd: "AfD", tfd: "TfD", ffd: "FfD", cfd: "CfD", cfds: "CfD/S", mfd: "MfD", rfd: "RfD", rm: "RM" }
 				},
-
-				// TwinkleConfig.xfdWatchPage (string)
-				// The watchlist setting of the page being nominated for XfD.
 				{
-					name: 'xfdWatchPage',
-					label: 'Add the nominated page to watchlist',
-					type: 'enum',
+					name: "xfdWatchPage",
+					label: "إضافة الصفحة المرشحة إلى قائمة المراقبة",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
-
-				// TwinkleConfig.xfdWatchDiscussion (string)
-				// The watchlist setting of the newly created XfD page (for those processes that create discussion pages for each nomination),
-				// or the list page for the other processes.
 				{
-					name: 'xfdWatchDiscussion',
-					label: 'Add the deletion discussion page to watchlist',
-					helptip: 'This refers to the discussion subpage (for AfD and MfD) or the daily log page (for TfD, CfD, RfD and FfD)',
-					type: 'enum',
+					name: "xfdWatchDiscussion",
+					label: "إضافة صفحة مناقشة الحذف إلى قائمة المراقبة",
+					helptip: "يشير هذا إلى الصفحة الفرعية للمناقشة (لـ AfD وMfD) أو صفحة السجل اليومي (لـ TfD وCfD وRfD وFfD).",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
-
-				// TwinkleConfig.xfdWatchList (string)
-				// The watchlist setting of the XfD list page, *if* the discussion is on a separate page.
 				{
-					name: 'xfdWatchList',
-					label: 'Add the daily log/list page to the watchlist (AfD and MfD)',
-					helptip: 'This only applies for AfD and MfD, where the discussions are transcluded onto a daily log page (for AfD) or the main MfD page (for MfD).',
-					type: 'enum',
+					name: "xfdWatchList",
+					label: "إضافة صفحة السجل/القائمة اليومية إلى قائمة المراقبة (AfD وMfD)",
+					helptip: "ينطبق هذا فقط على AfD وMfD، حيث يتم تضمين المناقشات في صفحة سجل يومي (لـ AfD) أو الصفحة الرئيسية لـ MfD.",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
-
-				// TwinkleConfig.xfdWatchUser (string)
-				// The watchlist setting of the user talk page if they receive a notification.
 				{
-					name: 'xfdWatchUser',
-					label: 'Add user talk page of initial contributor to watchlist (when notifying)',
-					type: 'enum',
+					name: "xfdWatchUser",
+					label: "إضافة صفحة نقاش المستخدم للمساهم الأول إلى قائمة المراقبة (عند الإخطار)",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
-
-				// TwinkleConfig.xfdWatchRelated (string)
-				// The watchlist setting of the target of a redirect being nominated for RfD.
 				{
-					name: 'xfdWatchRelated',
-					label: "Add the redirect's target page to watchlist (when notifying)",
-					helptip: 'This only applies for RfD, when leaving a notification on the talk page of the target of the redirect',
-					type: 'enum',
+					name: "xfdWatchRelated",
+					label: "إضافة صفحة الهدف لعملية إعادة التوجيه إلى قائمة المراقبة (عند الإخطار)",
+					helptip: "ينطبق هذا فقط على RfD، عند ترك إشعار على صفحة نقاش الهدف لعملية إعادة التوجيه.",
+					type: "enum",
 					enumValues: Twinkle.config.watchlistEnums
 				},
-
 				{
-					name: 'markXfdPagesAsPatrolled',
-					label: 'Mark page as patrolled/reviewed when nominating for AFD (if possible)',
-					type: 'boolean'
+					name: "markXfdPagesAsPatrolled",
+					label: "وضع علامة على الصفحة كمراجعة/دورية عند ترشيحها لـ AFD (إن أمكن)",
+					type: "boolean"
 				}
 			]
 		},
@@ -940,13 +913,13 @@
 				{
 					name: 'batchMax',
 					type: 'integer',
-					adminOnly: true
+					adminOnly: false
 				},
 				// How many pages should be processed at a time by deprod and batchdelete/protect/undelete
 				{
 					name: 'batchChunks',
 					type: 'integer',
-					adminOnly: true
+					adminOnly: false
 				}
 			]
 		}
@@ -976,10 +949,10 @@
 				const contentnotice = document.createElement('p');
 				contentnotice.innerHTML = '<table class="plainlinks morebits-ombox morebits-ombox-content"><tr><td class="morebits-mbox-image">' +
 					'<img alt="" src="https://upload.wikimedia.org/wikipedia/commons/3/38/Imbox_content.png" /></td>' +
-					'<td class="morebits-mbox-text"><p><big><b>Before modifying your settings here,</b> you must remove your old Twinkle and Friendly settings from your personal skin JavaScript.</big></p>' +
-					'<p>To do this, you can <a href="' + mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/' + mw.config.get('skin') +
-						'.js', { action: 'edit' }) + '" target="_blank"><b>edit your personal skin javascript file</b></a> or <a href="' +
-					mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/common.js', { action: 'edit' }) + '" target="_blank"><b>your common.js file</b></a>, removing all lines of code that refer to <code>TwinkleConfig</code> and <code>FriendlyConfig</code>.</p>' +
+					'<td class="morebits-mbox-text"><p><big><b>قبل تعديل إعداداتك هنا،</b> يجب عليك إزالة إعدادات Twinkle و Friendly القديمة من ملف JavaScript الخاص بواجهتك.</big></p>' +
+					'<p>للقيام بذلك، يمكنك <a href="' + mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/' + mw.config.get('skin') +
+						'.js', { action: 'edit' }) + '" target="_blank"><b>تعديل ملف JavaScript الخاص بواجهتك</b></a> أو <a href="' +
+					mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/common.js', { action: 'edit' }) + '" target="_blank"><b>ملف common.js الخاص بك</b></a>، وإزالة جميع سطور التعليمات البرمجية التي تشير إلى <code>TwinkleConfig</code> و <code>FriendlyConfig</code>.</p>' +
 					'</td></tr></table>';
 				contentdiv.appendChild(contentnotice);
 			}
@@ -992,7 +965,7 @@
 			const toctitle = document.createElement('div');
 			toctitle.id = 'toctitle';
 			const toch2 = document.createElement('h2');
-			toch2.textContent = 'Contents ';
+			toch2.textContent = 'المحتويات ';
 			toctitle.appendChild(toch2);
 			// add TOC show/hide link
 			const toctoggle = document.createElement('span');
@@ -1001,7 +974,7 @@
 			const toctogglelink = document.createElement('a');
 			toctogglelink.className = 'internal';
 			toctogglelink.setAttribute('href', '#tw-tocshowhide');
-			toctogglelink.textContent = 'hide';
+			toctogglelink.textContent = 'إخفاء';
 			toctoggle.appendChild(toctogglelink);
 			toctoggle.appendChild(document.createTextNode(']'));
 			toctitle.appendChild(toctoggle);
@@ -1012,9 +985,9 @@
 				const $tocul = $(tocul);
 				$tocul.toggle();
 				if ($tocul.find(':visible').length) {
-					toctogglelink.textContent = 'hide';
+					toctogglelink.textContent = 'إخفاء';
 				} else {
-					toctogglelink.textContent = 'show';
+					toctogglelink.textContent = 'إظهار';
 				}
 			}, false);
 			toctable.appendChild(tocul);
@@ -1219,12 +1192,12 @@
 								value: gotPref,
 								pref: pref
 							});
-							button.appendChild(document.createTextNode('Edit items'));
+							button.appendChild(document.createTextNode('تعديل العناصر'));
 							cell.appendChild(button);
 							break;
 
 						default:
-							alert('twinkleconfig: unknown data type for preference ' + pref.name);
+							alert('twinkleconfig: نوع بيانات غير معروف للتفضيل ' + pref.name);
 							break;
 					}
 					row.appendChild(cell);
@@ -1246,7 +1219,7 @@
 						resetlink.addEventListener('click', Twinkle.config.resetPrefLink, false);
 						resetlink.style.cssFloat = 'right';
 						resetlink.style.margin = '0 0.6em';
-						resetlink.appendChild(document.createTextNode('Reset'));
+						resetlink.appendChild(document.createTextNode('إعادة تعيين'));
 						cell.appendChild(resetlink);
 					}
 					row.appendChild(cell);
@@ -1262,7 +1235,7 @@
 			const button = document.createElement('button');
 			button.setAttribute('id', 'twinkle-config-submit');
 			button.setAttribute('type', 'submit');
-			button.appendChild(document.createTextNode('Save changes'));
+			button.appendChild(document.createTextNode('حفظ التغييرات'));
 			footerbox.appendChild(button);
 			const footerspan = document.createElement('span');
 			footerspan.className = 'plainlinks';
@@ -1272,7 +1245,7 @@
 			footera.setAttribute('href', '#tw-reset-all');
 			footera.setAttribute('id', 'twinkle-config-resetall');
 			footera.addEventListener('click', Twinkle.config.resetAllPrefs, false);
-			footera.appendChild(document.createTextNode('Restore defaults'));
+			footera.appendChild(document.createTextNode('استعادة الافتراضيات'));
 			footerspan.appendChild(footera);
 			footerbox.appendChild(footerspan);
 			contentform.appendChild(footerbox);
@@ -1303,25 +1276,25 @@
 				box.setAttribute('class', 'config-twopt-box');
 
 				if (mw.config.get('wgArticleId') > 0) { // page exists
-					box.appendChild(document.createTextNode('This page contains your Twinkle preferences. You can change them using the '));
+					box.appendChild(document.createTextNode('تحتوي هذه الصفحة على تفضيلات Twinkle الخاصة بك. يمكنك تغييرها باستخدام '));
 				} else { // page does not exist
-					box.appendChild(document.createTextNode('You can customize Twinkle to suit your preferences by using the '));
+					box.appendChild(document.createTextNode('يمكنك تخصيص Twinkle ليناسب تفضيلاتك باستخدام '));
 				}
 				link = document.createElement('a');
 				link.setAttribute('href', mw.util.getUrl(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceIds').project] + ':Twinkle/Preferences'));
-				link.appendChild(document.createTextNode('Twinkle preferences panel'));
+				link.appendChild(document.createTextNode('لوحة تفضيلات Twinkle'));
 				box.appendChild(link);
-				box.appendChild(document.createTextNode(', or by editing this page.'));
+				box.appendChild(document.createTextNode('، أو عن طريق تعديل هذه الصفحة.'));
 				$(box).insertAfter($('#contentSub'));
 
 			} else if (['monobook', 'vector', 'vector-2022', 'cologneblue', 'modern', 'timeless', 'minerva', 'common'].includes(scriptPageName)) {
 				// place "Looking for Twinkle options?" notice
 				box.setAttribute('class', 'config-userskin-box');
 
-				box.appendChild(document.createTextNode('If you want to set Twinkle preferences, you can use the '));
+				box.appendChild(document.createTextNode('إذا كنت ترغب في تعيين تفضيلات Twinkle، يمكنك استخدام '));
 				link = document.createElement('a');
 				link.setAttribute('href', mw.util.getUrl(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceIds').project] + ':Twinkle/Preferences'));
-				link.appendChild(document.createTextNode('Twinkle preferences panel'));
+				link.appendChild(document.createTextNode('لوحة تفضيلات Twinkle'));
 				box.appendChild(link);
 				box.appendChild(document.createTextNode('.'));
 				$(box).insertAfter($('#contentSub'));
@@ -1547,7 +1520,7 @@
 				break;
 
 			default:
-				alert('twinkleconfig: unknown data type for preference ' + pref.name);
+				alert('تكوين twinkle: نوع بيانات غير معروف للتفضيل ' + pref.name);
 				break;
 		}
 	};
@@ -1572,7 +1545,7 @@
 		Morebits.Status.init(document.getElementById('twinkle-config-content'));
 
 		const userjs = mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceIds').user] + ':' + mw.config.get('wgUserName') + '/twinkleoptions.js';
-		const wikipedia_page = new Morebits.wiki.Page(userjs, 'Saving preferences to ' + userjs);
+		const wikipedia_page = new Morebits.wiki.Page(userjs, 'حفظ التفضيلات في ' + userjs);
 		wikipedia_page.setCallbackParameters(e.target);
 		wikipedia_page.load(Twinkle.config.writePrefs);
 
@@ -1637,7 +1610,7 @@
 							case 'integer': // read from the input box
 								userValue = parseInt(form[pref.name].value, 10);
 								if (isNaN(userValue)) {
-									Morebits.Status.warn('Saving', 'The value you specified for ' + pref.name + ' (' + pref.value + ') was invalid.  The save will continue, but the invalid data value will be skipped.');
+									Morebits.Status.warn('حفظ', 'القيمة التي حددتها لـ ' + pref.name + ' (' + pref.value + ') غير صالحة. سيستمر الحفظ، ولكن سيتم تخطي قيمة البيانات غير الصالحة.');
 									userValue = null;
 								}
 								break;
@@ -1666,7 +1639,7 @@
 								break;
 
 							default:
-								alert('twinkleconfig: unknown data type for preference ' + pref.name);
+								alert('twinkleconfig: نوع بيانات غير معروف للتفضيل ' + pref.name);
 								break;
 						}
 					} else if (Twinkle.prefs) {
@@ -1684,15 +1657,15 @@
 		});
 
 		let text =
-			'// twinkleoptions.js: personal Twinkle preferences file\n' +
+			'// twinkleoptions.js: ملف تفضيلات Twinkle الشخصية\n' +
 			'//\n' +
-			'// NOTE: The easiest way to change your Twinkle preferences is by using the\n' +
-			'// Twinkle preferences panel, at [[' + Morebits.pageNameNorm + ']].\n' +
+			'// NOTE: أسهل طريقة لتغيير تفضيلات Twinkle الخاصة بك هي استخدام\n' +
+			'// لوحة تفضيلات Twinkle، في [[' + Morebits.pageNameNorm + ']].\n' +
 			'//\n' +
-			'// This file is AUTOMATICALLY GENERATED.  Any changes you make (aside from\n' +
-			'// changing the configuration parameters in a valid-JavaScript way) will be\n' +
-			'// overwritten the next time you click "save" in the Twinkle preferences\n' +
-			'// panel.  If modifying this file, make sure to use correct JavaScript.\n' +
+			'// هذا الملف يتم إنشاؤه تلقائيًا. أي تغييرات تجريها (بصرف النظر عن\n' +
+			'// تغيير معلمات التكوين بطريقة JavaScript صالحة) سيتم\n' +
+			'// الكتابة فوقها في المرة التالية التي تنقر فيها على "حفظ" في تفضيلات Twinkle\n' +
+			'// اللوحة. إذا قمت بتعديل هذا الملف، فتأكد من استخدام JavaScript الصحيح.\n' +
 			// eslint-disable-next-line no-useless-concat
 			'// <no' + 'wiki>\n' +
 			'\n' +
@@ -1706,19 +1679,19 @@
 			'// End of twinkleoptions.js\n';
 
 		pageobj.setPageText(text);
-		pageobj.setEditSummary('Saving Twinkle preferences: automatic edit from [[:' + Morebits.pageNameNorm + ']]');
+		pageobj.setEditSummary('حفظ تفضيلات Twinkle: تعديل تلقائي من [[:' + Morebits.pageNameNorm + ']]');
 		pageobj.setChangeTags(Twinkle.changeTags);
 		pageobj.setCreateOption('recreate');
 		pageobj.save(Twinkle.config.saveSuccess);
 	};
 
 	Twinkle.config.saveSuccess = function twinkleconfigSaveSuccess(pageobj) {
-		pageobj.getStatusElement().info('successful');
+		pageobj.getStatusElement().info('تم الحفظ بنجاح');
 
 		const noticebox = document.createElement('div');
 		noticebox.className = 'cdx-message cdx-message--success';
 		noticebox.style.fontSize = '100%';
-		noticebox.innerHTML = '<p><b>Your Twinkle preferences have been saved.</b> To see the changes, you will need to clear your browser cache entirely (see <a href="' + mw.util.getUrl('WP:BYPASS') + '" title="WP:BYPASS">WP:BYPASS</a> for instructions).</p>';
+		noticebox.innerHTML = '<p><b>تم حفظ تفضيلات Twinkle الخاصة بك.</b> لرؤية التغييرات، ستحتاج إلى مسح ذاكرة التخزين المؤقت للمتصفح بالكامل (راجع <a href="' + mw.util.getUrl('WP:BYPASS') + '" title="WP:BYPASS">WP:BYPASS</a> للحصول على التعليمات).</p>';
 		mw.loader.using('mediawiki.htmlform.codex.styles', () => {
 			Morebits.Status.root.appendChild(noticebox);
 		});

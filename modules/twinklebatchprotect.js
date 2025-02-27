@@ -15,18 +15,17 @@
 		if (Morebits.userIsSysop && ((mw.config.get('wgArticleId') > 0 && (mw.config.get('wgNamespaceNumber') === 2 ||
 			mw.config.get('wgNamespaceNumber') === 4)) || mw.config.get('wgNamespaceNumber') === 14 ||
 			mw.config.get('wgCanonicalSpecialPageName') === 'Prefixindex')) {
-			Twinkle.addPortletLink(Twinkle.batchprotect.callback, 'P-batch', 'tw-pbatch', 'Protect pages linked from this page');
+			Twinkle.addPortletLink(Twinkle.batchprotect.callback, 'P-batch', 'tw-pbatch', 'حماية الصفحات المرتبطة من هذه الصفحة');
 		}
 	};
-
 	Twinkle.batchprotect.unlinkCache = {};
 	Twinkle.batchprotect.callback = function twinklebatchprotectCallback() {
 		const Window = new Morebits.SimpleWindow(600, 400);
-		Window.setTitle('Batch protection');
+		Window.setTitle('حماية دفعة');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('Protection policy', 'WP:PROT');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#protect');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#protect');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.batchprotect.callback.evaluate);
 		form.append({
@@ -34,10 +33,10 @@
 			event: Twinkle.protect.formevents.editmodify,
 			list: [
 				{
-					label: 'Modify edit protection',
+					label: 'تعديل حماية التعديل',
 					value: 'editmodify',
 					name: 'editmodify',
-					tooltip: 'Only for existing pages.',
+					tooltip: 'فقط للصفحات الموجودة.',
 					checked: true
 				}
 			]
@@ -45,14 +44,14 @@
 		form.append({
 			type: 'select',
 			name: 'editlevel',
-			label: 'Edit protection:',
+			label: 'حماية التعديل:',
 			event: Twinkle.protect.formevents.editlevel,
 			list: Twinkle.protect.protectionLevels
 		});
 		form.append({
 			type: 'select',
 			name: 'editexpiry',
-			label: 'Expires:',
+			label: 'تنتهي صلاحيته:',
 			event: function (e) {
 				if (e.target.value === 'custom') {
 					Twinkle.protect.doCustomExpiry(e.target);
@@ -66,10 +65,10 @@
 			event: Twinkle.protect.formevents.movemodify,
 			list: [
 				{
-					label: 'Modify move protection',
+					label: 'تعديل حماية النقل',
 					value: 'movemodify',
 					name: 'movemodify',
-					tooltip: 'Only for existing pages.',
+					tooltip: 'فقط للصفحات الموجودة.',
 					checked: true
 				}
 			]
@@ -77,7 +76,7 @@
 		form.append({
 			type: 'select',
 			name: 'movelevel',
-			label: 'Move protection:',
+			label: 'حماية النقل:',
 			event: Twinkle.protect.formevents.movelevel,
 			// Autoconfirmed is required for a move, redundant
 			list: Twinkle.protect.protectionLevels.filter((level) => level.value !== 'autoconfirmed')
@@ -85,7 +84,7 @@
 		form.append({
 			type: 'select',
 			name: 'moveexpiry',
-			label: 'Expires:',
+			label: 'تنتهي صلاحيته:',
 			event: function (e) {
 				if (e.target.value === 'custom') {
 					Twinkle.protect.doCustomExpiry(e.target);
@@ -103,10 +102,10 @@
 			},
 			list: [
 				{
-					label: 'Modify create protection',
+					label: 'تعديل حماية الإنشاء',
 					value: 'createmodify',
 					name: 'createmodify',
-					tooltip: 'Only for pages that do not exist.',
+					tooltip: 'فقط للصفحات التي لا توجد.',
 					checked: true
 				}
 			]
@@ -114,14 +113,14 @@
 		form.append({
 			type: 'select',
 			name: 'createlevel',
-			label: 'Create protection:',
+			label: 'حماية الإنشاء:',
 			event: Twinkle.protect.formevents.createlevel,
 			list: Twinkle.protect.protectionLevels
 		});
 		form.append({
 			type: 'select',
 			name: 'createexpiry',
-			label: 'Expires:',
+			label: 'تنتهي صلاحيته:',
 			event: function (e) {
 				if (e.target.value === 'custom') {
 					Twinkle.protect.doCustomExpiry(e.target);
@@ -137,9 +136,9 @@
 		form.append({
 			type: 'input',
 			name: 'reason',
-			label: 'Reason:',
+			label: 'السبب:',
 			size: 60,
-			tooltip: 'For the protection log and page history.'
+			tooltip: 'لسجل الحماية وسجل الصفحة.'
 		});
 
 		const query = {
@@ -171,7 +170,7 @@
 		Morebits.Status.init(statusdiv);
 		Window.display();
 
-		const statelem = new Morebits.Status('Grabbing list of pages');
+		const statelem = new Morebits.Status('جلب قائمة بالصفحات');
 
 		const wikipedia_api = new Morebits.wiki.Api('loading...', query, ((apiobj) => {
 			const response = apiobj.getResponse();
@@ -184,18 +183,18 @@
 				let editProt;
 
 				if (missing) {
-					metadata.push('page does not exist');
+					metadata.push('الصفحة غير موجودة');
 					editProt = page.protection.filter((pr) => pr.type === 'create' && pr.level === 'sysop').pop();
 				} else {
 					if (page.redirect) {
-						metadata.push('redirect');
+						metadata.push('تحويل');
 					}
 
 					if (page.ns === 6) {
-						metadata.push('uploader: ' + page.imageinfo[0].user);
-						metadata.push('last edit from: ' + page.revisions[0].user);
+						metadata.push('الرافع: ' + page.imageinfo[0].user);
+						metadata.push('آخر تعديل من: ' + page.revisions[0].user);
 					} else {
-						metadata.push(mw.language.convertNumber(page.revisions[0].size) + ' bytes');
+						metadata.push(mw.language.convertNumber(page.revisions[0].size) + ' بايت');
 					}
 
 					editProt = page.protection
@@ -203,24 +202,24 @@
 						.pop();
 				}
 				if (editProt) {
-					metadata.push('fully' + (missing ? ' create' : '') + ' protected' +
-						(editProt.expiry === 'infinity' ? ' indefinitely' : ', expires ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)'));
+					metadata.push('محمي بالكامل' + (missing ? ' إنشاء' : '') + ' ' +
+						(editProt.expiry === 'infinity' ? 'إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)'));
 				}
 
 				const title = page.title;
 				list.push({ label: title + (metadata.length ? ' (' + metadata.join('; ') + ')' : ''), value: title, checked: true, style: editProt ? 'color:red' : '' });
 			});
-			form.append({ type: 'header', label: 'Pages to protect' });
+			form.append({ type: 'header', label: 'الصفحات المراد حمايتها' });
 			form.append({
 				type: 'button',
-				label: 'Select All',
+				label: 'تحديد الكل',
 				event: function (e) {
 					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', true);
 				}
 			});
 			form.append({
 				type: 'button',
-				label: 'Deselect All',
+				label: 'إلغاء تحديد الكل',
 				event: function (e) {
 					$(Morebits.QuickForm.getElements(e.target.form, 'pages')).prop('checked', false);
 				}
@@ -251,21 +250,21 @@
 	Twinkle.batchprotect.currentProtectCounter = 0;
 	Twinkle.batchprotect.currentprotector = 0;
 	Twinkle.batchprotect.callback.evaluate = function twinklebatchprotectCallbackEvaluate(event) {
-		Morebits.wiki.actionCompleted.notice = 'Batch protection is now complete';
+		Morebits.wiki.actionCompleted.notice = 'اكتملت الحماية الدفعية الآن';
 
 		const form = event.target;
 
 		const numProtected = $(Morebits.QuickForm.getElements(form, 'pages'))
 			.filter((index, element) => element.checked && element.nextElementSibling.style.color === 'red')
 			.length;
-		if (numProtected > 0 && !confirm('You are about to act on ' + mw.language.convertNumber(numProtected) + ' fully protected page(s). Are you sure?')) {
+		if (numProtected > 0 && !confirm('أنت على وشك التصرف بشأن ' + mw.language.convertNumber(numProtected) + ' صفحة (صفحات) محمية بالكامل. هل أنت متأكد؟')) {
 			return;
 		}
 
 		const input = Morebits.QuickForm.getInputData(form);
 
 		if (!input.reason) {
-			alert("You've got to give a reason, you rouge admin!");
+			alert('يجب أن تعطي سببًا، أيها المدير المارق!');
 			return;
 		}
 
@@ -273,11 +272,11 @@
 		Morebits.Status.init(form);
 
 		if (input.pages.length === 0) {
-			Morebits.Status.error('Error', 'Nothing to protect, aborting');
+			Morebits.Status.error('خطأ', 'لا يوجد شيء لحمايته، يتم الإحباط');
 			return;
 		}
 
-		const batchOperation = new Morebits.BatchOperation('Applying protection settings');
+		const batchOperation = new Morebits.BatchOperation('تطبيق إعدادات الحماية');
 		batchOperation.setOption('chunkSize', Twinkle.getPref('batchChunks'));
 		batchOperation.setOption('preserveIndividualStatusLines', true);
 		batchOperation.setPageList(input.pages);
@@ -287,7 +286,7 @@
 				titles: pageName,
 				format: 'json'
 			};
-			const wikipedia_api = new Morebits.wiki.Api('Checking if page ' + pageName + ' exists', query,
+			const wikipedia_api = new Morebits.wiki.Api('التحقق مما إذا كانت الصفحة ' + pageName + ' موجودة', query,
 				Twinkle.batchprotect.callbacks.main, null, batchOperation.workerFailure);
 			wikipedia_api.params = $.extend({
 				page: pageName,
@@ -307,7 +306,7 @@
 
 			const exists = !response.query.pages[0].missing;
 
-			const page = new Morebits.wiki.Page(apiobj.params.page, 'Protecting ' + apiobj.params.page);
+			const page = new Morebits.wiki.Page(apiobj.params.page, 'حماية ' + apiobj.params.page);
 			let takenAction = false;
 			if (exists && apiobj.params.editmodify) {
 				page.setEditProtection(apiobj.params.editlevel, apiobj.params.editexpiry);
@@ -322,7 +321,7 @@
 				takenAction = true;
 			}
 			if (!takenAction) {
-				Morebits.Status.warn('Protecting ' + apiobj.params.page, 'page ' + (exists ? 'exists' : 'does not exist') + '; nothing to do, skipping');
+				Morebits.Status.warn('حماية ' + apiobj.params.page, 'الصفحة ' + (exists ? 'موجودة' : 'غير موجودة') + '؛ لا يوجد شيء للقيام به ، يتم التخطي');
 				apiobj.params.batchOperation.workerFailure(apiobj);
 				return;
 			}

@@ -10,7 +10,6 @@
 	 * Active on:              Any page with relevant user name (userspace,
 	 *                         contribs, etc.) and diff pages
 	 */
-
 	Twinkle.welcome = function twinklewelcome() {
 		if (Twinkle.getPrefill('twinklewelcome')) {
 			if (Twinkle.getPrefill('twinklewelcome') === 'auto') {
@@ -57,7 +56,7 @@
 				const welcomeNode = document.createElement('strong');
 				const welcomeLink = document.createElement('a');
 				welcomeLink.appendChild(spanTag('Black', '['));
-				welcomeLink.appendChild(spanTag('Goldenrod', 'welcome'));
+				welcomeLink.appendChild(spanTag('Goldenrod', 'ترحيب'));
 				welcomeLink.appendChild(spanTag('Black', ']'));
 				welcomeNode.appendChild(welcomeLink);
 
@@ -90,7 +89,7 @@
 		if (mw.config.exists('wgRelevantUserName') && !Morebits.ip.isRange(mw.config.get('wgRelevantUserName'))) {
 			Twinkle.addPortletLink(() => {
 				Twinkle.welcome.callback(mw.config.get('wgRelevantUserName'));
-			}, 'Wel', 'twinkle-welcome', 'Welcome user');
+			}, 'Wel', 'twinkle-welcome', 'ترحيب بالمستخدم');
 		}
 	};
 
@@ -106,39 +105,39 @@
 
 		const userTalkPage = mw.config.get('wgFormattedNamespaces')[3] + ':' + mw.config.get('wgRelevantUserName');
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'Welcoming complete, reloading talk page in a few seconds';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الترحيب ، وإعادة تحميل صفحة النقاش في بضع ثوان';
 
-		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'User talk page modification');
+		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setFollowRedirect(true);
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.load(Twinkle.welcome.callbacks.main);
 	};
 
 	Twinkle.welcome.callback = function twinklewelcomeCallback(uid) {
-		if (uid === mw.config.get('wgUserName') && !confirm('Are you really sure you want to welcome yourself?...')) {
+		if (uid === mw.config.get('wgUserName') && !confirm('هل أنت متأكد حقًا من أنك تريد الترحيب بنفسك؟...')) {
 			return;
 		}
 
 		const Window = new Morebits.SimpleWindow(600, 420);
-		Window.setTitle('Welcome user');
+		Window.setTitle('ترحيب بالمستخدم');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('Welcoming Committee', 'WP:WC');
-		Window.addFooterLink('Welcome prefs', 'WP:TW/PREF#welcome');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#welcome');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('لجنة الترحيب', 'WP:WC');
+		Window.addFooterLink('تفضيلات الترحيب', 'WP:TW/PREF#welcome');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#welcome');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.welcome.callback.evaluate);
 
 		form.append({
 			type: 'select',
 			name: 'type',
-			label: 'Type of welcome:',
+			label: 'نوع الترحيب:',
 			event: Twinkle.welcome.populateWelcomeList,
 			list: [
-				{ type: 'option', value: 'standard', label: 'Standard welcomes', selected: !mw.util.isIPAddress(mw.config.get('wgRelevantUserName')) },
-				{ type: 'option', value: 'unregistered', label: 'IP user welcomes', selected: mw.util.isIPAddress(mw.config.get('wgRelevantUserName')) },
-				{ type: 'option', value: 'wikiProject', label: 'WikiProject welcomes' },
-				{ type: 'option', value: 'nonEnglish', label: 'Non-English welcomes' }
+				{ type: 'option', value: 'standard', label: 'ترحيبات قياسية', selected: !mw.util.isIPAddress(mw.config.get('wgRelevantUserName')) },
+				{ type: 'option', value: 'unregistered', label: 'ترحيبات مستخدم IP', selected: mw.util.isIPAddress(mw.config.get('wgRelevantUserName')) },
+				{ type: 'option', value: 'wikiProject', label: 'ترحيبات WikiProject' },
+				{ type: 'option', value: 'nonEnglish', label: 'ترحيبات غير إنجليزية' }
 			]
 		});
 
@@ -151,9 +150,9 @@
 		form.append({
 			type: 'input',
 			name: 'article',
-			label: '* Linked article (if supported by template):',
+			label: '* مقالة مرتبطة (إذا كان القالب يدعمها):',
 			value: Twinkle.getPrefill('vanarticle') || '',
-			tooltip: 'An article might be linked from within the welcome if the template supports it. Leave empty for no article to be linked.  Templates that support a linked article are marked with an asterisk.'
+			tooltip: 'قد يتم ربط مقالة من داخل الترحيب إذا كان القالب يدعمه. اترك فارغًا حتى لا يتم ربط أي مقالة. يتم وضع علامة النجمة على القوالب التي تدعم مقالة مرتبطة.'
 		});
 
 		const previewlink = document.createElement('a');
@@ -161,7 +160,7 @@
 			Twinkle.welcome.callbacks.preview(result); // |result| is defined below
 		});
 		previewlink.style.cursor = 'pointer';
-		previewlink.textContent = 'Preview';
+		previewlink.textContent = 'معاينة';
 		form.append({ type: 'div', name: 'welcomepreview', label: [previewlink] });
 
 		form.append({ type: 'submit' });
@@ -182,7 +181,7 @@
 		const container = new Morebits.QuickForm.Element({ type: 'fragment' });
 
 		if ((type === 'standard' || type === 'unregistered') && Twinkle.getPref('customWelcomeList').length) {
-			container.append({ type: 'header', label: 'Custom welcome templates' });
+			container.append({ type: 'header', label: 'قوالب ترحيب مخصصة' });
 			container.append({
 				type: 'radio',
 				name: 'template',
@@ -218,7 +217,6 @@
 		const vals = Object.values(sets)[0];
 		e.target.form.article.disabled = vals[firstRadio.value] ? !vals[firstRadio.value].linkedArticle : true;
 	};
-
 	// A list of welcome templates and their properties and syntax
 
 	// The four fields that are available are "description", "linkedArticle", "syntax", and "tooltip".
@@ -230,116 +228,116 @@
 
 	Twinkle.welcome.templates = {
 		standard: {
-			'General welcome templates': {
+			'قوالب الترحيب العامة': {
 				welcome: {
-					description: 'standard welcome',
+					description: 'ترحيب قياسي',
 					linkedArticle: true,
 					syntax: '{{subst:welcome|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-retro': {
-					description: 'a welcome message with a small list of helpful links',
+					description: 'رسالة ترحيب مع قائمة صغيرة من الروابط المفيدة',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-retro|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-short': {
-					description: 'a shorter welcome message',
+					description: 'رسالة ترحيب أقصر',
 					syntax: '{{subst:W-short|$EXTRA$}}'
 				},
 				'welcome-cookie': {
-					description: 'a welcome message with some helpful links and a plate of cookies',
+					description: 'رسالة ترحيب مع بعض الروابط المفيدة وصفيحة من ملفات تعريف الارتباط',
 					syntax: '{{subst:welcome cookie}} ~~~~'
 				},
 				welcoming: {
-					description: 'welcome message with tutorial links and basic editing tips',
+					description: 'رسالة ترحيب مع روابط الدروس ونصائح التحرير الأساسية',
 					syntax: '{{subst:Welcoming}}'
 				}
 			},
 
-			'Specific welcome templates': {
+			'قوالب ترحيب محددة': {
 				'welcome-belated': {
-					description: 'welcome for users with more substantial contributions',
+					description: 'ترحيب للمستخدمين ذوي المساهمات الكبيرة',
 					syntax: '{{subst:welcome-belated|$USERNAME$}}'
 				},
 				'welcome student': {
-					description: 'welcome for students editing as part of an educational class project',
+					description: 'ترحيب للطلاب الذين يقومون بالتحرير كجزء من مشروع فصل دراسي تعليمي',
 					syntax: '$HEADER$ {{subst:welcome student|$USERNAME$}} ~~~~'
 				},
 				'welcome teacher': {
-					description: 'welcome for course instructors involved in an educational class project',
+					description: 'ترحيب للمدربين المشاركين في مشروع فصل دراسي تعليمي',
 					syntax: '$HEADER$ {{subst:welcome teacher|$USERNAME$}} ~~~~'
 				},
 				'welcome non-latin': {
-					description: 'welcome for users with a username containing non-Latin characters',
+					description: 'ترحيب للمستخدمين الذين لديهم اسم مستخدم يحتوي على أحرف غير لاتينية',
 					syntax: '{{subst:welcome non-latin|$USERNAME$}} ~~~~'
 				},
 				'welcome mentor': {
-					description: 'welcome for mentor users to give to their mentees',
+					description: 'ترحيب للمستخدمين المرشدين لتقديمه لطلابهم',
 					syntax: '{{subst:mentor welcome|$USERNAME$}} ~~~~'
 				},
 				'welcome draft': {
-					description: 'welcome for users who write draft articles',
+					description: 'ترحيب للمستخدمين الذين يكتبون مقالات مسودة',
 					linkedArticle: true,
 					syntax: '{{subst:welcome draft|art=$ARTICLE$}} ~~~~'
 				}
 			},
 
-			'Problem user welcome templates': {
+			'قوالب الترحيب الخاصة بمستخدم لديه مشكلة': {
 				'first article': {
-					description: 'for someone whose first article did not meet page creation guidelines',
+					description: 'لشخص لم تستوف مقالته الأولى إرشادات إنشاء الصفحة',
 					linkedArticle: true,
 					syntax: '{{subst:first article|$ARTICLE$|$USERNAME$}}'
 				},
 				'welcome-COI': {
-					description: 'for someone who has edited in areas where they may have a conflict of interest',
+					description: 'لشخص قام بالتحرير في مناطق قد يكون لديه فيها تضارب في المصالح',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-COI|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-auto': {
-					description: 'for someone who created an autobiographical article',
+					description: 'لشخص أنشأ مقالاً عن السيرة الذاتية',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-auto|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-copyright': {
-					description: 'for someone who has been adding copyright violations to articles',
+					description: 'لشخص كان يضيف انتهاكات حقوق الطبع والنشر إلى المقالات',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-copyright|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				'welcome-delete': {
-					description: 'for someone who has been removing information from articles',
+					description: 'لشخص كان يزيل معلومات من المقالات',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-delete|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				'welcome-image': {
-					description: 'welcome with additional information about images (policy and procedure)',
+					description: 'ترحيب بمعلومات إضافية حول الصور (السياسة والإجراءات)',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-image|$USERNAME$|art=$ARTICLE$}}'
 				},
 				'welcome-unsourced': {
-					description: 'for someone whose initial efforts are unsourced',
+					description: 'لشخص كانت جهوده الأولية غير موثقة',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unsourced|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				welcomelaws: {
-					description: 'welcome with information about copyrights, NPOV, the sandbox, and vandalism',
+					description: 'ترحيب بمعلومات حول حقوق الطبع والنشر وNPOV والميدان والتخريب',
 					syntax: '{{subst:welcomelaws|$USERNAME$}} ~~~~'
 				},
 				welcomenpov: {
-					description: 'for someone whose initial efforts do not adhere to the neutral point of view policy',
+					description: 'لشخص لم تلتزم جهوده الأولية بسياسة وجهة النظر المحايدة',
 					linkedArticle: true,
 					syntax: '{{subst:welcomenpov|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				welcomevandal: {
-					description: 'for someone whose initial efforts appear to be vandalism',
+					description: 'لشخص بدت جهوده الأولية وكأنها تخريب',
 					linkedArticle: true,
 					syntax: '{{subst:welcomevandal|$ARTICLE$|$USERNAME$}}'
 				},
 				welcomespam: {
-					description: 'welcome with additional discussion of anti-spamming policies',
+					description: 'ترحيب مع مناقشة إضافية لسياسات مكافحة الرسائل غير المرغوب فيها',
 					linkedArticle: true,
 					syntax: '{{subst:welcomespam|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				welcometest: {
-					description: 'for someone whose initial efforts appear to be tests',
+					description: 'لشخص بدت جهوده الأولية وكأنها اختبارات',
 					linkedArticle: true,
 					syntax: '{{subst:welcometest|$ARTICLE$|$USERNAME$}} ~~~~'
 				}
@@ -347,39 +345,39 @@
 		},
 
 		unregistered: {
-			'Unregistered user welcome templates': {
+			'قوالب ترحيب المستخدمين غير المسجلين': {
 				'welcome-unregistered': {
-					description: 'for unregistered users; encourages creating an account',
+					description: 'للمستخدمين غير المسجلين ؛ تشجع على إنشاء حساب',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered|art=$ARTICLE$}} ~~~~'
 				},
 				thanks: {
-					description: 'for unregistered users; short; encourages creating an account',
+					description: 'للمستخدمين غير المسجلين؛ قصير؛ يشجع على إنشاء حساب',
 					linkedArticle: true,
-					syntax: '== Welcome! ==\n{{subst:thanks|page=$ARTICLE$}} ~~~~'
+					syntax: '== اهلا بك! ==\n{{subst:thanks|page=$ARTICLE$}} ~~~~'
 				},
 				'welcome-unregistered-test': {
-					description: 'for unregistered users who have performed test edits',
+					description: 'للمستخدمين غير المسجلين الذين قاموا بإجراء تعديلات تجريبية',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered-test|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				'welcome-unregistered-unconstructive': {
-					description: 'for unregistered users who have vandalized or made unhelpful edits',
+					description: 'للمستخدمين غير المسجلين الذين قاموا بتخريب أو إجراء تعديلات غير مفيدة',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered-unconstructive|$ARTICLE$|$USERNAME$}}'
 				},
 				'welcome-unregistered-constructive': {
-					description: 'for unregistered users who fight vandalism or edit constructively',
+					description: 'للمستخدمين غير المسجلين الذين يكافحون التخريب أو التحرير بشكل بناء',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered-constructive|art=$ARTICLE$}}'
 				},
 				'welcome-unregistered-delete': {
-					description: 'for unregistered users who have removed content from pages',
+					description: 'للمستخدمين غير المسجلين الذين أزالوا محتوى من الصفحات',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered-delete|$ARTICLE$|$USERNAME$}} ~~~~'
 				},
 				'welcome-unregistered-unsourced': {
-					description: 'for anonymous users who have added unsourced content',
+					description: 'للمستخدمين المجهولين الذين أضافوا محتوى غير موثوق',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered-unsourced|$ARTICLE$|$USERNAME$}}'
 				}
@@ -387,258 +385,258 @@
 		},
 
 		wikiProject: {
-			'WikiProject-specific welcome templates': {
+			'قوالب الترحيب الخاصة بـ WikiProject': {
 				'TWA invite': {
-					description: 'invite the user to The Wikipedia Adventure (not a welcome template)',
+					description: 'ادع المستخدم إلى The Wikipedia Adventure (ليس قالب ترحيب)',
 					syntax: '{{subst:WP:TWA/InviteTW|signature=~~~~}}'
 				},
 				'welcome-anatomy': {
-					description: 'welcome for users with an apparent interest in anatomy topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات التشريح',
 					syntax: '{{subst:welcome-anatomy}} ~~~~'
 				},
 				'welcome-athletics': {
-					description: 'welcome for users with an apparent interest in athletics (track and field) topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات ألعاب القوى (المضمار والميدان)',
 					syntax: '{{subst:welcome-athletics}}'
 				},
 				'welcome-au': {
-					description: 'welcome for users with an apparent interest in Australia topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات أستراليا',
 					syntax: '{{subst:welcome-au}} ~~~~'
 				},
 				'welcome-bd': {
-					description: 'welcome for users with an apparent interest in Bangladesh topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات بنغلاديش',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-bd|$USERNAME$||$EXTRA$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-bio': {
-					description: 'welcome for users with an apparent interest in biographical topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات السيرة الذاتية',
 					syntax: '{{subst:welcome-bio}} ~~~~'
 				},
 				'welcome-cal': {
-					description: 'welcome for users with an apparent interest in California topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات كاليفورنيا',
 					syntax: '{{subst:welcome-cal}} ~~~~'
 				},
 				'welcome-conserv': {
-					description: 'welcome for users with an apparent interest in conservatism topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات المحافظة',
 					syntax: '{{subst:welcome-conserv}}'
 				},
 				'welcome-cycling': {
-					description: 'welcome for users with an apparent interest in cycling topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات ركوب الدراجات',
 					syntax: '{{subst:welcome-cycling}} ~~~~'
 				},
 				'welcome-dbz': {
-					description: 'welcome for users with an apparent interest in Dragon Ball topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات Dragon Ball',
 					syntax: '{{subst:welcome-dbz|$EXTRA$|sig=~~~~}}'
 				},
 				'welcome-et': {
-					description: 'welcome for users with an apparent interest in Estonia topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات إستونيا',
 					syntax: '{{subst:welcome-et}}'
 				},
 				'welcome-de': {
-					description: 'welcome for users with an apparent interest in Germany topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات ألمانيا',
 					syntax: '{{subst:welcome-de}} ~~~~'
 				},
 				'welcome-in': {
-					description: 'welcome for users with an apparent interest in India topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات الهند',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-in|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-math': {
-					description: 'welcome for users with an apparent interest in mathematical topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بالموضوعات الرياضية',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-math|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-med': {
-					description: 'welcome for users with an apparent interest in medicine topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات الطب',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-med|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-no': {
-					description: 'welcome for users with an apparent interest in Norway topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات النرويج',
 					syntax: '{{subst:welcome-no}} ~~~~'
 				},
 				'welcome-pk': {
-					description: 'welcome for users with an apparent interest in Pakistan topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات باكستان',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-pk|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-phys': {
-					description: 'welcome for users with an apparent interest in physics topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات الفيزياء',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-phys|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-pl': {
-					description: 'welcome for users with an apparent interest in Poland topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات بولندا',
 					syntax: '{{subst:welcome-pl}} ~~~~'
 				},
 				'welcome-rugbyunion': {
-					description: 'welcome for users with an apparent interest in rugby union topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات اتحاد الرغبي',
 					syntax: '{{subst:welcome-rugbyunion}} ~~~~'
 				},
 				'welcome-ru': {
-					description: 'welcome for users with an apparent interest in Russia topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات روسيا',
 					syntax: '{{subst:welcome-ru}} ~~~~'
 				},
 				'welcome-starwars': {
-					description: 'welcome for users with an apparent interest in Star Wars topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات حرب النجوم',
 					syntax: '{{subst:welcome-starwars}} ~~~~'
 				},
 				'welcome-ch': {
-					description: 'welcome for users with an apparent interest in Switzerland topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات سويسرا',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-ch|$USERNAME$|art=$ARTICLE$}} ~~~~'
 				},
 				'welcome-uk': {
-					description: 'welcome for users with an apparent interest in Ukraine topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات أوكرانيا',
 					syntax: '{{subst:welcome-uk}} ~~~~'
 				},
 				'welcome-roads': {
-					description: 'welcome for users with an apparent interest in roads and highways topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات الطرق والطرق السريعة',
 					syntax: '{{subst:welcome-roads}}'
 				},
 				'welcome-videogames': {
-					description: 'welcome for users with an apparent interest in video game topics',
+					description: 'ترحيب للمستخدمين الذين يبدون اهتمامًا بموضوعات ألعاب الفيديو',
 					syntax: '{{subst:welcome-videogames}}'
 				},
 				'WikiProject Women in Red invite': {
-					description: 'welcome for users with an interest in writing about women',
+					description: 'ترحيب للمستخدمين المهتمين بالكتابة عن النساء',
 					syntax: '{{subst:WikiProject Women in Red invite|1=~~~~}}'
 				}
 			}
 		},
 
 		nonEnglish: {
-			'Non-English welcome templates': {
+			'قوالب الترحيب غير الإنجليزية': {
 				welcomeen: {
-					description: 'welcome for users whose first language is not listed here',
+					description: 'ترحيب للمستخدمين الذين ليست لغتهم الأولى مدرجة هنا',
 					syntax: '{{subst:welcomeen}}'
 				},
 				'welcomeen-ar': {
-					description: 'welcome for users whose first language appears to be Arabic',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ar}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي العربية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ar}}'
 				},
 				'welcomeen-sq': {
-					description: 'welcome for users whose first language appears to be Albanian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-sq}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الألبانية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-sq}}'
 				},
 				'welcomeen-zh': {
-					description: 'welcome for users whose first language appears to be Chinese',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-zh}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الصينية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-zh}}'
 				},
 				'welcomeen-nl': {
-					description: 'welcome for users whose first language appears to be Dutch',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-nl}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الهولندية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-nl}}'
 				},
 				'welcomeen-fi': {
-					description: 'welcome for users whose first language appears to be Finnish',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-fi}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الفنلندية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-fi}}'
 				},
 				'welcomeen-fr': {
-					description: 'welcome for users whose first language appears to be French',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-fr}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الفرنسية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-fr}}'
 				},
 				'welcomeen-de': {
-					description: 'welcome for users whose first language appears to be German',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-de}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الألمانية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-de}}'
 				},
 				'welcomeen-ha': {
-					description: 'welcome for users whose first language appears to be Hausa',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ha}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الهوسا',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ha}}'
 				},
 				'welcomeen-he': {
-					description: 'welcome for users whose first language appears to be Hebrew',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-he}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي العبرية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-he}}'
 				},
 				'welcomeen-hi': {
-					description: 'welcome for users whose first language appears to be Hindi',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-hi}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الهندية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-hi}}'
 				},
 				'welcomeen-id': {
-					description: 'welcome for users whose first language appears to be Indonesian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-id}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الإندونيسية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-id}}'
 				},
 				'welcomeen-it': {
-					description: 'welcome for users whose first language appears to be Italian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-it}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الإيطالية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-it}}'
 				},
 				'welcomeen-ja': {
-					description: 'welcome for users whose first language appears to be Japanese',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ja}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي اليابانية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ja}}'
 				},
 				'welcomeen-ko': {
-					description: 'welcome for users whose first language appears to be Korean',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ko}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الكورية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ko}}'
 				},
 				'welcomeen-ms': {
-					description: 'welcome for users whose first language appears to be Malay',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ms}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الملايو',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ms}}'
 				},
 				'welcomeen-ml': {
-					description: 'welcome for users whose first language appears to be Malayalam',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ml}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي المالايالامية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ml}}'
 				},
 				'welcomeen-mr': {
-					description: 'welcome for users whose first language appears to be Marathi',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-mr}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي المهاراتية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-mr}}'
 				},
 				'welcomeen-no': {
-					description: 'welcome for users whose first language appears to be Norwegian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-no}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي النرويجية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-no}}'
 				},
 				'welcomeen-or': {
-					description: 'welcome for users whose first language appears to be Oriya (Odia)',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-or}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الأوريا (الأودية)',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-or}}'
 				},
 				'welcomeen-fa': {
-					description: 'welcome for users whose first language appears to be Persian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-fa}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الفارسية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-fa}}'
 				},
 				'welcomeen-pl': {
-					description: 'welcome for users whose first language appears to be Polish',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-pl}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي البولندية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-pl}}'
 				},
 				'welcomeen-pt': {
-					description: 'welcome for users whose first language appears to be Portuguese',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-pt}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي البرتغالية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-pt}}'
 				},
 				'welcomeen-ro': {
-					description: 'welcome for users whose first language appears to be Romanian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ro}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الرومانية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ro}}'
 				},
 				'welcomeen-ru': {
-					description: 'welcome for users whose first language appears to be Russian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ru}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الروسية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ru}}'
 				},
 				'welcomeen-es': {
-					description: 'welcome for users whose first language appears to be Spanish',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-es}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الإسبانية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-es}}'
 				},
 				'welcomeen-sv': {
-					description: 'welcome for users whose first language appears to be Swedish',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-sv}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي السويدية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-sv}}'
 				},
 				'welcomeen-th': {
-					description: 'welcome for users whose first language appears to be Thai',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-th}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي التايلاندية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-th}}'
 				},
 				'welcomeen-tl': {
-					description: 'welcome for users whose first language appears to be Tagalog',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-tl}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي التغالوغية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-tl}}'
 				},
 				'welcomeen-tr': {
-					description: 'welcome for users whose first language appears to be Turkish',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-tr}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي التركية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-tr}}'
 				},
 				'welcomeen-uk': {
-					description: 'welcome for users whose first language appears to be Ukrainian',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-uk}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الأوكرانية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-uk}}'
 				},
 				'welcomeen-ur': {
-					description: 'welcome for users whose first language appears to be Urdu',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-ur}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الأردية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-ur}}'
 				},
 				'welcomeen-vi': {
-					description: 'welcome for users whose first language appears to be Vietnamese',
-					syntax: '== Welcome! ==\n{{subst:welcomeen-vi}}'
+					description: 'ترحيب للمستخدمين الذين يبدو أن لغتهم الأولى هي الفيتنامية',
+					syntax: '== اهلا بك! ==\n{{subst:welcomeen-vi}}'
 				}
 			}
 		}
@@ -668,8 +666,8 @@
 	Twinkle.welcome.callbacks = {
 		preview: function (form) {
 			const previewDialog = new Morebits.SimpleWindow(750, 400);
-			previewDialog.setTitle('Welcome template preview');
-			previewDialog.setScriptName('Welcome user');
+			previewDialog.setTitle('معاينة قالب الترحيب');
+			previewDialog.setScriptName('الترحيب بالمستخدم');
 			previewDialog.setModality(true);
 
 			const previewdiv = document.createElement('div');
@@ -683,7 +681,7 @@
 
 			const submit = document.createElement('input');
 			submit.setAttribute('type', 'submit');
-			submit.setAttribute('value', 'Close');
+			submit.setAttribute('value', 'إغلاق');
 			previewDialog.addContent(submit);
 
 			previewDialog.display();
@@ -698,7 +696,7 @@
 
 			// abort if mode is auto and form is not empty
 			if (pageobj.exists() && params.mode === 'auto') {
-				Morebits.Status.info('Warning', 'User talk page not empty; aborting automatic welcome');
+				Morebits.Status.info('تحذير', 'صفحة نقاش المستخدم ليست فارغة؛ يتم إلغاء الترحيب التلقائي');
 				Morebits.wiki.actionCompleted.event();
 				return;
 			}
@@ -718,7 +716,7 @@
 				text += '\n' + welcomeText;
 			}
 
-			const summaryText = 'Welcome to Wikipedia!';
+			const summaryText = 'مرحبا بكم في ويكيبيديا!';
 			pageobj.setPageText(text);
 			pageobj.setEditSummary(summaryText);
 			pageobj.setChangeTags(Twinkle.changeTags);
@@ -739,9 +737,9 @@
 
 		const userTalkPage = mw.config.get('wgFormattedNamespaces')[3] + ':' + mw.config.get('wgRelevantUserName');
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'Welcoming complete, reloading talk page in a few seconds';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الترحيب ، وإعادة تحميل صفحة النقاش في بضع ثوان';
 
-		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'User talk page modification');
+		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setFollowRedirect(true);
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.load(Twinkle.welcome.callbacks.main);
