@@ -259,7 +259,7 @@
 		effp: {
 			label: 'WP:EFFP/R (تقرير إيجابي زائف لمرشح التحرير)',
 			text: '{{EFFPReply|1=$SECTION|2=~~~~}}',
-			editSummary: 'لديك ردود على [[Wikipedia:Edit filter/False positives/Reports|تقرير إيجابي زائف لمرشح التحرير]]'
+			editSummary: 'لديك ردود على [[ويكيبيديا:مرشح الإساءة/حالات خاطئة/تقارير|تقرير إيجابي زائف لمرشح التحرير]]'
 		},
 		eln: {
 			label: 'WP:ELN (لوحة إعلانات الروابط الخارجية)',
@@ -274,7 +274,7 @@
 		hd: {
 			label: 'WP:HD (مكتب المساعدة)',
 			text: '== سؤالك في مكتب المساعدة ==\n{{helpdeskreply|1=$SECTION|ts=~~~~~}}',
-			editSummary: 'لديك ردود في [[Wikipedia:Help desk|مكتب المساعدة في ويكيبيديا]]'
+			editSummary: 'لديك ردود في [[ويكيبيديا:فريق المساعدة/طلبات|مكتب المساعدة في ويكيبيديا]]'
 		},
 		norn: {
 			label: 'WP:NORN (لوحة إعلانات لا أبحاث أصلية)',
@@ -294,7 +294,7 @@
 		th: {
 			label: 'WP:THQ (منتدى أسئلة Teahouse)',
 			text: "== Teahouse talkback: لديك رسائل! ==\n{{WP:Teahouse/Teahouse talkback|WP:Teahouse/Questions|$SECTION|ts=~~~~}}",
-			editSummary: 'لديك ردود في [[Wikipedia:Teahouse/Questions|لوحة أسئلة Teahouse]]'
+			editSummary: 'لديك ردود في [[ويكيبيديا:بوابة المشاركة|لوحة أسئلة Teahouse]]'
 		},
 		vrt: {
 			label: 'WP:VRTN (لوحة إعلانات VRT)',

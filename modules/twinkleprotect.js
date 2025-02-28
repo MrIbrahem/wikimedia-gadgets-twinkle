@@ -828,7 +828,7 @@
 		'pp-30-500-blp': {
 			edit: 'extendedconfirmed',
 			move: 'extendedconfirmed',
-			reason: 'انتهاكات مستمرة لـ [[WP:BLP|سياسة السير الذاتية للأشخاص الأحياء]] من حسابات (مؤكدة تلقائيًا)',
+			reason: 'انتهاكات مستمرة لـ [[ويكيبيديا:سير الأحياء|سياسة السير الذاتية للأشخاص الأحياء]] من حسابات (مؤكدة تلقائيًا)',
 			template: 'pp-extended'
 		},
 		'pp-30-500-sock': {
@@ -860,7 +860,7 @@
 		},
 		'pp-semi-blp': {
 			edit: 'autoconfirmed',
-			reason: 'انتهاكات [[WP:BLP|سياسة السير الذاتية للأشخاص الأحياء]]',
+			reason: 'انتهاكات [[ويكيبيديا:سير الأحياء|سياسة السير الذاتية للأشخاص الأحياء]]',
 			template: 'pp-blp'
 		},
 		'pp-semi-usertalk': {
@@ -904,7 +904,7 @@
 		},
 		'pp-pc-blp': {
 			stabilize: 'autoconfirmed',
-			reason: 'انتهاكات [[WP:BLP|سياسة السير الذاتية للأشخاص الأحياء]]',
+			reason: 'انتهاكات [[ويكيبيديا:سير الأحياء|سياسة السير الذاتية للأشخاص الأحياء]]',
 			template: 'pp-pc'
 		},
 		'pp-pc-protected': {
@@ -1296,19 +1296,19 @@
 					case 'pp-semi-vandalism':
 					case 'pp-pc-vandalism':
 					case 'pp-30-500-vandalism':
-						typereason = '[[WP:VAND|تخريب مستمر]]';
+						typereason = '[[ويكيبيديا:تخريب|تخريب مستمر]]';
 						break;
 					case 'pp-semi-disruptive':
 					case 'pp-pc-disruptive':
 					case 'pp-30-500-disruptive':
-						typereason = '[[Wikipedia:Disruptive editing|تحرير تخريبي مستمر]]';
+						typereason = '[[ويكيبيديا:تعديلات مزعجة|تحرير تخريبي مستمر]]';
 						break;
 					case 'pp-semi-unsourced':
 					case 'pp-pc-unsourced':
 						typereason = 'إضافة مستمرة لـ [[WP:INTREF|محتوى غير مدعوم بمصادر أو ذي مصادر ضعيفة]]';
 						break;
 					case 'pp-template':
-						typereason = '[[WP:HIGHRISK|قالب عالي المخاطر]]';
+						typereason = '[[ويكيبيديا:قوالب حساسة|قالب عالي المخاطر]]';
 						break;
 					case 'pp-30-500-arb':
 						typereason = '[[WP:30/500|إنفاذ التحكيم]]';
@@ -1319,12 +1319,12 @@
 						break;
 					case 'pp-semi-sock':
 					case 'pp-30-500-sock':
-						typereason = '[[WP:SOCK|استخدام الدمى المستمر]]';
+						typereason = '[[ويكيبيديا:دمية جورب|استخدام الدمى المستمر]]';
 						break;
 					case 'pp-semi-blp':
 					case 'pp-pc-blp':
 					case 'pp-30-500-blp':
-						typereason = '[[WP:BLP|انتهاكات سياسة BLP]]';
+						typereason = '[[ويكيبيديا:سير الأحياء|انتهاكات سياسة BLP]]';
 						break;
 					case 'pp-move-dispute':
 						typereason = 'نزاع عنوان الصفحة/حرب النقل';

@@ -970,7 +970,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: 'انتهاكات [[WP:Biographies of living persons|السير الذاتية للأشخاص الأحياء]]',
-			summary: 'مُنعت من التحرير بسبب انتهاكات [[WP:BLP|سياسة السير الذاتية للأشخاص الأحياء]] في ويكيبيديا'
+			summary: 'مُنعت من التحرير بسبب انتهاكات [[ويكيبيديا:سير الأحياء|سياسة السير الذاتية للأشخاص الأحياء]] في ويكيبيديا'
 		},
 		'uw-block': {
 			autoblock: true,
@@ -1046,7 +1046,7 @@
 			nocreate: true,
 			reason: 'الإزالة المستمرة للمحتوى',
 			pageParam: true,
-			summary: 'مُنعت من التحرير بسبب [[WP:VAND|الإزالة المستمرة للمواد]]'
+			summary: 'مُنعت من التحرير بسبب [[ويكيبيديا:تخريب|الإزالة المستمرة للمواد]]'
 		},
 		'uw-disruptblock': {
 			autoblock: true,
@@ -1138,7 +1138,7 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد مُنعت من التحرير لإساءة استخدام [[WP:SOCK|حسابات متعددة]]'
+			summary: 'لقد مُنعت من التحرير لإساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-softerblock': {
 			expiry: 'infinity',
@@ -1159,8 +1159,8 @@
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			nocreate: true,
-			reason: '[[WP:SOCK|دمية جورب]]',
-			summary: 'تم منع هذا الحساب باعتباره [[WP:SOCK|دمية جورب]] تم إنشاؤها لانتهاك سياسة ويكيبيديا'
+			reason: '[[ويكيبيديا:دمية جورب|دمية جورب]]',
+			summary: 'تم منع هذا الحساب باعتباره [[ويكيبيديا:دمية جورب|دمية جورب]] تم إنشاؤها لانتهاك سياسة ويكيبيديا'
 		},
 		'uw-talkrevoked': {
 			disabletalk: true,
@@ -1237,7 +1237,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:Vandalism|تخريب]]',
-			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[WP:VAND|التخريب]]'
+			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[ويكيبيديا:تخريب|التخريب]]'
 		},
 		'uw-voablock': {
 			autoblock: true,
@@ -1265,7 +1265,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد [[WP:PB|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[WP:SOCK|حسابات متعددة]]'
+			summary: 'لقد [[WP:PB|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-acpblockindef': {
 			autoblock: true,
@@ -1275,7 +1275,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد [[WP:PB|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[WP:SOCK|حسابات متعددة]]'
+			summary: 'لقد [[WP:PB|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-aepblock': {
 			autoblock: true,
@@ -1368,7 +1368,7 @@
 				{ label: 'إعلان', value: 'uw-adblock' },
 				{ label: 'إنفاذ التحكيم', value: 'uw-aeblock' },
 				{ label: 'التهرب من الحظر - IP', value: 'uw-ipevadeblock' },
-				{ label: 'انتهاكات BLP', value: 'uw-bioblock' },
+				{ label: 'انتهاكات سير الأحياء', value: 'uw-bioblock' },
 				{ label: 'انتهاكات حقوق الطبع والنشر', value: 'uw-copyrightblock' },
 				{ label: 'إنشاء صفحات عديمة المعنى', value: 'uw-npblock' },
 				{ label: 'متعلق بمرشح التحرير', value: 'uw-efblock' },
@@ -1981,7 +1981,7 @@
 					if (params.namespacerestrictions.length) {
 						// 1 => Talk, 2 => User, etc.
 						const namespaceNames = params.namespacerestrictions.map((id) => menuFormattedNamespaces[id]);
-						text += '[[Wikipedia:Namespace|المساحات الاسمية]] (' + makeSentence(namespaceNames) + ')';
+						text += '[[ويكيبيديا:نطاق|النطاقات]] (' + makeSentence(namespaceNames) + ')';
 					}
 				} else if (params.area) {
 					text += '|area=' + params.area;
