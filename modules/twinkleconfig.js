@@ -26,7 +26,7 @@
 
 	Twinkle.config.commonSets = {
 		csdCriteria: {
-			db: 'Custom rationale ({{db}})',
+			db: 'مبررات مخصصة ({{db}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 			u1: "U1", u2: "U2", u5: "U5",
@@ -44,7 +44,7 @@
 			"r2", "r3", "r4"
 		],
 		csdCriteriaNotification: {
-			db: 'Custom rationale ({{db}})',
+			db: 'مبررات مخصصة ({{db}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g6: 'G6 ("copy-paste move" only)',
 			g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
@@ -63,7 +63,7 @@
 			"r2", "r3", "r4"
 		],
 		csdAndImageDeletionCriteria: {
-			db: 'Custom rationale ({{db}})',
+			db: 'مبررات مخصصة ({{db}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 			u1: "U1", u2: "U2", u5: "U5",
@@ -81,30 +81,33 @@
 			"r2", "r3", "r4"
 		],
 		namespacesNoSpecial: {
-			0: "Article",
-			1: 'Talk (article)',
-			2: "User",
-			3: 'User talk',
-			4: "Wikipedia",
-			5: 'Wikipedia talk',
-			6: "File",
-			7: 'File talk',
-			8: "MediaWiki",
-			9: 'MediaWiki talk',
-			10: "Template",
-			11: 'Template talk',
-			12: "Help",
-			13: 'Help talk',
-			14: "Category",
-			15: 'Category talk',
-			100: "Portal",
-			101: 'Portal talk',
+			0: "مقالة",
+			1: 'نقاش (مقالة)',
+			2: "مستخدم",
+			3: 'نقاش المستخدم',
+			4: "ويكيبيديا",
+			5: 'نقاش ويكيبيديا',
+			6: "ملف",
+			7: 'نقاش الملف',
+			8: "ميدياويكي",
+			9: 'نقاش ميدياويكي',
+			10: "قالب",
+			11: 'نقاش القالب',
+			12: "مساعدة",
+			13: 'نقاش المساعدة',
+			14: "تصنيف",
+			15: 'نقاش التصنيف',
+			100: "بوابة",
+			101: 'نقاش البوابة',
 			118: "Draft",
 			119: 'Draft talk',
 			710: "TimedText",
 			711: 'TimedText talk',
-			828: "Module",
-			829: 'Module talk'
+			828: "وحدة",
+			829: 'نقاش وحدة',
+			1728: 'فعالية',
+			1729: 'نقاش فعالية',
+			2600: 'موضوع'
 		}
 	};
 

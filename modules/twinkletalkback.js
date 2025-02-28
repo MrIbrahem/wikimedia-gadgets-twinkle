@@ -13,7 +13,7 @@
 		if (!mw.config.exists('wgRelevantUserName') || Morebits.ip.isRange(mw.config.get('wgRelevantUserName'))) {
 			return;
 		}
-		Twinkle.addPortletLink(Twinkle.talkback.callback, 'TB', 'twinkle-talkback', 'Talkback سهل');
+		Twinkle.addPortletLink(Twinkle.talkback.callback, 'TB', 'twinkle-talkback', 'رد بسيط');
 	};
 
 	Twinkle.talkback.callback = function () {
@@ -22,9 +22,9 @@
 		}
 
 		const Window = new Morebits.SimpleWindow(600, 350);
-		Window.setTitle('Talkback');
+		Window.setTitle('رد');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('تفضيلات Talkback', 'WP:TW/PREF#talkback');
+		Window.addFooterLink('تفضيلات رد', 'WP:TW/PREF#talkback');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#talkback');
 		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
@@ -34,7 +34,7 @@
 			type: 'radio', name: 'tbtarget',
 			list: [
 				{
-					label: 'Talkback',
+					label: 'رد',
 					value: 'talkback',
 					checked: 'true'
 				},
@@ -129,7 +129,7 @@
 
 		let work_area = new Morebits.QuickForm.Element({
 			type: 'field',
-			label: 'معلومات Talkback',
+			label: 'معلومات رد',
 			name: 'work_area'
 		});
 
@@ -221,18 +221,18 @@
 		an: {
 			label: "WP:AN (لوحة إعلانات المدراء)",
 			text: '{{subst:AN-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Administrators\' noticeboard]]'
+			editSummary: 'إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين]]'
 		},
 		an3: {
 			label: "WP:AN3 (لوحة إعلانات المدراء/حرب التحرير)",
 			text: '{{subst:An3-notice|$SECTION}} ~~~~',
-			editSummary: "إشعار بالمناقشة في [[Wikipedia:Administrators' noticeboard/Edit warring]]"
+			editSummary: "إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين/استرجاعات ثلاثة]]"
 		},
 		ani: {
 			label: "WP:ANI (لوحة إعلانات المدراء/الحوادث)",
 			text: "== إشعار بمناقشة لوحة إعلانات المدراء/الحوادث ==\n" +
 				'{{subst:ANI-notice|thread=$SECTION}} ~~~~',
-			editSummary: 'إشعار بالمناقشة في [[Wikipedia:Administrators\' noticeboard/Incidents]]',
+			editSummary: 'إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين/Incidents]]',
 			defaultSelected: true
 		},
 		// let's keep AN and its cousins at the top

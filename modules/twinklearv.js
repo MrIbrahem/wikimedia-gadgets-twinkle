@@ -490,10 +490,10 @@
 				Morebits.SimpleWindow.setButtonsEnabled(false);
 				Morebits.Status.init(form);
 
-				Morebits.wiki.actionCompleted.redirect = 'Wikipedia:Administrator intervention against vandalism';
+				Morebits.wiki.actionCompleted.redirect = 'ويكيبيديا:إخطار الإداريين/منع';
 				Morebits.wiki.actionCompleted.notice = 'اكتمل الإبلاغ';
 
-				var aivPage = new Morebits.wiki.Page('Wikipedia:Administrator intervention against vandalism', 'معالجة طلب AIV');
+				var aivPage = new Morebits.wiki.Page('ويكيبيديا:إخطار الإداريين/منع', 'معالجة طلب AIV');
 				aivPage.setPageSection(1);
 				aivPage.setFollowRedirect(true);
 
@@ -509,7 +509,7 @@
 					}
 
 					// then check for any bot reports
-					const tb2Page = new Morebits.wiki.Page('Wikipedia:Administrator intervention against vandalism/TB2', 'جارٍ التحقق من تقارير الروبوت');
+					const tb2Page = new Morebits.wiki.Page('ويكيبيديا:إخطار الإداريين/منع/TB2', 'جارٍ التحقق من تقارير الروبوت');
 					tb2Page.load(() => {
 						const tb2Text = tb2Page.getPageText();
 						const tb2statelem = tb2Page.getStatusElement();
@@ -959,7 +959,7 @@
 
 			const text = '\n\n{{subst:AN3 report|diffs=' + difftext + '|warnings=' + warningtext + '|resolves=' + resolvetext + '|pagename=' + params.page + '|orig=' + origtext + '|comment=' + comment + '|uid=' + params.uid + '}}';
 
-			const reportpage = 'Wikipedia:Administrators\' noticeboard/Edit warring';
+			const reportpage = 'ويكيبيديا:إخطار الإداريين/استرجاعات ثلاثة';
 
 			Morebits.wiki.actionCompleted.redirect = reportpage;
 			Morebits.wiki.actionCompleted.notice = 'اكتمل الإبلاغ';

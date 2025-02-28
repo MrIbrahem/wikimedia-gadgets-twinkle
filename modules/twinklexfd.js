@@ -1375,8 +1375,8 @@
 				if (params.devpages) {
 					const inCategories = mw.config.get('wgCategories');
 					const categoryNotificationPageMap = {
-						'Templates used by Twinkle': 'Wikipedia talk:Twinkle',
-						'Templates used by AutoWikiBrowser': 'Wikipedia talk:AutoWikiBrowser',
+						'قوالب يستخدمها لمح البصر': 'نقاش ويكيبيديا:لمح البصر',
+						'قوالب يستخدمها أوتوويكي براوزر': 'نقاش ويكيبيديا:أوتوويكي براوزر',
 						'Templates used by Ultraviolet': 'Wikipedia talk:Ultraviolet'
 					};
 					$.each(categoryNotificationPageMap, (category, page) => {
