@@ -142,7 +142,7 @@
 			for (let i = 0; i < Twinkle.shared.standardList.length; i++) {
 				const tagRe = new RegExp('(\\{\\{' + Twinkle.shared.standardList[i].value + '(\\||\\}\\}))', 'im');
 				if (tagRe.exec(pageText)) {
-					Morebits.Status.warn('معلومات', 'تم العثور على {{' + Twinkle.shared.standardList[i].value + '}} في صفحة نقاش المستخدم بالفعل... يتم الإحباط');
+					Morebits.Status.warn('معلومات', 'تم العثور على {{' + Twinkle.shared.standardList[i].value + '}} في صفحة نقاش المستخدم بالفعل... أُلغي الطلب');
 					found = true;
 				}
 			}

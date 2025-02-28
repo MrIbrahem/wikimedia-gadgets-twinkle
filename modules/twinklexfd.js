@@ -754,7 +754,7 @@
 		autoEditRequest: function (pageobj, params) {
 			const talkName = new mw.Title(pageobj.getPageName()).getTalkPage().toText();
 			if (talkName === pageobj.getPageName()) {
-				pageobj.getStatusElement().error('الصفحة محمية ولا يوجد مكان لإضافة طلب تحرير ، يتم الإحباط');
+				pageobj.getStatusElement().error('الصفحة محمية ولا يوجد مكان لإضافة طلب تحرير ، أُلغي الطلب');
 			} else {
 				pageobj.getStatusElement().warn('الصفحة محمية، ويتم طلب التحرير');
 
@@ -1896,7 +1896,7 @@
 					if (!apiobj.params.rfdtarget) { // Not a softredirect
 						const target = response.query.redirects && response.query.redirects[0].to;
 						if (!target) {
-							let message = 'لم يتم العثور على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه ، ويتم الإحباط';
+							let message = 'لم يتم العثور على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه ، وأُلغي الطلب';
 							if (mw.config.get('wgAction') === 'history') {
 								message += '. إذا كانت هذه إعادة توجيه ناعمة ، فحاول مرة أخرى من صفحة المحتوى ، وليس سجل الصفحة.';
 							}

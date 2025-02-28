@@ -2046,7 +2046,7 @@
 		Morebits.Status.init(e.target);
 
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'اكتمل التحذير ، ويتم إعادة تحميل صفحة النقاش في بضع ثوانٍ';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل التحذير ، وسيُعاد تحميل صفحة النقاش في بضع ثوانٍ';
 
 		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setCallbackParameters(params);

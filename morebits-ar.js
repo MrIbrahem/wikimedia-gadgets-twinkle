@@ -4491,7 +4491,7 @@
 
 			// check for "Database query error"
 			if (errorCode === 'internal_api_error_DBQueryError' && ctx.retries++ < ctx.maxRetries) {
-				ctx.statusElement.info('خطأ في استعلام قاعدة البيانات، يتم إعادة المحاولة');
+				ctx.statusElement.info('خطأ في استعلام قاعدة البيانات، سأعيد المحاولة');
 				--Morebits.wiki.numberOfActionsLeft;  // allow for normal completion if retry succeeds
 				ctx.deleteProcessApi.post(); // give it another go!
 
@@ -4560,7 +4560,7 @@
 			// check for "Database query error"
 			if (errorCode === 'internal_api_error_DBQueryError') {
 				if (ctx.retries++ < ctx.maxRetries) {
-					ctx.statusElement.info('خطأ في استعلام قاعدة البيانات، يتم إعادة المحاولة');
+					ctx.statusElement.info('خطأ في استعلام قاعدة البيانات، سأعيد المحاولة');
 					--Morebits.wiki.numberOfActionsLeft;  // allow for normal completion if retry succeeds
 					ctx.undeleteProcessApi.post(); // give it another go!
 				} else {

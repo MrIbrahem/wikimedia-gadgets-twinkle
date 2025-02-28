@@ -123,14 +123,14 @@
 		const input = Morebits.QuickForm.getInputData(event.target);
 
 		if (!input.reason) {
-			alert('تحتاج إلى إعطاء سبب، أيها المحتال المتآمر!');
+			alert('تحتاج إلى إعطاء سبب!');
 			return;
 		}
 		Morebits.SimpleWindow.setButtonsEnabled(false);
 		Morebits.Status.init(event.target);
 
 		if (!input.pages || !input.pages.length) {
-			Morebits.Status.error('خطأ', 'لا يوجد شيء لاسترجاعه، يتم الإحباط');
+			Morebits.Status.error('خطأ', 'لا يوجد شيء لاسترجاعه، أُلغي الطلب');
 			return;
 		}
 

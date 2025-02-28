@@ -1515,13 +1515,13 @@
 				rppLink.appendChild(document.createTextNode('Wikipedia:Requests for page protection'));
 
 				if (tag) {
-					statusElement.error(['يوجد بالفعل طلب حماية لهذه الصفحة في ', rppLink, '، يتم الإحباط.']);
+					statusElement.error(['يوجد بالفعل طلب حماية لهذه الصفحة في ', rppLink, '، أُلغي الطلب.']);
 					return;
 				}
 
 				let newtag = '=== [[:' + Morebits.pageNameNorm + ']] ===\n';
 				if (new RegExp('^' + mw.util.escapeRegExp(newtag).replace(/\s+/g, '\\s*'), 'm').test(text) || new RegExp('^' + mw.util.escapeRegExp(newtag).replace(/\s+/g, '\\s*'), 'm').test(text2)) {
-					statusElement.error(['يوجد بالفعل طلب حماية لهذه الصفحة في ', rppLink, '، يتم الإحباط.']);
+					statusElement.error(['يوجد بالفعل طلب حماية لهذه الصفحة في ', rppLink, '، أُلغي الطلب.']);
 					return;
 				}
 				newtag += '* {{pagelinks|1=' + Morebits.pageNameNorm + '}}\n\n';

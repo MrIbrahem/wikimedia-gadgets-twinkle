@@ -264,7 +264,7 @@
 		const input = Morebits.QuickForm.getInputData(form);
 
 		if (!input.reason) {
-			alert('يجب أن تعطي سببًا، أيها المدير المارق!');
+			alert('يجب أن تعطي سببًا!');
 			return;
 		}
 
@@ -272,7 +272,7 @@
 		Morebits.Status.init(form);
 
 		if (input.pages.length === 0) {
-			Morebits.Status.error('خطأ', 'لا يوجد شيء لحمايته، يتم الإحباط');
+			Morebits.Status.error('خطأ', 'لا يوجد شيء لحمايته، أُلغي الطلب');
 			return;
 		}
 

@@ -415,13 +415,13 @@
 		const input = Morebits.QuickForm.getInputData(form);
 
 		if (!input.reason) {
-			alert('تحتاج إلى تقديم سبب ، أيها المحتال المتآمر!');
+			alert('تحتاج إلى تقديم سبب!');
 			return;
 		}
 		Morebits.SimpleWindow.setButtonsEnabled(false);
 		Morebits.Status.init(form);
 		if (input.pages.length === 0) {
-			Morebits.Status.error('خطأ', 'لا يوجد شيء لحذفه ، يتم الإجهاض');
+			Morebits.Status.error('خطأ', 'لا يوجد شيء لحذفه ، أُلغي الطلب');
 			return;
 		}
 

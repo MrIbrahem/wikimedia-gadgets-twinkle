@@ -1222,7 +1222,7 @@
 				if (reason === null) {
 					return Morebits.Status.error('طلب السبب', 'تم إلغاء العملية من قبل المستخدم');
 				} else if (!reason || !reason.replace(/^\s*/, '').replace(/\s*$/, '')) {
-					return Morebits.Status.error('طلب السبب', 'لم يتم تقديم "سبب" الحذف ، أو لم يتمكن Twinkle من حسابه. يتم الإحباط.');
+					return Morebits.Status.error('طلب السبب', 'لم يتم تقديم "سبب" الحذف ، أو لم يتمكن Twinkle من حسابه. أُلغي الطلب.');
 				}
 
 				const deleteMain = function (callback) {
@@ -1480,7 +1480,7 @@
 						talk_page.setCallbackParameters(params);
 						talk_page.newSection(Twinkle.speedy.callbacks.user.tagComplete);
 					} else {
-						pageobj.getStatusElement().error('لا يمكن تحرير الصفحة ولا يوجد موقع آخر لتقديم طلب حذف سريع ، يتم الإحباط');
+						pageobj.getStatusElement().error('لا يمكن تحرير الصفحة ولا يوجد موقع آخر لتقديم طلب حذف سريع ، أُلغي الطلب');
 					}
 				}
 			},

@@ -64,7 +64,7 @@
 			const revid = rev && rev[0].revid;
 
 			if (!revid) {
-				self.statelem.error('لم يتم العثور على مراجعة سابقة مناسبة، أو أن ' + self.params.user + ' هو المساهم الوحيد. يتم الإحباط.');
+				self.statelem.error('لم يتم العثور على مراجعة سابقة مناسبة، أو أن ' + self.params.user + ' هو المساهم الوحيد. أُلغي الطلب.');
 				return;
 			}
 			window.location = mw.util.getUrl(mw.config.get('wgPageName'), {
