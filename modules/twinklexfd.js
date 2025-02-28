@@ -1602,7 +1602,7 @@
 					statelem.info('تم العثور على قسم اليوم، والمضي قدمًا لإضافة إدخال جديد');
 					text = text.replace(date_header_regex, '$1\n' + added_data);
 				} else { // we need to create a new section
-					statelem.info('لم يتم العثور على قسم لليوم، والمضي قدمًا لإنشاء واحد');
+					statelem.info('لم يُعثر على قسم لليوم، والمضي قدمًا لإنشاء واحد');
 					text = text.replace('===', date_header + added_data + '\n\n===');
 				}
 
@@ -1896,7 +1896,7 @@
 					if (!apiobj.params.rfdtarget) { // Not a softredirect
 						const target = response.query.redirects && response.query.redirects[0].to;
 						if (!target) {
-							let message = 'لم يتم العثور على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه، وأُلغي الطلب';
+							let message = 'لم يُعثر على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه، وأُلغي الطلب';
 							if (mw.config.get('wgAction') === 'history') {
 								message += '. إذا كانت هذه إعادة توجيه ناعمة، فحاول مرة أخرى من صفحة المحتوى، وليس سجل الصفحة.';
 							}

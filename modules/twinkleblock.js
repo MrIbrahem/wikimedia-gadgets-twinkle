@@ -605,13 +605,13 @@
 							label: 'تم منع المستخدم من إرسال بريد إلكتروني',
 							name: 'noemail_template',
 							checked: Twinkle.block.field_template_options.noemail_template,
-							tooltip: 'إذا لم يتم توفير المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
+							tooltip: 'إذا لم تُوفر المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
 						},
 						{
 							label: 'تم منع المستخدم من إنشاء حسابات',
 							name: 'nocreate_template',
 							checked: Twinkle.block.field_template_options.nocreate_template,
-							tooltip: 'إذا لم يتم توفير المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
+							tooltip: 'إذا لم تُوفر المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
 						}
 					]
 				});
@@ -2033,7 +2033,7 @@
 			}
 
 			if (!dateHeaderRegexResult || dateHeaderRegexResult.index !== lastHeaderIndex) {
-				Morebits.Status.info('Info', 'سيتم إنشاء قسم جديد في صفحة النقاش لهذا الشهر، حيث لم يتم العثور على قسم');
+				Morebits.Status.info('Info', 'سيتم إنشاء قسم جديد في صفحة النقاش لهذا الشهر، حيث لم يُعثر على قسم');
 				text += date.monthHeader() + '\n';
 			}
 		}

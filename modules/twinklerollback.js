@@ -605,7 +605,7 @@
 			}
 
 			if (!found) {
-				statelem.error(['لم يتم العثور على مراجعة سابقة. ربما ', Morebits.htmlNode('strong', userNorm), ' هو المساهم الوحيد ، أو قاموا بإجراء أكثر من ' + mw.language.convertNumber(Twinkle.getPref('revertMaxRevisions')) + ' تعديلات على التوالي.']);
+				statelem.error(['لم يُعثر على مراجعة سابقة. ربما ', Morebits.htmlNode('strong', userNorm), ' هو المساهم الوحيد ، أو قاموا بإجراء أكثر من ' + mw.language.convertNumber(Twinkle.getPref('revertMaxRevisions')) + ' تعديلات على التوالي.']);
 				return;
 			}
 

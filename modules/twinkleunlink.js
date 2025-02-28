@@ -144,7 +144,7 @@
 						list.push({ label: '', value: imageusage[i].title, checked: true });
 					}
 					if (!list.length) {
-						apiobj.params.form.append({ type: 'div', label: 'لم يتم العثور على حالات استخدام للملف.' });
+						apiobj.params.form.append({ type: 'div', label: 'لم يُعثر على حالات استخدام للملف.' });
 					} else {
 						apiobj.params.form.append({ type: 'header', label: 'استخدام الملف' });
 						namespaces = [];
@@ -231,7 +231,7 @@
 					});
 					havecontent = true;
 				} else {
-					apiobj.params.form.append({ type: 'div', label: 'لم يتم العثور على روابط خلفية.' });
+					apiobj.params.form.append({ type: 'div', label: 'لم يُعثر على روابط خلفية.' });
 				}
 
 				if (havecontent) {
@@ -280,7 +280,7 @@
 
 			if (warningString) {
 				// nothing to do!
-				pageobj.getStatusElement().error("لم يتم العثور على أي " + warningString + ' في الصفحة.');
+				pageobj.getStatusElement().error("لم يُعثر على أي " + warningString + ' في الصفحة.');
 				params.unlinker.workerFailure(pageobj);
 				return;
 			}

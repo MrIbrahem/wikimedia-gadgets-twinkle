@@ -2010,7 +2010,7 @@
 				if (messageData.heading) { // create new section
 					pageobj.setNewSectionTitle(messageData.heading);
 				} else {
-					Morebits.Status.info('معلومات', 'سيتم إنشاء قسم صفحة نقاش جديد لهذا الشهر، حيث لم يتم العثور على أي قسم');
+					Morebits.Status.info('معلومات', 'سيتم إنشاء قسم صفحة نقاش جديد لهذا الشهر، حيث لم يُعثر على أي قسم');
 					pageobj.setNewSectionTitle(now.monthHeader(0));
 				}
 				pageobj.setNewSectionText(warningText);

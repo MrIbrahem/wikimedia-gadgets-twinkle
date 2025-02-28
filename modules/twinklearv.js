@@ -369,7 +369,7 @@
 								const pageid = data.query.pageids[0];
 								const page = data.query.pages[pageid];
 								if (!page.revisions) {
-									$('<span class="entry">لم يتم العثور على شيء</span>').appendTo($field);
+									$('<span class="entry">لم يُعثر على شيء</span>').appendTo($field);
 								} else {
 									for (let i = 0; i < page.revisions.length; ++i) {
 										const rev = page.revisions[i];
