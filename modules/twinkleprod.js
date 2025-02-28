@@ -71,12 +71,12 @@
 					label: 'PROD (حذف مقترح)',
 					value: 'prod',
 					checked: true,
-					tooltip: 'حذف مقترح عادي ، لكل [[WP:PROD]]'
+					tooltip: 'حذف مقترح عادي، لكل [[WP:PROD]]'
 				},
 				{
 					label: 'BLP PROD (حذف مقترح لـ BLPs غير الموثقة)',
 					value: 'prodblp',
-					tooltip: 'الحذف المقترح لسير ذاتية جديدة وغير موثقة بالكامل لشخصيات حية ، لكل [[WP:BLPPROD]]'
+					tooltip: 'الحذف المقترح لسير ذاتية جديدة وغير موثقة بالكامل لشخصيات حية، لكل [[WP:BLPPROD]]'
 				}
 			]
 		});
@@ -160,7 +160,7 @@
 				});
 				// temp warning, can be removed down the line once BLPPROD is more established. Amalthea, May 2010.
 				var boldtext = document.createElement('b');
-				boldtext.appendChild(document.createTextNode('يرجى ملاحظة أنه فقط السير الذاتية غير الموثقة للشخصيات الحية مؤهلة لهذه العلامة ، بتفسير ضيق.'));
+				boldtext.appendChild(document.createTextNode('يرجى ملاحظة أنه فقط السير الذاتية غير الموثقة للشخصيات الحية مؤهلة لهذه العلامة، بتفسير ضيق.'));
 				field.append({
 					type: 'div',
 					label: boldtext
@@ -209,7 +209,7 @@
 						params.oldProdPresent = true; // Mark for reference later, when deciding if to endorse
 						// if there are multiple templates, at least one of them would be a prior xfd template
 					} else {
-						statelem.warn('تم العثور على قالب XfD سابق في صفحة النقاش ، يتم إلغاء الإجراء');
+						statelem.warn('تم العثور على قالب XfD سابق في صفحة النقاش، يتم إلغاء الإجراء');
 						return $.Deferred().reject();
 					}
 				}
@@ -224,7 +224,7 @@
 			ts.lookupCreation((pageobj) => {
 				params.initialContrib = pageobj.getCreator();
 				params.creation = pageobj.getCreationTimestamp();
-				pageobj.getStatusElement().info('تم ، تم العثور على ' + params.initialContrib);
+				pageobj.getStatusElement().info('تم، تم العثور على ' + params.initialContrib);
 				def.resolve();
 			}, def.reject);
 			return def;
@@ -250,7 +250,7 @@
 				// Check for already existing deletion tags
 				const tag_re = /{{(?:article for deletion\/dated|AfDM|ffd\b)|#invoke:RfD/i;
 				if (tag_re.test(text)) {
-					statelem.warn('الصفحة موسومة بالفعل بقالب حذف ، يتم إلغاء الإجراء');
+					statelem.warn('الصفحة موسومة بالفعل بقالب حذف، يتم إلغاء الإجراء');
 					return def.reject();
 				}
 
@@ -265,12 +265,12 @@
 					if (params.oldProdPresent) {
 						if (params.blp) {
 							if (!confirm('تم العثور على ترشيح PROD سابق في صفحة النقاش. هل ما زلت ترغب في متابعة تطبيق BLPPROD؟')) {
-								statelem.warn('تم العثور على PROD سابق في صفحة النقاش ، وتم إحباطه من قبل المستخدم');
+								statelem.warn('تم العثور على PROD سابق في صفحة النقاش، وتم إحباطه من قبل المستخدم');
 								return def.reject();
 							}
-							statelem.info('تم العثور على PROD سابق في صفحة النقاش ، ويستمر');
+							statelem.info('تم العثور على PROD سابق في صفحة النقاش، ويستمر');
 						} else {
-							statelem.warn('تم العثور على PROD سابق في صفحة النقاش ، يتم إلغاء الإجراء');
+							statelem.warn('تم العثور على PROD سابق في صفحة النقاش، يتم إلغاء الإجراء');
 							return def.reject();
 						}
 					}
@@ -390,7 +390,7 @@
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('prodLogPageName'));
 			usl.initialText =
 				"هذا سجل لجميع علامات [[WP:PROD|الحذف المقترح]] التي تم تطبيقها أو تأييدها من قبل هذا المستخدم باستخدام وحدة PROD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
-				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل ، فيمكنك إيقاف تشغيله باستخدام [[Wikipedia:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].';
+				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[Wikipedia:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].';
 
 			let logText = '# [[:' + Morebits.pageNameNorm + ']]';
 			let summaryText;

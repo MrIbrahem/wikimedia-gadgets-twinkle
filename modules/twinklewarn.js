@@ -30,7 +30,7 @@
 			const $vandalTalkLink = $('#mw-rollback-success').find('.mw-usertoollinks a').first();
 			if ($vandalTalkLink.length) {
 				$vandalTalkLink.css('font-weight', 'bold');
-				$vandalTalkLink.wrapInner($('<span>').attr('title', 'إذا كان ذلك مناسبًا ، يمكنك استخدام Twinkle لتحذير المستخدم بشأن تعديلاته على هذه الصفحة.'));
+				$vandalTalkLink.wrapInner($('<span>').attr('title', 'إذا كان ذلك مناسبًا، يمكنك استخدام Twinkle لتحذير المستخدم بشأن تعديلاته على هذه الصفحة.'));
 
 				// Can't provide vanarticlerevid as only wgCurRevisionId is provided
 				const extraParam = 'vanarticle=' + mw.util.rawurlencode(Morebits.pageNameNorm);
@@ -66,7 +66,7 @@
 		const main_select = form.append({
 			type: 'field',
 			label: 'اختر نوع التحذير / الإشعار المراد إصداره',
-			tooltip: 'اختر أولاً مجموعة تحذير رئيسية ، ثم التحذير المحدد المراد إصداره.'
+			tooltip: 'اختر أولاً مجموعة تحذير رئيسية، ثم التحذير المحدد المراد إصداره.'
 		});
 
 		const main_group = main_select.append({
@@ -101,7 +101,7 @@
 			name: 'article',
 			label: 'الصفحة المرتبطة',
 			value: Twinkle.getPrefill('vanarticle') || '',
-			tooltip: 'يمكن ربط صفحة داخل الإشعار ، ربما لأنها كانت استعادة لتلك الصفحة التي أرسلت هذا الإشعار. اترك فارغًا لعدم ربط أي صفحة.'
+			tooltip: 'يمكن ربط صفحة داخل الإشعار، ربما لأنها كانت استعادة لتلك الصفحة التي أرسلت هذا الإشعار. اترك فارغًا لعدم ربط أي صفحة.'
 		});
 
 		form.append({
@@ -165,7 +165,7 @@
 				const revDate = new Morebits.Date(vantimestamp);
 				if (vantimestamp && revDate.isValid()) {
 					if (revDate.add(24, 'hours').isBefore(new Date())) {
-						message += ' تم إجراء هذا التعديل منذ أكثر من 24 ساعة ، لذا قد يكون التحذير قديمًا.';
+						message += ' تم إجراء هذا التعديل منذ أكثر من 24 ساعة، لذا قد يكون التحذير قديمًا.';
 						$('#twinkle-warn-warning-messages').text('ملاحظة:' + message);
 					}
 				}
@@ -259,24 +259,24 @@
 				},
 				'uw-delete': {
 					level1: {
-						label: 'إزالة المحتوى ، والتفريغ',
-						summary: 'ملاحظة عامة: إزالة المحتوى ، والتفريغ'
+						label: 'إزالة المحتوى، والتفريغ',
+						summary: 'ملاحظة عامة: إزالة المحتوى، والتفريغ'
 					},
 					level2: {
-						label: 'إزالة المحتوى ، والتفريغ',
-						summary: 'تحذير: إزالة المحتوى ، والتفريغ'
+						label: 'إزالة المحتوى، والتفريغ',
+						summary: 'تحذير: إزالة المحتوى، والتفريغ'
 					},
 					level3: {
-						label: 'إزالة المحتوى ، والتفريغ',
-						summary: 'تحذير: إزالة المحتوى ، والتفريغ'
+						label: 'إزالة المحتوى، والتفريغ',
+						summary: 'تحذير: إزالة المحتوى، والتفريغ'
 					},
 					level4: {
-						label: 'إزالة المحتوى ، والتفريغ',
-						summary: 'تحذير نهائي: إزالة المحتوى ، والتفريغ'
+						label: 'إزالة المحتوى، والتفريغ',
+						summary: 'تحذير نهائي: إزالة المحتوى، والتفريغ'
 					},
 					level4im: {
-						label: 'إزالة المحتوى ، والتفريغ',
-						summary: 'التحذير الوحيد: إزالة المحتوى ، والتفريغ'
+						label: 'إزالة المحتوى، والتفريغ',
+						summary: 'التحذير الوحيد: إزالة المحتوى، والتفريغ'
 					}
 				},
 				'uw-generic': {
@@ -889,8 +889,8 @@
 				},
 				'uw-fv': {
 					level1: {
-						label: 'كان للعبارة المضافة مصدر ، لكنها لم تتحقق من المحتوى',
-						summary: 'ملاحظة عامة: كان للعبارة المضافة مصدر ، لكنها لم تتحقق من المحتوى'
+						label: 'كان للعبارة المضافة مصدر، لكنها لم تتحقق من المحتوى',
+						summary: 'ملاحظة عامة: كان للعبارة المضافة مصدر، لكنها لم تتحقق من المحتوى'
 					}
 				},
 				'uw-mislead': {
@@ -1161,8 +1161,8 @@
 				summary: 'إشعار: إضافة محتوى غير إنجليزي إلى المقالات'
 			},
 			'uw-notvote': {
-				label: 'نحن نستخدم الإجماع ، وليس التصويت',
-				summary: 'إشعار: نحن نستخدم الإجماع ، وليس التصويت'
+				label: 'نحن نستخدم الإجماع، وليس التصويت',
+				summary: 'إشعار: نحن نستخدم الإجماع، وليس التصويت'
 			},
 			'uw-plagiarism': {
 				label: 'النسخ من مصادر المجال العام دون إسناد',
@@ -1342,7 +1342,7 @@
 				suppressArticleInSummary: true // not relevant for this template
 			},
 			'uw-coi-username': {
-				label: 'اسم المستخدم مخالف للسياسة ، وتضارب مصالح',
+				label: 'اسم المستخدم مخالف للسياسة، وتضارب مصالح',
 				summary: 'تحذير: اسم المستخدم وتضارب المصالح',
 				heading: 'اسم المستخدم الخاص بك'
 			},
@@ -1813,7 +1813,7 @@
 			if (isNaN(level)) { // No prior warnings found, this is the first
 				level = 1;
 			} else if (level > 4 || level < 1) { // Shouldn't happen
-				const message = 'تعذر تحليل مستوى التحذير السابق ، يرجى تحديد مستوى التحذير يدويًا.';
+				const message = 'تعذر تحليل مستوى التحذير السابق، يرجى تحديد مستوى التحذير يدويًا.';
 				if (statelem) {
 					statelem.error(message);
 				} else {
@@ -1888,7 +1888,7 @@
 				const templateAndLevel = Twinkle.warn.callbacks.autolevelParseWikitext(text, params, latest, now, statelem);
 
 				// Only if there's a change from the prior display/load
-				if (params.sub_group !== templateAndLevel[0] && !confirm('سيصدر قالب {{' + templateAndLevel[0] + '}} للمستخدم ، هل هذا صحيح؟')) {
+				if (params.sub_group !== templateAndLevel[0] && !confirm('سيصدر قالب {{' + templateAndLevel[0] + '}} للمستخدم، هل هذا صحيح؟')) {
 					statelem.error('تم الإحباط بناءً على طلب المستخدم');
 					return;
 				}
@@ -2010,7 +2010,7 @@
 				if (messageData.heading) { // create new section
 					pageobj.setNewSectionTitle(messageData.heading);
 				} else {
-					Morebits.Status.info('معلومات', 'سيتم إنشاء قسم صفحة نقاش جديد لهذا الشهر ، حيث لم يتم العثور على أي قسم');
+					Morebits.Status.info('معلومات', 'سيتم إنشاء قسم صفحة نقاش جديد لهذا الشهر، حيث لم يتم العثور على أي قسم');
 					pageobj.setNewSectionTitle(now.monthHeader(0));
 				}
 				pageobj.setNewSectionText(warningText);
@@ -2046,7 +2046,7 @@
 		Morebits.Status.init(e.target);
 
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'اكتمل التحذير ، وسيُعاد تحميل صفحة النقاش في بضع ثوانٍ';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل التحذير، وسيُعاد تحميل صفحة النقاش في بضع ثوانٍ';
 
 		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setCallbackParameters(params);

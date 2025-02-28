@@ -123,7 +123,7 @@
 			value: 'Mobile IP'
 		},
 		{
-			label: '{{Whois}}: قالب لعناوين IP التي تحتاج إلى مراقبة ، ولكن من غير المعروف ما إذا كانت ثابتة أو ديناميكية أو مشتركة',
+			label: '{{Whois}}: قالب لعناوين IP التي تحتاج إلى مراقبة، ولكن من غير المعروف ما إذا كانت ثابتة أو ديناميكية أو مشتركة',
 			value: 'Whois'
 		}
 	];
@@ -220,7 +220,7 @@
 		Morebits.Status.init(e.target);
 
 		Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-		Morebits.wiki.actionCompleted.notice = 'اكتمل الوسم ، وإعادة تحميل صفحة النقاش في بضع ثوان';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الوسم، وإعادة تحميل صفحة النقاش في بضع ثوان';
 
 		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setFollowRedirect(true);

@@ -59,7 +59,7 @@
 				{
 					label: 'منع المستخدم',
 					value: 'block',
-					tooltip: 'منع المستخدم ذي الصلة بالخيارات المحددة. إذا تم إلغاء تحديد الحظر الجزئي ، فسيكون هذا حظرًا على مستوى الموقع.',
+					tooltip: 'منع المستخدم ذي الصلة بالخيارات المحددة. إذا تم إلغاء تحديد الحظر الجزئي، فسيكون هذا حظرًا على مستوى الموقع.',
 					checked: true
 				},
 				{
@@ -71,7 +71,7 @@
 				{
 					label: 'إضافة قالب منع إلى صفحة نقاش المستخدم',
 					value: 'template',
-					tooltip: 'إذا نسي مدير الحظر إصدار قالب منع ، أو قمت للتو بحظر المستخدم دون وضع قالب له ، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
+					tooltip: 'إذا نسي مدير الحظر إصدار قالب منع ، أو قمت للتو بحظر المستخدم دون وضع قالب له، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
 					// Disallow when viewing the block dialog on an IP range
 					checked: !Morebits.ip.isRange(relevantUserName),
 					disabled: Morebits.ip.isRange(relevantUserName)
@@ -385,7 +385,7 @@
 				type: 'input',
 				name: 'expiry',
 				label: 'تاريخ انتهاء الصلاحية المخصص',
-				tooltip: 'يمكنك استخدام الأوقات النسبية ، مثل "دقيقة واحدة" أو "19 يومًا" ، أو الطوابع الزمنية المطلقة ، "yyyymmddhhmm" (على سبيل المثال ، "200602011405" هو 1 فبراير 2006 ، الساعة 14:05 بالتوقيت العالمي المنسق).',
+				tooltip: 'يمكنك استخدام الأوقات النسبية، مثل "دقيقة واحدة" أو "19 يومًا" ، أو الطوابع الزمنية المطلقة ، "yyyymmddhhmm" (على سبيل المثال ، "200602011405" هو 1 فبراير 2006 ، الساعة 14:05 بالتوقيت العالمي المنسق).',
 				value: Twinkle.block.field_block_options.expiry || Twinkle.block.field_template_options.template_expiry
 			});
 
@@ -432,7 +432,7 @@
 					label: 'منع هذا المستخدم من تعديل صفحة نقاشه أثناء الحظر',
 					name: 'disabletalk',
 					value: '1',
-					tooltip: partialBox ? 'إذا كنت تصدر حظرًا جزئيًا ، فيجب أن يظل هذا غير محدد ما لم تمنعهم أيضًا من تعديل مساحة نقاش المستخدم' : ''
+					tooltip: partialBox ? 'إذا كنت تصدر حظرًا جزئيًا، فيجب أن يظل هذا غير محدد ما لم تمنعهم أيضًا من تعديل مساحة نقاش المستخدم' : ''
 				}
 			];
 
@@ -528,7 +528,7 @@
 			name: 'dstopic',
 			label: 'موضوع DS',
 			value: '',
-			tooltip: 'إذا تم تحديده ، فسوف يقوم بإبلاغ القالب وقد تتم إضافته إلى رسالة الحظر',
+			tooltip: 'إذا تم تحديده، فسوف يقوم بإبلاغ القالب وقد تتم إضافته إلى رسالة الحظر',
 			event: Twinkle.block.callback.toggle_ds_reason
 		};
 		if (templateBox) {
@@ -550,7 +550,7 @@
 				name: 'article',
 				label: 'صفحة مرتبطة',
 				value: '',
-				tooltip: 'يمكن ربط صفحة داخل الإشعار ، ربما إذا كانت الهدف الأساسي للاضطراب. اترك فارغًا حتى لا يتم ربط أي صفحة.'
+				tooltip: 'يمكن ربط صفحة داخل الإشعار، ربما إذا كانت الهدف الأساسي للاضطراب. اترك فارغًا حتى لا يتم ربط أي صفحة.'
 			});
 
 			// Only visible if partial and not blocking
@@ -568,14 +568,14 @@
 					name: 'template_expiry',
 					label: 'مدة الحظر:',
 					value: '',
-					tooltip: 'الفترة التي يستحقها الحظر ، على سبيل المثال 24 ساعة ، أسبوعان ، غير محددة وما إلى ذلك...'
+					tooltip: 'الفترة التي يستحقها الحظر، على سبيل المثال 24 ساعة ، أسبوعان، غير محددة وما إلى ذلك...'
 				});
 			}
 			field_template_options.append({
 				type: 'input',
 				name: 'block_reason',
 				label: '"لقد تم حظرك بسبب ..."',
-				tooltip: 'سبب اختياري ، لاستبدال السبب العام الافتراضي. متاح فقط لقوالب الحظر العامة.',
+				tooltip: 'سبب اختياري، لاستبدال السبب العام الافتراضي. متاح فقط لقوالب الحظر العامة.',
 				value: Twinkle.block.field_template_options.block_reason
 			});
 
@@ -587,7 +587,7 @@
 						{
 							label: 'عدم تضمين تاريخ انتهاء الصلاحية في القالب',
 							checked: Twinkle.block.field_template_options.blank_duration,
-							tooltip: 'بدلاً من تضمين المدة ، اجعل قالب الحظر يقرأ "لقد تم حظرك مؤقتًا..."'
+							tooltip: 'بدلاً من تضمين المدة، اجعل قالب الحظر يقرأ "لقد تم حظرك مؤقتًا..."'
 						}
 					]
 				});
@@ -605,13 +605,13 @@
 							label: 'تم منع المستخدم من إرسال بريد إلكتروني',
 							name: 'noemail_template',
 							checked: Twinkle.block.field_template_options.noemail_template,
-							tooltip: 'إذا لم يتم توفير المنطقة ، فاجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
+							tooltip: 'إذا لم يتم توفير المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
 						},
 						{
 							label: 'تم منع المستخدم من إنشاء حسابات',
 							name: 'nocreate_template',
 							checked: Twinkle.block.field_template_options.nocreate_template,
-							tooltip: 'إذا لم يتم توفير المنطقة ، فاجعل قالب الحظر ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
+							tooltip: 'إذا لم يتم توفير المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
 						}
 					]
 				});
@@ -1392,17 +1392,17 @@
 		{
 			label: 'انتهاكات اسم المستخدم',
 			list: [
-				{ label: 'اسم مستخدم روبوت ، منع خفيف', value: 'uw-botublock' },
-				{ label: 'اسم مستخدم روبوت ، منع صارم', value: 'uw-botuhblock' },
-				{ label: 'اسم مستخدم ترويجي ، منع صارم', value: 'uw-spamublock' },
-				{ label: 'اسم مستخدم ترويجي ، منع خفيف', value: 'uw-softerblock' },
-				{ label: 'اسم مستخدم مشابه ، منع خفيف', value: 'uw-ublock-double' },
-				{ label: 'انتهاك اسم المستخدم ، منع خفيف', value: 'uw-ublock' },
-				{ label: 'انتهاك اسم المستخدم ، منع صارم', value: 'uw-uhblock' },
-				{ label: 'انتحال شخصية اسم المستخدم ، منع صارم', value: 'uw-uhblock-double' },
-				{ label: 'اسم المستخدم يمثل شخصًا معروفًا ، منع خفيف', value: 'uw-ublock-wellknown' },
-				{ label: 'اسم المستخدم يمثل مؤسسة غير ربحية ، منع خفيف', value: 'uw-causeblock' },
-				{ label: 'انتهاك اسم المستخدم ، حساب تخريبي فقط', value: 'uw-vaublock' }
+				{ label: 'اسم مستخدم روبوت، منع خفيف', value: 'uw-botublock' },
+				{ label: 'اسم مستخدم روبوت، منع صارم', value: 'uw-botuhblock' },
+				{ label: 'اسم مستخدم ترويجي، منع صارم', value: 'uw-spamublock' },
+				{ label: 'اسم مستخدم ترويجي، منع خفيف', value: 'uw-softerblock' },
+				{ label: 'اسم مستخدم مشابه، منع خفيف', value: 'uw-ublock-double' },
+				{ label: 'انتهاك اسم المستخدم، منع خفيف', value: 'uw-ublock' },
+				{ label: 'انتهاك اسم المستخدم، منع صارم', value: 'uw-uhblock' },
+				{ label: 'انتحال شخصية اسم المستخدم، منع صارم', value: 'uw-uhblock-double' },
+				{ label: 'اسم المستخدم يمثل شخصًا معروفًا، منع خفيف', value: 'uw-ublock-wellknown' },
+				{ label: 'اسم المستخدم يمثل مؤسسة غير ربحية، منع خفيف', value: 'uw-causeblock' },
+				{ label: 'انتهاك اسم المستخدم، حساب تخريبي فقط', value: 'uw-vaublock' }
 			]
 		},
 		{
@@ -1765,10 +1765,10 @@
 				}
 				if (!blockoptions.namespacerestrictions && !blockoptions.pagerestrictions) {
 					if (!blockoptions.noemail && !blockoptions.nocreate) { // Blank entries technically allowed [[phab:T208645]]
-						return alert('لم يتم تحديد أي صفحات أو مساحات اسم ، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب ؛ يرجى تحديد خيار واحد على الأقل لتطبيق منع جزئي!');
+						return alert('لم يتم تحديد أي صفحات أو مساحات اسم، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب ؛ يرجى تحديد خيار واحد على الأقل لتطبيق منع جزئي!');
 					} else if ((templateoptions.template !== 'uw-epblock' || $form.find('select[name="preset"]').val() !== 'uw-epblock') &&
 						// Don't require confirmation if email harassment defaults are set
-						!confirm('أنت على وشك الحظر بدون قيود على تحرير الصفحة أو المساحة الاسمية ، هل أنت متأكد من أنك تريد المتابعة؟')) {
+						!confirm('أنت على وشك الحظر بدون قيود على تحرير الصفحة أو المساحة الاسمية، هل أنت متأكد من أنك تريد المتابعة؟')) {
 						return;
 					}
 				}
@@ -1912,7 +1912,7 @@
 		);
 
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'اكتملت الإجراءات ، ويتم تحميل صفحة نقاش المستخدم في بضع ثوان';
+		Morebits.wiki.actionCompleted.notice = 'اكتملت الإجراءات، ويتم تحميل صفحة نقاش المستخدم في بضع ثوان';
 
 		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setCallbackParameters(params);

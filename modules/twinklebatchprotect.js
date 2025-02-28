@@ -321,7 +321,7 @@
 				takenAction = true;
 			}
 			if (!takenAction) {
-				Morebits.Status.warn('حماية ' + apiobj.params.page, 'الصفحة ' + (exists ? 'موجودة' : 'غير موجودة') + '؛ لا يوجد شيء للقيام به ، يتم التخطي');
+				Morebits.Status.warn('حماية ' + apiobj.params.page, 'الصفحة ' + (exists ? 'موجودة' : 'غير موجودة') + '؛ لا يوجد شيء للقيام به، يتم التخطي');
 				apiobj.params.batchOperation.workerFailure(apiobj);
 				return;
 			}

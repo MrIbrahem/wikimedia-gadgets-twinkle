@@ -105,7 +105,7 @@
 
 		const userTalkPage = mw.config.get('wgFormattedNamespaces')[3] + ':' + mw.config.get('wgRelevantUserName');
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'اكتمل الترحيب ، وإعادة تحميل صفحة النقاش في بضع ثوان';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الترحيب، وإعادة تحميل صفحة النقاش في بضع ثوان';
 
 		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setFollowRedirect(true);
@@ -737,7 +737,7 @@
 
 		const userTalkPage = mw.config.get('wgFormattedNamespaces')[3] + ':' + mw.config.get('wgRelevantUserName');
 		Morebits.wiki.actionCompleted.redirect = userTalkPage;
-		Morebits.wiki.actionCompleted.notice = 'اكتمل الترحيب ، وإعادة تحميل صفحة النقاش في بضع ثوان';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الترحيب، وإعادة تحميل صفحة النقاش في بضع ثوان';
 
 		const wikipedia_page = new Morebits.wiki.Page(userTalkPage, 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setFollowRedirect(true);

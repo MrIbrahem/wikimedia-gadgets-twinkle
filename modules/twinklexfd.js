@@ -109,7 +109,7 @@
 	// error callback on Morebits.Status.object
 	Twinkle.xfd.printRationale = function twinklexfdPrintRationale() {
 		if (Twinkle.xfd.currentRationale) {
-			Morebits.Status.printUserText(Twinkle.xfd.currentRationale, 'يتم توفير الأساس المنطقي للحذف الخاص بك أدناه ، والذي يمكنك نسخه ولصقه في مربع حوار XFD جديد إذا كنت ترغب في المحاولة مرة أخرى:');
+			Morebits.Status.printUserText(Twinkle.xfd.currentRationale, 'يتم توفير الأساس المنطقي للحذف الخاص بك أدناه، والذي يمكنك نسخه ولصقه في مربع حوار XFD جديد إذا كنت ترغب في المحاولة مرة أخرى:');
 			// only need to print the rationale once
 			Twinkle.xfd.currentRationale = null;
 		}
@@ -129,7 +129,7 @@
 			type: 'select',
 			name: 'venue',
 			label: 'مكان مناقشة الحذف:',
-			tooltip: 'عند التنشيط ، يتم تحديد خيار افتراضي ، بناءً على مساحة الاسم التي تتواجد فيها. يجب أن يكون هذا الافتراضي هو الأنسب.',
+			tooltip: 'عند التنشيط، يتم تحديد خيار افتراضي، بناءً على مساحة الاسم التي تتواجد فيها. يجب أن يكون هذا الافتراضي هو الأنسب.',
 			event: Twinkle.xfd.callback.change_category
 		});
 		const namespace = mw.config.get('wgNamespaceNumber');
@@ -267,7 +267,7 @@
 				if (namespace === 14) { // category
 					text = 'الرجاء استخدام CfD أو CfDS لإعادة تسمية الفئة.';
 				} else if ([118, 119, 2, 3].includes(namespace)) { // draft, draft talk, user, user talk
-					text = 'لا يُسمح بعمليات RM في المسودة ومساحة المستخدم ، ما لم تكن طلبات فنية غير مثيرة للجدل.';
+					text = 'لا يُسمح بعمليات RM في المسودة ومساحة المستخدم، ما لم تكن طلبات فنية غير مثيرة للجدل.';
 				}
 				break;
 
@@ -521,7 +521,7 @@
 								label: 'إخطار مالك مساحة المستخدم (إذا لم يكن هو مُنشئ الصفحة)',
 								value: 'notifyuserspace',
 								name: 'notifyuserspace',
-								tooltip: 'إذا كان المستخدم الذي تقع في مساحة المستخدم الخاصة به هذه الصفحة ليس هو مُنشئ الصفحة (على سبيل المثال ، الصفحة عبارة عن مقالة تم إنقاذها ومخزنة كمسودة في مساحة المستخدم) ، فقم أيضًا بإخطار مالك مساحة المستخدم.',
+								tooltip: 'إذا كان المستخدم الذي تقع في مساحة المستخدم الخاصة به هذه الصفحة ليس هو مُنشئ الصفحة (على سبيل المثال، الصفحة عبارة عن مقالة تم إنقاذها ومخزنة كمسودة في مساحة المستخدم) ، فقم أيضًا بإخطار مالك مساحة المستخدم.',
 								checked: true
 							}
 						]
@@ -686,7 +686,7 @@
 							label: 'طلب فني غير مثير للجدل',
 							value: 'rmtr',
 							name: 'rmtr',
-							tooltip: 'استخدم هذا الخيار عندما تكون غير قادر على إجراء هذه الخطوة الفنية غير المثيرة للجدل بنفسك بسبب سبب فني (على سبيل المثال ، توجد صفحة بالفعل في العنوان الجديد ، أو الصفحة محمية)',
+							tooltip: 'استخدم هذا الخيار عندما تكون غير قادر على إجراء هذه الخطوة الفنية غير المثيرة للجدل بنفسك بسبب سبب فني (على سبيل المثال، توجد صفحة بالفعل في العنوان الجديد ، أو الصفحة محمية)',
 							checked: false,
 							event: function () {
 								$('input[name="newname"]', form).prop('required', this.checked);
@@ -699,7 +699,7 @@
 										label: 'الانسحاب من المناقشة إذا كان الطلب متنازع عليه',
 										value: 'rmtr-discuss',
 										name: 'rmtr-discuss',
-										tooltip: 'استخدم هذا الخيار إذا كنت تفضل سحب الطلب إذا تم الاعتراض عليه ، بدلاً من مناقشته. يؤدي هذا إلى قمع ارتباط "المناقشة" ، والذي يمكن استخدامه لتحويل طلبك إلى مناقشة في صفحة النقاش.',
+										tooltip: 'استخدم هذا الخيار إذا كنت تفضل سحب الطلب إذا تم الاعتراض عليه، بدلاً من مناقشته. يؤدي هذا إلى قمع ارتباط "المناقشة" ، والذي يمكن استخدامه لتحويل طلبك إلى مناقشة في صفحة النقاش.',
 										checked: false
 									}
 								]
@@ -718,7 +718,7 @@
 						{
 							label: 'إلى:',
 							name: 'newname',
-							tooltip: 'مطلوب للطلبات الفنية. بخلاف ذلك ، إذا لم تكن متأكدًا من العنوان المناسب ، فيمكنك تركه فارغًا.'
+							tooltip: 'مطلوب للطلبات الفنية. بخلاف ذلك ، إذا لم تكن متأكدًا من العنوان المناسب، فيمكنك تركه فارغًا.'
 						}
 					],
 					min: 1
@@ -771,7 +771,7 @@
 				talk_page.setChangeTags(Twinkle.changeTags);
 				talk_page.setCallbackParameters(params);
 				talk_page.newSection(null, () => {
-					talk_page.getStatusElement().warn('غير قادر على إضافة طلب تحرير ، قد تكون صفحة النقاش محمية');
+					talk_page.getStatusElement().warn('غير قادر على إضافة طلب تحرير، قد تكون صفحة النقاش محمية');
 				});
 			}
 		},
@@ -988,7 +988,7 @@
 
 			usl.initialText =
 				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
-				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل ، فيمكنك إيقاف تشغيله باستخدام [[Wikipedia:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
+				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[Wikipedia:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
 				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام Twinkle.' : '');
 
 			let editsummary;
@@ -1113,7 +1113,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = apiobj.params.discussionpage;
-				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Tagging article
 				const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'إضافة علامة حذف إلى المقالة');
@@ -1244,7 +1244,7 @@
 						const linknode = document.createElement('a');
 						linknode.setAttribute('href', mw.util.getUrl('Wikipedia:Twinkle/Fixing AFD') + '?action=purge');
 						linknode.appendChild(document.createTextNode('كيفية إصلاح AFD'));
-						statelem.error(['تعذر العثور على البقعة المستهدفة للمناقشة. لإصلاح هذه المشكلة ، يرجى الاطلاع على ', linknode, '.']);
+						statelem.error(['تعذر العثور على البقعة المستهدفة للمناقشة. لإصلاح هذه المشكلة، يرجى الاطلاع على ', linknode, '.']);
 						return;
 					}
 				}
@@ -1526,7 +1526,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = apiobj.params.discussionpage;
-				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Discussion page
 				wikipedia_page = new Morebits.wiki.Page(apiobj.params.discussionpage, 'إنشاء صفحة مناقشة الحذف');
@@ -1599,10 +1599,10 @@
 				const added_data = '{{subst:mfd3|pg=' + Morebits.pageNameNorm + params.numbering + '}}';
 
 				if (date_header_regex.test(text)) { // we have a section already
-					statelem.info('تم العثور على قسم اليوم ، والمضي قدمًا لإضافة إدخال جديد');
+					statelem.info('تم العثور على قسم اليوم، والمضي قدمًا لإضافة إدخال جديد');
 					text = text.replace(date_header_regex, '$1\n' + added_data);
 				} else { // we need to create a new section
-					statelem.info('لم يتم العثور على قسم لليوم ، والمضي قدمًا لإنشاء واحد');
+					statelem.info('لم يتم العثور على قسم لليوم، والمضي قدمًا لإنشاء واحد');
 					text = text.replace('===', date_header + added_data + '\n\n===');
 				}
 
@@ -1663,7 +1663,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح، ويتم الآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Contributor specific edits
 				const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'));
@@ -1725,7 +1725,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى سجل اليوم";
+				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح، ويتم الآن إعادة التوجيه إلى سجل اليوم";
 
 				// Adding discussion to list
 				let wikipedia_page = new Morebits.wiki.Page(params.logpage, "إضافة المناقشة إلى القائمة اليوم");
@@ -1896,9 +1896,9 @@
 					if (!apiobj.params.rfdtarget) { // Not a softredirect
 						const target = response.query.redirects && response.query.redirects[0].to;
 						if (!target) {
-							let message = 'لم يتم العثور على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه ، وأُلغي الطلب';
+							let message = 'لم يتم العثور على هدف. يبدو أن هذه الصفحة ليست إعادة توجيه، وأُلغي الطلب';
 							if (mw.config.get('wgAction') === 'history') {
-								message += '. إذا كانت هذه إعادة توجيه ناعمة ، فحاول مرة أخرى من صفحة المحتوى ، وليس سجل الصفحة.';
+								message += '. إذا كانت هذه إعادة توجيه ناعمة، فحاول مرة أخرى من صفحة المحتوى، وليس سجل الصفحة.';
 							}
 							apiobj.statelem.error(message);
 							return;
@@ -1923,7 +1923,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = params.logpage;
-				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح ، ويتم الآن إعادة التوجيه إلى سجل اليوم";
+				Morebits.wiki.actionCompleted.notice = "اكتمل الترشيح، ويتم الآن إعادة التوجيه إلى سجل اليوم";
 
 				// Adding discussion
 				wikipedia_page = new Morebits.wiki.Page(params.logpage, "إضافة مناقشة إلى سجل اليوم");
@@ -2199,7 +2199,7 @@
 
 				// Updating data for the action completed event
 				Morebits.wiki.actionCompleted.redirect = logpage;
-				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، والآن إعادة التوجيه إلى صفحة المناقشة';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح، والآن إعادة التوجيه إلى صفحة المناقشة';
 
 				// Tagging category
 				wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وسم الفئة بعلامة إعادة التسمية');
@@ -2226,7 +2226,7 @@
 					new mw.Title(Morebits.pageNameNorm).getTalkPage().toText();
 
 				Morebits.wiki.actionCompleted.redirect = nomPageName;
-				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح ، والآن إعادة التوجيه إلى صفحة المناقشة';
+				Morebits.wiki.actionCompleted.notice = 'اكتمل الترشيح، والآن إعادة التوجيه إلى صفحة المناقشة';
 
 				wikipedia_page = new Morebits.wiki.Page(nomPageName, params.rmtr ? 'إضافة إدخال في WP:RM/TR' : 'إضافة إدخال في صفحة النقاش');
 				wikipedia_page.setFollowRedirect(true);

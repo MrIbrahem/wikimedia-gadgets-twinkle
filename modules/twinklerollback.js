@@ -494,7 +494,7 @@
 
 			const page = response.query.pages[0];
 			if (!page.actions.edit) {
-				apiobj.statelem.error("غير قادر على تحرير الصفحة ، ربما تكون محمية.");
+				apiobj.statelem.error("غير قادر على تحرير الصفحة، ربما تكون محمية.");
 				return;
 			}
 
@@ -507,7 +507,7 @@
 			const params = apiobj.params;
 
 			if (revs.length < 1) {
-				statelem.error('لدينا أقل من مراجعة إضافية واحدة ، وبالتالي من المستحيل الاسترجاع.');
+				statelem.error('لدينا أقل من مراجعة إضافية واحدة، وبالتالي من المستحيل الاسترجاع.');
 				return;
 			}
 			const top = revs[0];
@@ -529,10 +529,10 @@
 						case 'vand':
 							var diffUser = lastuser !== params.user;
 							Morebits.Status.info('معلومات', ['المراجعة الأخيرة كانت ' + (diffUser ? '' : 'أيضًا ') + 'صنع بواسطة ', Morebits.htmlNode('strong', userNorm),
-							diffUser ? ', وهو على نفس الشبكة الفرعية /64' : '', '. نظرًا لأننا نفترض التخريب ، فسنشرع في الاسترجاع.']);
+							diffUser ? ', وهو على نفس الشبكة الفرعية /64' : '', '. نظرًا لأننا نفترض التخريب، فسنشرع في الاسترجاع.']);
 							break;
 						case 'agf':
-							Morebits.Status.warn('تحذير', ['المراجعة الأخيرة تمت بواسطة ', Morebits.htmlNode('strong', userNorm), '. نظرًا لأننا نفترض حسن النية ، فسوف نوقف الاسترجاع ، حيث ربما تم إصلاح المشكلة.']);
+							Morebits.Status.warn('تحذير', ['المراجعة الأخيرة تمت بواسطة ', Morebits.htmlNode('strong', userNorm), '. نظرًا لأننا نفترض حسن النية، فسوف نوقف الاسترجاع، حيث ربما تم إصلاح المشكلة.']);
 							return;
 						default:
 							Morebits.Status.warn('ملاحظة', ['المراجعة الأخيرة تمت بواسطة ', Morebits.htmlNode('strong', userNorm), '، لكننا سنوقف الاسترجاع.']);
@@ -543,10 +543,10 @@
 					// Besides, none of the trusted bots are going to be revdel'd
 					Twinkle.rollback.trustedBots.includes(top.user) && revs.length > 1 &&
 					revs[1].revid === params.revid) {
-					Morebits.Status.info('معلومات', ['تم إجراء المراجعة الأخيرة بواسطة ', Morebits.htmlNode('strong', lastuser), ' ، روبوت موثوق به ، وكانت المراجعة السابقة من قبل المخرب الخاص بنا ، لذلك سنشرع في الاسترجاع.']);
+					Morebits.Status.info('معلومات', ['تم إجراء المراجعة الأخيرة بواسطة ', Morebits.htmlNode('strong', lastuser), ' ، روبوت موثوق به، وكانت المراجعة السابقة من قبل المخرب الخاص بنا، لذلك سنشرع في الاسترجاع.']);
 					index = 2;
 				} else {
-					Morebits.Status.error('خطأ', ['تم إجراء المراجعة الأخيرة بواسطة ', Morebits.htmlNode('strong', lastuser), '، لذلك ربما تم استرجاعه بالفعل ، وسوف نوقف الاسترجاع.']);
+					Morebits.Status.error('خطأ', ['تم إجراء المراجعة الأخيرة بواسطة ', Morebits.htmlNode('strong', lastuser), '، لذلك ربما تم استرجاعه بالفعل، وسوف نوقف الاسترجاع.']);
 					return;
 				}
 
@@ -560,7 +560,7 @@
 			if (Twinkle.rollback.trustedBots.includes(params.user)) {
 				switch (params.type) {
 					case 'vand':
-						Morebits.Status.info('معلومات', ['تم اختيار استرجاع التخريب على ', Morebits.htmlNode('strong', userNorm), '. نظرًا لأن هذا روبوت موثوق به ، فإننا نفترض أنك أردت استرجاع التخريب الذي قام به المستخدم السابق بدلاً من ذلك.']);
+						Morebits.Status.info('معلومات', ['تم اختيار استرجاع التخريب على ', Morebits.htmlNode('strong', userNorm), '. نظرًا لأن هذا روبوت موثوق به، فإننا نفترض أنك أردت استرجاع التخريب الذي قام به المستخدم السابق بدلاً من ذلك.']);
 						index = 2;
 						params.user = revs[1].user;
 						params.userHidden = !!revs[1].userhidden;
@@ -571,15 +571,15 @@
 					case 'norm':
 					/* falls through */
 					default:
-						var cont = confirm('تم اختيار الاسترجاع العادي ، ولكن التعديل الأخير تم إجراؤه بواسطة روبوت موثوق به (' + userNorm + '). هل تريد استرجاع المراجعة السابقة بدلاً من ذلك؟');
+						var cont = confirm('تم اختيار الاسترجاع العادي، ولكن التعديل الأخير تم إجراؤه بواسطة روبوت موثوق به (' + userNorm + '). هل تريد استرجاع المراجعة السابقة بدلاً من ذلك؟');
 						if (cont) {
-							Morebits.Status.info('معلومات', ['تم اختيار استرجاع عادي على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به ، وبناءً على التأكيد ، سنقوم باسترجاع المراجعة السابقة بدلاً من ذلك.']);
+							Morebits.Status.info('معلومات', ['تم اختيار استرجاع عادي على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به، وبناءً على التأكيد، سنقوم باسترجاع المراجعة السابقة بدلاً من ذلك.']);
 							index = 2;
 							params.user = revs[1].user;
 							params.userHidden = !!revs[1].userhidden;
 							userNorm = params.user || Twinkle.rollback.hiddenName;
 						} else {
-							Morebits.Status.warn('ملاحظة', ['تم اختيار استرجاع عادي على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به ، ولكن بناءً على التأكيد ، سيتم المتابعة في استرجاع المراجعة المحددة.']);
+							Morebits.Status.warn('ملاحظة', ['تم اختيار استرجاع عادي على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به، ولكن بناءً على التأكيد، سيتم المتابعة في استرجاع المراجعة المحددة.']);
 						}
 						break;
 				}
@@ -610,7 +610,7 @@
 			}
 
 			if (!count) {
-				Morebits.Status.error('خطأ', 'نظرًا لأنه لا يمكن استرجاع صفر من المراجعات ، فسوف نوقف هذا الاسترجاع. قد يكون التعديل قد تم استرجاعه بالفعل ، لكن معرف المراجعة كان لا يزال كما هو.');
+				Morebits.Status.error('خطأ', 'نظرًا لأنه لا يمكن استرجاع صفر من المراجعات، فسوف نوقف هذا الاسترجاع. قد يكون التعديل قد تم استرجاعه بالفعل، لكن معرف المراجعة كان لا يزال كما هو.');
 				return;
 			}
 
@@ -748,9 +748,9 @@
 			const edit = response.edit;
 
 			if (edit.captcha) {
-				apiobj.statelem.error('تعذر الاسترجاع ، لأن خادم الويكي أراد منك ملء اختبار CAPTCHA.');
+				apiobj.statelem.error('تعذر الاسترجاع، لأن خادم الويكي أراد منك ملء اختبار CAPTCHA.');
 			} else if (edit.nochange) {
-				apiobj.statelem.error('المراجعة التي نعود إليها مطابقة للمراجعة الحالية ، يتم إيقاف الاسترجاع.');
+				apiobj.statelem.error('المراجعة التي نعود إليها مطابقة للمراجعة الحالية، يتم إيقاف الاسترجاع.');
 			} else {
 				apiobj.statelem.info('تم');
 				const params = apiobj.params;
