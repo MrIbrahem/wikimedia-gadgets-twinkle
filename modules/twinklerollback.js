@@ -140,7 +140,7 @@
 
 			if (!inline) {
 				const agfNode = document.createElement('span');
-				const agfLink = Twinkle.rollback.linkBuilder.buildLink('DarkOliveGreen', 'استرجاع (AGF)');
+				const agfLink = Twinkle.rollback.linkBuilder.buildLink('DarkOliveGreen', 'استرجاع (حسن نية)');
 				$(agfLink).on('click', (e) => {
 					e.preventDefault();
 					Twinkle.rollback.revert('agf', vandal, rev, page);
@@ -566,7 +566,7 @@
 						params.userHidden = !!revs[1].userhidden;
 						break;
 					case 'agf':
-						Morebits.Status.warn('ملاحظة', ['تم اختيار استرجاع حسن النية على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به وبالتالي لن يتم متابعة استرجاع AGF.']);
+						Morebits.Status.warn('ملاحظة', ['تم اختيار استرجاع حسن النية على ', Morebits.htmlNode('strong', userNorm), '. هذا روبوت موثوق به وبالتالي لن يتم متابعة استرجاع حسن النية.']);
 						return;
 					case 'norm':
 					/* falls through */
@@ -642,7 +642,7 @@
 					}
 					userHasAlreadyConfirmedAction = true;
 
-					summary = Twinkle.rollback.formatSummary('تم استرجاع تعديلات [[WP:AGF|حسن النية]] بواسطة $USER',
+					summary = Twinkle.rollback.formatSummary('تم استرجاع تعديلات [[ويكيبيديا:افترض حسن النية|حسن النية]] بواسطة $USER',
 						params.userHidden ? null : params.user, extra_summary);
 					break;
 

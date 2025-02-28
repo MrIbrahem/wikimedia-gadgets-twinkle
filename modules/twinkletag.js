@@ -971,7 +971,7 @@
 				{ tag: 'R from acronym', description: 'تحويل من اختصار (مثل POTUS) إلى شكله الموسع', restriction: 'insideMainspaceOnly' },
 				{ tag: 'R from airport code', description: 'تحويل من رمز IATA أو ICAO للمطار إلى مقال المطار هذا', restriction: 'insideMainspaceOnly' },
 				{ tag: 'R from airline code', description: 'تحويل من رمز IATA أو ICAO لشركة الطيران إلى مقال شركة الطيران هذا', restriction: 'insideMainspaceOnly' },
-				{ tag: 'R from initialism', description: 'تحويل من حرف استهلالي (مثل AGF) إلى شكله الموسع', restriction: 'insideMainspaceOnly' },
+				{ tag: 'R from initialism', description: 'تحويل من حرف استهلالي (مثل حسن النية) إلى شكله الموسع', restriction: 'insideMainspaceOnly' },
 				{ tag: 'R from MathSciNet abbreviation', description: 'تحويل من اختصار عنوان منشور MathSciNet إلى العنوان غير المختصر', restriction: 'insideMainspaceOnly' },
 				{ tag: 'R from NLM abbreviation', description: 'تحويل من اختصار عنوان منشور NLM إلى العنوان غير المختصر', restriction: 'insideMainspaceOnly' }
 			],
