@@ -162,7 +162,7 @@
 				// Twinkle.config.disabledModules (array)
 				{
 					name: "disabledModules",
-					label: 'إيقاف تشغيل وحدات Twinkle المحددة',
+					label: 'إيقاف تشغيل وحدات توينكل المحددة',
 					helptip: 'أي شيء تختاره هنا لن يكون متاحًا للاستخدام، لذا تصرف بحذر. قم بإلغاء التحديد لإعادة التفعيل.',
 					type: "set",
 					setValues: { arv: "ARV", warn: 'تحذير', welcome: 'ترحيب', shared: 'عنوان IP مشترك', talkback: 'رد النقاش', speedy: 'حذف سريع', prod: "PROD", xfd: "XfD", image: 'صورة (DI)', protect: 'حماية (RPP)', tag: 'وسم', diff: 'مقارنة التعديلات', unlink: 'إزالة الروابط', rollback: 'استرجاع التعديلات' }
@@ -317,8 +317,8 @@
 
 				{
 					name: "logProdPages",
-					label: 'الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي تم وسمها بالحذف المقترح',
-					helptip: 'نظرًا لأن غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، يوفر سجل المستخدم طريقة جيدة لتتبع جميع الصفحات التي تم وسمها بالحذف المقترح باستخدام Twinkle.',
+					label: 'الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي وسمت بالحذف المقترح',
+					helptip: 'نظرًا لأن غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، يوفر سجل المستخدم طريقة جيدة لتتبع جميع الصفحات التي وسمت بالحذف المقترح باستخدام Twinkle.',
 					type: "boolean"
 				},
 				{
@@ -338,7 +338,7 @@
 				// Option to automatically open the warning menu if the user talk page is opened post-reversion
 				{
 					name: "autoMenuAfterRollback",
-					label: "فتح قائمة التحذير في Twinkle تلقائيًا على صفحة نقاش المستخدم بعد التراجع باستخدام Twinkle",
+					label: "فتح قائمة التحذير في توينكل تلقائيًا على صفحة نقاش المستخدم بعد التراجع باستخدام Twinkle",
 					helptip: "يعمل فقط إذا تم تحديد المربع المناسب أدناه.",
 					type: "boolean"
 				},
@@ -365,7 +365,7 @@
 				{
 					name: "rollbackInPlace",
 					label: "عدم إعادة تحميل الصفحة عند التراجع من المساهمات أو أحدث التغييرات",
-					helptip: "عند تفعيل هذا الخيار، لن يقوم Twinkle بإعادة تحميل المساهمات أو أحدث التغييرات بعد التراجع، مما يسمح لك بالتراجع عن أكثر من تعديل في نفس الوقت.",
+					helptip: "عند تفعيل هذا الخيار، لن يقوم توينكل بإعادة تحميل المساهمات أو أحدث التغييرات بعد التراجع، مما يسمح لك بالتراجع عن أكثر من تعديل في نفس الوقت.",
 					type: "boolean"
 				},
 				// TwinkleConfig.markRevertedPagesAsMinor (array)
@@ -572,7 +572,7 @@
 				{
 					name: "logSpeedyNominations",
 					label: "الاحتفاظ بسجل في نطاق المستخدم لجميع طلبات الحذف السريع",
-					helptip: "نظرًا لأن المستخدمين غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، فإن سجل المستخدم يوفر طريقة جيدة لتتبع جميع الصفحات التي تم ترشيحها للحذف السريع باستخدام Twinkle. يتم أيضًا تسجيل الملفات الموسومة باستخدام DI.",
+					helptip: "نظرًا لأن المستخدمين غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، فإن سجل المستخدم يوفر طريقة جيدة لتتبع جميع الصفحات التي رُشحت للحذف السريع باستخدام Twinkle. يتم أيضًا تسجيل الملفات الموسومة باستخدام DI.",
 					type: "boolean"
 				},
 				{
@@ -632,12 +632,12 @@
 					name: "tagArticleSortOrder",
 					label: "ترتيب عرض وسوم المقالات الافتراضي",
 					type: "enum",
-					enumValues: { cat: "حسب الفئات", alpha: "حسب الترتيب الأبجدي" }
+					enumValues: { cat: "حسب التصنيفات", alpha: "حسب الترتيب الأبجدي" }
 				},
 				{
 					name: "customTagList",
 					label: "وسوم صيانة المقالات/المسودات المخصصة للعرض",
-					helptip: "تظهر هذه الوسوم كخيارات إضافية في أسفل قائمة الوسوم. يمكنك إضافة وسوم صيانة جديدة لم تُدرج بعد ضمن وسوم Twinkle الافتراضية.",
+					helptip: "تظهر هذه الوسوم كخيارات إضافية في أسفل قائمة الوسوم. يمكنك إضافة وسوم صيانة جديدة لم تُدرج بعد ضمن وسوم توينكل الافتراضية.",
 					type: "customList",
 					customListValueTitle: "اسم القالب (بدون أقواس معقوفة)",
 					customListLabelTitle: "النص المعروض في مربع الوسم"
@@ -959,7 +959,7 @@
 				const contentnotice = document.createElement("p");
 				contentnotice.innerHTML = '<table class="plainlinks morebits-ombox morebits-ombox-content"><tr><td class="morebits-mbox-image">' +
 					'<img alt="" src="https://upload.wikimedia.org/wikipedia/commons/3/38/Imbox_content.png" /></td>' +
-					'<td class="morebits-mbox-text"><p><big><b>قبل تعديل إعداداتك هنا،</b> يجب عليك إزالة إعدادات Twinkle و Friendly القديمة من ملف JavaScript الخاص بواجهتك.</big></p>' +
+					'<td class="morebits-mbox-text"><p><big><b>قبل تعديل إعداداتك هنا،</b> يجب عليك إزالة إعدادات توينكل و Friendly القديمة من ملف JavaScript الخاص بواجهتك.</big></p>' +
 					'<p>للقيام بذلك، يمكنك <a href="' + mw.util.getUrl('User:' + mw.config.get("wgUserName") + '/' + mw.config.get("skin") +
 						'.js', { action: "edit" }) + '" target="_blank"><b>تعديل ملف JavaScript الخاص بواجهتك</b></a> أو <a href="' +
 					mw.util.getUrl('User:' + mw.config.get("wgUserName") + '/common.js', { action: "edit" }) + '" target="_blank"><b>ملف common.js الخاص بك</b></a>، وإزالة جميع سطور التعليمات البرمجية التي تشير إلى <code>TwinkleConfig</code> و <code>FriendlyConfig</code>.</p>' +
@@ -1286,9 +1286,9 @@
 				box.setAttribute("class", 'config-twopt-box');
 
 				if (mw.config.get("wgArticleId") > 0) { // page exists
-					box.appendChild(document.createTextNode('تحتوي هذه الصفحة على تفضيلات Twinkle الخاصة بك. يمكنك تغييرها باستخدام '));
+					box.appendChild(document.createTextNode('تحتوي هذه الصفحة على تفضيلات توينكل الخاصة بك. يمكنك تغييرها باستخدام '));
 				} else { // page does not exist
-					box.appendChild(document.createTextNode('يمكنك تخصيص Twinkle ليناسب تفضيلاتك باستخدام '));
+					box.appendChild(document.createTextNode('يمكنك تخصيص توينكل ليناسب تفضيلاتك باستخدام '));
 				}
 				link = document.createElement("a");
 				link.setAttribute("href", mw.util.getUrl(mw.config.get("wgFormattedNamespaces")[mw.config.get("wgNamespaceIds").project] + ':Twinkle/Preferences'));
@@ -1667,9 +1667,9 @@
 		});
 
 		let text =
-			'// twinkleoptions.js: ملف تفضيلات Twinkle الشخصية\n' +
+			'// twinkleoptions.js: ملف تفضيلات توينكل الشخصية\n' +
 			'//\n' +
-			'// NOTE: أسهل طريقة لتغيير تفضيلات Twinkle الخاصة بك هي استخدام\n' +
+			'// NOTE: أسهل طريقة لتغيير تفضيلات توينكل الخاصة بك هي استخدام\n' +
 			'// لوحة تفضيلات Twinkle، في [[' + Morebits.pageNameNorm + ']].\n' +
 			'//\n' +
 			'// هذا الملف يتم إنشاؤه تلقائيًا. أي تغييرات تجريها (بصرف النظر عن\n' +
@@ -1701,7 +1701,7 @@
 		const noticebox = document.createElement("div");
 		noticebox.className = 'cdx-message cdx-message--success';
 		noticebox.style.fontSize = '100%';
-		noticebox.innerHTML = '<p><b>تم حفظ تفضيلات Twinkle الخاصة بك.</b> لرؤية التغييرات، ستحتاج إلى مسح ذاكرة التخزين المؤقت للمتصفح بالكامل (راجع <a href="' + mw.util.getUrl('WP:BYPASS') + '" title="WP:BYPASS">WP:BYPASS</a> للحصول على التعليمات).</p>';
+		noticebox.innerHTML = '<p><b>تم حفظ تفضيلات توينكل الخاصة بك.</b> لرؤية التغييرات، ستحتاج إلى مسح ذاكرة التخزين المؤقت للمتصفح بالكامل (راجع <a href="' + mw.util.getUrl('WP:BYPASS') + '" title="WP:BYPASS">WP:BYPASS</a> للحصول على التعليمات).</p>';
 		mw.loader.using('mediawiki.htmlform.codex.styles', () => {
 			Morebits.Status.root.appendChild(noticebox);
 		});

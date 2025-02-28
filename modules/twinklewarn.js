@@ -30,7 +30,7 @@
 			const $vandalTalkLink = $('#mw-rollback-success').find('.mw-usertoollinks a').first();
 			if ($vandalTalkLink.length) {
 				$vandalTalkLink.css('font-weight', 'bold');
-				$vandalTalkLink.wrapInner($('<span>').attr('title', 'إذا كان ذلك مناسبًا، يمكنك استخدام Twinkle لتحذير المستخدم بشأن تعديلاته على هذه الصفحة.'));
+				$vandalTalkLink.wrapInner($('<span>').attr('title', 'إذا كان ذلك مناسبًا، يمكنك استخدام توينكل لتحذير المستخدم بشأن تعديلاته على هذه الصفحة.'));
 
 				// Can't provide vanarticlerevid as only wgCurRevisionId is provided
 				const extraParam = 'vanarticle=' + mw.util.rawurlencode(Morebits.pageNameNorm);
@@ -72,7 +72,7 @@
 		const main_group = main_select.append({
 			type: 'select',
 			name: 'main_group',
-			tooltip: 'يمكنك تخصيص التحديد الافتراضي في تفضيلات Twinkle الخاصة بك',
+			tooltip: 'يمكنك تخصيص التحديد الافتراضي في تفضيلات توينكل الخاصة بك',
 			event: Twinkle.warn.callback.change_category
 		});
 
@@ -112,7 +112,7 @@
 		});
 
 		const more = form.append({ type: 'field', name: 'reasonGroup', label: 'معلومات التحذير' });
-		more.append({ type: 'textarea', label: 'رسالة اختيارية:', name: 'reason', tooltip: 'ربما سبب ، أو أنه يجب إلحاق إشعار أكثر تفصيلاً' });
+		more.append({ type: 'textarea', label: 'رسالة اختيارية:', name: 'reason', tooltip: 'ربما سبب، أو أنه يجب إلحاق إشعار أكثر تفصيلاً' });
 
 		const previewlink = document.createElement('a');
 		$(previewlink).on('click', () => {
@@ -1035,8 +1035,8 @@
 				summary: 'إشعار: إنشاء سير ذاتية'
 			},
 			'uw-badcat': {
-				label: 'إضافة فئات غير صحيحة',
-				summary: 'إشعار: إضافة فئات غير صحيحة'
+				label: 'إضافة تصنيفات غير صحيحة',
+				summary: 'إشعار: إضافة تصنيفات غير صحيحة'
 			},
 			'uw-badlistentry': {
 				label: 'إضافة إدخالات غير مناسبة إلى القوائم',
@@ -1243,7 +1243,7 @@
 
 		singlewarn: {
 			'uw-3rr': {
-				label: 'انتهاك محتمل لقاعدة الثلاثة استرجاعات ؛ انظر أيضًا uw-ew',
+				label: 'انتهاك محتمل لقاعدة الثلاثة استرجاعات؛ انظر أيضًا uw-ew',
 				summary: 'تحذير: قاعدة الثلاثة استرجاعات'
 			},
 			'uw-affiliate': {
@@ -1842,7 +1842,7 @@
 								}
 							});
 							const $statusNode = $('<div>', {
-								text: mw.config.get('wgRelevantUserName') + ' تلقى مؤخرًا تحذيرًا من المستوى 4 (' + latest.type + ') لذلك قد يكون من الأفضل الإبلاغ عنه بدلاً من ذلك ؛ ',
+								text: mw.config.get('wgRelevantUserName') + ' تلقى مؤخرًا تحذيرًا من المستوى 4 (' + latest.type + ') لذلك قد يكون من الأفضل الإبلاغ عنه بدلاً من ذلك؛ ',
 								css: { color: 'red' }
 							});
 							$statusNode.append($link[0]);

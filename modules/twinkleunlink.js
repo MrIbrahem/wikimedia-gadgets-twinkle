@@ -154,7 +154,7 @@
 						apiobj.params.form.append({
 							type: 'div',
 							label: 'المساحات الاسمية المحددة: ' + namespaces.join(', '),
-							tooltip: 'يمكنك تغيير هذا من خلال تفضيلات Twinkle الخاصة بك، في [[WP:TWPREFS]]'
+							tooltip: 'يمكنك تغيير هذا من خلال تفضيلات توينكل الخاصة بك، في [[WP:TWPREFS]]'
 						});
 						if (response['query-continue'] && response['query-continue'].imageusage) {
 							apiobj.params.form.append({
@@ -201,7 +201,7 @@
 					apiobj.params.form.append({
 						type: 'div',
 						label: 'المساحات الاسمية المحددة: ' + namespaces.join(', '),
-						tooltip: 'يمكنك تغيير هذا من خلال تفضيلات Twinkle الخاصة بك، المرتبطة في الجزء السفلي من نافذة Twinkle هذه'
+						tooltip: 'يمكنك تغيير هذا من خلال تفضيلات توينكل الخاصة بك، المرتبطة في الجزء السفلي من نافذة توينكل هذه'
 					});
 					if (response['query-continue'] && response['query-continue'].backlinks) {
 						apiobj.params.form.append({

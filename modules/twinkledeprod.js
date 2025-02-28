@@ -18,7 +18,7 @@
 		) {
 			return;
 		}
-		Twinkle.addPortletLink(Twinkle.deprod.callback, 'Deprod', 'tw-deprod', 'حذف صفحات prod الموجودة في هذه الفئة');
+		Twinkle.addPortletLink(Twinkle.deprod.callback, 'Deprod', 'tw-deprod', 'حذف صفحات prod الموجودة في هذه التصنيف');
 	};
 
 	const concerns = {};
@@ -72,7 +72,7 @@
 
 				const editProt = page.protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
 				if (editProt) {
-					metadata.push('محمي بالكامل' +
+					metadata.push('محمي حماية كاملة' +
 						(editProt.expiry === 'infinity' ? ' إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + editProt.expiry));
 				}
 

@@ -153,7 +153,7 @@
 	 * @return {string}
 	 */
 	Morebits.sanitizeIPv6 = function (address) {
-		console.warn('ملاحظة: تم إعادة تسمية Morebits.sanitizeIPv6 إلى Morebits.ip.sanitizeIPv6 في فبراير 2021، يرجى استخدام ذلك بدلاً من هذه الوظيفة'); // eslint-disable-line no-console
+		console.warn('ملاحظة: أُعيد تسمية Morebits.sanitizeIPv6 إلى Morebits.ip.sanitizeIPv6 في فبراير 2021، يرجى استخدام ذلك بدلاً من هذه الوظيفة'); // eslint-disable-line no-console
 		return Morebits.ip.sanitizeIPv6(address);
 	};
 
@@ -2837,15 +2837,15 @@
 				!confirm(
 					ctx.fullyProtected === 'infinity' ?
 						msg('protected-indef-edit-warning', ctx.pageName,
-							'أنت على وشك إجراء تعديل على الصفحة المحمية بالكامل "' + ctx.pageName + '" (محمية إلى أجل غير مسمى). \n\nانقر فوق "موافق" للمتابعة في التعديل ، أو "إلغاء" لتخطي هذا التعديل.'
+							'أنت على وشك إجراء تعديل على الصفحة المحمية حماية كاملة "' + ctx.pageName + '" (محمية إلى أجل غير مسمى). \n\nانقر فوق "موافق" للمتابعة في التعديل، أو "إلغاء" لتخطي هذا التعديل.'
 						) :
 						msg('protected-edit-warning', ctx.pageName, ctx.fullyProtected,
-							'أنت على وشك إجراء تعديل على الصفحة المحمية بالكامل "' + ctx.pageName +
-							'" (تنتهي الحماية في ' + new Morebits.date(ctx.fullyProtected).calendar('utc') + ' (UTC)). \n\nانقر فوق "موافق" للمتابعة في التعديل ، أو "إلغاء" لتخطي هذا التعديل.'
+							'أنت على وشك إجراء تعديل على الصفحة المحمية حماية كاملة "' + ctx.pageName +
+							'" (تنتهي الحماية في ' + new Morebits.date(ctx.fullyProtected).calendar('utc') + ' (UTC)). \n\nانقر فوق "موافق" للمتابعة في التعديل، أو "إلغاء" لتخطي هذا التعديل.'
 						)
 				)
 			) {
-				ctx.statusElement.error(msg('protected-aborted', 'تم إلغاء التعديل على الصفحة المحمية بالكامل.'));
+				ctx.statusElement.error(msg('protected-aborted', 'أُلغي تعديل الصفحة المحمية حماية كاملة.'));
 				ctx.onSaveFailure(this);
 				return;
 			}
@@ -4111,7 +4111,7 @@
 						break;
 
 					case 'abusefilter-disallowed':
-						ctx.statusElement.error('مُنعت من التعديل بواسطة مُرشح التحرير: "' + errorData.abusefilter.description + '".');
+						ctx.statusElement.error('مُنعت من التحرير بواسطة مُرشح التحرير: "' + errorData.abusefilter.description + '".');
 						break;
 
 					case 'abusefilter-warning':
@@ -4278,10 +4278,10 @@
 				editprot = response.pages[0].protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
 			}
 			if (editprot && !ctx.suppressProtectWarning &&
-				!confirm('أنت على وشك ' + action + ' صفحة محمية بالكامل "' + ctx.pageName +
+				!confirm('أنت على وشك ' + action + ' صفحة محمية حماية كاملة "' + ctx.pageName +
 					(editprot.expiry === 'infinity' ? '" (محمية إلى أجل غير مسمى)' : '" (تنتهي الحماية ' + new Morebits.date(editprot.expiry).calendar('utc') + ' (UTC))') +
 					'.  \n\nانقر فوق "موافق" للمتابعة باستخدام ' + action + '، أو انقر فوق "إلغاء" للتخطي.')) {
-				ctx.statusElement.error('لم يتم ' + action + ' على الصفحة المحمية بالكامل.');
+				ctx.statusElement.error('لم يتم ' + action + ' على الصفحة المحمية حماية كاملة.');
 				onFailure(this);
 				return false;
 			}

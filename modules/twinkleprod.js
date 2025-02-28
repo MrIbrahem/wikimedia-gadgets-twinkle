@@ -209,7 +209,7 @@
 						params.oldProdPresent = true; // Mark for reference later, when deciding if to endorse
 						// if there are multiple templates, at least one of them would be a prior xfd template
 					} else {
-						statelem.warn('تم العثور على قالب XfD سابق في صفحة النقاش، يتم إلغاء الإجراء');
+						statelem.warn('عُثر على قالب XfD سابق في صفحة النقاش، أُلغي الإجراء');
 						return $.Deferred().reject();
 					}
 				}
@@ -224,7 +224,7 @@
 			ts.lookupCreation((pageobj) => {
 				params.initialContrib = pageobj.getCreator();
 				params.creation = pageobj.getCreationTimestamp();
-				pageobj.getStatusElement().info('تم، تم العثور على ' + params.initialContrib);
+				pageobj.getStatusElement().info('تم، عُثر على ' + params.initialContrib);
 				def.resolve();
 			}, def.reject);
 			return def;
@@ -250,7 +250,7 @@
 				// Check for already existing deletion tags
 				const tag_re = /{{(?:article for deletion\/dated|AfDM|ffd\b)|#invoke:RfD/i;
 				if (tag_re.test(text)) {
-					statelem.warn('الصفحة موسومة بالفعل بقالب حذف، يتم إلغاء الإجراء');
+					statelem.warn('الصفحة موسومة بالفعل بقالب حذف، أُلغي الإجراء');
 					return def.reject();
 				}
 
@@ -264,13 +264,13 @@
 					// Page previously PROD-ed
 					if (params.oldProdPresent) {
 						if (params.blp) {
-							if (!confirm('تم العثور على ترشيح PROD سابق في صفحة النقاش. هل ما زلت ترغب في متابعة تطبيق BLPPROD؟')) {
-								statelem.warn('تم العثور على PROD سابق في صفحة النقاش، وتم إحباطه من قبل المستخدم');
+							if (!confirm('عُثر على ترشيح PROD سابق في صفحة النقاش. هل ما زلت ترغب في متابعة تطبيق BLPPROD؟')) {
+								statelem.warn('عُثر على PROD سابق في صفحة النقاش، وتم إحباطه من قبل المستخدم');
 								return def.reject();
 							}
-							statelem.info('تم العثور على PROD سابق في صفحة النقاش، ويستمر');
+							statelem.info('عُثر على PROD سابق في صفحة النقاش، ويستمر');
 						} else {
-							statelem.warn('تم العثور على PROD سابق في صفحة النقاش، يتم إلغاء الإجراء');
+							statelem.warn('عُثر على PROD سابق في صفحة النقاش، أُلغي الإجراء');
 							return def.reject();
 						}
 					}
@@ -291,12 +291,12 @@
 				} else { // already tagged for PROD, so try endorsing it
 					const prod2_re = /{{(?:Proposed deletion endorsed|prod-?2).*?}}/i;
 					if (prod2_re.test(text)) {
-						statelem.warn('الصفحة موسومة بالفعل بقالبي {{proposed deletion}} و {{proposed deletion endorsed}}، يتم إلغاء الإجراء');
+						statelem.warn('الصفحة موسومة بالفعل بقالبي {{proposed deletion}} و {{proposed deletion endorsed}}، أُلغي الإجراء');
 						return def.reject();
 					}
-					let confirmtext = 'تم العثور بالفعل على علامة {{proposed deletion}} في هذه الصفحة. \nهل ترغب في إضافة علامة {{proposed deletion endorsed}} مع شرحك؟';
+					let confirmtext = 'تحتوي هذه الصفحة بالفعل على علامة {{proposed deletion}} في هذه الصفحة. \nهل ترغب في إضافة علامة {{proposed deletion endorsed}} مع شرحك؟';
 					if (params.blp && !/{{\s*Prod blp\/dated/.test(text)) {
-						confirmtext = 'تم العثور على علامة {{proposed deletion}} غير خاصة بـ BLP في هذه المقالة.\nهل ترغب في إضافة علامة {{proposed deletion endorsed}} مع شرح "المقالة عبارة عن سيرة ذاتية لشخص حي بدون مصادر"؟';
+						confirmtext = 'عُثر على علامة {{proposed deletion}} غير خاصة بـ BLP في هذه المقالة.\nهل ترغب في إضافة علامة {{proposed deletion endorsed}} مع شرح "المقالة عبارة عن سيرة ذاتية لشخص حي بدون مصادر"؟';
 					}
 					if (!confirm(confirmtext)) {
 						statelem.warn('تم الإلغاء بناءً على طلب المستخدم');
@@ -389,7 +389,7 @@
 			}
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('prodLogPageName'));
 			usl.initialText =
-				"هذا سجل لجميع علامات [[WP:PROD|الحذف المقترح]] التي تم تطبيقها أو تأييدها من قبل هذا المستخدم باستخدام وحدة PROD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				"هذا سجل لجميع علامات [[WP:PROD|الحذف المقترح]] التي طُبقت أو تأييدها من قبل هذا المستخدم باستخدام وحدة PROD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
 				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[Wikipedia:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].';
 
 			let logText = '# [[:' + Morebits.pageNameNorm + ']]';

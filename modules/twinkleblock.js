@@ -71,7 +71,7 @@
 				{
 					label: 'إضافة قالب منع إلى صفحة نقاش المستخدم',
 					value: 'template',
-					tooltip: 'إذا نسي مدير الحظر إصدار قالب منع ، أو قمت للتو بحظر المستخدم دون وضع قالب له، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
+					tooltip: 'إذا نسي مدير الحظر إصدار قالب منع، أو قمت للتو بحظر المستخدم دون وضع قالب له، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
 					// Disallow when viewing the block dialog on an IP range
 					checked: !Morebits.ip.isRange(relevantUserName),
 					disabled: Morebits.ip.isRange(relevantUserName)
@@ -101,7 +101,7 @@
 			block64field.append({
 				type: 'div',
 				style: 'margin-bottom: 0.5em',
-				label: ['عادة ما يكون الأمر جيدًا ، إن لم يكن أفضل ، أن ', $.parseHTML('<a target="_blank" href="' + mw.util.getUrl('WP:/64') + '">مجرد منع نطاق /64</a>')[0], ' (',
+				label: ['عادة ما يكون الأمر جيدًا ، إن لم يكن أفضل، أن ', $.parseHTML('<a target="_blank" href="' + mw.util.getUrl('WP:/64') + '">مجرد منع نطاق /64</a>')[0], ' (',
 					$.parseHTML('<a target="_blank" href="' + mw.util.getUrl('Special:Contributions/' + sixtyFour) + '">' + sixtyFour + '</a>)')[0], ').']
 			});
 			block64field.append({
@@ -559,7 +559,7 @@
 				name: 'area',
 				label: 'المنطقة المحظورة من',
 				value: '',
-				tooltip: 'شرح اختياري للصفحات أو المساحات الاسمية التي تم منع المستخدم من تعديلها.'
+				tooltip: 'شرح اختياري للصفحات أو المساحات الاسمية التي مٌنع المستخدم من تعديلها.'
 			});
 
 			if (!blockBox) {
@@ -568,13 +568,13 @@
 					name: 'template_expiry',
 					label: 'مدة الحظر:',
 					value: '',
-					tooltip: 'الفترة التي يستحقها الحظر، على سبيل المثال 24 ساعة ، أسبوعان، غير محددة وما إلى ذلك...'
+					tooltip: 'الفترة التي يستحقها الحظر، على سبيل المثال 24 ساعة، أسبوعان، غير محددة وما إلى ذلك...'
 				});
 			}
 			field_template_options.append({
 				type: 'input',
 				name: 'block_reason',
-				label: '"لقد تم حظرك بسبب ..."',
+				label: '"مُنعت بسبب ..."',
 				tooltip: 'سبب اختياري، لاستبدال السبب العام الافتراضي. متاح فقط لقوالب الحظر العامة.',
 				value: Twinkle.block.field_template_options.block_reason
 			});
@@ -587,7 +587,7 @@
 						{
 							label: 'عدم تضمين تاريخ انتهاء الصلاحية في القالب',
 							checked: Twinkle.block.field_template_options.blank_duration,
-							tooltip: 'بدلاً من تضمين المدة، اجعل قالب الحظر يقرأ "لقد تم حظرك مؤقتًا..."'
+							tooltip: 'بدلاً من تضمين المدة، اجعل قالب الحظر يقرأ "لقد مُنعت مؤقتًا..."'
 						}
 					]
 				});
@@ -938,7 +938,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: 'انتهاك [[WP:Three-revert rule|قاعدة الثلاثة استرجاعات]]',
-			summary: 'لقد تم حظرك من التحرير بسبب انتهاك [[WP:3RR|قاعدة الثلاثة استرجاعات]]'
+			summary: 'مُنعت من التحرير بسبب انتهاك [[WP:3RR|قاعدة الثلاثة استرجاعات]]'
 		},
 		'uw-ablock': {
 			autoblock: true,
@@ -955,7 +955,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: 'استخدام ويكيبيديا لأغراض [[WP:Spam|البريد العشوائي]] أو [[WP:NOTADVERTISING|الإعلان]]',
-			summary: 'لقد تم حظرك من التحرير بسبب [[WP:SOAP|الإعلان أو الترويج الذاتي]]'
+			summary: 'مُنعت من التحرير بسبب [[WP:SOAP|الإعلان أو الترويج الذاتي]]'
 		},
 		'uw-aeblock': {
 			autoblock: true,
@@ -963,14 +963,14 @@
 			pageParam: true,
 			reason: '[[WP:Arbitration enforcement|إنفاذ التحكيم]]',
 			reasonParam: true,
-			summary: 'لقد تم حظرك من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
+			summary: 'مُنعت من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
 		},
 		'uw-bioblock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
 			reason: 'انتهاكات [[WP:Biographies of living persons|السير الذاتية للأشخاص الأحياء]]',
-			summary: 'لقد تم حظرك من التحرير بسبب انتهاكات [[WP:BLP|سياسة السير الذاتية للأشخاص الأحياء]] في ويكيبيديا'
+			summary: 'مُنعت من التحرير بسبب انتهاكات [[WP:BLP|سياسة السير الذاتية للأشخاص الأحياء]] في ويكيبيديا'
 		},
 		'uw-block': {
 			autoblock: true,
@@ -989,7 +989,7 @@
 			nocreate: true,
 			pageParam: true,
 			reasonParam: true,
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير',
 			suppressArticleInSummary: true
 		},
 		'uw-blocknotalk': {
@@ -1003,13 +1003,13 @@
 			forRegisteredOnly: true,
 			pageParam: true,
 			reason: 'تشغيل [[WP:BOT|نص روبوت]] بدون [[WP:BRFA|موافقة]]',
-			summary: 'لقد تم حظرك من التحرير لأنه يبدو أنك تقوم بتشغيل [[WP:BOT|نص روبوت]] بدون [[WP:BRFA|موافقة]]'
+			summary: 'لقد مُنعت من التحرير لأنه يبدو أنك تقوم بتشغيل [[WP:BOT|نص روبوت]] بدون [[WP:BRFA|موافقة]]'
 		},
 		'uw-botublock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-botublock}} <!-- Username implies a bot, soft block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعني أن هذا حساب [[WP:BOT|روبوت]] ، والذي لم تتم الموافقة عليه حاليًا'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعني أن هذا حساب [[WP:BOT|روبوت]] ، والذي لم تتم الموافقة عليه حاليًا'
 		},
 		'uw-botuhblock': {
 			autoblock: true,
@@ -1017,13 +1017,13 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: '{{uw-botuhblock}} <!-- Username implies a bot, hard block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[WP:U|سياسة اسم المستخدم]]'
 		},
 		'uw-causeblock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-causeblock}} <!-- Username represents a non-profit, soft block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
 		},
 		'uw-compblock': {
 			autoblock: true,
@@ -1031,7 +1031,7 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: 'حساب مخترق',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأنه يُعتقد أن [[WP:SECURE|حسابك قد تم اختراقه]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يُعتقد أن [[WP:SECURE|حسابك قد تم اختراقه]]'
 		},
 		'uw-copyrightblock': {
 			autoblock: true,
@@ -1039,26 +1039,26 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:Copyright violations|انتهاكات حقوق الطبع والنشر]]',
-			summary: 'لقد تم حظرك من التحرير بسبب [[WP:COPYVIO|انتهاك حقوق الطبع والنشر المستمر]]'
+			summary: 'مُنعت من التحرير بسبب [[WP:COPYVIO|انتهاك حقوق الطبع والنشر المستمر]]'
 		},
 		'uw-dblock': {
 			autoblock: true,
 			nocreate: true,
 			reason: 'الإزالة المستمرة للمحتوى',
 			pageParam: true,
-			summary: 'لقد تم حظرك من التحرير بسبب [[WP:VAND|الإزالة المستمرة للمواد]]'
+			summary: 'مُنعت من التحرير بسبب [[WP:VAND|الإزالة المستمرة للمواد]]'
 		},
 		'uw-disruptblock': {
 			autoblock: true,
 			nocreate: true,
 			reason: '[[WP:Disruptive editing|تحرير مزعج]]',
-			summary: 'لقد تم حظرك من التحرير بسبب [[WP:DE|التحرير المزعج]]'
+			summary: 'مُنعت من التحرير بسبب [[WP:DE|التحرير المزعج]]'
 		},
 		'uw-efblock': {
 			autoblock: true,
 			nocreate: true,
 			reason: 'تشغيل [[WP:Edit filter|مرشح التحرير]] بشكل متكرر',
-			summary: 'لقد تم حظرك من التحرير بسبب التعديلات المزعجة التي أدت بشكل متكرر إلى تشغيل [[WP:EF|مرشح التحرير]]'
+			summary: 'مُنعت من التحرير بسبب التعديلات المزعجة التي أدت بشكل متكرر إلى تشغيل [[WP:EF|مرشح التحرير]]'
 		},
 		'uw-ewblock': {
 			autoblock: true,
@@ -1066,14 +1066,14 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:Edit warring|حرب التحرير]]',
-			summary: 'لقد تم حظرك من التحرير لمنع المزيد من [[WP:DE|التعطيل]] الناجم عن مشاركتك في [[WP:EW|حرب التحرير]]'
+			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[WP:DE|التعطيل]] الناجم عن مشاركتك في [[WP:EW|حرب التحرير]]'
 		},
 		'uw-hblock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:No personal attacks|هجمات شخصية]] أو [[WP:Harassment|مضايقة]]',
-			summary: 'لقد تم حظرك من التحرير لمحاولة [[WP:HARASS|مضايقة]] مستخدمين آخرين'
+			summary: 'لقد مُنعت من التحرير لمحاولة [[WP:HARASS|مضايقة]] مستخدمين آخرين'
 		},
 		'uw-ipevadeblock': {
 			forUnregisteredOnly: true,
@@ -1086,7 +1086,7 @@
 			expiry: 'infinity',
 			nocreate: true,
 			reason: 'إصدار [[WP:No legal threats|تهديدات قانونية]]',
-			summary: 'لقد تم حظرك من التحرير لإصدار [[WP:NLT|تهديدات قانونية أو اتخاذ إجراء قانوني]]'
+			summary: 'لقد مُنعت من التحرير لإصدار [[WP:NLT|تهديدات قانونية أو اتخاذ إجراء قانوني]]'
 		},
 		'uw-nothereblock': {
 			autoblock: true,
@@ -1094,14 +1094,14 @@
 			nocreate: true,
 			reason: 'بوضوح [[WP:NOTHERE|ليس هنا لبناء موسوعة]]',
 			forRegisteredOnly: true,
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأنه يبدو أنك لست هنا [[WP:NOTHERE|لبناء موسوعة]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يبدو أنك لست هنا [[WP:NOTHERE|لبناء موسوعة]]'
 		},
 		'uw-npblock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
 			reason: 'إنشاء [[WP:Patent nonsense|هراء واضح]] أو صفحات أخرى غير لائقة',
-			summary: 'لقد تم حظرك من التحرير لإنشاء [[WP:PN|صفحات غير منطقية]]'
+			summary: 'لقد مُنعت من التحرير لإنشاء [[WP:PN|صفحات غير منطقية]]'
 		},
 		'uw-pablock': {
 			autoblock: true,
@@ -1109,13 +1109,13 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:No personal attacks|هجمات شخصية]] أو [[WP:Harassment|مضايقة]]',
-			summary: 'لقد تم حظرك من التحرير لإجراء [[WP:NPA|هجمات شخصية]] تجاه مستخدمين آخرين'
+			summary: 'لقد مُنعت من التحرير لإجراء [[WP:NPA|هجمات شخصية]] تجاه مستخدمين آخرين'
 		},
 		'uw-sblock': {
 			autoblock: true,
 			nocreate: true,
 			reason: 'استخدام ويكيبيديا لأغراض [[WP:SPAM|البريد العشوائي]]',
-			summary: 'لقد تم حظرك من التحرير لاستخدام ويكيبيديا لأغراض [[WP:SPAM|البريد العشوائي]]'
+			summary: 'لقد مُنعت من التحرير لاستخدام ويكيبيديا لأغراض [[WP:SPAM|البريد العشوائي]]'
 		},
 		'uw-soablock': {
 			autoblock: true,
@@ -1124,27 +1124,27 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:Spam|البريد العشوائي]] / [[WP:NOTADVERTISING|الإعلان]] فقط',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان أو الترويج]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان أو الترويج]]'
 		},
 		'uw-socialmediablock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
 			reason: 'استخدام ويكيبيديا كـ [[WP:NOTMYSPACE|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]',
-			summary: 'لقد تم حظرك من التحرير لاستخدام صفحات المستخدم و/أو المقالات كـ [[WP:NOTMYSPACE|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]'
+			summary: 'لقد مُنعت من التحرير لاستخدام صفحات المستخدم و/أو المقالات كـ [[WP:NOTMYSPACE|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]'
 		},
 		'uw-sockblock': {
 			autoblock: true,
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد تم حظرك من التحرير لإساءة استخدام [[WP:SOCK|حسابات متعددة]]'
+			summary: 'لقد مُنعت من التحرير لإساءة استخدام [[WP:SOCK|حسابات متعددة]]'
 		},
 		'uw-softerblock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-softerblock}} <!-- Promotional username, soft block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
 		},
 		'uw-spamublock': {
 			autoblock: true,
@@ -1152,7 +1152,7 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: '{{uw-spamublock}} <!-- Promotional username, promotional edits -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان]] واسم المستخدم الخاص بك هو انتهاك لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان]] واسم المستخدم الخاص بك هو انتهاك لـ [[WP:U|سياسة اسم المستخدم]]'
 		},
 		'uw-spoablock': {
 			autoblock: true,
@@ -1174,13 +1174,13 @@
 			forRegisteredOnly: true,
 			reason: '{{uw-ublock}} <!-- Username violation, soft block -->',
 			reasonParam: true,
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا لـ [[WP:U|سياسة اسم المستخدم]]'
 		},
 		'uw-ublock-double': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-ublock-double}} <!-- Username closely resembles another user, soft block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك مشابه جدًا لاسم المستخدم لمستخدم ويكيبيديا آخر'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك مشابه جدًا لاسم المستخدم لمستخدم ويكيبيديا آخر'
 		},
 		'uw-ucblock': {
 			autoblock: true,
@@ -1188,7 +1188,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: 'الإضافة المستمرة لـ [[WP:INTREF|محتوى غير موثوق]]',
-			summary: 'لقد تم حظرك من التحرير بسبب الإضافة المستمرة لـ [[WP:INTREF|محتوى غير موثوق]]'
+			summary: 'مُنعت من التحرير بسبب الإضافة المستمرة لـ [[WP:INTREF|محتوى غير موثوق]]'
 		},
 		'uw-uhblock': {
 			autoblock: true,
@@ -1197,13 +1197,13 @@
 			nocreate: true,
 			reason: '{{uw-uhblock}} <!-- Username violation, hard block -->',
 			reasonParam: true,
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[WP:U|سياسة اسم المستخدم]]'
 		},
 		'uw-ublock-wellknown': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-ublock-wellknown}} <!-- Username represents a well-known person, soft block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يطابق اسم شخص حي معروف'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يطابق اسم شخص حي معروف'
 		},
 		'uw-uhblock-double': {
 			autoblock: true,
@@ -1211,7 +1211,7 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: '{{uw-uhblock-double}} <!-- Attempted impersonation of another user, hard block -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يبدو أنه ينتحل شخصية مستخدم ويكيبيديا راسخ آخر'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يبدو أنه ينتحل شخصية مستخدم ويكيبيديا راسخ آخر'
 		},
 		'uw-upeblock': {
 			autoblock: true,
@@ -1220,7 +1220,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:PAID|تحرير مدفوع غير معلن]] في انتهاك لـ [[WP:TOU|شروط استخدام]] WMF',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن حسابك يستخدم في انتهاك [[WP:PAID|سياسة ويكيبيديا بشأن الدعوة المدفوعة غير المعلنة]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم في انتهاك [[WP:PAID|سياسة ويكيبيديا بشأن الدعوة المدفوعة غير المعلنة]]'
 		},
 		'uw-vaublock': {
 			autoblock: true,
@@ -1229,7 +1229,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '{{uw-vaublock}} <!-- Username violation, vandalism-only account -->',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن حسابك [[WP:DISRUPTONLY|يستخدم فقط للتخريب]] واسم المستخدم الخاص بك هو انتهاك صارخ لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك [[WP:DISRUPTONLY|يستخدم فقط للتخريب]] واسم المستخدم الخاص بك هو انتهاك صارخ لـ [[WP:U|سياسة اسم المستخدم]]'
 		},
 		'uw-vblock': {
 			autoblock: true,
@@ -1237,7 +1237,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:Vandalism|تخريب]]',
-			summary: 'لقد تم حظرك من التحرير لمنع المزيد من [[WP:VAND|التخريب]]'
+			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[WP:VAND|التخريب]]'
 		},
 		'uw-voablock': {
 			autoblock: true,
@@ -1246,7 +1246,7 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '[[WP:DISRUPTONLY|حساب تخريبي فقط]]',
-			summary: 'لقد تم حظرك إلى أجل غير مسمى من التحرير لأن حسابك [[WP:DISRUPTONLY|يستخدم فقط للتخريب]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك [[WP:DISRUPTONLY|يستخدم فقط للتخريب]]'
 		},
 		'zombie proxy': {
 			expiry: '1 month',
@@ -1265,7 +1265,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد تم [[WP:PB|حظرك من إنشاء حسابات]] بسبب إساءة استخدام [[WP:SOCK|حسابات متعددة]]'
+			summary: 'لقد [[WP:PB|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[WP:SOCK|حسابات متعددة]]'
 		},
 		'uw-acpblockindef': {
 			autoblock: true,
@@ -1275,7 +1275,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد تم [[WP:PB|حظرك إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[WP:SOCK|حسابات متعددة]]'
+			summary: 'لقد [[WP:PB|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[WP:SOCK|حسابات متعددة]]'
 		},
 		'uw-aepblock': {
 			autoblock: true,
@@ -1283,7 +1283,7 @@
 			pageParam: false,
 			reason: '[[WP:Arbitration enforcement|إنفاذ التحكيم]]',
 			reasonParam: true,
-			summary: 'لقد تم [[WP:PB|حظرك جزئيًا]] من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
+			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
 		},
 		'uw-epblock': {
 			autoblock: true,
@@ -1294,7 +1294,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'بريد إلكتروني [[WP:Harassment|مضايقة]]',
-			summary: 'لقد تم [[WP:PB|حظرك من إرسال بريد إلكتروني]] إلى محررين آخرين بسبب [[WP:Harassment|المضايقة]]'
+			summary: 'لقد [[WP:PB|مُنعت من إرسال بريد إلكتروني]] إلى محررين آخرين بسبب [[WP:Harassment|المضايقة]]'
 		},
 		'uw-ewpblock': {
 			autoblock: true,
@@ -1303,7 +1303,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: '[[WP:Edit warring|حرب التحرير]]',
-			summary: 'لقد تم [[WP:PB|حظرك جزئيًا]] من تحرير مناطق معينة من الموسوعة لمنع المزيد من [[WP:DE|التعطيل]] بسبب [[WP:EW|حرب التحرير]]'
+			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من تحرير مناطق معينة من الموسوعة لمنع المزيد من [[WP:DE|التعطيل]] بسبب [[WP:EW|حرب التحرير]]'
 		},
 		'uw-pblock': {
 			autoblock: true,
@@ -1311,7 +1311,7 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			summary: 'لقد تم [[WP:PB|حظرك جزئيًا]] من مناطق معينة من الموسوعة'
+			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من مناطق معينة من الموسوعة'
 		},
 		'uw-pblockindef': {
 			autoblock: true,
@@ -1320,7 +1320,7 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			summary: 'لقد تم [[WP:PB|حظرك جزئيًا]] إلى أجل غير مسمى من مناطق معينة من الموسوعة'
+			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] إلى أجل غير مسمى من مناطق معينة من الموسوعة'
 		}
 	};
 
@@ -1765,7 +1765,7 @@
 				}
 				if (!blockoptions.namespacerestrictions && !blockoptions.pagerestrictions) {
 					if (!blockoptions.noemail && !blockoptions.nocreate) { // Blank entries technically allowed [[phab:T208645]]
-						return alert('لم يتم تحديد أي صفحات أو مساحات اسم، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب ؛ يرجى تحديد خيار واحد على الأقل لتطبيق منع جزئي!');
+						return alert('لم يتم تحديد أي صفحات أو مساحات اسم، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب؛ يرجى تحديد خيار واحد على الأقل لتطبيق منع جزئي!');
 					} else if ((templateoptions.template !== 'uw-epblock' || $form.find('select[name="preset"]').val() !== 'uw-epblock') &&
 						// Don't require confirmation if email harassment defaults are set
 						!confirm('أنت على وشك الحظر بدون قيود على تحرير الصفحة أو المساحة الاسمية، هل أنت متأكد من أنك تريد المتابعة؟')) {

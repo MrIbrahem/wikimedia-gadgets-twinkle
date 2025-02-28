@@ -227,7 +227,7 @@
 				work_area.append({
 					type: 'header',
 					label: 'نوع (أنواع) اسم المستخدم غير المناسب',
-					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل، تحظر أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى ، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات ، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا، تعتبر غير مناسبة.'
+					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل، تحظر أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا، تعتبر غير مناسبة.'
 				});
 				work_area.append({
 					type: 'checkbox',
@@ -236,7 +236,7 @@
 						{
 							label: 'اسم مستخدم مضلل',
 							value: 'misleading',
-							tooltip: 'تتضمن أسماء المستخدمين المضللة أشياء ذات صلة ومضللة حول المساهم. على سبيل المثال، نقاط واقعية مضللة ، أو انطباع بسلطة لا مبرر لها ، أو أسماء مستخدمين تعطي انطباعًا عن حساب روبوت.'
+							tooltip: 'تتضمن أسماء المستخدمين المضللة أشياء ذات صلة ومضللة حول المساهم. على سبيل المثال، نقاط واقعية مضللة، أو انطباع بسلطة لا مبرر لها، أو أسماء مستخدمين تعطي انطباعًا عن حساب روبوت.'
 						},
 						{
 							label: 'اسم مستخدم ترويجي',
@@ -251,7 +251,7 @@
 						{
 							label: 'اسم مستخدم مزعج',
 							value: 'disruptive',
-							tooltip: 'تتضمن أسماء المستخدمين المعطلة التصيد العلني أو الهجمات الشخصية ، أو تظهر خلاف ذلك نية واضحة لتعطيل ويكيبيديا.'
+							tooltip: 'تتضمن أسماء المستخدمين المعطلة التصيد العلني أو الهجمات الشخصية، أو تظهر خلاف ذلك نية واضحة لتعطيل ويكيبيديا.'
 						}
 					]
 				});
@@ -923,7 +923,7 @@
 				if (sub.length >= 2) {
 					const last = sub[0];
 					const first = sub.slice(-1)[0];
-					const label = 'تعديلات متتالية تم إجراؤها من ' + new Morebits.Date(first.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(last.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)';
+					const label = 'تعديلات متتالية أُجريت من ' + new Morebits.Date(first.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(last.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)';
 					ret = '# {{diff|oldid=' + first.parentid + '|diff=' + last.revid + '|label=' + label + '}}\n';
 				}
 				ret += sub.reverse().map((v) => (sub.length >= 2 ? '#' : '') + '# {{diff2|' + v.revid + '|' + new Morebits.Date(v.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)}} ' + hasHiddenComment(v)).join('\n');
@@ -945,7 +945,7 @@
 					} else { // diff and oldid are nonconsecutive
 						rev = page.revisions[0];
 						const revLatest = page.revisions[revCount - 1];
-						const label = 'تعديلات متتالية تم إجراؤها من ' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(revLatest.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) في ' + page.title;
+						const label = 'تعديلات متتالية أُجريت من ' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(revLatest.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) في ' + page.title;
 						resolvetext += '\n# {{diff|oldid=' + rev.revid + '|diff=' + revLatest.revid + '|label=' + label + '}}\n';
 					}
 				}

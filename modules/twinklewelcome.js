@@ -347,7 +347,7 @@
 		unregistered: {
 			'قوالب ترحيب المستخدمين غير المسجلين': {
 				'welcome-unregistered': {
-					description: 'للمستخدمين غير المسجلين ؛ تشجع على إنشاء حساب',
+					description: 'للمستخدمين غير المسجلين؛ تشجع على إنشاء حساب',
 					linkedArticle: true,
 					syntax: '{{subst:welcome-unregistered|art=$ARTICLE$}} ~~~~'
 				},

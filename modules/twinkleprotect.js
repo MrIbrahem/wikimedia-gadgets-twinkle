@@ -1435,7 +1435,7 @@
 			const oldtag_re = /(?:\/\*)?\s*(?:<noinclude>)?\s*\{\{\s*(pp-[^{}]*?|protected|(?:t|v|s|p-|usertalk-v|usertalk-s|sb|move)protected(?:2)?|protected template|privacy protection)\s*?\}\}\s*(?:<\/noinclude>)?\s*(?:\*\/)?\s*/gi;
 			const re_result = oldtag_re.exec(text);
 			if (re_result) {
-				if (params.tag === 'none' || confirm('تم العثور على {{' + re_result[1] + '}} في الصفحة.\nانقر فوق "موافق" لإزالته، أو انقر فوق "إلغاء" لتركه هناك.')) {
+				if (params.tag === 'none' || confirm('عُثر على {{' + re_result[1] + '}} في الصفحة.\nانقر فوق "موافق" لإزالته، أو انقر فوق "إلغاء" لتركه هناك.')) {
 					text = text.replace(oldtag_re, '');
 				}
 			}

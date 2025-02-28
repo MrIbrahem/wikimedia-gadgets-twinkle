@@ -72,7 +72,7 @@
 
 				const title = page.title;
 				list.push({
-					label: title + (editProt ? ' (محمي إنشاء بالكامل' +
+					label: title + (editProt ? ' (محمي إنشاء حماية كاملة' +
 						(editProt.expiry === 'infinity' ? ' إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)') + ')' : ''),
 					value: title,
 					checked: true,
@@ -116,7 +116,7 @@
 		Morebits.wiki.actionCompleted.notice = 'اكتمل الآن استرجاع الدفعي';
 
 		const numProtected = Morebits.QuickForm.getElements(event.target, 'pages').filter((element) => element.checked && element.nextElementSibling.style.color === 'red').length;
-		if (numProtected > 0 && !confirm('أنت على وشك استرجاع ' + numProtected + ' صفحة (صفحات) محمية إنشاء بالكامل. هل أنت متأكد؟')) {
+		if (numProtected > 0 && !confirm('أنت على وشك استرجاع ' + numProtected + ' صفحة (صفحات) محمية إنشاء حماية كاملة. هل أنت متأكد؟')) {
 			return;
 		}
 

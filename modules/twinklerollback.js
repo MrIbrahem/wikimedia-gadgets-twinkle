@@ -605,7 +605,7 @@
 			}
 
 			if (!found) {
-				statelem.error(['لم يُعثر على مراجعة سابقة. ربما ', Morebits.htmlNode('strong', userNorm), ' هو المساهم الوحيد ، أو قاموا بإجراء أكثر من ' + mw.language.convertNumber(Twinkle.getPref('revertMaxRevisions')) + ' تعديلات على التوالي.']);
+				statelem.error(['لم يُعثر على مراجعة سابقة. ربما ', Morebits.htmlNode('strong', userNorm), ' هو المساهم الوحيد، أو قاموا بإجراء أكثر من ' + mw.language.convertNumber(Twinkle.getPref('revertMaxRevisions')) + ' تعديلات على التوالي.']);
 				return;
 			}
 
@@ -630,7 +630,7 @@
 			params.gooduser = good_revision.user;
 			params.gooduserHidden = !!good_revision.userhidden;
 
-			statelem.status([' المراجعة ', Morebits.htmlNode('strong', params.goodid), ' التي تم إجراؤها ', Morebits.htmlNode('strong', mw.language.convertNumber(count)), ' مراجعات مضت بواسطة ', Morebits.htmlNode('strong', params.gooduserHidden ? Twinkle.rollback.hiddenName : params.gooduser)]);
+			statelem.status([' المراجعة ', Morebits.htmlNode('strong', params.goodid), ' التي أُجريت ', Morebits.htmlNode('strong', mw.language.convertNumber(count)), ' مراجعات مضت بواسطة ', Morebits.htmlNode('strong', params.gooduserHidden ? Twinkle.rollback.hiddenName : params.gooduser)]);
 
 			let summary, extra_summary;
 			switch (params.type) {

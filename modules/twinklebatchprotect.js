@@ -202,7 +202,7 @@
 						.pop();
 				}
 				if (editProt) {
-					metadata.push('محمي بالكامل' + (missing ? ' إنشاء' : '') + ' ' +
+					metadata.push('محمي حماية كاملة' + (missing ? ' إنشاء' : '') + ' ' +
 						(editProt.expiry === 'infinity' ? 'إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)'));
 				}
 
@@ -257,7 +257,7 @@
 		const numProtected = $(Morebits.QuickForm.getElements(form, 'pages'))
 			.filter((index, element) => element.checked && element.nextElementSibling.style.color === 'red')
 			.length;
-		if (numProtected > 0 && !confirm('أنت على وشك التصرف بشأن ' + mw.language.convertNumber(numProtected) + ' صفحة (صفحات) محمية بالكامل. هل أنت متأكد؟')) {
+		if (numProtected > 0 && !confirm('أنت على وشك التصرف بشأن ' + mw.language.convertNumber(numProtected) + ' صفحة (صفحات) محمية حماية كاملة. هل أنت متأكد؟')) {
 			return;
 		}
 

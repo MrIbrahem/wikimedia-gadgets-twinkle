@@ -143,10 +143,10 @@
 					type: 'select',
 					name: 'sortorder',
 					label: 'عرض هذه القائمة:',
-					tooltip: 'يمكنك تغيير ترتيب العرض الافتراضي في تفضيلات Twinkle الخاصة بك (WP:TWPREFS).',
+					tooltip: 'يمكنك تغيير ترتيب العرض الافتراضي في تفضيلات توينكل الخاصة بك (WP:TWPREFS).',
 					event: Twinkle.tag.updateSortOrder,
 					list: [
-						{ type: 'option', value: 'cat', label: 'حسب الفئات', selected: Twinkle.getPref('tagArticleSortOrder') === 'cat' },
+						{ type: 'option', value: 'cat', label: 'حسب التصنيفات', selected: Twinkle.getPref('tagArticleSortOrder') === 'cat' },
 						{ type: 'option', value: 'alpha', label: 'بالترتيب الأبجدي', selected: Twinkle.getPref('tagArticleSortOrder') === 'alpha' }
 					]
 				});
@@ -908,8 +908,8 @@
 				{ tag: 'Parenthetical referencing', description: 'يستخدم الإسناد بين قوسين، وهو أمر مهمل في ويكيبيديا' }
 			],
 			Categories: [
-				{ tag: 'Improve categories', description: 'يحتاج إلى فئات إضافية أو أكثر تحديدًا', excludeMI: true },
-				{ tag: 'Uncategorized', description: 'لم تتم إضافته إلى أي فئات', excludeMI: true }
+				{ tag: 'Improve categories', description: 'يحتاج إلى تصنيفات إضافية أو أكثر تحديدًا', excludeMI: true },
+				{ tag: 'Uncategorized', description: 'لم تتم إضافته إلى أي تصنيفات', excludeMI: true }
 			]
 		},
 		Merging: [
@@ -1105,7 +1105,7 @@
 			],
 			"نطاق": [
 				{ tag: 'R from remote talk page', description: 'تحويل من صفحة نقاش في أي نطاق نقاش إلى صفحة مقابلة تتم مشاهدتها بشكل مكثف', restriction: 'insideTalkNamespaceOnly' },
-				{ tag: 'R to category namespace', description: 'تحويل من صفحة خارج نطاق الفئة إلى صفحة فئة' },
+				{ tag: 'R to category namespace', description: 'تحويل من صفحة خارج نطاق التصنيف إلى صفحة فئة' },
 				{ tag: 'R to help namespace', description: 'تحويل من أي صفحة داخل أو خارج نطاق المساعدة إلى صفحة في هذا النطاق' },
 				{ tag: 'R to main namespace', description: 'تحويل من صفحة خارج نطاق المقالات الرئيسية إلى مقال في النطاق الرئيسي' },
 				{ tag: 'R to portal namespace', description: 'تحويل من أي صفحة داخل أو خارج نطاق المدخل إلى صفحة في هذا النطاق' },
@@ -1532,7 +1532,7 @@
 					return;
 				}
 
-				Morebits.Status.info('معلومات', 'إزالة القوالب التي تم إلغاء تحديدها والتي كانت موجودة بالفعل');
+				Morebits.Status.info('معلومات', 'إزالة القوالب التي أُلغي تحديدها والتي كانت موجودة بالفعل');
 
 				const getRedirectsFor = [];
 
@@ -1709,7 +1709,7 @@
 					if (tag === 'Merge from' || tag === 'History merge') {
 						tags.push(tag);
 					} else {
-						Morebits.Status.warn('معلومات', 'تم العثور على {{' + tag +
+						Morebits.Status.warn('معلومات', 'عُثر على {{' + tag +
 							'}} في المقال بالفعل... باستثناء');
 						// don't do anything else with merge tags
 						if (['Merge', 'Merge to'].includes(tag)) {
@@ -1826,7 +1826,7 @@
 				if (!tagRe.exec(pageText)) {
 					tags.push(params.tags[i]);
 				} else {
-					Morebits.Status.warn('معلومات', 'تم العثور على {{' + params.tags[i] +
+					Morebits.Status.warn('معلومات', 'عُثر على {{' + params.tags[i] +
 						'}} في التحويل بالفعل... باستثناء');
 				}
 			}
@@ -2053,7 +2053,7 @@
 
 				if ((params.tags.includes('Merge')) || (params.tags.includes('Merge from')) ||
 					(params.tags.includes('Merge to'))) {
-					if (Twinkle.tag.checkIncompatible(['Merge', 'Merge from', 'Merge to'], params.tags, 'إذا كانت هناك حاجة إلى عدة عمليات دمج، فاستخدم {{Merge}} وافصل أسماء المقالات بأحرف الأنابيب (على الرغم من أنه في هذه الحالة لا يمكن لـ Twinkle وضع علامة على المقالات الأخرى تلقائيًا).')) {
+					if (Twinkle.tag.checkIncompatible(['Merge', 'Merge from', 'Merge to'], params.tags, 'إذا كانت هناك حاجة إلى عدة عمليات دمج، فاستخدم {{Merge}} وافصل أسماء المقالات بأحرف الأنابيب (على الرغم من أنه في هذه الحالة لا يمكن لـ توينكل وضع علامة على المقالات الأخرى تلقائيًا).')) {
 						return;
 					}
 					if ((params.mergeTagOther || params.mergeReason) && params.mergeTarget.includes('|')) {

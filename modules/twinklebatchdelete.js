@@ -16,7 +16,7 @@
 				mw.config.get('wgCanonicalSpecialPageName') === 'Prefixindex'
 			)
 		) {
-			Twinkle.addPortletLink(Twinkle.batchdelete.callback, 'D-batch', 'tw-batch', 'حذف الصفحات الموجودة في هذه الفئة/في هذه الصفحة');
+			Twinkle.addPortletLink(Twinkle.batchdelete.callback, 'D-batch', 'tw-batch', 'حذف الصفحات الموجودة في هذه التصنيف/في هذه الصفحة');
 		}
 	};
 
@@ -176,7 +176,7 @@
 
 				const editProt = page.protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
 				if (editProt) {
-					metadata.push('محمي بالكامل' +
+					metadata.push('محمي حماية كاملة' +
 						(editProt.expiry === 'infinity' ? ' إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)'));
 				}
 
@@ -332,7 +332,7 @@
 
 						const editProt = page.protection.filter((pr) => pr.type === 'edit' && pr.level === 'sysop').pop();
 						if (editProt) {
-							metadata.push('محمي بالكامل' +
+							metadata.push('محمي حماية كاملة' +
 								(editProt.expiry === 'infinity' ? ' إلى أجل غير مسمى' : '، تنتهي صلاحيته ' + new Morebits.Date(editProt.expiry).calendar('utc') + ' (UTC)'));
 						}
 						if (page.ns === 6) {
@@ -408,7 +408,7 @@
 		const form = event.target;
 
 		const numProtected = $(Morebits.QuickForm.getElements(form, 'pages')).filter((index, element) => element.checked && element.nextElementSibling.style.color === 'red').length;
-		if (numProtected > 0 && !confirm('أنت على وشك حذف ' + mw.language.convertNumber(numProtected) + ' صفحة (صفحات) محمية بالكامل. هل أنت متأكد؟')) {
+		if (numProtected > 0 && !confirm('أنت على وشك حذف ' + mw.language.convertNumber(numProtected) + ' صفحة (صفحات) محمية حماية كاملة. هل أنت متأكد؟')) {
 			return;
 		}
 
@@ -421,7 +421,7 @@
 		Morebits.SimpleWindow.setButtonsEnabled(false);
 		Morebits.Status.init(form);
 		if (input.pages.length === 0) {
-			Morebits.Status.error('خطأ', 'لا يوجد شيء لحذفه ، أُلغي الطلب');
+			Morebits.Status.error('خطأ', 'لا يوجد شيء لحذفه، أُلغي الطلب');
 			return;
 		}
 
@@ -679,7 +679,7 @@
 				params.unlinker.workerFailure(pageobj);
 				return;
 			}
-			pageobj.setEditSummary('إزالة نسخة من الملف ' + image + ' التي تم حذفها بسبب "' + params.reason + '")');
+			pageobj.setEditSummary('إزالة نسخة من الملف ' + image + ' التي حُذفت بسبب "' + params.reason + '")');
 			pageobj.setChangeTags(Twinkle.changeTags);
 			pageobj.setPageText(text);
 			pageobj.setCreateOption('nocreate');
