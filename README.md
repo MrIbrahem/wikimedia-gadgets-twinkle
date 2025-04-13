@@ -1,4 +1,4 @@
-# [لمح البصر!](https://github.com/wikimedia-gadgets/twinkle) ![Linter](https://github.com/wikimedia-gadgets/twinkle/workflows/Linter/badge.svg)
+# [لمح البصر!](https://github.com/wikimedia-gadgets/twinkle)
 
 # اضف السطر التالي إلى common.js للتفعيل:
 ```
