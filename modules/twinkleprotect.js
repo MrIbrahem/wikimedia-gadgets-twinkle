@@ -1451,10 +1451,11 @@
 					tag += '|small=yes';
 				}
 
-				if (/^\s*#redirect/i.test(text)) { // redirect page
+				if (/^\s*#redirect/i.test(text) || /^\s*#تحويل/i.test(text)) { // redirect page
 					// Only tag if no {{rcat shell}} is found
 					if (!text.match(/{{(?:redr|this is a redirect|r(?:edirect)?(?:.?cat.*)?[ _]?sh)/i)) {
 						text = text.replace(/#REDIRECT ?(\[\[.*?\]\])(.*)/i, '#REDIRECT $1$2\n\n{{' + tag + '}}');
+						text = text.replace(/#تحويل ?(\[\[.*?\]\])(.*)/i, '#تحويل $1$2\n\n{{' + tag + '}}');
 					} else {
 						Morebits.Status.info('غلاف فئة التحويل موجود', 'لا يوجد شيء للقيام به');
 						return;

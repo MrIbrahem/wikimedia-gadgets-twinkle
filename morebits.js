@@ -97,7 +97,7 @@
 		 * Local aliases for "redirect" magic word.
 		 * Check using api.php?action=query&format=json&meta=siteinfo&formatversion=2&siprop=magicwords
 		 */
-		redirectTagAliases: ['#REDIRECT'],
+		redirectTagAliases: ['#REDIRECT', '#تحويل'],
 
 		/**
 		 * Takes a string as argument and checks if it is a timestamp or not
