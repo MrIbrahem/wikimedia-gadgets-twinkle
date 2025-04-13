@@ -414,8 +414,8 @@
 	 */
 
 	// Custom change tag(s) to be applied to all Twinkle actions, create at Special:Tags
-	// Twinkle.changeTags = 'twinkle';
-	Twinkle.changeTags = '';
+	Twinkle.changeTags = 'twinkle';
+	// Twinkle.changeTags = '';
 	// Available for actions that don’t (yet) support tags
 	// currently: FlaggedRevs and PageTriage
 	Twinkle.summaryAd = ' ([[WP:TW|توينكل]])';
