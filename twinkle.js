@@ -89,7 +89,7 @@
 		markProdPagesAsPatrolled: false,
 		prodReasonDefault: '',
 		logProdPages: false,
-		prodLogPageName: 'PROD log',
+		prodLogPageName: 'سجل اقتراح الحذف',
 
 		// CSD
 		speedySelectionStyle: 'buttonClick',
@@ -109,7 +109,7 @@
 		speedyWindowHeight: 500,
 		speedyWindowWidth: 800,
 		logSpeedyNominations: false,
-		speedyLogPageName: 'CSD log',
+		speedyLogPageName: 'سجل الحذف السريع',
 		noLogOnSpeedyNomination: ['u1'],
 
 		// Unlink
@@ -125,7 +125,7 @@
 
 		// XfD
 		logXfdNominations: false,
-		xfdLogPageName: 'XfD log',
+		xfdLogPageName: 'سجل مناقشات الحذف',
 		noLogOnXfdNomination: [],
 		xfdWatchDiscussion: 'default',
 		xfdWatchList: 'no',
@@ -141,9 +141,9 @@
 		batchChunks: 50,
 
 		// Deprecated options, as a fallback for add-on scripts/modules
-		summaryAd: ' ([[WP:TW|TW]])',
-		deletionSummaryAd: ' ([[WP:TW|TW]])',
-		protectionSummaryAd: ' ([[WP:TW|TW]])',
+		summaryAd: ' ([[WP:TW|توينكل]])',
+		deletionSummaryAd: ' ([[WP:TW|توينكل]])',
+		protectionSummaryAd: ' ([[WP:TW|توينكل]])',
 
 		// Tag
 		groupByDefault: true,
@@ -169,8 +169,8 @@
 		// Talkback
 		markTalkbackAsMinor: false,
 		insertTalkbackSignature: true, // always sign talkback templates
-		talkbackHeading: 'New message from ' + mw.config.get('wgUserName'),
-		mailHeading: "You've got mail!",
+		talkbackHeading: 'رسالة جديدة من ' + mw.config.get('wgUserName'),
+		mailHeading: "لديك بريد جديد!",
 
 		// Shared
 		markSharedIPAsMinor: true
@@ -229,7 +229,7 @@
 			case 'timeless':
 				navigation = '#page-tools .sidebar-inner';
 				id = 'p-twinkle';
-				text = 'Twinkle';
+				text = 'توينكل';
 				nextnodeid = 'p-userpagetools';
 				break;
 			default:
@@ -264,7 +264,7 @@
 
 			// .vector-page-tools-landmark is unstable and could change. If so, log it to console, to hopefully get someone's attention.
 			if (!$landmark) {
-				mw.log.warn('Unexpected change in DOM');
+				mw.log.warn('تغيير غير متوقع في DOM');
 			}
 		}
 
@@ -312,11 +312,11 @@
 
 	// Retrieve the user's Twinkle preferences
 	$.ajax({
-		url: scriptpathbefore + 'User:' + encodeURIComponent(mw.config.get('wgUserName')) + '/twinkleoptions.js' + scriptpathafter,
+		url: scriptpathbefore + 'مستخدم:' + encodeURIComponent(mw.config.get('wgUserName')) + '/twinkleoptions.js' + scriptpathafter,
 		dataType: 'text'
 	})
 		.fail(() => {
-			console.log('Could not load your Twinkle preferences, resorting to default preferences'); // eslint-disable-line no-console
+			console.log('تعذر تحميل تفضيلات توينكل الخاصة بك، سيتم اللجوء إلى التفضيلات الافتراضية'); // eslint-disable-line no-console
 		})
 		.done((optionsText) => {
 
@@ -345,7 +345,7 @@
 					Twinkle.prefs.optionsVersion = Twinkle.prefs.optionsVersion || 1;
 				}
 			} catch (e) {
-				mw.notify('Could not parse your Twinkle preferences', { type: 'error' });
+				mw.notify('تعذر تحليل تفضيلات توينكل الخاصة بك', { type: 'error' });
 			}
 		})
 		.always(() => {
@@ -404,7 +404,7 @@
 		// If using a skin with space for lots of modules, display a link to Twinkle Preferences
 		const usingSkinWithDropDownMenu = mw.config.get('skin') === 'vector' || mw.config.get('skin') === 'vector-2022' || mw.config.get('skin') === 'timeless';
 		if (usingSkinWithDropDownMenu) {
-			Twinkle.addPortletLink(mw.util.getUrl('Wikipedia:Twinkle/Preferences'), 'Config', 'tw-config', 'Open Twinkle preferences page');
+			Twinkle.addPortletLink(mw.util.getUrl('Wikipedia:Twinkle/Preferences'), 'التهيئة', 'tw-config', 'فتح صفحة تفضيلات Twinkle');
 		}
 	};
 
@@ -415,13 +415,15 @@
 
 	// Custom change tag(s) to be applied to all Twinkle actions, create at Special:Tags
 	Twinkle.changeTags = 'twinkle';
-	// Available for actions that don't (yet) support tags
+	// Twinkle.changeTags = '';
+	// Available for actions that don’t (yet) support tags
 	// currently: FlaggedRevs and PageTriage
-	Twinkle.summaryAd = ' ([[WP:TW|TW]])';
+	Twinkle.summaryAd = ' ([[WP:TW|توينكل]])';
 
 	// Various hatnote templates, used when tagging (csd/xfd/tag/prod/protect) to
 	// ensure MOS:ORDER
 	Twinkle.hatnoteRegex = 'short description|hatnote|main|correct title|dablink|distinguish|for|further|selfref|year dab|similar names|highway detail hatnote|broader|about(?:-distinguish| other people)?|other\\s?(?:hurricane(?: use)?s|people|persons|places|ships|uses(?: of)?)|redirect(?:-(?:distinguish|synonym|multi))?|see\\s?(?:wiktionary|also(?: if exists)?)';
+	// Twinkle.hatnoteRegex = 'وصف قصير|ملاحظة علوية|رئيسي|عنوان صحيح|توضيح|تمييز|لـ|مزيد|مرجع ذاتي|تأريخ سنة|أسماء مشابهة|تفاصيل الطريق السريع|أوسع|حول(?:-تمييز| أشخاص آخرون)?|غيرها(?:-إعصار(?: استخدام)?ات|أشخاص|أماكن|سفن|استخدامات(?: لـ)?)|تحويلة(?:-(?:تمييز|مرادف|متعدد))?|انظر(?:-ويكاموس|أيضًا(?: إذا وجد)?)';
 
 	/* Twinkle-specific utility functions shared by multiple modules */
 

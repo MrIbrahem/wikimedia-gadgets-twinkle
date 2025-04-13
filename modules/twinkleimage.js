@@ -12,28 +12,28 @@
 
 	Twinkle.image = function twinkleimage() {
 		if (mw.config.get('wgNamespaceNumber') === 6 && mw.config.get('wgArticleId') && !document.getElementById('mw-sharedupload') && !Morebits.isPageRedirect()) {
-			Twinkle.addPortletLink(Twinkle.image.callback, 'DI', 'tw-di', 'Nominate file for delayed speedy deletion');
+			Twinkle.addPortletLink(Twinkle.image.callback, 'DI', 'tw-di', 'ترشيح الملف للحذف السريع المؤجل');
 		}
 	};
 
 	Twinkle.image.callback = function twinkleimageCallback() {
 		const Window = new Morebits.SimpleWindow(600, 330);
-		Window.setTitle('File for dated speedy deletion');
+		Window.setTitle('ملف للحذف السريع المؤرخ');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('Speedy deletion policy', 'WP:CSD#Files');
-		Window.addFooterLink('Image prefs', 'WP:TW/PREF#image');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#image');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('سياسة الحذف السريع', 'WP:CSD#Files');
+		Window.addFooterLink('تفضيلات الصورة', 'WP:TW/PREF#image');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#image');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.image.callback.evaluate);
 		form.append({
 			type: 'checkbox',
 			list: [
 				{
-					label: 'Notify original uploader',
+					label: 'إعلام الرافع الأصلي',
 					value: 'notify',
 					name: 'notify',
-					tooltip: "Uncheck this if you are planning to make multiple nominations from the same user, and don't want to overload their talk page with too many notifications.",
+					tooltip: "قم بإلغاء تحديد هذا إذا كنت تخطط لتقديم ترشيحات متعددة من نفس المستخدم، ولا تريد إثقال صفحة نقاشهم بالكثير من الإشعارات.",
 					checked: Twinkle.getPref('notifyUserOnDeli')
 				}
 			]
@@ -41,7 +41,7 @@
 		);
 		const field = form.append({
 			type: 'field',
-			label: 'Type of action wanted'
+			label: 'نوع الإجراء المطلوب'
 		});
 		field.append({
 			type: 'radio',
@@ -49,51 +49,51 @@
 			event: Twinkle.image.callback.choice,
 			list: [
 				{
-					label: 'No source (CSD F4)',
+					label: 'لا يوجد مصدر (CSD F4)',
 					value: 'no source',
 					checked: true,
-					tooltip: 'Image or media has no source information'
+					tooltip: 'الصورة أو الوسائط ليس لديها معلومات المصدر'
 				},
 				{
-					label: 'No license (CSD F4)',
+					label: 'لا يوجد ترخيص (CSD F4)',
 					value: 'no license',
-					tooltip: 'Image or media does not have information on its copyright status'
+					tooltip: 'الصورة أو الوسائط ليس لديها معلومات حول حالة حقوق النشر الخاصة بها'
 				},
 				{
-					label: 'No source and no license (CSD F4)',
+					label: 'لا يوجد مصدر ولا يوجد ترخيص (CSD F4)',
 					value: 'no source no license',
-					tooltip: 'Image or media has neither information on source nor its copyright status'
+					tooltip: 'الصورة أو الوسائط لا تملك معلومات عن المصدر ولا عن حالة حقوق النشر الخاصة بها'
 				},
 				{
-					label: 'Orphaned non-free use (CSD F5)',
+					label: 'استخدام غير حر يتيم (CSD F5)',
 					value: 'orphaned non-free use',
-					tooltip: 'Image or media is unlicensed for use on Wikipedia and allowed only under a claim of fair use per Wikipedia:Non-free content, but it is not used in any articles'
+					tooltip: 'الصورة أو الوسائط غير مرخصة للاستخدام في ويكيبيديا ومسموح بها فقط بموجب ادعاء الاستخدام العادل وفقًا لـ ويكيبيديا:محتوى غير حر، ولكنها غير مستخدمة في أي مقالات'
 				},
 				{
-					label: 'No non-free use rationale (CSD F6)',
+					label: 'لا يوجد أساس منطقي للاستخدام غير الحر (CSD F6)',
 					value: 'no non-free use rationale',
-					tooltip: 'Image or media is claimed to be used under Wikipedia\'s fair use policy but has no explanation as to why it is permitted under the policy'
+					tooltip: 'يُزعم أن الصورة أو الوسائط تستخدم بموجب سياسة الاستخدام العادل لويكيبيديا ولكن ليس لديها تفسير لسبب السماح بها بموجب السياسة'
 				},
 				{
-					label: 'Disputed non-free use rationale (CSD F7)',
+					label: 'أساس منطقي للاستخدام غير الحر المتنازع عليه (CSD F7)',
 					value: 'disputed non-free use rationale',
-					tooltip: 'Image or media has a fair use rationale that is disputed or invalid, such as a {{Non-free logo}} tag on a photograph of a mascot'
+					tooltip: 'تحتوي الصورة أو الوسائط على أساس منطقي للاستخدام العادل يتم التنازع عليه أو غير صالح، مثل علامة {{Non-free logo}} على صورة فوتوغرافية لتميمة'
 				},
 				{
-					label: 'Replaceable non-free use (CSD F7)',
+					label: 'استخدام غير حر قابل للاستبدال (CSD F7)',
 					value: 'replaceable non-free use',
-					tooltip: 'Image or media may fail Wikipedia\'s first non-free content criterion ([[WP:NFCC#1]]) in that it illustrates a subject for which a free image might reasonably be found or created that adequately provides the same information'
+					tooltip: 'قد تفشل الصورة أو الوسائط في معيار المحتوى غير الحر الأول لويكيبيديا ([[WP:NFCC#1]]) من حيث أنها توضح موضوعًا يمكن العثور فيه بشكل معقول على صورة مجانية أو إنشاؤها والتي توفر بشكل كافٍ نفس المعلومات'
 				},
 				{
-					label: 'No evidence of permission (CSD F11)',
+					label: 'لا يوجد دليل على الإذن (CSD F11)',
 					value: 'no permission',
-					tooltip: 'Image or media does not have proof that the author agreed to licence the file'
+					tooltip: 'الصورة أو الوسائط ليس لديها دليل على أن المؤلف وافق على ترخيص الملف'
 				}
 			]
 		});
 		form.append({
 			type: 'div',
-			label: 'Work area',
+			label: 'منطقة العمل',
 			name: 'work_area'
 		});
 		form.append({ type: 'submit' });
@@ -107,7 +107,6 @@
 		evt.initEvent('change', true, true);
 		result.type[0].dispatchEvent(evt);
 	};
-
 	Twinkle.image.callback.choice = function twinkleimageCallbackChoose(event) {
 		const value = event.target.values;
 		const root = event.target.form;
@@ -123,9 +122,9 @@
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Non-free',
+							label: 'غير حر',
 							name: 'non_free',
-							tooltip: 'File is licensed under a fair use claim'
+							tooltip: 'الملف مرخص بموجب مطالبة الاستخدام العادل'
 						}
 					]
 				});
@@ -136,8 +135,8 @@
 					list: [
 						{
 							name: 'derivative',
-							label: 'Derivative work which lacks a source for incorporated works',
-							tooltip: 'File is a derivative of one or more other works whose source is not specified'
+							label: 'عمل مشتق يفتقر إلى مصدر للأعمال المدمجة',
+							tooltip: 'الملف هو مشتق من عمل واحد أو أكثر لم يتم تحديد مصدره'
 						}
 					]
 				});
@@ -146,29 +145,29 @@
 				work_area.append({
 					type: 'input',
 					name: 'source',
-					label: 'Source:'
+					label: 'المصدر:'
 				});
 				break;
 			case 'disputed non-free use rationale':
 				work_area.append({
 					type: 'textarea',
 					name: 'reason',
-					label: 'Concern:'
+					label: 'السبب:',
 				});
 				break;
 			case 'orphaned non-free use':
 				work_area.append({
 					type: 'input',
 					name: 'replacement',
-					label: 'Replacement:',
-					tooltip: 'Optional file that replaces this one.  The "File:" prefix is optional.'
+					label: 'الاستبدال:',
+					tooltip: 'ملف اختياري يحل محل هذا الملف. البادئة "File:" اختيارية.'
 				});
 				break;
 			case 'replaceable non-free use':
 				work_area.append({
 					type: 'textarea',
 					name: 'reason',
-					label: 'Reason:'
+					label: 'السبب:',
 				});
 				break;
 			default:
@@ -222,10 +221,10 @@
 		Morebits.Status.init(event.target);
 
 		Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-		Morebits.wiki.actionCompleted.notice = 'Tagging complete';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الوسم';
 
 		// Tagging image
-		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging file with deletion tag');
+		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وسم الملف بعلامة الحذف');
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.load(Twinkle.image.callbacks.taggingImage);
 
@@ -240,7 +239,7 @@
 			// No auto-notification, display what was going to be added.
 			const noteData = document.createElement('pre');
 			noteData.appendChild(document.createTextNode('{{subst:di-' + templatename + '-notice|1=' + mw.config.get('wgTitle') + '}} ~~~~'));
-			Morebits.Status.info('Notification', ['Following/similar data should be posted to the original uploader:', document.createElement('br'), noteData]);
+			Morebits.Status.info('إعلام', ['يجب نشر البيانات التالية/المشابهة على الرافع الأصلي:', document.createElement('br'), noteData]);
 		}
 	};
 
@@ -276,7 +275,7 @@
 			tag += '|help=off}}\n';
 
 			pageobj.setPageText(tag + text);
-			pageobj.setEditSummary('This file is up for deletion, per [[WP:CSD#' + params.normalized + '|CSD ' + params.normalized + ']] (' + params.type + ').');
+			pageobj.setEditSummary('هذا الملف مُرشح للحذف، حسب [[WP:CSD#' + params.normalized + '|CSD ' + params.normalized + ']] (' + params.type + ').');
 			pageobj.setChangeTags(Twinkle.changeTags);
 			pageobj.setWatchlist(Twinkle.getPref('deliWatchPage'));
 			pageobj.setCreateOption('nocreate');
@@ -288,16 +287,16 @@
 
 			// disallow warning yourself
 			if (initialContrib === mw.config.get('wgUserName')) {
-				pageobj.getStatusElement().warn('You (' + initialContrib + ') created this page; skipping user notification');
+				pageobj.getStatusElement().warn('أنت (' + initialContrib + ') من أنشأ هذه الصفحة؛ تخطي إشعار المستخدم');
 			} else {
-				const usertalkpage = new Morebits.wiki.Page('User talk:' + initialContrib, 'Notifying initial contributor (' + initialContrib + ')');
+				const usertalkpage = new Morebits.wiki.Page('User talk:' + initialContrib, 'إعلام المساهم الأولي (' + initialContrib + ')');
 				let notifytext = '\n{{subst:di-' + params.templatename + '-notice|1=' + mw.config.get('wgTitle');
 				if (params.type === 'no permission') {
 					notifytext += params.source ? '|source=' + params.source : '';
 				}
 				notifytext += '}} ~~~~';
 				usertalkpage.setAppendText(notifytext);
-				usertalkpage.setEditSummary('Notification: tagging for deletion of [[:' + Morebits.pageNameNorm + ']].');
+				usertalkpage.setEditSummary('إشعار: وسم للحذف لـ [[:' + Morebits.pageNameNorm + ']].');
 				usertalkpage.setChangeTags(Twinkle.changeTags);
 				usertalkpage.setCreateOption('recreate');
 				usertalkpage.setWatchlist(Twinkle.getPref('deliWatchUser'));
@@ -313,10 +312,9 @@
 		addToLog: function (params, initialContrib) {
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 			usl.initialText =
-				"This is a log of all [[WP:CSD|speedy deletion]] nominations made by this user using [[WP:TW|Twinkle]]'s CSD module.\n\n" +
-				'If you no longer wish to keep this log, you can turn it off using the [[Wikipedia:Twinkle/Preferences|preferences panel]], and ' +
-				'nominate this page for speedy deletion under [[WP:CSD#U1|CSD U1]].' +
-				(Morebits.userIsSysop ? '\n\nThis log does not track outright speedy deletions made using Twinkle.' : '');
+				"هذا سجل لجميع ترشيحات [[WP:CSD|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
+				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام Twinkle.' : '');
 
 			const formatParamLog = function (normalize, csdparam, input) {
 				if (normalize === 'F5' && csdparam === 'replacement') {
@@ -328,7 +326,7 @@
 			let extraInfo = '';
 
 			// If a logged file is deleted but exists on commons, the wikilink will be blue, so provide a link to the log
-			const fileLogLink = ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} log])';
+			const fileLogLink = ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} سجل])';
 
 			let appendText = '# [[:' + Morebits.pageNameNorm + ']]' + fileLogLink + ': DI [[WP:CSD#' + params.normalized.toUpperCase() + '|CSD ' + params.normalized.toUpperCase() + ']] ({{tl|di-' + params.templatename + '}})';
 
@@ -340,14 +338,14 @@
 			});
 
 			if (extraInfo) {
-				appendText += '; additional information:' + extraInfo;
+				appendText += '; معلومات إضافية:' + extraInfo;
 			}
 			if (initialContrib) {
-				appendText += '; notified {{user|1=' + initialContrib + '}}';
+				appendText += '; تم إعلام {{user|1=' + initialContrib + '}}';
 			}
 			appendText += ' ~~~~~\n';
 
-			const editsummary = 'Logging speedy deletion nomination of [[:' + Morebits.pageNameNorm + ']].';
+			const editsummary = 'تسجيل ترشيح الحذف السريع لـ [[:' + Morebits.pageNameNorm + ']].';
 
 			usl.changeTags = Twinkle.changeTags;
 			usl.log(appendText, editsummary);

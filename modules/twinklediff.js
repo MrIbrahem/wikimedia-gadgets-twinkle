@@ -14,18 +14,18 @@
 		if (mw.config.get('wgNamespaceNumber') < 0 || !mw.config.get('wgArticleId')) {
 			return;
 		}
-		Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), { diff: 'cur', oldid: 'prev' }), 'Last', 'tw-lastdiff', 'Show most recent diff');
+		Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), { diff: 'cur', oldid: 'prev' }), 'الأخير', 'tw-lastdiff', 'إظهار أحدث مقارنة');
 
 		// Show additional tabs only on diff pages
 		if (mw.config.get('wgDiffNewId')) {
 			Twinkle.addPortletLink(() => {
 				Twinkle.diff.evaluate(false);
-			}, 'Since', 'tw-since', 'Show difference between last diff and the revision made by previous user');
+			}, 'منذ', 'tw-since', 'إظهار الفرق بين المقارنة الأخيرة والتعديل الذي أجراه المستخدم السابق');
 			Twinkle.addPortletLink(() => {
 				Twinkle.diff.evaluate(true);
-			}, 'Since mine', 'tw-sincemine', 'Show difference between last diff and my last revision');
+			}, 'منذ تعديلي', 'tw-sincemine', 'إظهار الفرق بين المقارنة الأخيرة وآخر تعديل لي');
 
-			Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), { diff: 'cur', oldid: mw.config.get('wgDiffNewId') }), 'Current', 'tw-curdiff', 'Show difference to current revision');
+			Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), { diff: 'cur', oldid: mw.config.get('wgDiffNewId') }), 'الحالي', 'tw-curdiff', 'إظهار الفرق مع المراجعة الحالية');
 		}
 	};
 
@@ -53,7 +53,7 @@
 			format: 'json'
 		};
 		Morebits.Status.init(document.getElementById('mw-content-text'));
-		const wikipedia_api = new Morebits.wiki.Api('Grabbing data of initial contributor', query, Twinkle.diff.callbacks.main);
+		const wikipedia_api = new Morebits.wiki.Api('جلب بيانات المساهم الأولي', query, Twinkle.diff.callbacks.main);
 		wikipedia_api.params = { user: user };
 		wikipedia_api.post();
 	};
@@ -64,7 +64,7 @@
 			const revid = rev && rev[0].revid;
 
 			if (!revid) {
-				self.statelem.error('no suitable earlier revision found, or ' + self.params.user + ' is the only contributor. Aborting.');
+				self.statelem.error('لم يُعثر على مراجعة سابقة مناسبة، أو أن ' + self.params.user + ' هو المساهم الوحيد. أُلغي الطلب.');
 				return;
 			}
 			window.location = mw.util.getUrl(mw.config.get('wgPageName'), {

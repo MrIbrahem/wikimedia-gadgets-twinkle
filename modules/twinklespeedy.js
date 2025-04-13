@@ -24,7 +24,7 @@
 			return;
 		}
 
-		Twinkle.addPortletLink(Twinkle.speedy.callback, 'CSD', 'tw-csd', Morebits.userIsSysop ? 'Delete page according to WP:CSD' : 'Request speedy deletion according to WP:CSD');
+		Twinkle.addPortletLink(Twinkle.speedy.callback, 'CSD', 'tw-csd', Morebits.userIsSysop ? 'حذف الصفحة وفقًا لـ WP: CSD' : 'طلب حذف سريع وفقًا لـ WP: CSD');
 	};
 
 	// This function is run when the CSD tab/header link is clicked
@@ -41,12 +41,12 @@
 	Twinkle.speedy.initDialog = function twinklespeedyInitDialog(callbackfunc) {
 		Twinkle.speedy.dialog = new Morebits.SimpleWindow(Twinkle.getPref('speedyWindowWidth'), Twinkle.getPref('speedyWindowHeight'));
 		const dialog = Twinkle.speedy.dialog;
-		dialog.setTitle('Choose criteria for speedy deletion');
+		dialog.setTitle('اختر معايير الحذف السريع');
 		dialog.setScriptName('Twinkle');
-		dialog.addFooterLink('Speedy deletion policy', 'WP:CSD');
-		dialog.addFooterLink('CSD prefs', 'WP:TW/PREF#speedy');
-		dialog.addFooterLink('Twinkle help', 'WP:TW/DOC#speedy');
-		dialog.addFooterLink('Give feedback', 'WT:TW');
+		dialog.addFooterLink('سياسة الحذف السريع', 'WP:CSD');
+		dialog.addFooterLink('تفضيلات CSD', 'WP:TW/PREF#speedy');
+		dialog.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#speedy');
+		dialog.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(callbackfunc, Twinkle.getPref('speedySelectionStyle') === 'radioClick' ? 'change' : null);
 		if (Morebits.userIsSysop) {
@@ -54,10 +54,10 @@
 				type: 'checkbox',
 				list: [
 					{
-						label: 'Tag page only, don\'t delete',
+						label: 'ضع علامة على الصفحة فقط، لا تحذفها',
 						value: 'tag_only',
 						name: 'tag_only',
-						tooltip: 'If you just want to tag the page, instead of deleting it now',
+						tooltip: 'إذا كنت تريد فقط وضع علامة على الصفحة، بدلاً من حذفها الآن',
 						checked: !(Twinkle.speedy.hasCSD || Twinkle.getPref('deleteSysopDefaultToDelete')),
 						event: function (event) {
 							const cForm = event.target.form;
@@ -93,17 +93,17 @@
 			});
 			deleteOptions.append({
 				type: 'header',
-				label: 'Delete-related options'
+				label: 'خيارات متعلقة بالحذف'
 			});
 			if (mw.config.get('wgNamespaceNumber') % 2 === 0 && (mw.config.get('wgNamespaceNumber') !== 2 || (/\//).test(mw.config.get('wgTitle')))) { // hide option for user pages, to avoid accidentally deleting user talk page
 				deleteOptions.append({
 					type: 'checkbox',
 					list: [
 						{
-							label: 'Also delete talk page',
+							label: 'حذف صفحة النقاش أيضًا',
 							value: 'talkpage',
 							name: 'talkpage',
-							tooltip: "This option deletes the page's talk page in addition. If you choose the F8 (moved to Commons) criterion, this option is ignored and the talk page is *not* deleted.",
+							tooltip: 'يقوم هذا الخيار بحذف صفحة نقاش الصفحة بالإضافة إلى ذلك. إذا اخترت معيار F8 (تم نقله إلى Commons) ، فسيتم تجاهل هذا الخيار ولن يتم حذف صفحة النقاش.',
 							checked: Twinkle.getPref('deleteTalkPageOnDelete'),
 							event: function (event) {
 								event.stopPropagation();
@@ -116,31 +116,31 @@
 				type: 'checkbox',
 				list: [
 					{
-						label: 'Also delete all redirects',
+						label: 'حذف جميع عمليات إعادة التوجيه أيضًا',
 						value: 'redirects',
 						name: 'redirects',
-						tooltip: 'This option deletes all incoming redirects in addition. Avoid this option for procedural (e.g. move/merge) deletions.',
+						tooltip: 'يقوم هذا الخيار بحذف جميع عمليات إعادة التوجيه الواردة بالإضافة إلى ذلك. تجنب هذا الخيار لعمليات الحذف الإجرائية (مثل النقل / الدمج).',
 						checked: Twinkle.getPref('deleteRedirectsOnDelete'),
 						event: function (event) {
 							event.stopPropagation();
 						}
 					},
 					{
-						label: 'Delete under multiple criteria',
+						label: 'الحذف بموجب معايير متعددة',
 						value: 'delmultiple',
 						name: 'delmultiple',
-						tooltip: 'When selected, you can select several criteria that apply to the page. For example, G11 and A7 are a common combination for articles.',
+						tooltip: 'عند تحديده، يمكنك تحديد العديد من المعايير التي تنطبق على الصفحة. على سبيل المثال ، G11 و A7 هما مزيج شائع للمقالات.',
 						event: function (event) {
 							Twinkle.speedy.callback.modeChanged(event.target.form);
 							event.stopPropagation();
 						}
 					},
 					{
-						label: 'Notify page creator of page deletion',
+						label: 'إخطار منشئ الصفحة بحذف الصفحة',
 						value: 'warnusertalk',
 						name: 'warnusertalk',
-						tooltip: 'A notification template will be placed on the talk page of the creator, IF you have a notification enabled in your Twinkle preferences ' +
-							'for the criterion you choose AND this box is checked. The creator may be welcomed as well.',
+						tooltip: 'سيتم وضع قالب إشعار في صفحة نقاش المنشئ ، إذا كان لديك إشعار ممكّن في تفضيلات توينكل الخاصة بك' +
+							'للمعيار الذي تختاره وتم تحديد هذا المربع. يمكن الترحيب بالمنشئ أيضًا.',
 						checked: !Twinkle.speedy.hasCSD,
 						event: function (event) {
 							event.stopPropagation();
@@ -158,7 +158,7 @@
 		if (Morebits.userIsSysop) {
 			tagOptions.append({
 				type: 'header',
-				label: 'Tag-related options'
+				label: 'خيارات متعلقة بالعلامة'
 			});
 		}
 
@@ -166,30 +166,30 @@
 			type: 'checkbox',
 			list: [
 				{
-					label: 'Notify page creator if possible',
+					label: 'إخطار منشئ الصفحة إن أمكن',
 					value: 'notify',
 					name: 'notify',
-					tooltip: 'A notification template will be placed on the talk page of the creator, IF you have a notification enabled in your Twinkle preferences ' +
-						'for the criterion you choose AND this box is checked. The creator may be welcomed as well.',
+					tooltip: 'سيتم وضع قالب إشعار في صفحة نقاش المنشئ ، إذا كان لديك إشعار ممكّن في تفضيلات توينكل الخاصة بك' +
+						'للمعيار الذي تختاره وتم تحديد هذا المربع. يمكن الترحيب بالمنشئ أيضًا.',
 					checked: !Morebits.userIsSysop || !(Twinkle.speedy.hasCSD || Twinkle.getPref('deleteSysopDefaultToDelete')),
 					event: function (event) {
 						event.stopPropagation();
 					}
 				},
 				{
-					label: 'Tag for creation protection (salting) as well',
+					label: 'ضع علامة على حماية الإنشاء (salting) أيضًا',
 					value: 'salting',
 					name: 'salting',
-					tooltip: 'When selected, the speedy deletion tag will be accompanied by a {{salt}} tag requesting that the deleting administrator apply creation protection. Only select if this page has been repeatedly recreated.',
+					tooltip: 'عند تحديده، ستكون علامة الحذف السريع مصحوبة بعلامة {{salt}} تطلب من المسؤول الذي يحذف تطبيق حماية الإنشاء. حدد فقط ما إذا كانت هذه الصفحة قد أعيد إنشاؤها بشكل متكرر.',
 					event: function (event) {
 						event.stopPropagation();
 					}
 				},
 				{
-					label: 'Tag with multiple criteria',
+					label: 'ضع علامة بمعايير متعددة',
 					value: 'multiple',
 					name: 'multiple',
-					tooltip: 'When selected, you can select several criteria that apply to the page. For example, G11 and A7 are a common combination for articles.',
+					tooltip: 'عند تحديده، يمكنك تحديد العديد من المعايير التي تنطبق على الصفحة. على سبيل المثال ، G11 و A7 هما مزيج شائع للمقالات.',
 					event: function (event) {
 						Twinkle.speedy.callback.modeChanged(event.target.form);
 						event.stopPropagation();
@@ -207,7 +207,7 @@
 		form.append({
 			type: 'div',
 			name: 'work_area',
-			label: 'Failed to initialize the CSD module. Please try again, or tell the Twinkle developers about the issue.'
+			label: 'فشل تهيئة وحدة CSD. يرجى المحاولة مرة أخرى أو إخبار مطوري توينكل بالمشكلة.'
 		});
 
 		if (Twinkle.getPref('speedySelectionStyle') !== 'radioClick') {
@@ -237,11 +237,11 @@
 		if (mode.isSysop) {
 			$('[name=delete_options]').show();
 			$('[name=tag_options]').hide();
-			$('button.tw-speedy-submit').text('Delete page');
+			$('button.tw-speedy-submit').text('حذف الصفحة');
 		} else {
 			$('[name=delete_options]').hide();
 			$('[name=tag_options]').show();
-			$('button.tw-speedy-submit').text('Tag page');
+			$('button.tw-speedy-submit').text('وضع علامة على الصفحة');
 		}
 
 		const work_area = new Morebits.QuickForm.Element({
@@ -254,12 +254,12 @@
 
 			work_area.append({
 				type: 'div',
-				label: 'When finished choosing criteria, click:'
+				label: 'عند الانتهاء من اختيار المعايير، انقر فوق:'
 			});
 			work_area.append({
 				type: 'button',
 				name: 'submit-multiple',
-				label: mode.isSysop ? 'Delete page' : 'Tag page',
+				label: mode.isSysop ? 'حذف الصفحة' : 'وضع علامة على الصفحة',
 				event: function (event) {
 					Twinkle.speedy.callback[evaluateType](event);
 					event.stopPropagation();
@@ -273,37 +273,37 @@
 		};
 
 		if (mode.isSysop && !mode.isMultiple) {
-			appendList('Custom rationale', Twinkle.speedy.customRationale);
+			appendList('الأساس المنطقي المخصص', Twinkle.speedy.customRationale);
 		}
 
 		if (namespace % 2 === 1 && namespace !== 3) {
 			// show db-talk on talk pages, but not user talk pages
-			appendList('Talk pages', Twinkle.speedy.talkList);
+			appendList('صفحات النقاش', Twinkle.speedy.talkList);
 		}
 
 		if (!Morebits.isPageRedirect()) {
 			switch (namespace) {
 				case 0: // article
 				case 1: // talk
-					appendList('Articles', Twinkle.speedy.articleList);
+					appendList('مقالات', Twinkle.speedy.articleList);
 					break;
 
 				case 2: // user
 				case 3: // user talk
-					appendList('User pages', Twinkle.speedy.userList);
+					appendList('صفحات المستخدم', Twinkle.speedy.userList);
 					break;
 
 				case 6: // file
 				case 7: // file talk
-					appendList('Files', Twinkle.speedy.fileList);
+					appendList('الملفات', Twinkle.speedy.fileList);
 					if (!mode.isSysop) {
-						work_area.append({ type: 'div', label: 'Tagging for CSD F4 (no license), F5 (orphaned non-free use), F6 (no non-free use rationale), and F11 (no permission) can be done using Twinkle\'s "DI" tab.' });
+						work_area.append({ type: 'div', label: 'يمكن وضع علامة على CSD F4 (بدون ترخيص) و F5 (استخدام غير مجاني يتيم) و F6 (بدون أساس منطقي للاستخدام غير المجاني) و F11 (بدون إذن) باستخدام علامة التبويب "DI" في Twinkle.' });
 					}
 					break;
 
 				case 14: // category
 				case 15: // category talk
-					appendList('Categories', Twinkle.speedy.categoryList);
+					appendList('التصنيفات', Twinkle.speedy.categoryList);
 					break;
 
 				default:
@@ -311,9 +311,9 @@
 			}
 		} else {
 			if (namespace === 2 || namespace === 3) {
-				appendList('User pages', Twinkle.speedy.userList);
+				appendList('صفحات المستخدم', Twinkle.speedy.userList);
 			}
-			appendList('Redirects', Twinkle.speedy.redirectList);
+			appendList('عمليات إعادة التوجيه', Twinkle.speedy.redirectList);
 		}
 
 		let generalCriteria = Twinkle.speedy.generalList;
@@ -322,7 +322,7 @@
 		if (!mode.isSysop) {
 			generalCriteria = Twinkle.speedy.customRationale.concat(generalCriteria);
 		}
-		appendList('General criteria', generalCriteria);
+		appendList('المعايير العامة', generalCriteria);
 
 		const old_area = Morebits.QuickForm.getElements(form, 'work_area')[0];
 		form.replaceChild(work_area.render(), old_area);
@@ -353,15 +353,15 @@
 			lelimit: 5 // A little bit goes a long way
 		};
 
-		new Morebits.wiki.Api('Checking for past deletions', query, ((apiobj) => {
+		new Morebits.wiki.Api('جارٍ التحقق من عمليات الحذف السابقة', query, ((apiobj) => {
 			const response = apiobj.getResponse();
 			const delCount = response.query.logevents.length;
 			if (delCount) {
-				let message = delCount + ' previous deletion';
+				let message = delCount + ' عملية حذف سابقة';
 				if (delCount > 1) {
-					message += 's';
+					message += 'عمليات';
 					if (response.continue) {
-						message = 'More than ' + message;
+						message = 'أكثر من ' + message;
 					}
 
 					// 3+ seems problematic
@@ -371,7 +371,7 @@
 				}
 
 				// Provide a link to page logs (CSD templates have one for sysops)
-				const link = Morebits.htmlNode('a', '(logs)');
+				const link = Morebits.htmlNode('a', '(سجلات)');
 				link.setAttribute('href', mw.util.getUrl('Special:Log', { page: mw.config.get('wgPageName') }));
 				link.setAttribute('target', '_blank');
 
@@ -449,7 +449,7 @@
 					criterion.subgroup = criterion.subgroup.concat({
 						type: 'button',
 						name: 'submit',
-						label: mode.isSysop ? 'Delete page' : 'Tag page',
+						label: mode.isSysop ? 'حذف الصفحة' : 'وضع علامة على الصفحة',
 						event: submitSubgroupHandler
 					});
 				} else {
@@ -458,7 +458,7 @@
 						{
 							type: 'button',
 							name: 'submit', // ends up being called "csd.submit" so this is OK
-							label: mode.isSysop ? 'Delete page' : 'Tag page',
+							label: mode.isSysop ? 'حذف الصفحة' : 'وضع علامة على الصفحة',
 							event: submitSubgroupHandler
 						}
 					];
@@ -473,13 +473,13 @@
 
 	Twinkle.speedy.customRationale = [
 		{
-			label: 'Custom rationale' + (Morebits.userIsSysop ? ' (custom deletion reason)' : ' using {{db}} template'),
+			label: 'الأساس المنطقي المخصص' + (Morebits.userIsSysop ? ' (سبب الحذف المخصص)' : ' باستخدام قالب {{db}}'),
 			value: 'reason',
-			tooltip: '{{db}} is short for "delete because". At least one of the other deletion criteria must still apply to the page, and you must make mention of this in your rationale. This is not a "catch-all" for when you can\'t find any criteria that fit.',
+			tooltip: '{{db}} هي اختصار لعبارة "حذف بسبب". يجب أن يظل أحد معايير الحذف الأخرى على الأقل ساريًا على الصفحة، ويجب عليك ذكر ذلك في الأساس المنطقي الخاص بك. هذا ليس "حلًا شاملاً" عندما لا يمكنك العثور على أي معايير تناسب.',
 			subgroup: {
 				name: 'reason_1',
 				type: 'input',
-				label: 'Rationale:',
+				label: 'الأساس المنطقي:',
 				size: 60
 			},
 			hideWhenMultiple: true
@@ -488,221 +488,222 @@
 
 	Twinkle.speedy.talkList = [
 		{
-			label: 'G8: Talk pages with no corresponding subject page',
+			label: 'G8: صفحات النقاش التي لا تحتوي على صفحة موضوع مقابلة',
 			value: 'talk',
-			tooltip: 'This excludes any page that is useful to the project - in particular, user talk pages, talk page archives, and talk pages for files that exist on Wikimedia Commons.'
+			tooltip: 'يستثني هذا أي صفحة مفيدة للمشروع - على وجه الخصوص، صفحات نقاش المستخدمين وأرشيفات صفحات النقاش وصفحات النقاش للملفات الموجودة على ويكيميديا ​​كومنز.'
 		}
 	];
 
 	Twinkle.speedy.fileList = [
 		{
-			label: 'F1: Redundant file',
+			label: 'F1: ملف زائد عن الحاجة',
 			value: 'redundantimage',
-			tooltip: 'Any file that is a redundant copy, in the same file format and same or lower resolution, of something else on Wikipedia. Likewise, other media that is a redundant copy, in the same format and of the same or lower quality. This does not apply to files duplicated on Wikimedia Commons, because of licence issues; these should be tagged with {{subst:ncd|Image:newname.ext}} or {{subst:ncd}} instead',
+			tooltip: 'أي ملف عبارة عن نسخة مكررة زائدة عن الحاجة، بنفس تنسيق الملف وبنفس الدقة أو بدقة أقل، لشيء آخر في ويكيبيديا. وبالمثل، وسائط أخرى عبارة عن نسخة مكررة زائدة عن الحاجة، بنفس التنسيق وبنفس الجودة أو بجودة أقل. لا ينطبق هذا على الملفات المكررة على ويكيميديا ​​كومنز، بسبب مشكلات الترخيص؛ يجب وضع علامة عليها باستخدام {{subst:ncd|Image:newname.ext}} أو {{subst:ncd}} بدلاً من ذلك',
 			subgroup: {
 				name: 'redundantimage_filename',
 				type: 'input',
-				label: 'File this is redundant to:',
-				tooltip: 'The "File:" prefix can be left off.'
+				label: 'الملف الذي يمثل هذا الملف نسخة زائدة منه:',
+				tooltip: 'يمكن حذف البادئة "ملف:".'
 			}
 		},
 		{
-			label: 'F2: Corrupt, missing, or empty file',
+			label: 'F2: ملف تالف أو مفقود أو فارغ',
 			value: 'noimage',
-			tooltip: 'Before deleting this type of file, verify that the MediaWiki engine cannot read it by previewing a resized thumbnail of it. This also includes empty (i.e., no content) file description pages for Commons files'
+			tooltip: 'قبل حذف هذا النوع من الملفات، تحقق من أن محرك MediaWiki لا يمكنه قراءته عن طريق معاينة صورة مصغرة تم تغيير حجمها منه. يتضمن ذلك أيضًا صفحات وصف ملف فارغة (أي بدون محتوى) لملفات Commons'
 		},
 		{
-			label: 'F2: Unneeded file description page for a file on Commons',
+			label: 'F2: صفحة وصف ملف غير ضرورية لملف على Commons',
 			value: 'fpcfail',
-			tooltip: 'An image, hosted on Commons, but with tags or information on its English Wikipedia description page that are no longer needed. (For example, a failed featured picture candidate.)',
+			tooltip: 'صورة مستضافة على Commons ، ولكن مع علامات أو معلومات على صفحة وصف ويكيبيديا الإنجليزية الخاصة بها لم تعد هناك حاجة إليها. (على سبيل المثال، مرشح صورة مميزة فاشلة).',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'F3: Improper license',
+			label: 'F3: ترخيص غير لائق',
 			value: 'noncom',
-			tooltip: 'Files licensed as "for non-commercial use only", "non-derivative use" or "used with permission" that were uploaded on or after 2005-05-19, except where they have been shown to comply with the limited standards for the use of non-free content. This includes files licensed under a "Non-commercial Creative Commons License". Such files uploaded before 2005-05-19 may also be speedily deleted if they are not used in any articles'
+			tooltip: 'الملفات المرخصة على أنها "للاستخدام غير التجاري فقط" أو "الاستخدام غير المشتق" أو "المستخدمة بإذن" والتي رُفعت في أو بعد 2005-05-19 ، باستثناء الحالات التي ثبت فيها امتثالها للمعايير المحدودة لاستخدام المحتوى غير المجاني. يتضمن ذلك الملفات المرخصة بموجب "ترخيص المشاع الإبداعي غير التجاري". يمكن أيضًا حذف هذه الملفات التي رُفعت قبل 2005-05-19 بسرعة إذا لم يتم استخدامها في أي مقالات'
 		},
 		{
-			label: 'F4: Lack of licensing information',
+			label: 'F4: نقص معلومات الترخيص',
 			value: 'unksource',
-			tooltip: 'Files in category "Files with unknown source", "Files with unknown copyright status", or "Files with no copyright tag" that have been tagged with a template that places them in the category for more than seven days, regardless of when uploaded. Note, users sometimes specify their source in the upload summary, so be sure to check the circumstances of the file.',
+			tooltip: 'الملفات الموجودة في فئة "ملفات ذات مصدر غير معروف" أو "ملفات ذات حالة حقوق نشر غير معروفة" أو "ملفات بدون علامة حقوق طبع ونشر" التي وضُع عليها علامة بقالب يضعها في التصنيف لأكثر من سبعة أيام، بغض النظر عن وقت التحميل. لاحظ أن المستخدمين يحددون أحيانًا مصدرهم في ملخص التحميل، لذا تأكد من التحقق من ظروف الملف.',
 			hideWhenUser: true
 		},
 		{
-			label: 'F5: Unused non-free copyrighted file',
+			label: 'F5: ملف محمي بحقوق الطبع والنشر غير مجاني غير مستخدم',
 			value: 'f5',
-			tooltip: 'Files that are not under a free license or in the public domain that are not used in any article, whose only use is in a deleted article, and that are very unlikely to be used on any other article. Reasonable exceptions may be made for files uploaded for an upcoming article. For other unused non-free files, use the "Orphaned non-free use" option in Twinkle\'s DI tab.',
+			tooltip: 'الملفات التي ليست بموجب ترخيص مجاني أو في المجال العام والتي لا يتم استخدامها في أي مقال، والتي يقتصر استخدامها على مقال محذوف، والتي من غير المحتمل جدًا استخدامها في أي مقال آخر. يمكن تقديم استثناءات معقولة للملفات التي رُفعت لمقال قادم. بالنسبة للملفات الأخرى غير المجانية غير المستخدمة، استخدم الخيار "الاستخدام غير المجاني اليتيم" في علامة التبويب DI في Twinkle.',
 			hideWhenUser: true
 		},
 		{
-			label: 'F6: Missing fair-use rationale',
+			label: 'F6: فقدان الأساس المنطقي للاستخدام العادل',
 			value: 'norat',
-			tooltip: 'Any file without a fair use rationale may be deleted seven days after it is uploaded.  Boilerplate fair use templates do not constitute a fair use rationale.  Files uploaded before 2006-05-04 should not be deleted immediately; instead, the uploader should be notified that a fair-use rationale is needed.  Files uploaded after 2006-05-04 can be tagged using the "No non-free use rationale" option in Twinkle\'s DI module. Such files can be found in the dated subcategories of Category:Files with no non-free use rationale.',
+			tooltip: 'يمكن حذف أي ملف بدون أساس منطقي للاستخدام العادل بعد سبعة أيام من تحميله. قوالب الاستخدام العادل القياسية لا تشكل أساسًا منطقيًا للاستخدام العادل. يجب عدم حذف الملفات التي رُفعت قبل 2006-05-04 على الفور؛ بدلاً من ذلك، يجب إخطار القائم بالتحميل بالحاجة إلى أساس منطقي للاستخدام العادل. يمكن وضع علامة على الملفات التي رُفعت بعد 2006-05-04 باستخدام الخيار "لا يوجد أساس منطقي للاستخدام غير المجاني" في وحدة DI في Twinkle. يمكن العثور على هذه الملفات في التصنيفات الفرعية المؤرخة من التصنيف: ملفات بدون أساس منطقي للاستخدام غير المجاني.',
 			hideWhenUser: true
 		},
 		{
-			label: 'F7: Fair-use media from a commercial image agency which is not the subject of sourced commentary',
+			label: 'F7: وسائط الاستخدام العادل من وكالة صور تجارية ليست موضوع تعليق موثق',
 			value: 'badfairuse',
-			tooltip: 'Non-free images or media from a commercial source (e.g., Associated Press, Getty), where the file itself is not the subject of sourced commentary, are considered an invalid claim of fair use and fail the strict requirements of WP:NFCC. For cases that require a waiting period (invalid or otherwise disputed rationales or replaceable images), use the options on Twinkle\'s DI tab.',
+			tooltip: 'تعتبر الصور أو الوسائط غير المجانية من مصدر تجاري (مثل Associated Press أو Getty) ، حيث لا يكون الملف نفسه موضوع تعليق موثق، مطالبة غير صالحة بالاستخدام العادل وتفشل في المتطلبات الصارمة لـ WP:NFCC. بالنسبة للحالات التي تتطلب فترة انتظار (أساس منطقي غير صالح أو متنازع عليه أو صور قابلة للاستبدال) ، استخدم الخيارات الموجودة في علامة التبويب DI في Twinkle.',
 			subgroup: {
 				name: 'badfairuse_rationale',
 				type: 'input',
-				label: 'Optional explanation:',
+				label: 'شرح اختياري:',
 				size: 60
 			},
 			hideWhenMultiple: true
 		},
 		{
-			label: 'F8: File available as an identical or higher-resolution copy on Wikimedia Commons',
+			label: 'F8: الملف متاح كنسخة متطابقة أو ذات دقة أعلى على ويكيميديا ​​كومنز',
 			value: 'commons',
-			tooltip: 'Provided the following conditions are met: 1: The file format of both images is the same. 2: The file\'s license and source status is beyond reasonable doubt, and the license is undoubtedly accepted at Commons. 3: All information on the file description page is present on the Commons file description page. That includes the complete upload history with links to the uploader\'s local user pages. 4: The file is not protected, and the file description page does not contain a request not to move it to Commons. 5: If the file is available on Commons under a different name than locally, all local references to the file must be updated to point to the title used at Commons. 6: For {{c-uploaded}} files: They may be speedily deleted as soon as they are off the Main Page',
+			tooltip: 'بشرط استيفاء الشروط التالية: 1: تنسيق الملف لكلا الصورتين هو نفسه. 2: ترخيص الملف وحالة المصدر يتجاوزان أي شك معقول، والترخيص مقبول بلا شك في Commons. 3: جميع المعلومات الموجودة في صفحة وصف الملف موجودة في صفحة وصف ملف Commons. يتضمن ذلك سجل التحميل الكامل مع روابط لصفحات المستخدم المحلي للقائم بالتحميل. 4: الملف غير محمي، ولا تحتوي صفحة وصف الملف على طلب بعدم نقله إلى Commons. 5: إذا كان الملف متاحًا في Commons باسم مختلف عن الاسم المحلي، فيجب تحديث جميع المراجع المحلية إلى الملف للإشارة إلى العنوان المستخدم في Commons. 6: بالنسبة لملفات {{c-uploaded}}: يمكن حذفها بسرعة بمجرد إيقافها عن الصفحة الرئيسية',
 			subgroup: {
 				name: 'commons_filename',
 				type: 'input',
-				label: 'Filename on Commons:',
+				label: 'اسم الملف على Commons:',
 				value: Morebits.pageNameNorm,
-				tooltip: 'This can be left blank if the file has the same name on Commons as here. The "File:" prefix is optional.'
+				tooltip: 'يمكن ترك هذا فارغًا إذا كان للملف نفس الاسم الموجود هنا على Commons. البادئة "ملف:" اختيارية.'
 			},
 			hideWhenMultiple: true
 		},
 		{
-			label: 'F9: Unambiguous copyright infringement',
+			label: 'F9: انتهاك حقوق الطبع والنشر لا لبس فيه',
 			value: 'imgcopyvio',
-			tooltip: 'The file was copied from a website or other source that does not have a license compatible with Wikipedia, and the uploader neither claims fair use nor makes a credible assertion of permission of free use. Sources that do not have a license compatible with Wikipedia include stock photo libraries such as Getty Images or Corbis. Non-blatant copyright infringements should be discussed at Wikipedia:Files for deletion',
+			tooltip: 'تم نسخ الملف من موقع ويب أو مصدر آخر ليس لديه ترخيص متوافق مع ويكيبيديا، ولا يدعي القائم بالتحميل استخدامًا عادلاً ولا يقدم تأكيدًا ذا مصداقية لإذن الاستخدام المجاني. تشمل المصادر التي ليس لديها ترخيص متوافق مع ويكيبيديا مكتبات الصور المخزنة مثل Getty Images أو Corbis. يجب مناقشة انتهاكات حقوق الطبع والنشر غير الصارخة في Wikipedia:Files for deletion',
 			subgroup: [
 				{
 					name: 'imgcopyvio_url',
 					type: 'input',
-					label: 'URL of the copyvio, including the "http://".  If the copyvio is of a non-internet source and you cannot provide a URL, you must use the deletion rationale box.',
+					label: 'عنوان URL الخاص بـ copyvio ، بما في ذلك "http://". إذا كان copyvio من مصدر غير إنترنت ولا يمكنك تقديم عنوان URL ، فيجب عليك استخدام مربع الأساس المنطقي للحذف.',
 					size: 60
 				},
 				{
 					name: 'imgcopyvio_rationale',
 					type: 'input',
-					label: 'Deletion rationale for non-internet copyvios:',
+					label: 'الأساس المنطقي للحذف لـ copyvios غير الإنترنت:',
 					size: 60
 				}
 			]
 		},
 		{
-			label: 'F11: No evidence of permission',
+			label: 'F11: لا يوجد دليل على الإذن',
 			value: 'nopermission',
-			tooltip: 'If an uploader has specified a license and has named a third party as the source/copyright holder without providing evidence that this third party has in fact agreed, the item may be deleted seven days after notification of the uploader',
+			tooltip: 'إذا حدد القائم بالتحميل ترخيصًا وسمى طرفًا ثالثًا كمصدر / صاحب حقوق الطبع والنشر دون تقديم دليل على أن هذا الطرف الثالث قد وافق في الواقع، فيمكن حذف العنصر بعد سبعة أيام من إخطار القائم بالتحميل',
 			hideWhenUser: true
 		},
 		{
-			label: 'G8: File description page with no corresponding file',
+			label: 'G8: صفحة وصف ملف بدون ملف مطابق',
 			value: 'imagepage',
-			tooltip: 'This is only for use when the file doesn\'t exist at all. Corrupt files, and local description pages for files on Commons, should use F2; implausible redirects should use R3; and broken Commons redirects should use R4.'
+			tooltip: 'هذا مخصص للاستخدام فقط عندما لا يكون الملف موجودًا على الإطلاق. يجب أن تستخدم الملفات التالفة وصفحات الوصف المحلية للملفات الموجودة على Commons F2؛ يجب أن تستخدم عمليات إعادة التوجيه غير المعقولة R3؛ ويجب أن تستخدم عمليات إعادة توجيه Commons المكسورة R4.'
 		}
 	];
 
 	Twinkle.speedy.articleList = [
 		{
-			label: 'A1: No context. Articles lacking sufficient context to identify the subject of the article.',
+			label: 'A1: لا يوجد سياق. مقالات تفتقر إلى سياق كافٍ لتحديد موضوع المقالة.',
 			value: 'nocontext',
-			tooltip: 'Example: "He is a funny man with a red car. He makes people laugh." This applies only to very short articles. Context is different from content, treated in A3, below.'
+			tooltip: 'مثال: "إنه رجل مضحك بسيارة حمراء. إنه يجعل الناس يضحكون." ينطبق هذا فقط على المقالات القصيرة جدًا. يختلف السياق عن المحتوى، الذي يتم تناوله في A3 ، أدناه.',
+			hideInNamespaces: [2] // Not applicable in userspace
 		},
 		{
-			label: 'A2: Foreign language articles that exist on another Wikimedia project',
+			label: 'A2: مقالات بلغة أجنبية موجودة في مشروع ويكيميديا ​​آخر',
 			value: 'foreign',
-			tooltip: 'If the article in question does not exist on another project, the template {{notenglish}} should be used instead. All articles in a non-English language that do not meet this criteria (and do not meet any other criteria for speedy deletion) should be listed at Pages Needing Translation (PNT) for review and possible translation',
+			tooltip: 'إذا كانت المقالة المعنية غير موجودة في مشروع آخر، فيجب استخدام القالب {{notenglish}} بدلاً من ذلك. يجب إدراج جميع المقالات بلغة غير الإنجليزية التي لا تفي بهذه المعايير (ولا تفي بأي معايير أخرى للحذف السريع) في صفحات تحتاج إلى ترجمة (PNT) للمراجعة والترجمة المحتملة',
 			subgroup: {
 				name: 'foreign_source',
 				type: 'input',
-				label: 'Interwiki link to the article on the foreign-language wiki:',
-				tooltip: 'For example, fr:Bonjour'
+				label: 'رابط Interwiki إلى المقالة على ويكي اللغة الأجنبية:',
+				tooltip: 'على سبيل المثال ، fr:Bonjour'
 			}
 		},
 		{
-			label: 'A3: No content whatsoever',
+			label: 'A3: لا يوجد محتوى على الإطلاق',
 			value: 'nocontent',
-			tooltip: 'Any article consisting only of links elsewhere (including hyperlinks, category tags and "see also" sections), a rephrasing of the title, and/or attempts to correspond with the person or group named by its title. This does not include disambiguation pages'
+			tooltip: 'أي مقال يتكون فقط من روابط في أماكن أخرى (بما في ذلك الارتباطات التشعبية وعلامات التصنيف وأقسام "انظر أيضًا") أو إعادة صياغة للعنوان و / أو محاولات للتوافق مع الشخص أو المجموعة التي يحملها عنوانه. لا يشمل ذلك صفحات التوضيح'
 		},
 		{
-			label: 'A7: No indication of importance (people, groups, companies, web content, individual animals, or organized events)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (الأشخاص أو المجموعات أو الشركات أو محتوى الويب أو الحيوانات الفردية أو الأحداث المنظمة)',
 			value: 'a7',
-			tooltip: 'An article about a real person, group of people, band, club, company, web content, individual animal, tour, or party that does not assert the importance or significance of its subject. If controversial, or if a previous AfD has resulted in the article being kept, the article should be nominated for AfD instead',
+			tooltip: 'مقال عن شخص حقيقي أو مجموعة من الأشخاص أو فرقة موسيقية أو نادي أو شركة أو محتوى ويب أو حيوان فردي أو جولة أو حفلة لا يؤكد أهمية أو أهمية موضوعه. إذا كان مثيرًا للجدل، أو إذا أدت AfD سابقة إلى الاحتفاظ بالمقال، فيجب ترشيح المقال لـ AfD بدلاً من ذلك',
 			hideWhenSingle: true
 		},
 		{
-			label: 'A7: No indication of importance (person)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (شخص)',
 			value: 'person',
-			tooltip: 'An article about a real person that does not assert the importance or significance of its subject. If controversial, or if there has been a previous AfD that resulted in the article being kept, the article should be nominated for AfD instead',
+			tooltip: 'مقال عن شخص حقيقي لا يؤكد أهمية أو أهمية موضوعه. إذا كان مثيرًا للجدل، أو إذا كانت هناك AfD سابقة أدت إلى الاحتفاظ بالمقال، فيجب ترشيح المقال لـ AfD بدلاً من ذلك',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A7: No indication of importance (musician(s) or band)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (موسيقي (موسيقيون) أو فرقة)',
 			value: 'band',
-			tooltip: 'Article about a band, singer, musician, or musical ensemble that does not assert the importance or significance of the subject',
+			tooltip: 'مقال عن فرقة موسيقية أو مغنية أو موسيقي أو فرقة موسيقية لا يؤكد أهمية أو أهمية الموضوع',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A7: No indication of importance (club, society or group)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (نادي أو جمعية أو مجموعة)',
 			value: 'club',
-			tooltip: 'Article about a club, society or group that does not assert the importance or significance of the subject',
+			tooltip: 'مقال عن نادي أو جمعية أو مجموعة لا يؤكد أهمية أو أهمية الموضوع',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A7: No indication of importance (company or organization)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (شركة أو منظمة)',
 			value: 'corp',
-			tooltip: 'Article about a company or organization that does not assert the importance or significance of the subject',
+			tooltip: 'مقال عن شركة أو منظمة لا يؤكد أهمية أو أهمية الموضوع',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A7: No indication of importance (website or web content)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (موقع ويب أو محتوى ويب)',
 			value: 'web',
-			tooltip: 'Article about a web site, blog, online forum, webcomic, podcast, or similar web content that does not assert the importance or significance of its subject',
+			tooltip: 'مقال عن موقع ويب أو مدونة أو منتدى عبر الإنترنت أو كوميديا ​​على الويب أو بودكاست أو محتوى ويب مشابه لا يؤكد أهمية أو أهمية موضوعه',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A7: No indication of importance (individual animal)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (حيوان فردي)',
 			value: 'animal',
-			tooltip: 'Article about an individual animal (e.g. pet) that does not assert the importance or significance of its subject',
+			tooltip: 'مقال عن حيوان فردي (مثل حيوان أليف) لا يؤكد أهمية أو أهمية موضوعه',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A7: No indication of importance (organized event)',
+			label: 'A7: لا يوجد ما يشير إلى الأهمية (حدث منظم)',
 			value: 'event',
-			tooltip: 'Article about an organized event (tour, function, meeting, party, etc.) that does not assert the importance or significance of its subject',
+			tooltip: 'مقال عن حدث منظم (جولة، وظيفة، اجتماع، حفلة ، إلخ) لا يؤكد أهمية أو أهمية موضوعه',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'A9: Unremarkable musical recording where artist\'s article doesn\'t exist',
+			label: 'A9: تسجيل موسيقي غير ملحوظ حيث لا توجد مقالة الفنان',
 			value: 'a9',
-			tooltip: 'An article about a musical recording which does not indicate why its subject is important or significant, and where the artist\'s article has never existed or has been deleted'
+			tooltip: 'مقال عن تسجيل موسيقي لا يشير إلى سبب أهمية موضوعه أو أهميته، وحيث لم تكن مقالة الفنان موجودة مطلقًا أو تم حذفها'
 		},
 		{
-			label: 'A10: Recently created article that duplicates an existing topic',
+			label: 'A10: مقالة تم إنشاؤها مؤخرًا وتكرر موضوعًا موجودًا',
 			value: 'a10',
-			tooltip: 'A recently created article with no relevant page history that does not aim to expand upon, detail or improve information within any existing article(s) on the subject, and where the title is not a plausible redirect. This does not include content forks, split pages or any article that aims at expanding or detailing an existing one.',
+			tooltip: 'مقال تم إنشاؤه مؤخرًا بدون سجل صفحة ذي صلة لا يهدف إلى التوسع أو التفصيل أو تحسين المعلومات داخل أي مقال (مقالات) موجودة حول الموضوع، وحيث لا يمثل العنوان إعادة توجيه معقولة. لا يتضمن ذلك فروع المحتوى أو الصفحات المقسمة أو أي مقال يهدف إلى توسيع أو تفصيل مقال موجود.',
 			subgroup: {
 				name: 'a10_article',
 				type: 'input',
-				label: 'Article that is duplicated:'
+				label: 'المقال الذي تم تكراره:'
 			}
 		},
 		{
-			label: 'A11: Obviously made up by creator, and no claim of significance',
+			label: 'A11: تم اختراعه بوضوح من قبل المنشئ ، ولا يوجد ادعاء بالأهمية',
 			value: 'madeup',
-			tooltip: 'An article which plainly indicates that the subject was invented/coined/discovered by the article\'s creator or someone they know personally, and does not credibly indicate why its subject is important or significant'
+			tooltip: 'مقال يشير بوضوح إلى أن الموضوع تم اختراعه / صياغته / اكتشافه من قبل مُنشئ المقالة أو شخص يعرفونه شخصيًا، ولا يشير بشكل موثوق إلى سبب أهمية موضوعه أو أهميته'
 		}
 	];
 
 	Twinkle.speedy.categoryList = [
 		{
-			label: 'C1: Empty categories',
+			label: 'C1: تصنيفات فارغة',
 			value: 'catempty',
-			tooltip: 'Categories that have been unpopulated for at least seven days. This does not apply to categories being discussed at WP:CFD, disambiguation categories, and certain other exceptions. If the category isn\'t relatively new, it possibly contained articles earlier, and deeper investigation is needed'
+			tooltip: 'التصنيفات التي أُلغي ملؤها لمدة سبعة أيام على الأقل. لا ينطبق هذا على التصنيفات التي تتم مناقشتها في WP:CFD وتصنيفات التوضيح وبعض الاستثناءات الأخرى. إذا لم تكن التصنيف جديدة نسبيًا، فمن المحتمل أنها تحتوي على مقالات في وقت سابق، وهناك حاجة إلى مزيد من التحقيق',
 		},
 		{
-			label: 'C4: Permanently unused maintenance categories',
+			label: 'C4: تصنيفات الصيانة غير المستخدمة بشكل دائم',
 			value: 'c4',
-			tooltip: 'Unused maintenance categories, such as empty dated maintenance categories for dates in the past, tracking categories no longer used by a template after a rewrite, or empty subcategories of Category:Wikipedia sockpuppets or Category:Suspected Wikipedia sockpuppets. Empty maintenance categories are not necessarily unused—this criterion is for categories which will always be empty, not just currently empty.',
+			tooltip: 'تصنيفات الصيانة غير المستخدمة، مثل تصنيفات الصيانة المؤرخة الفارغة لتواريخ في الماضي، أو تصنيفات التتبع التي لم يعد القالب يستخدمها بعد إعادة الكتابة، أو التصنيفات الفرعية الفارغة من التصنيف: دمى ويكيبيديا أو التصنيف: دمى ويكيبيديا المشتبه بها. تصنيفات الصيانة الفارغة ليست بالضرورة غير مستخدمة - هذا المعيار مخصص للتصنيفات التي ستكون دائمًا فارغة، وليست فارغة حاليًا فقط.',
 			subgroup: {
 				name: 'c4_rationale',
 				type: 'input',
-				label: 'Optional explanation:',
+				label: 'شرح اختياري:',
 				size: 60
 			}
 		}
@@ -710,40 +711,40 @@
 
 	Twinkle.speedy.userList = [
 		{
-			label: 'U1: User request',
+			label: 'U1: طلب المستخدم',
 			value: 'userreq',
-			tooltip: 'Personal subpages, upon request by their user. In some rare cases there may be administrative need to retain the page. Also, sometimes, main user pages may be deleted as well. See Wikipedia:User page for full instructions and guidelines',
+			tooltip: 'الصفحات الفرعية الشخصية، بناءً على طلب مستخدميها. في بعض الحالات النادرة، قد تكون هناك حاجة إدارية للاحتفاظ بالصفحة. أيضًا، في بعض الأحيان، قد يتم حذف صفحات المستخدم الرئيسية أيضًا. راجع صفحة مستخدم ويكيبيديا للحصول على الإرشادات والإرشادات الكاملة',
 			subgroup: mw.config.get('wgNamespaceNumber') === 3 && !mw.config.get('wgTitle').includes('/') ? {
 				name: 'userreq_rationale',
 				type: 'input',
-				label: 'A mandatory rationale to explain why this user talk page should be deleted:',
-				tooltip: 'User talk pages are deleted only in highly exceptional circumstances. See WP:DELTALK.',
+				label: 'أساس منطقي إلزامي لشرح سبب حذف صفحة نقاش المستخدم هذه:',
+				tooltip: 'يتم حذف صفحات نقاش المستخدمين فقط في ظروف استثنائية للغاية. راجع WP:DELTALK.',
 				size: 60
 			} : null,
 			hideSubgroupWhenMultiple: true
 		},
 		{
-			label: 'U2: Nonexistent user',
+			label: 'U2: مستخدم غير موجود',
 			value: 'nouser',
-			tooltip: 'User pages of users that do not exist (Check Special:Listusers)'
+			tooltip: 'صفحات المستخدمين للمستخدمين غير الموجودين (تحقق من Special:Listusers)'
 		},
 		{
-			label: 'U5: A non-contributor misusing Wikipedia as a web host',
+			label: 'U5: مستخدم غير مساهم يسيء استخدام ويكيبيديا كمضيف ويب',
 			value: 'notwebhost',
-			tooltip: 'Pages in userspace consisting of writings, information, discussions, or activities not closely related to Wikipedia\'s goals, where the owner has made few or no edits outside of user pages, except for plausible drafts and pages adhering to WP:UPYES. It applies regardless of the age of the page in question.',
+			tooltip: 'صفحات في مساحة المستخدم تتكون من كتابات أو معلومات أو مناقشات أو أنشطة لا ترتبط ارتباطًا وثيقًا بأهداف ويكيبيديا، حيث لم يقم المالك بإجراء تعديلات قليلة أو معدومة خارج صفحات المستخدم، باستثناء المسودات المعقولة والصفحات الملتزمة بـ WP:UPYES. ينطبق بغض النظر عن عمر الصفحة المعنية.',
 			hideWhenRedirect: true
 		},
 		{
-			label: 'G11: Promotional user page under a promotional user name',
+			label: 'G11: صفحة مستخدم ترويجية تحت اسم مستخدم ترويجي',
 			value: 'spamuser',
-			tooltip: 'A promotional user page, with a username that promotes or implies affiliation with the thing being promoted. Note that simply having a page on a company or product in one\'s userspace does not qualify it for deletion. If a user page is spammy but the username is not, then consider tagging with regular G11 instead.',
+			tooltip: 'صفحة مستخدم ترويجية، مع اسم مستخدم يروج أو يشير إلى الانتماء إلى الشيء الذي يتم الترويج له. لاحظ أن مجرد وجود صفحة على شركة أو منتج في مساحة مستخدم ما لا يؤهلها للحذف. إذا كانت صفحة المستخدم غير مرغوب فيها ولكن اسم المستخدم ليس كذلك، ففكر في وضع علامة عليها باستخدام G11 العادي بدلاً من ذلك.',
 			hideWhenMultiple: true,
 			hideWhenRedirect: true
 		},
 		{
-			label: 'G13: AfC draft submission or a blank draft, stale by over 6 months',
+			label: 'G13: إرسال مسودة AfC أو مسودة فارغة، قديمة منذ أكثر من 6 أشهر',
 			value: 'afc',
-			tooltip: 'Any rejected or unsubmitted AfC draft submission or a blank draft, that has not been edited in over 6 months (excluding bot edits).',
+			tooltip: 'أي إرسال AfC مرفوض أو غير مرسل أو مسودة فارغة، والتي لم تُحرر منذ أكثر من 6 أشهر (باستثناء تعديلات الروبوت).',
 			hideWhenMultiple: true,
 			hideWhenRedirect: true
 		}
@@ -751,71 +752,71 @@
 
 	Twinkle.speedy.generalList = [
 		{
-			label: 'G1: Patent nonsense. Pages consisting purely of incoherent text or gibberish with no meaningful content or history.',
+			label: 'G1: هراء خالص. صفحات تتكون بحتة من نص غير متماسك أو كلام طائش بدون محتوى أو تاريخ ذي معنى.',
 			value: 'nonsense',
-			tooltip: 'This does not include poor writing, partisan screeds, obscene remarks, vandalism, fictional material, material not in English, poorly translated material, implausible theories, or hoaxes. In short, if you can understand it, G1 does not apply.',
+			tooltip: 'لا يشمل ذلك الكتابة الضعيفة أو الخطب الحزبية أو الملاحظات البذيئة أو التخريب أو المواد الخيالية أو المواد غير الموجودة باللغة الإنجليزية أو المواد المترجمة بشكل سيئ أو النظريات غير المعقولة أو الخدع. باختصار ، إذا كنت تستطيع فهمها، فلا تنطبق G1.',
 			hideInNamespaces: [2] // Not applicable in userspace
 		},
 		{
-			label: 'G2: Test page',
+			label: 'G2: صفحة اختبار',
 			value: 'test',
-			tooltip: 'A page created to test editing or other Wikipedia functions. Pages in the User namespace are not included, nor are valid but unused or duplicate templates.',
+			tooltip: 'صفحة تم إنشاؤها لاختبار التحرير أو وظائف ويكيبيديا الأخرى. لا يتم تضمين الصفحات الموجودة في نطاق اسم المستخدم، ولا القوالب الصالحة ولكن غير المستخدمة أو المكررة.',
 			hideInNamespaces: [2] // Not applicable in userspace
 		},
 		{
-			label: 'G3: Pure vandalism',
+			label: 'G3: تخريب خالص',
 			value: 'vandalism',
-			tooltip: 'Plain pure vandalism (including redirects left behind from pagemove vandalism)'
+			tooltip: 'تخريب عادي خالص (بما في ذلك عمليات إعادة التوجيه المتروكة من تخريب نقل الصفحات)'
 		},
 		{
-			label: 'G3: Blatant hoax',
+			label: 'G3: خدعة صارخة',
 			value: 'hoax',
-			tooltip: 'Blatant and obvious hoax, to the point of vandalism',
+			tooltip: 'خدعة صارخة وواضحة، تصل إلى حد التخريب',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G4: Recreation of material deleted via a deletion discussion',
+			label: 'G4: إعادة إنشاء مادة تم حذفها عبر مناقشة الحذف',
 			value: 'repost',
-			tooltip: 'A copy, by any title, of a page that was deleted via an XfD process or Deletion review, provided that the copy is substantially identical to the deleted version. This clause does not apply to content that has been "userfied", to content undeleted as a result of Deletion review, or if the prior deletions were proposed or speedy deletions, although in this last case, other speedy deletion criteria may still apply',
+			tooltip: 'نسخة، بأي عنوان، لصفحة تم حذفها عبر عملية XfD أو مراجعة الحذف، بشرط أن تكون النسخة متطابقة إلى حد كبير مع الإصدار المحذوف. لا ينطبق هذا البند على المحتوى الذي تم "تخصيصه للمستخدم" ، أو على المحتوى الذي تم إلغاء حذفه نتيجة لمراجعة الحذف، أو إذا كانت عمليات الحذف السابقة عبارة عن عمليات حذف مقترحة أو سريعة، على الرغم من أنه في هذه الحالة الأخيرة، قد تظل معايير الحذف السريع الأخرى سارية',
 			subgroup: {
 				name: 'repost_xfd',
 				type: 'input',
-				label: 'Page where the deletion discussion took place:',
-				tooltip: 'Must start with "Wikipedia:"',
+				label: 'الصفحة التي جرت فيها مناقشة الحذف:',
+				tooltip: 'يجب أن تبدأ بـ "Wikipedia:"',
 				size: 60
 			}
 		},
 		{
-			label: 'G5: Created by a banned or blocked user',
+			label: 'G5: تم إنشاؤها بواسطة مستخدم محظور أو محظور',
 			value: 'banned',
-			tooltip: 'Pages created by banned or blocked users in violation of their ban or block, and which have no substantial edits by others',
+			tooltip: 'الصفحات التي أُنشأها مستخدمين محظورين أو محظورين في انتهاك للحظر أو الحظر المفروض عليهم، والتي لا تحتوي على تعديلات جوهرية من قبل الآخرين',
 			subgroup: {
 				name: 'banned_user',
 				type: 'input',
-				label: 'Username of banned user (if available):',
-				tooltip: 'Should not start with "User:"'
+				label: 'اسم مستخدم محظور (إذا كان متاحًا):',
+				tooltip: 'يجب ألا تبدأ بـ "مستخدم:"'
 			}
 		},
 		{
-			label: 'G6: Error',
+			label: 'G6: خطأ',
 			value: 'error',
-			tooltip: 'A page that was obviously created in error, or a redirect left over from moving a page that was obviously created at the wrong title.',
+			tooltip: 'صفحة تم إنشاؤها بوضوح عن طريق الخطأ، أو إعادة توجيه متروكة من نقل صفحة تم إنشاؤها بوضوح بعنوان خاطئ.',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G6: Move',
+			label: 'G6: نقل',
 			value: 'move',
-			tooltip: 'Making way for an uncontroversial move like reversing a redirect',
+			tooltip: 'إفساح المجال لنقل غير مثير للجدل مثل عكس إعادة التوجيه',
 			subgroup: [
 				{
 					name: 'move_page',
 					type: 'input',
-					label: 'Page to be moved here:'
+					label: 'الصفحة المراد نقلها هنا:'
 				},
 				{
 					name: 'move_reason',
 					type: 'input',
-					label: 'Reason:',
+					label: 'السبب:',
 					size: 60
 				}
 			],
@@ -824,167 +825,168 @@
 		{
 			label: 'G6: XfD',
 			value: 'xfd',
-			tooltip: 'A deletion discussion (at AfD, FfD, RfD, TfD, CfD, or MfD) was closed as "delete", but the page wasn\'t actually deleted.',
+			tooltip: 'تم إغلاق مناقشة الحذف (في AfD أو FfD أو RfD أو TfD أو CfD أو MfD) على أنها "حذف" ، ولكن الصفحة لم يتم حذفها بالفعل.',
 			subgroup: {
 				name: 'xfd_fullvotepage',
 				type: 'input',
-				label: 'Page where the deletion discussion was held:',
-				tooltip: 'Must start with "Wikipedia:"',
+				label: 'الصفحة التي عُقدت فيها مناقشة الحذف:',
+				tooltip: 'يجب أن تبدأ بـ "Wikipedia:"',
 				size: 40
 			},
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G6: AfC move',
+			label: 'G6: نقل AfC',
 			value: 'afc-move',
-			tooltip: 'Making way for acceptance of a draft submitted to AfC',
+			tooltip: 'إفساح المجال لقبول مسودة مقدمة إلى AfC',
 			subgroup: {
 				name: 'draft_page',
 				type: 'input',
-				label: 'Draft to be moved here:'
+				label: 'المسودة المراد نقلها هنا:'
 			},
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G6: Copy-and-paste page move',
+			label: 'G6: نقل صفحة النسخ واللصق',
 			value: 'copypaste',
-			tooltip: 'This only applies for a copy-and-paste page move of another page that needs to be temporarily deleted to make room for a clean page move.',
+			tooltip: 'ينطبق هذا فقط على نقل صفحة النسخ واللصق لصفحة أخرى تحتاج إلى حذفها مؤقتًا لإفساح المجال لنقل صفحة نظيفة.',
 			subgroup: {
 				name: 'copypaste_sourcepage',
 				type: 'input',
-				label: 'Original page that was copy-pasted here:'
+				label: 'الصفحة الأصلية التي نُسخت ولصقها هنا:',
+				size: 60
 			},
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G6: Housekeeping and non-controversial cleanup',
+			label: 'G6: التدبير المنزلي والتنظيف غير المثير للجدل',
 			value: 'g6',
-			tooltip: 'Other routine maintenance tasks',
+			tooltip: 'مهام الصيانة الروتينية الأخرى',
 			subgroup: {
 				name: 'g6_rationale',
 				type: 'input',
-				label: 'Rationale:',
+				label: 'الأساس المنطقي:',
 				size: 60
 			}
 		},
 		{
-			label: 'G7: Author requests deletion, or author blanked',
+			label: 'G7: يطلب المؤلف حذفها، أو قام المؤلف بإفراغها',
 			value: 'author',
-			tooltip: 'Any page for which deletion is requested by the original author in good faith, provided the page\'s only substantial content was added by its author. If the author blanks the page, this can also be taken as a deletion request.',
+			tooltip: 'أي صفحة يطلب حذفها المؤلف الأصلي بحسن نية، بشرط أن يكون المحتوى الجوهري الوحيد للصفحة قد تمت إضافته بواسطة مؤلفها. إذا قام المؤلف بإفراغ الصفحة، فيمكن اعتبار ذلك أيضًا طلب حذف.',
 			subgroup: {
 				name: 'author_rationale',
 				type: 'input',
-				label: 'Optional explanation:',
-				tooltip: 'Perhaps linking to where the author requested this deletion.',
+				label: 'شرح اختياري:',
+				tooltip: 'ربما ربط المكان الذي طلب فيه المؤلف هذا الحذف.',
 				size: 60
 			},
 			hideSubgroupWhenSysop: true
 		},
 		{
-			label: 'G8: Pages dependent on a non-existent or deleted page',
+			label: 'G8: الصفحات التي تعتمد على صفحة غير موجودة أو محذوفة',
 			value: 'g8',
-			tooltip: 'such as talk pages with no corresponding subject page; subpages with no parent page; file pages without a corresponding file; redirects to non-existent targets; or categories populated by deleted or retargeted templates. This excludes any page that is useful to the project, and in particular: deletion discussions that are not logged elsewhere, user and user talk pages, talk page archives, plausible redirects that can be changed to valid targets, and file pages or talk pages for files that exist on Wikimedia Commons.',
+			tooltip: 'مثل صفحات النقاش التي لا تحتوي على صفحة موضوع مقابلة؛ الصفحات الفرعية التي ليس لها صفحة أصل؛ صفحات الملفات بدون ملف مطابق؛ عمليات إعادة التوجيه إلى أهداف غير موجودة؛ أو التصنيفات التي تملأها قوالب محذوفة أو مستهدفة. يستثني هذا أي صفحة مفيدة للمشروع، وعلى وجه الخصوص: مناقشات الحذف غير المسجلة في مكان آخر، وصفحات المستخدم وصفحات نقاش المستخدم، وأرشيفات صفحات النقاش، وعمليات إعادة التوجيه المعقولة التي يمكن تغييرها إلى أهداف صالحة، وصفحات الملفات أو صفحات النقاش للملفات الموجودة على ويكيميديا ​​كومنز.',
 			subgroup: {
 				name: 'g8_rationale',
 				type: 'input',
-				label: 'Optional explanation:',
+				label: 'شرح اختياري:',
 				size: 60
 			},
 			hideSubgroupWhenSysop: true
 		},
 		{
-			label: 'G8: Subpages with no parent page',
+			label: 'G8: الصفحات الفرعية التي ليس لها صفحة أصل',
 			value: 'subpage',
-			tooltip: 'This excludes any page that is useful to the project, and in particular: deletion discussions that are not logged elsewhere, user and user talk pages, talk page archives, plausible redirects that can be changed to valid targets, and file pages or talk pages for files that exist on Wikimedia Commons.',
+			tooltip: 'يستثني هذا أي صفحة مفيدة للمشروع، وعلى وجه الخصوص: مناقشات الحذف غير المسجلة في مكان آخر، وصفحات المستخدم وصفحات نقاش المستخدم، وأرشيفات صفحات النقاش، وعمليات إعادة التوجيه المعقولة التي يمكن تغييرها إلى أهداف صالحة، وصفحات الملفات أو صفحات النقاش للملفات الموجودة على ويكيميديا ​​كومنز.',
 			hideWhenMultiple: true,
 			hideInNamespaces: [0, 6, 8] // hide in main, file, and mediawiki-spaces
 		},
 		{
-			label: 'G10: Attack page',
+			label: 'G10: صفحة الهجوم',
 			value: 'attack',
-			tooltip: 'Pages that serve no purpose but to disparage or threaten their subject or some other entity (e.g., "John Q. Doe is an imbecile"). This includes a biography of a living person that is negative in tone and unsourced, where there is no NPOV version in the history to revert to. Administrators deleting such pages should not quote the content of the page in the deletion summary!'
+			tooltip: 'الصفحات التي لا تخدم أي غرض سوى التقليل من شأن موضوعها أو تهديده أو أي كيان آخر (مثل "جون كيو. دو هو معتوه"). ويشمل ذلك سيرة شخصية لشخص حي ذات نبرة سلبية وغير موثقة، حيث لا يوجد إصدار محايد في السجل للرجوع إليه. يجب على المسؤولين الذين يحذفون هذه الصفحات عدم اقتباس محتوى الصفحة في ملخص الحذف!'
 		},
 		{
-			label: 'G10: Wholly negative, unsourced BLP',
+			label: 'G10: BLP سلبي حماية كاملة وغير مدعوم بمصادر',
 			value: 'negublp',
-			tooltip: 'A biography of a living person that is entirely negative in tone and unsourced, where there is no neutral version in the history to revert to.',
+			tooltip: 'سيرة شخصية لشخص حي ذات نبرة سلبية تمامًا وغير موثقة، حيث لا يوجد إصدار محايد في السجل للرجوع إليه.',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G11: Unambiguous advertising or promotion',
+			label: 'G11: إعلانات أو ترويج لا لبس فيه',
 			value: 'spam',
-			tooltip: 'Pages which exclusively promote a company, product, group, service, or person and which would need to be fundamentally rewritten in order to become encyclopedic. Note that an article about a company or a product which describes its subject from a neutral point of view does not qualify for this criterion; an article that is blatant advertising should have inappropriate content as well'
+			tooltip: 'الصفحات التي تروج حصريًا لشركة أو منتج أو مجموعة أو خدمة أو شخص والتي تحتاج إلى إعادة كتابتها بشكل أساسي لتصبح موسوعية. لاحظ أن مقالًا عن شركة أو منتج يصف موضوعه من وجهة نظر محايدة لا يفي بهذا المعيار؛ يجب أن يحتوي مقال الدعاية الصارخ على محتوى غير لائق أيضًا'
 		},
 		{
-			label: 'G12: Unambiguous copyright infringement',
+			label: 'G12: انتهاك حقوق الطبع والنشر لا لبس فيه',
 			value: 'copyvio',
-			tooltip: 'Either: (1) Material was copied from another website that does not have a license compatible with Wikipedia, or is photography from a stock photo seller (such as Getty Images or Corbis) or other commercial content provider; (2) There is no non-infringing content in the page history worth saving; or (3) The infringement was introduced at once by a single person rather than created organically on wiki and then copied by another website such as one of the many Wikipedia mirrors',
+			tooltip: 'إما: (1) تم نسخ المواد من موقع ويب آخر ليس لديه ترخيص متوافق مع ويكيبيديا، أو أنها عبارة عن صورة فوتوغرافية من بائع صور مخزنة (مثل Getty Images أو Corbis) أو أي موفر محتوى تجاري آخر؛ (2) لا يوجد محتوى غير منتهك لحقوق الطبع والنشر في سجل الصفحة يستحق الحفظ؛ أو (3) تم تقديم الانتهاك مرة واحدة من قبل شخص واحد بدلاً من إنشائه بشكل عضوي على wiki ثم نسخه بواسطة موقع ويب آخر مثل أحد نسخ ويكيبيديا العديدة',
 			subgroup: [
 				{
 					name: 'copyvio_url',
 					type: 'input',
-					label: 'URL (if available):',
-					tooltip: 'If the material was copied from an online source, put the URL here, including the "http://" or "https://" protocol.',
+					label: 'عنوان URL (إذا كان متوفرًا):',
+					tooltip: 'إذا تم نسخ المواد من مصدر عبر الإنترنت، فضع عنوان URL هنا، بما في ذلك البروتوكول "http://" أو "https://".',
 					size: 60
 				},
 				{
 					name: 'copyvio_url2',
 					type: 'input',
-					label: 'Additional URL:',
-					tooltip: 'Optional. Should begin with "http://" or "https://"',
+					label: 'عنوان URL إضافي:',
+					tooltip: 'اختياري. يجب أن تبدأ بـ "http://" أو "https://"',
 					size: 60
 				},
 				{
 					name: 'copyvio_url3',
 					type: 'input',
-					label: 'Additional URL:',
-					tooltip: 'Optional. Should begin with "http://" or "https://"',
+					label: 'عنوان URL إضافي:',
+					tooltip: 'اختياري. يجب أن تبدأ بـ "http://" أو "https://"',
 					size: 60
 				}
 			]
 		},
 		{
-			label: 'G13: Page in draft namespace or userspace AfC submission, stale by over 6 months',
+			label: 'G13: صفحة في نطاق اسم المسودة أو إرسال AfC لنطاق اسم المستخدم، قديمة منذ أكثر من 6 أشهر',
 			value: 'afc',
-			tooltip: 'Any rejected or unsubmitted AfC submission in userspace or any non-redirect page in draft namespace, that has not been edited for more than 6 months. Blank drafts in either namespace are also included.',
+			tooltip: 'أي إرسال AfC مرفوض أو غير مرسل في نطاق اسم المستخدم أو أي صفحة غير إعادة توجيه في نطاق اسم المسودة، والتي لم تُحرر لأكثر من 6 أشهر. يتم تضمين المسودات الفارغة في أي من مساحتي الاسم أيضًا.',
 			hideWhenRedirect: true,
 			showInNamespaces: [2, 118] // user, draft namespaces only
 		},
 		{
-			label: 'G14: Unnecessary disambiguation page',
+			label: 'G14: صفحة توضيح غير ضرورية',
 			value: 'disambig',
-			tooltip: 'This only applies for orphaned disambiguation pages which either: (1) disambiguate only one existing Wikipedia page and whose title ends in "(disambiguation)" (i.e., there is a primary topic); or (2) disambiguate no (zero) existing Wikipedia pages, regardless of its title.  It also applies to orphan "Foo (disambiguation)" redirects that target pages that are not disambiguation or similar disambiguation-like pages (such as set index articles or lists)'
+			tooltip: 'لا ينطبق هذا إلا على صفحات التوضيح اليتيمة التي إما: (1) توضح صفحة ويكيبيديا واحدة موجودة فقط وينتهي عنوانها بـ "(توضيح)" (أي أن هناك موضوعًا أساسيًا)؛ أو (2) لا توضح أي صفحات ويكيبيديا موجودة (صفر) ، بغض النظر عن عنوانها. وينطبق أيضًا على عمليات إعادة التوجيه "Foo (توضيح)" اليتيمة التي تستهدف الصفحات التي ليست توضيحًا أو صفحات شبيهة بالتوضيح (مثل مقالات فهرس المجموعة أو القوائم)'
 		}
 	];
 
 	Twinkle.speedy.redirectList = [
 		{
-			label: 'R2: Redirect from mainspace to any other namespace except the Category:, Template:, Wikipedia:, Help: and Portal: namespaces',
+			label: 'R2: إعادة توجيه من النطاق الرئيسي إلى أي نطاق آخر باستثناء نطاقات: تصنيف، قالب، ويكيبيديا، مساعدة، وبوابة',
 			value: 'rediruser',
-			tooltip: 'This does not include the pseudo-namespace shortcuts. If this was the result of a page move, consider waiting a day or two before deleting the redirect',
+			tooltip: 'لا يشمل ذلك اختصارات النطاق الزائف. إذا كان هذا نتيجة لنقل صفحة، ففكر في الانتظار يومًا أو يومين قبل حذف إعادة التوجيه',
 			showInNamespaces: [0]
 		},
 		{
-			label: 'R3: Recently created redirect from an implausible typo or misnomer',
+			label: 'R3: إعادة توجيه تم إنشاؤها مؤخرًا من خطأ مطبعي أو تسمية خاطئة غير معقولة',
 			value: 'redirtypo',
-			tooltip: 'However, redirects from common misspellings or misnomers are generally useful, as are redirects in other languages'
+			tooltip: 'ومع ذلك، فإن عمليات إعادة التوجيه من الأخطاء الإملائية الشائعة أو التسميات الخاطئة شائعة الاستخدام بشكل عام، وكذلك عمليات إعادة التوجيه بلغات أخرى'
 		},
 		{
-			label: 'R4: File namespace redirect with a name that matches a Commons page',
+			label: 'R4: إعادة توجيه مساحة اسم الملف باسم يطابق صفحة Commons',
 			value: 'redircom',
-			tooltip: 'The redirect should have no incoming links (unless the links are cleary intended for the file or redirect at Commons).',
+			tooltip: 'يجب ألا تحتوي إعادة التوجيه على أي روابط واردة (ما لم تكن الروابط مخصصة بوضوح للملف أو إعادة التوجيه في Commons).',
 			showInNamespaces: [6]
 		},
 		{
-			label: 'G6: Redirect to malplaced disambiguation page',
+			label: 'G6: إعادة التوجيه إلى صفحة توضيح موضوعة في غير مكانها',
 			value: 'movedab',
-			tooltip: 'This only applies for redirects to disambiguation pages ending in (disambiguation) where a primary topic does not exist.',
+			tooltip: 'لا ينطبق هذا إلا على عمليات إعادة التوجيه إلى صفحات التوضيح التي تنتهي بـ (توضيح) حيث لا يوجد موضوع أساسي.',
 			hideWhenMultiple: true
 		},
 		{
-			label: 'G8: Redirects to non-existent targets',
+			label: 'G8: عمليات إعادة التوجيه إلى أهداف غير موجودة',
 			value: 'redirnone',
-			tooltip: 'This excludes any page that is useful to the project, and in particular: deletion discussions that are not logged elsewhere, user and user talk pages, talk page archives, plausible redirects that can be changed to valid targets, and file pages or talk pages for files that exist on Wikimedia Commons.',
+			tooltip: 'يستثني هذا أي صفحة مفيدة للمشروع، وعلى وجه الخصوص: مناقشات الحذف غير المسجلة في مكان آخر، وصفحات المستخدم وصفحات نقاش المستخدم، وأرشيفات صفحات النقاش، وعمليات إعادة التوجيه المعقولة التي يمكن تغييرها إلى أهداف صالحة، وصفحات الملفات أو صفحات النقاش للملفات الموجودة على ويكيميديا ​​كومنز.',
 			hideWhenMultiple: true
 		}
 	];
@@ -1100,13 +1102,13 @@
 				format: 'json'
 			};
 
-			const statusIndicator = new Morebits.Status('Building deletion summary');
-			const api = new Morebits.wiki.Api('Parsing deletion template', query, ((apiobj) => {
+			const statusIndicator = new Morebits.Status('جارٍ إنشاء ملخص الحذف');
+			const api = new Morebits.wiki.Api('تحليل قالب الحذف', query, ((apiobj) => {
 				const reason = decodeURIComponent($(apiobj.getResponse().parse.text).find('#delete-reason').text()).replace(/\+/g, ' ');
 				if (!reason) {
-					statusIndicator.warn('Unable to generate summary from deletion template');
+					statusIndicator.warn('تعذر إنشاء ملخص من قالب الحذف');
 				} else {
-					statusIndicator.info('complete');
+					statusIndicator.info('اكتمل');
 				}
 				callback(reason);
 			}), statusIndicator);
@@ -1119,27 +1121,27 @@
 
 			// disallow notifying yourself
 			if (initialContrib === mw.config.get('wgUserName')) {
-				Morebits.Status.warn('You (' + initialContrib + ') created this page; skipping user notification');
+				Morebits.Status.warn('أنت (' + initialContrib + ') أنشأت هذه الصفحة. تخطي إشعار المستخدم');
 				initialContrib = null;
 
 				// don't notify users when their user talk page is nominated/deleted
 			} else if (initialContrib === mw.config.get('wgTitle') && mw.config.get('wgNamespaceNumber') === 3) {
-				Morebits.Status.warn('Notifying initial contributor: this user created their own user talk page; skipping notification');
+				Morebits.Status.warn('إخطار المساهم الأولي: قام هذا المستخدم بإنشاء صفحة نقاش المستخدم الخاصة به. تخطي الإخطار');
 				initialContrib = null;
 
 				// quick hack to prevent excessive unwanted notifications, per request. Should actually be configurable on recipient page...
 			} else if ((initialContrib === 'Cyberbot I' || initialContrib === 'SoxBot') && params.normalizeds[0] === 'f2') {
-				Morebits.Status.warn('Notifying initial contributor: page created procedurally by bot; skipping notification');
+				Morebits.Status.warn('إخطار المساهم الأولي: تم إنشاء الصفحة إجرائيًا بواسطة الروبوت. تخطي الإخطار');
 				initialContrib = null;
 
 				// Check for already existing tags
-			} else if (Twinkle.speedy.hasCSD && params.warnUser && !confirm('The page is has a deletion-related tag, and thus the creator has likely been notified.  Do you want to notify them for this deletion as well?')) {
-				Morebits.Status.info('Notifying initial contributor', 'canceled by user; skipping notification.');
+			} else if (Twinkle.speedy.hasCSD && params.warnUser && !confirm('تحتوي الصفحة على علامة متعلقة بالحذف، وبالتالي من المحتمل أن يكون منشئها قد تم إخطاره. هل تريد إخطارهم بهذا الحذف أيضًا؟')) {
+				Morebits.Status.info('إخطار المساهم الأولي', 'تم إلغاؤها من قبل المستخدم. تخطي الإخطار.');
 				initialContrib = null;
 			}
 
 			if (initialContrib) {
-				const usertalkpage = new Morebits.wiki.Page('User talk:' + initialContrib, 'Notifying initial contributor (' + initialContrib + ')');
+				const usertalkpage = new Morebits.wiki.Page('User talk:' + initialContrib, 'إخطار المساهم الأولي (' + initialContrib + ')');
 				let notifytext, i, editsummary;
 
 				// special cases: "db" and "db-multiple"
@@ -1168,11 +1170,11 @@
 				}
 				notifytext += (params.welcomeuser ? '' : '|nowelcome=yes') + '}} ~~~~';
 
-				editsummary = 'Notification: speedy deletion' + (params.warnUser ? '' : ' nomination');
+				editsummary = 'إخطار: حذف سريع' + (params.warnUser ? '' : ' ترشيح');
 				if (!params.normalizeds.includes('g10')) { // no article name in summary for G10 taggings
-					editsummary += ' of [[:' + Morebits.pageNameNorm + ']].';
+					editsummary += ' من [[:' + Morebits.pageNameNorm + ']].';
 				} else {
-					editsummary += ' of an attack page.';
+					editsummary += ' من صفحة هجوم.';
 				}
 
 				usertalkpage.setAppendText(notifytext);
@@ -1202,25 +1204,25 @@
 			main: function (params) {
 				let reason;
 				if (!params.normalizeds.length && params.normalizeds[0] === 'db') {
-					reason = prompt('Enter the deletion summary to use, which will be entered into the deletion log:', '');
+					reason = prompt('أدخل ملخص الحذف المراد استخدامه، والذي سيتم إدخاله في سجل الحذف:', '');
 					Twinkle.speedy.callbacks.sysop.deletePage(reason, params);
 				} else {
 					const code = Twinkle.speedy.callbacks.getTemplateCodeAndParams(params)[0];
 					Twinkle.speedy.callbacks.parseWikitext(code, (reason) => {
 						if (params.promptForSummary) {
-							reason = prompt('Enter the deletion summary to use, or press OK to accept the automatically generated one.', reason);
+							reason = prompt('أدخل ملخص الحذف المراد استخدامه، أو اضغط على "موافق" لقبول الملخص الذي تم إنشاؤه تلقائيًا.', reason);
 						}
 						Twinkle.speedy.callbacks.sysop.deletePage(reason, params);
 					});
 				}
 			},
 			deletePage: function (reason, params) {
-				const thispage = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Deleting page');
+				const thispage = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'حذف الصفحة');
 
 				if (reason === null) {
-					return Morebits.Status.error('Asking for reason', 'User cancelled');
+					return Morebits.Status.error('طلب السبب', "ألغى المستخدم العملية");
 				} else if (!reason || !reason.replace(/^\s*/, '').replace(/\s*$/, '')) {
-					return Morebits.Status.error('Asking for reason', 'The "reason" for deleting was not provided, or Twinkle was unable to compute it. Aborting.');
+					return Morebits.Status.error('طلب السبب', 'لم يُقدم "سبب" الحذف، أو لم يتمكن توينكل من حسابه. أُلغي الطلب.');
 				}
 
 				const deleteMain = function (callback) {
@@ -1228,7 +1230,7 @@
 					thispage.setChangeTags(Twinkle.changeTags);
 					thispage.setWatchlist(params.watch);
 					thispage.deletePage(() => {
-						thispage.getStatusElement().info('done');
+						thispage.getStatusElement().info('تم');
 						typeof callback === 'function' && callback();
 						Twinkle.speedy.callbacks.sysop.deleteTalk(params);
 					});
@@ -1252,8 +1254,8 @@
 				if (params.deleteTalkPage &&
 					params.normalized !== 'f8' &&
 					!document.getElementById('ca-talk').classList.contains('new')) {
-					const talkpage = new Morebits.wiki.Page(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceNumber') + 1] + ':' + mw.config.get('wgTitle'), 'Deleting talk page');
-					talkpage.setEditSummary('[[WP:CSD#G8|G8]]: Talk page of deleted page [[' + Morebits.pageNameNorm + ']]');
+					const talkpage = new Morebits.wiki.Page(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceNumber') + 1] + ':' + mw.config.get('wgTitle'), 'حذف صفحة النقاش');
+					talkpage.setEditSummary('[[WP:CSD#G8|G8]]: صفحة نقاش الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
 					talkpage.setChangeTags(Twinkle.changeTags);
 					talkpage.deletePage();
 					// this is ugly, but because of the architecture of wiki.api, it is needed
@@ -1275,8 +1277,8 @@
 						rdlimit: 'max', // 500 is max for normal users, 5000 for bots and sysops
 						format: 'json'
 					};
-					const wikipedia_api = new Morebits.wiki.Api('getting list of redirects...', query, Twinkle.speedy.callbacks.sysop.deleteRedirectsMain,
-						new Morebits.Status('Deleting redirects'));
+					const wikipedia_api = new Morebits.wiki.Api('جارٍ الحصول على قائمة عمليات إعادة التوجيه ...', query, Twinkle.speedy.callbacks.sysop.deleteRedirectsMain,
+						new Morebits.Status('حذف عمليات إعادة التوجيه'));
 					wikipedia_api.params = params;
 					wikipedia_api.post();
 				}
@@ -1286,32 +1288,32 @@
 				if (mw.config.get('wgNamespaceNumber') === 6 && params.normalized !== 'f8') {
 					$link = $('<a>', {
 						href: '#',
-						text: 'click here to go to the Unlink tool',
+						text: 'انقر هنا للانتقال إلى أداة إلغاء الارتباط',
 						css: { fontSize: '130%', fontWeight: 'bold' },
 						click: function () {
 							Morebits.wiki.actionCompleted.redirect = null;
 							Twinkle.speedy.dialog.close();
-							Twinkle.unlink.callback('Removing usages of and/or links to deleted file ' + Morebits.pageNameNorm);
+							Twinkle.unlink.callback('إزالة استخدامات و / أو روابط للملف المحذوف ' + Morebits.pageNameNorm);
 						}
 					});
 					$bigtext = $('<span>', {
-						text: 'To orphan backlinks and remove instances of file usage',
+						text: 'لعزل الروابط الخلفية وإزالة مثيلات استخدام الملف',
 						css: { fontSize: '130%', fontWeight: 'bold' }
 					});
 					Morebits.Status.info($bigtext[0], $link[0]);
 				} else if (params.normalized !== 'f8') {
 					$link = $('<a>', {
 						href: '#',
-						text: 'click here to go to the Unlink tool',
+						text: 'انقر هنا للانتقال إلى أداة إلغاء الارتباط',
 						css: { fontSize: '130%', fontWeight: 'bold' },
 						click: function () {
 							Morebits.wiki.actionCompleted.redirect = null;
 							Twinkle.speedy.dialog.close();
-							Twinkle.unlink.callback('Removing links to deleted page ' + Morebits.pageNameNorm);
+							Twinkle.unlink.callback('إزالة الروابط إلى الصفحة المحذوفة ' + Morebits.pageNameNorm);
 						}
 					});
 					$bigtext = $('<span>', {
-						text: 'To orphan backlinks',
+						text: 'لعزل الروابط الخلفية',
 						css: { fontSize: '130%', fontWeight: 'bold' }
 					});
 					Morebits.Status.info($bigtext[0], $link[0]);
@@ -1324,11 +1326,11 @@
 				const statusIndicator = apiobj.statelem;
 
 				if (!total) {
-					statusIndicator.status('no redirects found');
+					statusIndicator.status('لم يُعثر على عمليات إعادة توجيه');
 					return;
 				}
 
-				statusIndicator.status('0%');
+				statusIndicator.status('0٪');
 
 				let current = 0;
 				const onsuccess = function (apiobjInner) {
@@ -1336,7 +1338,7 @@
 					statusIndicator.update(now);
 					apiobjInner.statelem.unlink();
 					if (current >= total) {
-						statusIndicator.info(now + ' (completed)');
+						statusIndicator.info(now + ' (اكتمل)');
 						Morebits.wiki.removeCheckpoint();
 					}
 				};
@@ -1345,8 +1347,8 @@
 
 				snapshot.forEach((value) => {
 					const title = value.title;
-					const page = new Morebits.wiki.Page(title, 'Deleting redirect "' + title + '"');
-					page.setEditSummary('[[WP:CSD#G8|G8]]: Redirect to deleted page [[' + Morebits.pageNameNorm + ']]');
+					const page = new Morebits.wiki.Page(title, 'حذف إعادة التوجيه "' + title + '"');
+					page.setEditSummary('[[WP:CSD#G8|G8]]: إعادة توجيه إلى الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
 					page.setChangeTags(Twinkle.changeTags);
 					page.deletePage(onsuccess);
 				});
@@ -1358,7 +1360,7 @@
 				const statelem = pageobj.getStatusElement();
 
 				if (!pageobj.exists()) {
-					statelem.error("It seems that the page doesn't exist; perhaps it has already been deleted");
+					statelem.error("يبدو أن الصفحة غير موجودة. ربما تم حذفها بالفعل");
 					return;
 				}
 
@@ -1379,17 +1381,17 @@
 				if (pageobj.canEdit() && ['wikitext', 'Scribunto', 'javascript', 'css', 'sanitized-css'].includes(pageobj.getContentModel()) && mw.config.get('wgNamespaceNumber') !== 710 /* TimedText */) {
 					let text = pageobj.getPageText();
 
-					statelem.status('Checking for tags on the page...');
+					statelem.status('جارٍ التحقق من وجود علامات على الصفحة...');
 
 					// check for existing deletion tags
 					const tag = /(?:\{\{\s*(db|delete|db-.*?|speedy deletion-.*?)(?:\s*\||\s*\}\}))/.exec(text);
 					// This won't make use of the db-multiple template but it probably should
-					if (tag && !confirm('The page already has the CSD-related template {{' + tag[1] + '}} on it.  Do you want to add another CSD template?')) {
+					if (tag && !confirm('تحتوي الصفحة بالفعل على القالب المرتبط بـ CSD {{' + tag[1] + '}}. هل تريد إضافة قالب CSD آخر؟')) {
 						return;
 					}
 
 					const xfd = /\{\{((?:article for deletion|proposed deletion|prod blp|template for discussion)\/dated|[cfm]fd\b)/i.exec(text) || /#invoke:(RfD)/.exec(text);
-					if (xfd && !confirm('The deletion-related template {{' + xfd[1] + '}} was found on the page. Do you still want to add a CSD template?')) {
+					if (xfd && !confirm('عُثر على القالب المتعلق بالحذف {{' + xfd[1] + '}} على الصفحة. هل ما زلت تريد إضافة قالب CSD؟')) {
 						return;
 					}
 
@@ -1434,16 +1436,16 @@
 					// Generate edit summary for edit
 					let editsummary;
 					if (params.normalizeds.length > 1) {
-						editsummary = 'Requesting speedy deletion (';
+						editsummary = 'طلب حذف سريع (';
 						$.each(params.normalizeds, (index, norm) => {
 							editsummary += '[[WP:CSD#' + norm.toUpperCase() + '|CSD ' + norm.toUpperCase() + ']], ';
 						});
 						editsummary = editsummary.substr(0, editsummary.length - 2); // remove trailing comma
 						editsummary += ').';
 					} else if (params.normalizeds[0] === 'db') {
-						editsummary = 'Requesting [[WP:CSD|speedy deletion]] with rationale "' + params.templateParams[0]['1'] + '".';
+						editsummary = 'طلب [[WP:CSD|حذف سريع]] مع الأساس المنطقي "' + params.templateParams[0]['1'] + '".';
 					} else {
-						editsummary = 'Requesting speedy deletion ([[WP:CSD#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']]).';
+						editsummary = 'طلب حذف سريع ([[WP:CSD#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']]).';
 					}
 
 					// Blank attack pages
@@ -1466,11 +1468,11 @@
 							code += '\n{{salt}}';
 						}
 
-						pageobj.getStatusElement().warn('Unable to edit page, placing tag on talk page');
+						pageobj.getStatusElement().warn('تعذر تحرير الصفحة، ووضع العلامة على صفحة النقاش');
 
-						const talk_page = new Morebits.wiki.Page(talkName, 'Automatically placing tag on talk page');
-						talk_page.setNewSectionTitle(pageobj.getPageName() + ' nominated for CSD, request deletion');
-						talk_page.setNewSectionText(code + '\n\nI was unable to tag ' + pageobj.getPageName() + ' so please delete it. ~~~~');
+						const talk_page = new Morebits.wiki.Page(talkName, 'وضع العلامة تلقائيًا على صفحة النقاش');
+						talk_page.setNewSectionTitle(pageobj.getPageName() + ' تم ترشيحه لـ CSD ، طلب حذف');
+						talk_page.setNewSectionText(code + '\n\nلم أتمكن من وضع علامة على ' + pageobj.getPageName() + ' لذا يرجى حذفها. ~~~~');
 						talk_page.setCreateOption('recreate');
 						talk_page.setFollowRedirect(true);
 						talk_page.setWatchlist(params.watch);
@@ -1478,7 +1480,7 @@
 						talk_page.setCallbackParameters(params);
 						talk_page.newSection(Twinkle.speedy.callbacks.user.tagComplete);
 					} else {
-						pageobj.getStatusElement().error('Page cannot be edited and no other location to place a speedy deletion request, aborting');
+						pageobj.getStatusElement().error('لا يمكن تحرير الصفحة ولا يوجد موقع آخر لتقديم طلب حذف سريع، أُلغي الطلب');
 					}
 				}
 			},
@@ -1500,10 +1502,10 @@
 			addToLog: function (params, initialContrib) {
 				const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 				usl.initialText =
-					"This is a log of all [[WP:CSD|speedy deletion]] nominations made by this user using [[WP:TW|Twinkle]]'s CSD module.\n\n" +
-					'If you no longer wish to keep this log, you can turn it off using the [[Wikipedia:Twinkle/Preferences|preferences panel]], and ' +
-					'nominate this page for speedy deletion under [[WP:CSD#U1|CSD U1]].' +
-					(Morebits.userIsSysop ? '\n\nThis log does not track outright speedy deletions made using Twinkle.' : '');
+					"هذا سجل لجميع ترشيحات [[WP:CSD|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+					'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، يمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، و' +
+					'ترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
+					(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام Twinkle.' : '');
 
 				const formatParamLog = function (normalize, csdparam, input) {
 					if ((normalize === 'G4' && csdparam === 'xfd') ||
@@ -1527,20 +1529,20 @@
 				let extraInfo = '';
 
 				// If a logged file is deleted but exists on commons, the wikilink will be blue, so provide a link to the log
-				const fileLogLink = mw.config.get('wgNamespaceNumber') === 6 ? ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} log])' : '';
+				const fileLogLink = mw.config.get('wgNamespaceNumber') === 6 ? ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} سجل])' : '';
 
-				let editsummary = 'Logging speedy deletion nomination';
+				let editsummary = 'تسجيل ترشيح الحذف السريع';
 				let appendText = '# [[:' + Morebits.pageNameNorm;
 
 				if (!params.normalizeds.includes('g10')) { // no article name in log for G10 taggings
 					appendText += ']]' + fileLogLink + ': ';
-					editsummary += ' of [[:' + Morebits.pageNameNorm + ']].';
+					editsummary += ' من [[:' + Morebits.pageNameNorm + ']].';
 				} else {
-					appendText += '|This]] attack page' + fileLogLink + ': ';
-					editsummary += ' of an attack page.';
+					appendText += '|هذه]] صفحة هجوم' + fileLogLink + ': ';
+					editsummary += ' من صفحة هجوم.';
 				}
 				if (params.normalizeds.length > 1) {
-					appendText += 'multiple criteria (';
+					appendText += 'معايير متعددة (';
 					$.each(params.normalizeds, (index, norm) => {
 						appendText += '[[WP:CSD#' + norm.toUpperCase() + '|' + norm.toUpperCase() + ']], ';
 					});
@@ -1574,13 +1576,13 @@
 				}
 
 				if (params.requestsalt) {
-					appendText += '; requested creation protection ([[WP:SALT|salting]])';
+					appendText += '; طلب حماية الإنشاء ([[WP:SALT|salting]])';
 				}
 				if (extraInfo) {
-					appendText += '; additional information:' + extraInfo;
+					appendText += '; معلومات إضافية:' + extraInfo;
 				}
 				if (initialContrib) {
-					appendText += '; notified {{user|1=' + initialContrib + '}}';
+					appendText += '; تم إخطار {{user|1=' + initialContrib + '}}';
 				}
 				appendText += ' ~~~~~\n';
 
@@ -1601,7 +1603,7 @@
 					if (form['csd.reason_1']) {
 						const dbrationale = form['csd.reason_1'].value;
 						if (!dbrationale || !dbrationale.trim()) {
-							alert('Custom rationale:  Please specify a rationale.');
+							alert('الأساس المنطقي المخصص: الرجاء تحديد أساس منطقي.');
 							parameters = null;
 							return false;
 						}
@@ -1614,7 +1616,7 @@
 						const u1rationale = form['csd.userreq_rationale'].value;
 						if (mw.config.get('wgNamespaceNumber') === 3 && !(/\//).test(mw.config.get('wgTitle')) &&
 							(!u1rationale || !u1rationale.trim())) {
-							alert('CSD U1:  Please specify a rationale when nominating user talk pages.');
+							alert('CSD U1: الرجاء تحديد أساس منطقي عند ترشيح صفحات نقاش المستخدم.');
 							parameters = null;
 							return false;
 						}
@@ -1642,12 +1644,12 @@
 						const movepage = form['csd.move_page'].value,
 							movereason = form['csd.move_reason'].value;
 						if (!movepage || !movepage.trim()) {
-							alert('CSD G6 (move):  Please specify the page to be moved here.');
+							alert('CSD G6 (نقل): الرجاء تحديد الصفحة المراد نقلها هنا.');
 							parameters = null;
 							return false;
 						}
 						if (!movereason || !movereason.trim()) {
-							alert('CSD G6 (move):  Please specify the reason for the move.');
+							alert('CSD G6 (نقل): الرجاء تحديد سبب النقل.');
 							parameters = null;
 							return false;
 						}
@@ -1669,7 +1671,7 @@
 					if (form['csd.draft_page']) {
 						const draftpage = form['csd.draft_page'].value;
 						if (!draftpage || !draftpage.trim()) {
-							alert('CSD G6 (AfC move):  Please specify the draft to be moved here.');
+							alert('CSD G6 (نقل AfC): الرجاء تحديد المسودة المراد نقلها هنا.');
 							parameters = null;
 							return false;
 						}
@@ -1681,7 +1683,7 @@
 					if (form['csd.copypaste_sourcepage']) {
 						const copypaste = form['csd.copypaste_sourcepage'].value;
 						if (!copypaste || !copypaste.trim()) {
-							alert('CSD G6 (copypaste):  Please specify the source page name.');
+							alert('CSD G6 (نسخ ولصق): الرجاء تحديد اسم الصفحة المصدر.');
 							parameters = null;
 							return false;
 						}
@@ -1732,7 +1734,7 @@
 					if (form['csd.redundantimage_filename']) {
 						const redimage = form['csd.redundantimage_filename'].value;
 						if (!redimage || !redimage.trim()) {
-							alert('CSD F1:  Please specify the filename of the other file.');
+							alert('CSD F1: الرجاء تحديد اسم ملف الملف الآخر.');
 							parameters = null;
 							return false;
 						}
@@ -1760,7 +1762,7 @@
 						const f9url = form['csd.imgcopyvio_url'].value;
 						const f9rationale = form['csd.imgcopyvio_rationale'].value;
 						if ((!f9url || !f9url.trim()) && (!f9rationale || !f9rationale.trim())) {
-							alert('CSD F9: You must enter a url or reason (or both) when nominating a file under F9.');
+							alert('CSD F9: يجب عليك إدخال عنوان url أو سبب (أو كليهما) عند ترشيح ملف بموجب F9.');
 							parameters = null;
 							return false;
 						}
@@ -1777,7 +1779,7 @@
 					if (form['csd.foreign_source']) {
 						const foreignlink = form['csd.foreign_source'].value;
 						if (!foreignlink || !foreignlink.trim()) {
-							alert('CSD A2:  Please specify an interwiki link to the article of which this is a copy.');
+							alert('CSD A2: الرجاء تحديد ارتباط إنترويكي بالمقال الذي هذه نسخة منه.');
 							parameters = null;
 							return false;
 						}
@@ -1789,7 +1791,7 @@
 					if (form['csd.a10_article']) {
 						const duptitle = form['csd.a10_article'].value;
 						if (!duptitle || !duptitle.trim()) {
-							alert('CSD A10:  Please specify the name of the article which is duplicated.');
+							alert('CSD A10: الرجاء تحديد اسم المقال المكرر.');
 							parameters = null;
 							return false;
 						}
@@ -1866,7 +1868,7 @@
 	Twinkle.speedy.resolveCsdValues = function twinklespeedyResolveCsdValues(e) {
 		const values = (e.target.form ? e.target.form : e.target).getChecked('csd');
 		if (values.length === 0) {
-			alert('Please select a criterion!');
+			alert('الرجاء تحديد معيار!');
 			return null;
 		}
 		return values;
@@ -1975,9 +1977,9 @@
 		Morebits.Status.init(form);
 
 		Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-		Morebits.wiki.actionCompleted.notice = 'Tagging complete';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الوسم';
 
-		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'Tagging page');
+		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'وضع علامات على الصفحة');
 		wikipedia_page.setChangeTags(Twinkle.changeTags); // Here to apply to triage
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.load(Twinkle.speedy.callbacks.user.main);

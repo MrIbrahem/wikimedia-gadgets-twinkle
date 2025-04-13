@@ -15,17 +15,17 @@
 			const username = mw.config.get('wgRelevantUserName');
 			Twinkle.addPortletLink(() => {
 				Twinkle.shared.callback(username);
-			}, 'Shared IP', 'twinkle-shared', 'Shared IP tagging');
+			}, 'IP مشترك', 'twinkle-shared', 'وسم IP المشترك');
 		}
 	};
 
 	Twinkle.shared.callback = function twinklesharedCallback() {
 		const Window = new Morebits.SimpleWindow(600, 450);
-		Window.setTitle('Shared IP address tagging');
+		Window.setTitle('وسم عنوان IP المشترك');
 		Window.setScriptName('Twinkle');
-		Window.addFooterLink('Shared prefs', 'WP:TW/PREF#shared');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#shared');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('تفضيلات المشترك', 'WP:TW/PREF#shared');
+		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#shared');
+		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
 
 		const form = new Morebits.QuickForm(Twinkle.shared.callback.evaluate);
 
@@ -35,7 +35,7 @@
 			className: 'morebits-scrollbox'
 		}
 		);
-		div.append({ type: 'header', label: 'Shared IP address templates' });
+		div.append({ type: 'header', label: 'قوالب عناوين IP المشتركة' });
 		div.append({
 			type: 'radio', name: 'template', list: Twinkle.shared.standardList,
 			event: function (e) {
@@ -44,29 +44,29 @@
 			}
 		});
 
-		const org = form.append({ type: 'field', label: 'Fill in other details (optional) and click "Submit"' });
+		const org = form.append({ type: 'field', label: 'املأ التفاصيل الأخرى (اختياري) وانقر على "إرسال"' });
 		org.append({
 			type: 'input',
 			name: 'organization',
-			label: 'IP address owner/operator',
+			label: 'مالك/مشغل عنوان IP',
 			disabled: true,
-			tooltip: 'You can optionally enter the name of the organization that owns/operates the IP address.  You can use wikimarkup if necessary.'
+			tooltip: 'يمكنك اختياريًا إدخال اسم المؤسسة التي تمتلك/تشغل عنوان IP. يمكنك استخدام ترميز الويكي إذا لزم الأمر.'
 		}
 		);
 		org.append({
 			type: 'input',
 			name: 'host',
-			label: 'Host name (optional)',
+			label: 'اسم المضيف (اختياري)',
 			disabled: true,
-			tooltip: 'The host name (for example, proxy.example.com) can be optionally entered here and will be linked by the template.'
+			tooltip: 'يمكن إدخال اسم المضيف (على سبيل المثال، proxy.example.com) اختياريًا هنا وسيتم ربطه بواسطة القالب.'
 		}
 		);
 		org.append({
 			type: 'input',
 			name: 'contact',
-			label: 'Contact information (only if requested)',
+			label: 'معلومات الاتصال (فقط إذا طُلب ذلك)',
 			disabled: true,
-			tooltip: 'You can optionally enter some contact details for the organization.  Use this parameter only if the organization has specifically requested that it be added.  You can use wikimarkup if necessary.'
+			tooltip: 'يمكنك اختياريًا إدخال بعض تفاصيل الاتصال للمؤسسة. استخدم هذه المعلمة فقط إذا طلبت المنظمة تحديدًا إضافتها. يمكنك استخدام ترميز الويكي إذا لزم الأمر.'
 		}
 		);
 
@@ -75,7 +75,7 @@
 			Twinkle.shared.preview(result);
 		});
 		previewlink.style.cursor = 'pointer';
-		previewlink.textContent = 'Preview';
+		previewlink.textContent = 'معاينة';
 		form.append({ type: 'div', id: 'sharedpreview', label: [previewlink] });
 		form.append({ type: 'submit' });
 
@@ -86,48 +86,47 @@
 
 	Twinkle.shared.standardList = [
 		{
-			label: '{{Shared IP}}: standard shared IP address template',
+			label: '{{Shared IP}}: قالب عنوان IP المشترك القياسي',
 			value: 'Shared IP',
-			tooltip: 'IP user talk page template that shows helpful information to IP users and those wishing to warn, block or ban them'
+			tooltip: 'قالب صفحة نقاش مستخدم IP يعرض معلومات مفيدة لمستخدمي IP وأولئك الذين يرغبون في تحذيرهم أو حظرهم أو حظرهم'
 		},
 		{
-			label: '{{Shared IP edu}}: shared IP address template modified for educational institutions',
+			label: '{{Shared IP edu}}: قالب عنوان IP مشترك مُعدَّل للمؤسسات التعليمية',
 			value: 'Shared IP edu'
 		},
 		{
-			label: '{{Shared IP corp}}: shared IP address template modified for businesses',
+			label: '{{Shared IP corp}}: قالب عنوان IP مشترك مُعدَّل للشركات',
 			value: 'Shared IP corp'
 		},
 		{
-			label: '{{Shared IP public}}: shared IP address template modified for public terminals',
+			label: '{{Shared IP public}}: قالب عنوان IP مشترك مُعدَّل للمحطات العامة',
 			value: 'Shared IP public'
 		},
 		{
-			label: '{{Shared IP gov}}: shared IP address template modified for government agencies or facilities',
+			label: '{{Shared IP gov}}: قالب عنوان IP مشترك مُعدَّل للوكالات أو المرافق الحكومية',
 			value: 'Shared IP gov'
 		},
 		{
-			label: '{{Dynamic IP}}: shared IP address template modified for organizations with dynamic addressing',
+			label: '{{Dynamic IP}}: قالب عنوان IP مشترك مُعدَّل للمؤسسات ذات العنونة الديناميكية',
 			value: 'Dynamic IP'
 		},
 		{
-			label: '{{Static IP}}: shared IP address template modified for static IP addresses',
+			label: '{{Static IP}}: قالب عنوان IP مشترك مُعدَّل لعناوين IP الثابتة',
 			value: 'Static IP'
 		},
 		{
-			label: '{{ISP}}: shared IP address template modified for ISP organizations (specifically proxies)',
+			label: '{{ISP}}: قالب عنوان IP مشترك مُعدَّل لمؤسسات مزود خدمة الإنترنت (وكلاء على وجه التحديد)',
 			value: 'ISP'
 		},
 		{
-			label: '{{Mobile IP}}: shared IP address template modified for mobile phone companies and their customers',
+			label: '{{Mobile IP}}: قالب عنوان IP مشترك مُعدَّل لشركات الهاتف المحمول وعملائها',
 			value: 'Mobile IP'
 		},
 		{
-			label: '{{Whois}}: template for IP addresses in need of monitoring, but unknown whether static, dynamic or shared',
+			label: '{{Whois}}: قالب لعناوين IP التي تحتاج إلى مراقبة، ولكن من غير المعروف ما إذا كانت ثابتة أو ديناميكية أو مشتركة',
 			value: 'Whois'
 		}
 	];
-
 	Twinkle.shared.callback.change_shared = function twinklesharedCallbackChangeShared(e) {
 		e.target.form.contact.disabled = e.target.value !== 'Shared IP edu'; // only supported by {{Shared IP edu}}
 		e.target.form.organization.disabled = false;
@@ -143,7 +142,7 @@
 			for (let i = 0; i < Twinkle.shared.standardList.length; i++) {
 				const tagRe = new RegExp('(\\{\\{' + Twinkle.shared.standardList[i].value + '(\\||\\}\\}))', 'im');
 				if (tagRe.exec(pageText)) {
-					Morebits.Status.warn('Info', 'Found {{' + Twinkle.shared.standardList[i].value + '}} on the user\'s talk page already...aborting');
+					Morebits.Status.warn('معلومات', 'عُثر على {{' + Twinkle.shared.standardList[i].value + '}} في صفحة نقاش المستخدم بالفعل... أُلغي الطلب');
 					found = true;
 				}
 			}
@@ -152,10 +151,10 @@
 				return;
 			}
 
-			Morebits.Status.info('Info', 'Will add the shared IP address template to the top of the user\'s talk page.');
+			Morebits.Status.info('معلومات', 'سيتم إضافة قالب عنوان IP المشترك في الجزء العلوي من صفحة نقاش المستخدم.');
 			const text = Twinkle.shared.getTemplateWikitext(params);
 
-			const summaryText = 'Added {{[[Template:' + params.template + '|' + params.template + ']]}} template.';
+			const summaryText = 'تمت إضافة قالب {{[[Template:' + params.template + '|' + params.template + ']]}}.';
 			pageobj.setPageText(text + pageText);
 			pageobj.setEditSummary(summaryText);
 			pageobj.setChangeTags(Twinkle.changeTags);
@@ -169,8 +168,8 @@
 		const input = Morebits.QuickForm.getInputData(form);
 		if (input.template) {
 			const previewDialog = new Morebits.SimpleWindow(700, 500);
-			previewDialog.setTitle('Shared IP template preview');
-			previewDialog.setScriptName('Add Shared IP template');
+			previewDialog.setTitle('معاينة قالب IP المشترك');
+			previewDialog.setScriptName('إضافة قالب IP المشترك');
 			previewDialog.setModality(true);
 
 			const previewdiv = document.createElement('div');
@@ -183,7 +182,7 @@
 
 			const submit = document.createElement('input');
 			submit.setAttribute('type', 'submit');
-			submit.setAttribute('value', 'Close');
+			submit.setAttribute('value', 'إغلاق');
 			previewDialog.addContent(submit);
 
 			previewDialog.display();
@@ -209,11 +208,11 @@
 	Twinkle.shared.callback.evaluate = function twinklesharedCallbackEvaluate(e) {
 		const params = Morebits.QuickForm.getInputData(e.target);
 		if (!params.template) {
-			alert('You must select a shared IP address template to use!');
+			alert('يجب عليك تحديد قالب عنوان IP المشترك لاستخدامه!');
 			return;
 		}
 		if (!params.organization) {
-			alert('You must input an organization for the {{' + params.template + '}} template!');
+			alert('يجب عليك إدخال مؤسسة لقالب {{' + params.template + '}}!');
 			return;
 		}
 
@@ -221,9 +220,9 @@
 		Morebits.Status.init(e.target);
 
 		Morebits.wiki.actionCompleted.redirect = mw.config.get('wgPageName');
-		Morebits.wiki.actionCompleted.notice = 'Tagging complete, reloading talk page in a few seconds';
+		Morebits.wiki.actionCompleted.notice = 'اكتمل الوسم، وإعادة تحميل صفحة النقاش في بضع ثوان';
 
-		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'User talk page modification');
+		const wikipedia_page = new Morebits.wiki.Page(mw.config.get('wgPageName'), 'تعديل صفحة نقاش المستخدم');
 		wikipedia_page.setFollowRedirect(true);
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.load(Twinkle.shared.callbacks.main);
