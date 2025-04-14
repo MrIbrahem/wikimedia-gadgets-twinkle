@@ -1517,7 +1517,7 @@
 
 		/**
 		 * Formats a "reason" (from a textarea) for inclusion in a userspace
-		 * log.  Replaces newlines with {{Pb}}, and adds an extra `#` before
+		 * log.  Replaces newlines with {{فاصل فقرة}}, and adds an extra `#` before
 		 * list items for proper formatting.
 		 *
 		 * @param {string} str
@@ -1526,7 +1526,7 @@
 		formatReasonForLog: function (str) {
 			return str
 				// handle line breaks, which otherwise break numbering
-				.replace(/\n+/g, '{{pb}}')
+				.replace(/\n+/g, '{{فاصل فقرة}}')
 				// put an extra # in front before bulleted or numbered list items
 				.replace(/^(#+)/mg, '#$1')
 				.replace(/^(\*+)/mg, '#$1');
