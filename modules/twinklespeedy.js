@@ -180,7 +180,7 @@
 					label: 'ضع علامة على حماية الإنشاء (salting) أيضًا',
 					value: 'salting',
 					name: 'salting',
-					tooltip: 'عند تحديده، ستكون علامة الحذف السريع مصحوبة بعلامة {{salt}} تطلب من المسؤول الذي يحذف تطبيق حماية الإنشاء. حدد فقط ما إذا كانت هذه الصفحة قد أعيد إنشاؤها بشكل متكرر.',
+					tooltip: 'عند تحديده، ستكون علامة الحذف السريع مصحوبة بعلامة {{Salt}} تطلب من المسؤول الذي يحذف تطبيق حماية الإنشاء. حدد فقط ما إذا كانت هذه الصفحة قد أعيد إنشاؤها بشكل متكرر.',
 					event: function (event) {
 						event.stopPropagation();
 					}
@@ -473,9 +473,9 @@
 
 	Twinkle.speedy.customRationale = [
 		{
-			label: 'الأساس المنطقي المخصص' + (Morebits.userIsSysop ? ' (سبب الحذف المخصص)' : ' باستخدام قالب {{db}}'),
+			label: 'الأساس المنطقي المخصص' + (Morebits.userIsSysop ? ' (سبب الحذف المخصص)' : ' باستخدام قالب {{شطب}}'),
 			value: 'reason',
-			tooltip: '{{db}} هي اختصار لعبارة "حذف بسبب". يجب أن يظل أحد معايير الحذف الأخرى على الأقل ساريًا على الصفحة، ويجب عليك ذكر ذلك في الأساس المنطقي الخاص بك. هذا ليس "حلًا شاملاً" عندما لا يمكنك العثور على أي معايير تناسب.',
+			tooltip: '{{شطب}} هي اختصار لعبارة "حذف بسبب". يجب أن يظل أحد معايير الحذف الأخرى على الأقل ساريًا على الصفحة، ويجب عليك ذكر ذلك في الأساس المنطقي الخاص بك. هذا ليس "حلًا شاملاً" عندما لا يمكنك العثور على أي معايير تناسب.',
 			subgroup: {
 				name: 'reason_1',
 				type: 'input',
@@ -555,7 +555,7 @@
 		{
 			label: 'F8: الملف متاح كنسخة متطابقة أو ذات دقة أعلى على ويكيميديا ​​كومنز',
 			value: 'commons',
-			tooltip: 'بشرط استيفاء الشروط التالية: 1: تنسيق الملف لكلا الصورتين هو نفسه. 2: ترخيص الملف وحالة المصدر يتجاوزان أي شك معقول، والترخيص مقبول بلا شك في Commons. 3: جميع المعلومات الموجودة في صفحة وصف الملف موجودة في صفحة وصف ملف Commons. يتضمن ذلك سجل التحميل الكامل مع روابط لصفحات المستخدم المحلي للقائم بالتحميل. 4: الملف غير محمي، ولا تحتوي صفحة وصف الملف على طلب بعدم نقله إلى Commons. 5: إذا كان الملف متاحًا في Commons باسم مختلف عن الاسم المحلي، فيجب تحديث جميع المراجع المحلية إلى الملف للإشارة إلى العنوان المستخدم في Commons. 6: بالنسبة لملفات {{c-uploaded}}: يمكن حذفها بسرعة بمجرد إيقافها عن الصفحة الرئيسية',
+			tooltip: 'بشرط استيفاء الشروط التالية: 1: تنسيق الملف لكلا الصورتين هو نفسه. 2: ترخيص الملف وحالة المصدر يتجاوزان أي شك معقول، والترخيص مقبول بلا شك في Commons. 3: جميع المعلومات الموجودة في صفحة وصف الملف موجودة في صفحة وصف ملف Commons. يتضمن ذلك سجل التحميل الكامل مع روابط لصفحات المستخدم المحلي للقائم بالتحميل. 4: الملف غير محمي، ولا تحتوي صفحة وصف الملف على طلب بعدم نقله إلى Commons. 5: إذا كان الملف متاحًا في Commons باسم مختلف عن الاسم المحلي، فيجب تحديث جميع المراجع المحلية إلى الملف للإشارة إلى العنوان المستخدم في Commons. 6: بالنسبة لملفات {{صورة مهمة}}: يمكن حذفها بسرعة بمجرد إيقافها عن الصفحة الرئيسية',
 			subgroup: {
 				name: 'commons_filename',
 				type: 'input',
@@ -607,7 +607,7 @@
 		{
 			label: 'A2: مقالات بلغة أجنبية موجودة في مشروع ويكيميديا ​​آخر',
 			value: 'foreign',
-			tooltip: 'إذا كانت المقالة المعنية غير موجودة في مشروع آخر، فيجب استخدام القالب {{notenglish}} بدلاً من ذلك. يجب إدراج جميع المقالات بلغة غير الإنجليزية التي لا تفي بهذه المعايير (ولا تفي بأي معايير أخرى للحذف السريع) في صفحات تحتاج إلى ترجمة (PNT) للمراجعة والترجمة المحتملة',
+			tooltip: 'إذا كانت المقالة المعنية غير موجودة في مشروع آخر، فيجب استخدام القالب {{ترجمة غير مكتملة}} بدلاً من ذلك. يجب إدراج جميع المقالات بلغة غير الإنجليزية التي لا تفي بهذه المعايير (ولا تفي بأي معايير أخرى للحذف السريع) في صفحات تحتاج إلى ترجمة (PNT) للمراجعة والترجمة المحتملة',
 			subgroup: {
 				name: 'foreign_source',
 				type: 'input',
@@ -1065,7 +1065,7 @@
 					code += '|' + norm.toUpperCase();
 					parameters = params.templateParams[index] || [];
 					for (const i in parameters) {
-						if (typeof parameters[i] === 'string' && !parseInt(i, 10)) { // skip numeric parameters - {{db-multiple}} doesn't understand them
+						if (typeof parameters[i] === 'string' && !parseInt(i, 10)) { // skip numeric parameters - {{Db-multiple}} doesn't understand them
 							code += '|' + i + '=' + parameters[i];
 						}
 					}
@@ -1372,7 +1372,7 @@
 				let code = buildData[0];
 				params.utparams = buildData[1];
 
-				// Set the correct value for |ts= parameter in {{db-g13}}
+				// Set the correct value for |ts= parameter in {{Db-g13}}
 				if (params.normalizeds.includes('g13')) {
 					code = code.replace('$TIMESTAMP', pageobj.getLastEditTime());
 				}
@@ -1415,9 +1415,9 @@
 
 					if (params.requestsalt) {
 						if (!params.normalizeds.includes('g10')) {
-							code += '\n{{salt}}';
+							code += '\n{{Salt}}';
 						} else {
-							code = '{{salt}}\n' + code;
+							code = '{{Salt}}\n' + code;
 						}
 					}
 
@@ -1465,7 +1465,7 @@
 					const talkName = new mw.Title(pageobj.getPageName()).getTalkPage().toText();
 					if (talkName !== pageobj.getPageName()) {
 						if (params.requestsalt) {
-							code += '\n{{salt}}';
+							code += '\n{{Salt}}';
 						}
 
 						pageobj.getStatusElement().warn('تعذر تحرير الصفحة، ووضع العلامة على صفحة النقاش');
@@ -1502,7 +1502,7 @@
 			addToLog: function (params, initialContrib) {
 				const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 				usl.initialText =
-					"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+					"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[ويكيبيديا:لمح البصر|Twinkle]].\n\n" +
 					'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، يمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، و' +
 					'ترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
 					(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام لمح البصر.' : '');
@@ -1549,9 +1549,9 @@
 					appendText = appendText.substr(0, appendText.length - 2); // remove trailing comma
 					appendText += ')';
 				} else if (params.normalizeds[0] === 'db') {
-					appendText += '{{tl|db-reason}}';
+					appendText += '{{وصلة قالب|شطب}}';
 				} else {
-					appendText += '[[ويكيبيديا:معايير الحذف السريع#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']] ({{tl|db-' + params.values[0] + '}})';
+					appendText += '[[ويكيبيديا:معايير الحذف السريع#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']] ({{وصلة قالب|db-' + params.values[0] + '}})';
 				}
 
 				// If params is "empty" it will still be full of empty arrays, but ask anyway
@@ -1576,13 +1576,13 @@
 				}
 
 				if (params.requestsalt) {
-					appendText += '; طلب حماية الإنشاء ([[WP:SALT|salting]])';
+					appendText += '; طلب حماية الإنشاء ([[ويكيبيديا:سياسة الحماية|salting]])';
 				}
 				if (extraInfo) {
 					appendText += '; معلومات إضافية:' + extraInfo;
 				}
 				if (initialContrib) {
-					appendText += '; تم إخطار {{user|1=' + initialContrib + '}}';
+					appendText += '; تم إخطار {{مستخدم|1=' + initialContrib + '}}';
 				}
 				appendText += ' ~~~~~\n';
 
