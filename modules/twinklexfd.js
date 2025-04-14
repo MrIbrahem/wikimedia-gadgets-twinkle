@@ -471,7 +471,7 @@
 							name: 'noinclude',
 							tooltip: 'سوف يلف علامة الحذف في علامات <noinclude> ، بحيث لا يتم استبدالها مع القالب.',
 							disabled: templateOrModule === 'module',
-							checked: !!$('.box-Subst_only').length // Default to checked if page carries {{subst only}}
+							checked: !!$('.box-Subst_only').length // Default to checked if page carries {{ينسخ دائما}}
 						}
 					]
 				});
@@ -987,7 +987,7 @@
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('xfdLogPageName'));// , 'Adding entry to userspace log');
 
 			usl.initialText =
-				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[ويكيبيديا:لمح البصر|Twinkle]].\n\n" +
 				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
 				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام لمح البصر.' : '');
 
@@ -1021,7 +1021,7 @@
 					break;
 				case 'mfd':
 					if (params.notifyuserspace && params.userspaceOwner && params.userspaceOwner !== initialContrib) {
-						appendText += '; تم إعلام {{user|1=' + params.userspaceOwner + '}}';
+						appendText += '; تم إعلام {{مستخدم|1=' + params.userspaceOwner + '}}';
 					}
 					break;
 				case 'cfd':
@@ -1060,7 +1060,7 @@
 			}
 
 			if (initialContrib && params.notifycreator) {
-				appendText += '; تم إعلام {{user|1=' + initialContrib + '}}';
+				appendText += '; تم إعلام {{مستخدم|1=' + initialContrib + '}}';
 			}
 			appendText += ' ~~~~~';
 			if (params.reason) {
@@ -1647,7 +1647,7 @@
 				params.logpage = 'Wikipedia:Files for discussion/' + date;
 				params.discussionpage = params.logpage + '#' + Morebits.pageNameNorm;
 
-				params.tagText = '{{ffd|log=' + date + '|help=off}}\n';
+				params.tagText = '{{ملف للنقاش|log=' + date + '|help=off}}\n';
 				if (pageobj.canEdit()) {
 					text = text.replace(/\{\{(mtc|(copy |move )?to ?commons|move to wikimedia commons|copy to wikimedia commons)[^}]*\}\}/gi, '');
 
