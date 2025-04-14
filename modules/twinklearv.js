@@ -757,9 +757,9 @@
 
 		if (input.page !== '') {
 			// Allow links to redirects, files, and categories
-			text = 'في {{No redirect|:' + input.page + '}}';
+			text = 'في {{لا تحويل|:' + input.page + '}}';
 			if (input.badid !== '') {
-				text += ' ({{diff|' + input.page + '|' + input.badid + '|' + input.goodid + '|diff}})';
+				text += ' ({{Diff|' + input.page + '|' + input.badid + '|' + input.goodid + '|diff}})';
 			}
 			text += ':';
 		}
@@ -789,7 +789,7 @@
 	};
 
 	Twinkle.arv.callback.buildAivReport = function (input) {
-		return '\n*{{vandal|' + (/=/.test(input.uid) ? '1=' : '') + input.uid + '}} &ndash; ' + Twinkle.arv.callback.getAivReasonWikitext(input);
+		return '\n*{{وصلات مخرب|' + (/=/.test(input.uid) ? '1=' : '') + input.uid + '}} &ndash; ' + Twinkle.arv.callback.getAivReasonWikitext(input);
 	};
 
 	Twinkle.arv.callback.getUsernameReportWikitext = function (input) {
@@ -806,7 +806,7 @@
 			adjective = 'an';
 		}
 
-		let text = '*{{user-uaa|1=' + input.uid + '}} – ';
+		let text = '*{{مستخدم-أمف|1=' + input.uid + '}} – ';
 		if (input.arvtype.length) {
 			text += 'انتهاك لسياسة اسم المستخدم كاسم مستخدم ' + adjective + ' ' + input.arvtype + '. ';
 		}
@@ -924,7 +924,7 @@
 					const last = sub[0];
 					const first = sub.slice(-1)[0];
 					const label = 'تعديلات متتالية أُجريت من ' + new Morebits.Date(first.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(last.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)';
-					ret = '# {{diff|oldid=' + first.parentid + '|diff=' + last.revid + '|label=' + label + '}}\n';
+					ret = '# {{Diff|oldid=' + first.parentid + '|diff=' + last.revid + '|label=' + label + '}}\n';
 				}
 				ret += sub.reverse().map((v) => (sub.length >= 2 ? '#' : '') + '# {{diff2|' + v.revid + '|' + new Morebits.Date(v.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)}} ' + hasHiddenComment(v)).join('\n');
 				return ret;
@@ -935,7 +935,7 @@
 			if (params.free_resolves) {
 				const page = params.free_resolves;
 				if (page.compare) {
-					resolvetext += '\n#  {{diff|oldid=' + page.compare.fromrevid + '|diff=' + page.compare.torevid + '|label=تعديلات متتالية في ' + page.compare.totitle + '}}';
+					resolvetext += '\n#  {{Diff|oldid=' + page.compare.fromrevid + '|diff=' + page.compare.torevid + '|label=تعديلات متتالية في ' + page.compare.totitle + '}}';
 				} else if (page.revisions) {
 					const revCount = page.revisions.length;
 					let rev;
@@ -946,7 +946,7 @@
 						rev = page.revisions[0];
 						const revLatest = page.revisions[revCount - 1];
 						const label = 'تعديلات متتالية أُجريت من ' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(revLatest.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) في ' + page.title;
-						resolvetext += '\n# {{diff|oldid=' + rev.revid + '|diff=' + revLatest.revid + '|label=' + label + '}}\n';
+						resolvetext += '\n# {{Diff|oldid=' + rev.revid + '|diff=' + revLatest.revid + '|label=' + label + '}}\n';
 					}
 				}
 			}
