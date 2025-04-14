@@ -384,7 +384,7 @@
 					break;
 				case 'mail':
 					text = '==' + Twinkle.getPref('mailHeading') + '==\n' +
-						"{{You've got mail|subject=" + input.section + '|ts=~~~~~}}';
+						"{{لديك بريد|subject=" + input.section + '|ts=~~~~~}}';
 
 					if (input.message) {
 						text += '\n' + input.message + '  ~~~~';
@@ -394,12 +394,12 @@
 					break;
 				case 'see':
 					var heading = Twinkle.getPref('talkbackHeading');
-					text = '{{subst:Please see|location=' + input.page + (input.section ? '#' + input.section : '') +
+					text = '{{subst:دعوة|location=' + input.page + (input.section ? '#' + input.section : '') +
 						'|more=' + input.message + '|heading=' + heading + '}}';
 					break;
 				default: // talkback
 					text = '==' + Twinkle.getPref('talkbackHeading') + '==\n' +
-						'{{talkback|' + input.page + (input.section ? '|' + input.section : '') + '|ts=~~~~~}}';
+						'{{رد|' + input.page + (input.section ? '|' + input.section : '') + '|ts=~~~~~}}';
 
 					if (input.message) {
 						text += '\n' + input.message + ' ~~~~';
