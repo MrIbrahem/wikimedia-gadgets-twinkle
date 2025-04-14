@@ -219,18 +219,18 @@
 
 	Twinkle.talkback.noticeboards = {
 		an: {
-			label: "WP:AN (لوحة إعلانات المدراء)",
+			label: "WP:AN (إخطار الإداريين)",
 			text: '{{subst:AN-notice|thread=$SECTION}} ~~~~',
 			editSummary: 'إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين]]'
 		},
 		an3: {
-			label: "WP:AN3 (لوحة إعلانات المدراء/حرب التحرير)",
+			label: "WP:AN3 (إخطار الإداريين/حرب التحرير)",
 			text: '{{subst:An3-notice|$SECTION}} ~~~~',
 			editSummary: "إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين/استرجاعات ثلاثة]]"
 		},
 		ani: {
-			label: "WP:ANI (لوحة إعلانات المدراء/الحوادث)",
-			text: "== إشعار بمناقشة لوحة إعلانات المدراء/الحوادث ==\n" +
+			label: "WP:ANI (إخطار الإداريين/الحوادث)",
+			text: "== إشعار بمناقشة إخطار الإداريين/الحوادث ==\n" +
 				'{{subst:ANI-notice|thread=$SECTION}} ~~~~',
 			editSummary: 'إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين/Incidents]]',
 			defaultSelected: true
