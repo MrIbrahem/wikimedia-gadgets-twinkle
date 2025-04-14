@@ -38,7 +38,7 @@
 
 		const Window = new Morebits.SimpleWindow(800, 410);
 		Window.setTitle('الحذف المقترح (PROD)');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 
 		const form = new Morebits.QuickForm(Twinkle.prod.callback.evaluate);
 
@@ -89,7 +89,7 @@
 
 		Window.addFooterLink('تفضيلات PROD', 'WP:TW/PREF#prod');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#prod');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		form.append({ type: 'submit', label: 'اقتراح الحذف' });
 

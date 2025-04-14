@@ -60,7 +60,7 @@
 		dialog.addFooterLink('اختيار مستوى التحذير', 'WP:UWUL#Levels');
 		dialog.addFooterLink('تفضيلات التحذير', 'WP:TW/PREF#warn');
 		dialog.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#warn');
-		dialog.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.warn.callback.evaluate);
 		const main_select = form.append({
@@ -723,12 +723,12 @@
 				},
 				'uw-tempabuse': {
 					level1: {
-						label: 'استخدام غير لائق لقالب التحذير أو الحظر',
-						summary: 'ملاحظة عامة: استخدام غير لائق لقالب التحذير أو الحظر'
+						label: 'استخدام غير لائق لقالب التحذير أو المنع',
+						summary: 'ملاحظة عامة: استخدام غير لائق لقالب التحذير أو المنع'
 					},
 					level2: {
-						label: 'استخدام غير لائق لقالب التحذير أو الحظر',
-						summary: 'تحذير: استخدام غير لائق لقالب التحذير أو الحظر'
+						label: 'استخدام غير لائق لقالب التحذير أو المنع',
+						summary: 'تحذير: استخدام غير لائق لقالب التحذير أو المنع'
 					}
 				}
 			},
@@ -1026,8 +1026,8 @@
 				summary: 'إشعار: تقرير AIV سيئ'
 			},
 			'uw-articletodraft': {
-				label: 'تم نقل المقالة إلى مساحة المسودة',
-				summary: 'إشعار: تم نقل المقالة إلى مساحة المسودة',
+				label: 'تم نقل المقالة إلى نطاق المسودة',
+				summary: 'إشعار: تم نقل المقالة إلى نطاق المسودة',
 				hideReason: true
 			},
 			'uw-autobiography': {
@@ -1098,8 +1098,8 @@
 				summary: 'إشعار: استخدام غير صحيح لـ DISPLAYTITLE'
 			},
 			'uw-draftfirst': {
-				label: 'يجب على المستخدم الصياغة في مساحة المستخدم دون التعرض لخطر الحذف السريع',
-				summary: 'إشعار: ضع في اعتبارك صياغة مقالتك في [[Help:Userspace draft|مساحة المستخدم]]'
+				label: 'يجب على المستخدم الصياغة في نطاق المستخدم دون التعرض لخطر الحذف السريع',
+				summary: 'إشعار: ضع في اعتبارك صياغة مقالتك في [[Help:Userspace draft|نطاق المستخدم]]'
 			},
 			'uw-editsummary': {
 				label: 'مستخدم جديد لا يستخدم ملخص التعديل',
@@ -1219,8 +1219,8 @@
 				summary: 'إشعار: النسخ من مصادر مرخصة بشكل متوافق دون إسناد'
 			},
 			'uw-userspace draft finish': {
-				label: 'مسودة مساحة مستخدم قديمة',
-				summary: 'إشعار: مسودة مساحة مستخدم قديمة'
+				label: 'مسودة نطاق مستخدم قديمة',
+				summary: 'إشعار: مسودة نطاق مستخدم قديمة'
 			},
 			'uw-usertalk': {
 				label: 'إساءة استخدام صفحة نقاش المستخدم',
@@ -1527,7 +1527,7 @@
 				if (Twinkle.warn.talkpageObj) {
 					autolevelProc();
 				} else {
-					const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
+					const usertalk_page = new Morebits.wiki.Page('نقاش_المستخدم:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
 					usertalk_page.setFollowRedirect(true, false);
 					usertalk_page.load((pageobj) => {
 						Twinkle.warn.talkpageObj = pageobj; // Update talkpageObj
@@ -1711,13 +1711,13 @@
 			const templatetext = Twinkle.warn.callbacks.getWarningWikitext(templatename, linkedarticle,
 				input.reason, input.main_group === 'custom');
 
-			form.previewer.beginRender(templatetext, 'User_talk:' + mw.config.get('wgRelevantUserName')); // Force wikitext/correct username
+			form.previewer.beginRender(templatetext, 'نقاش_المستخدم:' + mw.config.get('wgRelevantUserName')); // Force wikitext/correct username
 		},
 		// Just a pass-through unless the autolevel option was selected
 		preview: function (form) {
 			if (form.main_group.value === 'autolevel') {
 				// Always get a new, updated talkpage for autolevel processing
-				const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
+				const usertalk_page = new Morebits.wiki.Page('نقاش_المستخدم:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
 				usertalk_page.setFollowRedirect(true, false);
 				// Will fail silently if the talk page is a cross-ns redirect,
 				// removal of the preview box handled when loading the menu
@@ -2020,7 +2020,7 @@
 	};
 
 	Twinkle.warn.callback.evaluate = function twinklewarnCallbackEvaluate(e) {
-		const userTalkPage = 'User_talk:' + mw.config.get('wgRelevantUserName');
+		const userTalkPage = 'نقاش_المستخدم:' + mw.config.get('wgRelevantUserName');
 
 		// reason, main_group, sub_group, article
 		const params = Morebits.QuickForm.getInputData(e.target);

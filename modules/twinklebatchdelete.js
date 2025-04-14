@@ -29,9 +29,9 @@
 		subpagesLoaded = false;
 		const Window = new Morebits.SimpleWindow(600, 400);
 		Window.setTitle('حذف دفعة');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#batchdelete');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchdelete.callback.evaluate);
 		form.append({
@@ -77,7 +77,7 @@
 											value: 'delete_subpage_redirects'
 										},
 										{
-											label: 'إلغاء ارتباط الروابط الخلفية لكل صفحة فرعية محذوفة (في نطاقات Main و Portal فقط)',
+											label: 'إلغاء ارتباط الصفحات المرتبطة لكل صفحة فرعية محذوفة (في نطاقات Main و Portal فقط)',
 											name: 'unlink_subpages',
 											value: 'unlink_subpages'
 										}
@@ -88,7 +88,7 @@
 					}
 				},
 				{
-					label: 'إلغاء ارتباط الروابط الخلفية لكل صفحة (في نطاقات Main و Portal فقط)',
+					label: 'إلغاء ارتباط الصفحات المرتبطة لكل صفحة (في نطاقات Main و Portal فقط)',
 					name: 'unlink_page',
 					value: 'unlink',
 					checked: false

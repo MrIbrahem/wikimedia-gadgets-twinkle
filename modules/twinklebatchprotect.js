@@ -22,10 +22,10 @@
 	Twinkle.batchprotect.callback = function twinklebatchprotectCallback() {
 		const Window = new Morebits.SimpleWindow(600, 400);
 		Window.setTitle('حماية دفعة');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#protect');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchprotect.callback.evaluate);
 		form.append({

@@ -23,11 +23,11 @@
 	Twinkle.protect.callback = function twinkleprotectCallback() {
 		const Window = new Morebits.SimpleWindow(620, 530);
 		Window.setTitle(Morebits.userIsSysop ? 'تطبيق أو طلب أو إضافة قالب حماية صفحة' : 'طلب أو إضافة قالب حماية صفحة');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('قوالب الحماية', 'Template:Protection templates');
 		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#protect');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.protect.callback.evaluate);
 		const actionfield = form.append({
@@ -798,7 +798,7 @@
 			edit: 'sysop',
 			move: 'sysop',
 			expiry: 'infinity',
-			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر]]'
+			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]'
 		},
 		'pp-template': {
 			edit: 'templateeditor',
@@ -867,7 +867,7 @@
 			edit: 'autoconfirmed',
 			move: 'autoconfirmed',
 			expiry: 'infinity',
-			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر]]',
+			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]',
 			template: 'pp-usertalk'
 		},
 		'pp-semi-template': { // removed for now
@@ -1315,7 +1315,7 @@
 						break;
 					case 'pp-usertalk':
 					case 'pp-semi-usertalk':
-						typereason = 'استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر';
+						typereason = 'استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع';
 						break;
 					case 'pp-semi-sock':
 					case 'pp-30-500-sock':

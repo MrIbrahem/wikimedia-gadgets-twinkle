@@ -31,13 +31,13 @@
 	Twinkle.arv.callback = function (uid, isIP) {
 		const Window = new Morebits.SimpleWindow(600, 500);
 		Window.setTitle('الإبلاغ المتقدم والتدقيق'); // Backronym
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('دليل AIV', 'WP:GAIV');
 		Window.addFooterLink('دليل UAA', 'WP:UAAI');
 		Window.addFooterLink('دليل SPI', 'Wikipedia:Sockpuppet investigations/SPI/Guide to filing cases');
 		Window.addFooterLink('تفضيلات ARV', 'WP:TW/PREF#arv');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#arv');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.arv.callback.evaluate);
 		const categories = form.append({
@@ -115,7 +115,7 @@
 				const block = blocklist[0];
 				let message = (isIP ? 'هذا الـ IP ' + (Morebits.ip.isRange(uid) ? 'نطاق' : 'عنوان') : 'هذا الحساب') + 'هو ' + (block.partial ? 'جزئياً' : 'محظور بالفعل');
 				// Start and end differ, range blocked
-				message += block.rangestart !== block.rangeend ? ' كجزء من حظر نطاق.' : '.';
+				message += block.rangestart !== block.rangeend ? ' كجزء من منع نطاق.' : '.';
 				if (block.partial) {
 					$('#twinkle-arv-blockwarning').css('color', 'black'); // Less severe
 				}
@@ -191,7 +191,7 @@
 							value: 'final'
 						},
 						{
-							label: 'تخريب بعد الإفراج الأخير (خلال يوم واحد) عن الحظر',
+							label: 'تخريب بعد الإفراج الأخير (خلال يوم واحد) عن المنع',
 							value: 'postblock'
 						},
 						{
@@ -227,7 +227,7 @@
 				work_area.append({
 					type: 'header',
 					label: 'نوع (أنواع) اسم المستخدم غير المناسب',
-					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل، تحظر أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا، تعتبر غير مناسبة.'
+					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل، تمنع أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا، تعتبر غير مناسبة.'
 				});
 				work_area.append({
 					type: 'checkbox',
@@ -743,7 +743,7 @@
 				case 'final':
 					return 'تخريب بعد التحذير النهائي';
 				case 'postblock':
-					return 'تخريب بعد الإفراج الأخير عن الحظر';
+					return 'تخريب بعد الإفراج الأخير عن المنع';
 				case 'vandalonly':
 					return 'تشير الإجراءات بوضوح إلى حساب تخريبي فقط';
 				case 'promoonly':

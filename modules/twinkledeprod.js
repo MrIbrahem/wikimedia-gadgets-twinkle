@@ -26,10 +26,10 @@
 	Twinkle.deprod.callback = function () {
 		const Window = new Morebits.SimpleWindow(800, 400);
 		Window.setTitle('تنظيف PROD');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('الحذف المقترح', 'WP:PROD');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#deprod');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(callback_commit);
 

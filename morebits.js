@@ -943,7 +943,7 @@
 		const tooltipButton = node.appendChild(document.createElement('span'));
 		tooltipButton.className = 'morebits-tooltipButton';
 		tooltipButton.title = data.tooltip; // Provides the content for jQuery UI
-		tooltipButton.appendChild(document.createTextNode(msg('tooltip-mark', '?')));
+		tooltipButton.appendChild(document.createTextNode(msg('tooltip-mark', '؟')));
 		$(tooltipButton).tooltip({
 			position: { my: 'left top', at: 'center bottom', collision: 'flipfit' },
 			// Deprecated in UI 1.12, but MW stuck on 1.9.2 indefinitely; see #398 and T71386
@@ -2789,7 +2789,7 @@
 				ctx.loadQuery.inprop += '|protection';
 			}
 
-			ctx.loadApi = new Morebits.wiki.api(msg('retrieving-page', 'جاري استرداد الصفحة...'), ctx.loadQuery, fnLoadSuccess, ctx.statusElement, ctx.onLoadFailure);
+			ctx.loadApi = new Morebits.wiki.api(msg('retrieving-page', 'إعادة تحميل الصفحة...'), ctx.loadQuery, fnLoadSuccess, ctx.statusElement, ctx.onLoadFailure);
 			ctx.loadApi.setParent(this);
 			ctx.loadApi.post();
 		};
@@ -3929,7 +3929,7 @@
 					}
 				}
 				// set revert edit summary
-				ctx.editSummary = '[[مساعدة:تراجع|تراجع]] إلى المراجعة ' + ctx.revertOldID + ' بواسطة ' + ctx.revertUser + ': ' + ctx.editSummary;
+				ctx.editSummary = '[[مساعدة:تراجع|تراجع]] إلى أخر نسخة ' + ctx.revertOldID + ' بواسطة ' + ctx.revertUser + ': ' + ctx.editSummary;
 			}
 
 			ctx.pageLoaded = true;
@@ -4039,7 +4039,7 @@
 				const link = document.createElement('a');
 				link.setAttribute('href', mw.util.getUrl(ctx.pageName));
 				link.appendChild(document.createTextNode(ctx.pageName));
-				ctx.statusElement.info(['completed (', link, ')']);
+				ctx.statusElement.info(['اكتمل (', link, ')']);
 				if (ctx.onSaveSuccess) {
 					ctx.onSaveSuccess(this); // invoke callback
 				}
@@ -4051,7 +4051,7 @@
 			if (response.edit.captcha) {
 				ctx.statusElement.error('لم تُحفظ الصفحة لأن خادم الويكي يطلب منك ملء الكابتشا.');
 			} else {
-				ctx.statusElement.error(msg('خطأ غير معروف تم تلقيه من API أثناء حفظ الصفحة'));
+				ctx.statusElement.error(msg('api-error-unknown', 'خطأ غير معروف تم تلقيه من API أثناء حفظ الصفحة'));
 			}
 
 			// force error to stay on the screen
@@ -5649,7 +5649,7 @@
 					if (arg.getPageName || arg.pageName || (arg.query && arg.query.title)) {
 						// we know the page title - display a relevant message
 						const pageName = arg.getPageName ? arg.getPageName() : arg.pageName || arg.query.title;
-						statelem.info(msg('batch-done-page', pageName, 'تم الانتهاء من [[ ' + pageName + ' ]]'));
+						statelem.info(msg('batch-done-page', pageName, 'اكتمل ([[' + pageName + ']])'));
 					} else {
 						// we don't know the page title - just display a generic message
 						statelem.info(msg('done', 'تم'));
@@ -5660,7 +5660,7 @@
 				}
 
 			} else if (typeof arg === 'string' && ctx.options.preserveIndividualStatusLines) {
-				new Morebits.status(arg, msg('batch-done-page', arg, 'أكتمل ([[' + arg + ']])'));
+				new Morebits.status(arg, msg('batch-done-page', arg, 'اكتمل ([[' + arg + ']])'));
 			}
 
 			ctx.countFinishedSuccess++;
@@ -5719,7 +5719,7 @@
 			} else {
 				// ctx.countFinished > total
 				// just for giggles! (well, serious debugging, actually)
-				ctx.statusElement.warn('Done (overshot by ' + (ctx.countFinished - total) + ')');
+				ctx.statusElement.warn('تم (تجاوز بمقدار ' + (ctx.countFinished - total) + ')');
 				Morebits.wiki.removeCheckpoint();
 				ctx.running = false;
 			}

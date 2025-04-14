@@ -19,11 +19,11 @@
 	Twinkle.image.callback = function twinkleimageCallback() {
 		const Window = new Morebits.SimpleWindow(600, 330);
 		Window.setTitle('ملف للحذف السريع المؤرخ');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('سياسة الحذف السريع', 'WP:CSD#Files');
 		Window.addFooterLink('تفضيلات الصورة', 'WP:TW/PREF#image');
 		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#image');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.image.callback.evaluate);
 		form.append({

@@ -36,11 +36,11 @@
 
 	Twinkle.tag.callback = function twinkletagCallback() {
 		const Window = new Morebits.SimpleWindow(630, Twinkle.tag.mode === 'article' ? 500 : 400);
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		// anyone got a good policy/guideline/info page/instructional page link??
 		Window.addFooterLink('Tag prefs', 'WP:TW/PREF#tag');
 		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#tag');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('Give feedback', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.tag.callback.evaluate);
 
@@ -1252,7 +1252,7 @@
 			{ label: '{{NoCoins}}: صورة تستخدم عملات معدنية للإشارة إلى المقياس', value: 'NoCoins' },
 			{ label: '{{Overcompressed JPEG}}: JPEG مع مستويات عالية من القطع الأثرية', value: 'Overcompressed JPEG' },
 			{ label: '{{Opaque}}: يجب أن تكون الخلفية غير الشفافة شفافة', value: 'Opaque' },
-			{ label: '{{Remove border}}: حدود غير ضرورية، مساحة بيضاء، إلخ.', value: 'Remove border' },
+			{ label: '{{Remove border}}: حدود غير ضرورية، نطاق بيضاء، إلخ.', value: 'Remove border' },
 			{
 				label: '{{Rename media}}: يجب إعادة تسمية الملف وفقًا للمعايير في [[WP:FMV]]',
 				value: 'Rename media',
