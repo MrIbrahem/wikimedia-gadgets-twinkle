@@ -38,8 +38,8 @@
 		const Window = new Morebits.SimpleWindow(630, Twinkle.tag.mode === 'article' ? 500 : 400);
 		Window.setScriptName('لمح البصر!');
 		// anyone got a good policy/guideline/info page/instructional page link??
-		Window.addFooterLink('Tag prefs', 'WP:TW/PREF#tag');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#tag');
+		Window.addFooterLink('Tag prefs', 'ويكيبيديا:Twinkle/Preferences#tag');
+		Window.addFooterLink('Twinkle help', 'ويكيبيديا:لمح البصر/توثيق#tag');
 		Window.addFooterLink('Give feedback', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.tag.callback.evaluate);

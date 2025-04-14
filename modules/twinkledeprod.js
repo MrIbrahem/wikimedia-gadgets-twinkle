@@ -27,8 +27,8 @@
 		const Window = new Morebits.SimpleWindow(800, 400);
 		Window.setTitle('تنظيف PROD');
 		Window.setScriptName('لمح البصر!');
-		Window.addFooterLink('الحذف المقترح', 'WP:PROD');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#deprod');
+		Window.addFooterLink('الحذف المقترح', 'ويكيبيديا:اقتراح الحذف');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#deprod');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(callback_commit);
@@ -154,7 +154,7 @@
 			}
 
 			var page = new Morebits.wiki.Page(pageName, 'حذف الصفحة ' + pageName);
-			page.setEditSummary('منتهي الصلاحية [[WP:PROD|PROD]]، كان السبب: ' + concerns[pageName]);
+			page.setEditSummary('منتهي الصلاحية [[ويكيبيديا:اقتراح الحذف|PROD]]، كان السبب: ' + concerns[pageName]);
 			page.setChangeTags(Twinkle.changeTags);
 			page.suppressProtectWarning();
 			page.deletePage(batchOperation.workerSuccess, batchOperation.workerFailure);

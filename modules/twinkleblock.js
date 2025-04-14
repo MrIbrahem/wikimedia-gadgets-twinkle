@@ -39,8 +39,8 @@
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('قوالب المنع', 'Template:Uw-block/doc/Block_templates');
 		Window.addFooterLink('سياسة المنع', 'WP:BLOCK');
-		Window.addFooterLink('تفضيلات المنع', 'WP:TW/PREF#block');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#block');
+		Window.addFooterLink('تفضيلات المنع', 'ويكيبيديا:Twinkle/Preferences#block');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#block');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		// Always added, hidden later if actual user not blocked
@@ -1092,16 +1092,16 @@
 			autoblock: true,
 			expiry: 'infinity',
 			nocreate: true,
-			reason: 'بوضوح [[WP:NOTHERE|ليس هنا لبناء موسوعة]]',
+			reason: 'بوضوح [[وب:ليس بناء الموسوعة|ليس هنا لبناء موسوعة]]',
 			forRegisteredOnly: true,
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يبدو أنك لست هنا [[WP:NOTHERE|لبناء موسوعة]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يبدو أنك لست هنا [[وب:ليس بناء الموسوعة|لبناء موسوعة]]'
 		},
 		'uw-npblock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
-			reason: 'إنشاء [[WP:Patent nonsense|هراء واضح]] أو صفحات أخرى غير لائقة',
-			summary: 'لقد مُنعت من التحرير لإنشاء [[WP:PN|صفحات غير منطقية]]'
+			reason: 'إنشاء [[ويكيبيديا:كلام فارغ|هراء واضح]] أو صفحات أخرى غير لائقة',
+			summary: 'لقد مُنعت من التحرير لإنشاء [[ويكيبيديا:كلام فارغ|صفحات غير منطقية]]'
 		},
 		'uw-pablock': {
 			autoblock: true,
@@ -1219,8 +1219,8 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:PAID|تحرير مدفوع غير معلن]] في انتهاك لـ [[WP:TOU|شروط استخدام]] WMF',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم في انتهاك [[WP:PAID|سياسة ويكيبيديا بشأن الدعوة المدفوعة غير المعلنة]]'
+			reason: '[[ويكيبيديا:مساهمات مدفوعة|تحرير مدفوع غير معلن]] في انتهاك لـ [[WP:TOU|شروط استخدام]] WMF',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم في انتهاك [[ويكيبيديا:مساهمات مدفوعة|سياسة ويكيبيديا بشأن الدعوة المدفوعة غير المعلنة]]'
 		},
 		'uw-vaublock': {
 			autoblock: true,
@@ -1265,7 +1265,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد [[WP:PB|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-acpblockindef': {
 			autoblock: true,
@@ -1275,7 +1275,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد [[WP:PB|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-aepblock': {
 			autoblock: true,
@@ -1283,7 +1283,7 @@
 			pageParam: false,
 			reason: '[[WP:Arbitration enforcement|إنفاذ التحكيم]]',
 			reasonParam: true,
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
 		},
 		'uw-epblock': {
 			autoblock: true,
@@ -1294,7 +1294,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: 'بريد إلكتروني [[WP:Harassment|مضايقة]]',
-			summary: 'لقد [[WP:PB|مُنعت من إرسال بريد إلكتروني]] إلى محررين آخرين بسبب [[WP:Harassment|المضايقة]]'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت من إرسال بريد إلكتروني]] إلى محررين آخرين بسبب [[WP:Harassment|المضايقة]]'
 		},
 		'uw-ewpblock': {
 			autoblock: true,
@@ -1303,7 +1303,7 @@
 			pageParam: false,
 			reasonParam: true,
 			reason: '[[WP:Edit warring|حرب التحرير]]',
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من تحرير مناطق معينة من الموسوعة لمنع المزيد من [[WP:DE|التعطيل]] بسبب [[WP:EW|حرب التحرير]]'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] من تحرير مناطق معينة من الموسوعة لمنع المزيد من [[WP:DE|التعطيل]] بسبب [[WP:EW|حرب التحرير]]'
 		},
 		'uw-pblock': {
 			autoblock: true,
@@ -1311,7 +1311,7 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من مناطق معينة من الموسوعة'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] من مناطق معينة من الموسوعة'
 		},
 		'uw-pblockindef': {
 			autoblock: true,
@@ -1320,7 +1320,7 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] إلى أجل غير مسمى من مناطق معينة من الموسوعة'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] إلى أجل غير مسمى من مناطق معينة من الموسوعة'
 		}
 	};
 

@@ -120,8 +120,8 @@
 		Window.setTitle('بدء مناقشة حول الحذف (XfD)');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('حول مناقشات الحذف', 'WP:XFD');
-		Window.addFooterLink('تفضيلات XfD', 'WP:TW/PREF#xfd');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#xfd');
+		Window.addFooterLink('تفضيلات XfD', 'ويكيبيديا:Twinkle/Preferences#xfd');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#xfd');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.xfd.callback.evaluate);

@@ -123,8 +123,8 @@
 		Window.setTitle('ترحيب بالمستخدم');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('لجنة الترحيب', 'ويكيبيديا:لجنة الترحيب');
-		Window.addFooterLink('تفضيلات الترحيب', 'WP:TW/PREF#welcome');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#welcome');
+		Window.addFooterLink('تفضيلات الترحيب', 'ويكيبيديا:Twinkle/Preferences#welcome');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#welcome');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.welcome.callback.evaluate);

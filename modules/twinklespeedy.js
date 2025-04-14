@@ -44,8 +44,8 @@
 		dialog.setTitle('اختر معايير الحذف السريع');
 		dialog.setScriptName('Twinkle');
 		dialog.addFooterLink('سياسة الحذف السريع', 'WP:CSD');
-		dialog.addFooterLink('تفضيلات CSD', 'WP:TW/PREF#speedy');
-		dialog.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#speedy');
+		dialog.addFooterLink('تفضيلات CSD', 'ويكيبيديا:Twinkle/Preferences#speedy');
+		dialog.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#speedy');
 		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(callbackfunc, Twinkle.getPref('speedySelectionStyle') === 'radioClick' ? 'change' : null);

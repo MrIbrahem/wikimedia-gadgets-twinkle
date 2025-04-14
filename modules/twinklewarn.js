@@ -58,8 +58,8 @@
 		dialog.setTitle('تحذير / إخطار المستخدم');
 		dialog.setScriptName('Twinkle');
 		dialog.addFooterLink('اختيار مستوى التحذير', 'WP:UWUL#Levels');
-		dialog.addFooterLink('تفضيلات التحذير', 'WP:TW/PREF#warn');
-		dialog.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#warn');
+		dialog.addFooterLink('تفضيلات التحذير', 'ويكيبيديا:Twinkle/Preferences#warn');
+		dialog.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#warn');
 		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.warn.callback.evaluate);

@@ -35,8 +35,8 @@
 		Window.addFooterLink('دليل AIV', 'WP:GAIV');
 		Window.addFooterLink('دليل UAA', 'WP:UAAI');
 		Window.addFooterLink('دليل SPI', 'Wikipedia:Sockpuppet investigations/SPI/Guide to filing cases');
-		Window.addFooterLink('تفضيلات ARV', 'WP:TW/PREF#arv');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#arv');
+		Window.addFooterLink('تفضيلات ARV', 'ويكيبيديا:Twinkle/Preferences#arv');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#arv');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.arv.callback.evaluate);

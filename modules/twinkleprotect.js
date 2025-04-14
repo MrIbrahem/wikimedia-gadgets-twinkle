@@ -25,8 +25,8 @@
 		Window.setTitle(Morebits.userIsSysop ? 'تطبيق أو طلب أو إضافة قالب حماية صفحة' : 'طلب أو إضافة قالب حماية صفحة');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('قوالب الحماية', 'Template:Protection templates');
-		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#protect');
+		Window.addFooterLink('سياسة الحماية', 'ويكيبيديا:سياسة الحماية');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#protect');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.protect.callback.evaluate);
@@ -787,7 +787,7 @@
 		'pp-dispute': {
 			edit: 'sysop',
 			move: 'sysop',
-			reason: '[[WP:PP#Content disputes|حرب تحرير / نزاع محتوى]]'
+			reason: '[[ويكيبيديا:سياسة الحماية#Content disputes|حرب تحرير / نزاع محتوى]]'
 		},
 		'pp-vandalism': {
 			edit: 'sysop',
@@ -798,7 +798,7 @@
 			edit: 'sysop',
 			move: 'sysop',
 			expiry: 'infinity',
-			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]'
+			reason: '[[ويكيبيديا:سياسة الحماية#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]'
 		},
 		'pp-template': {
 			edit: 'templateeditor',
@@ -867,7 +867,7 @@
 			edit: 'autoconfirmed',
 			move: 'autoconfirmed',
 			expiry: 'infinity',
-			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]',
+			reason: '[[ويكيبيديا:سياسة الحماية#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]',
 			template: 'pp-usertalk'
 		},
 		'pp-semi-template': { // removed for now

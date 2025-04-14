@@ -23,8 +23,8 @@
 		const Window = new Morebits.SimpleWindow(600, 450);
 		Window.setTitle('وسم عنوان IP المشترك');
 		Window.setScriptName('لمح البصر!');
-		Window.addFooterLink('تفضيلات المشترك', 'WP:TW/PREF#shared');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#shared');
+		Window.addFooterLink('تفضيلات المشترك', 'ويكيبيديا:Twinkle/Preferences#shared');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#shared');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.shared.callback.evaluate);

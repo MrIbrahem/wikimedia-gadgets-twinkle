@@ -21,8 +21,8 @@
 		Window.setTitle('ملف للحذف السريع المؤرخ');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('سياسة الحذف السريع', 'WP:CSD#Files');
-		Window.addFooterLink('تفضيلات الصورة', 'WP:TW/PREF#image');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#image');
+		Window.addFooterLink('تفضيلات الصورة', 'ويكيبيديا:Twinkle/Preferences#image');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#image');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.image.callback.evaluate);

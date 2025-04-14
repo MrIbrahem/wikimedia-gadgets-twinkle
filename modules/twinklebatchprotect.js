@@ -23,8 +23,8 @@
 		const Window = new Morebits.SimpleWindow(600, 400);
 		Window.setTitle('حماية دفعة');
 		Window.setScriptName('لمح البصر!');
-		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
-		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#protect');
+		Window.addFooterLink('سياسة الحماية', 'ويكيبيديا:سياسة الحماية');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#protect');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchprotect.callback.evaluate);
