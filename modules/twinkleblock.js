@@ -836,7 +836,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			nonstandard: true,
-			reason: '{{anonblock}}',
+			reason: '{{Anonblock}}',
 			sig: '~~~~'
 		},
 		'anonblock - school': {
@@ -844,7 +844,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			nonstandard: true,
-			reason: '{{anonblock}} <!-- من المحتمل أن تكون مدرسة بناءً على دليل سلوكي -->',
+			reason: '{{Anonblock}} <!-- من المحتمل أن تكون مدرسة بناءً على دليل سلوكي -->',
 			templateName: 'anonblock',
 			sig: '~~~~'
 		},
@@ -854,7 +854,7 @@
 			nocreate: true,
 			nonstandard: true,
 			hardblock: true,
-			reason: '{{blocked proxy}}',
+			reason: '{{بروكسي ممنوع}}',
 			sig: null
 		},
 		'CheckUser block': {
@@ -862,7 +862,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			nonstandard: true,
-			reason: '{{CheckUser block}}',
+			reason: '{{منع تدقيق مستخدم}}',
 			sig: '~~~~'
 		},
 		'checkuserblock-account': {
@@ -1022,7 +1022,7 @@
 		'uw-causeblock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
-			reason: '{{uw-causeblock}} <!-- Username represents a non-profit, soft block -->',
+			reason: '{{Uw-causeblock}} <!-- Username represents a non-profit, soft block -->',
 			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
 		},
 		'uw-compblock': {
@@ -1143,7 +1143,7 @@
 		'uw-softerblock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
-			reason: '{{uw-softerblock}} <!-- Promotional username, soft block -->',
+			reason: '{{اسم مستخدم غير مقبول}} <!-- Promotional username, soft block -->',
 			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
 		},
 		'uw-spamublock': {
@@ -1151,7 +1151,7 @@
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			nocreate: true,
-			reason: '{{uw-spamublock}} <!-- Promotional username, promotional edits -->',
+			reason: '{{Uw-spamublock}} <!-- Promotional username, promotional edits -->',
 			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان]] واسم المستخدم الخاص بك هو انتهاك لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
 		'uw-spoablock': {
@@ -1172,7 +1172,7 @@
 		'uw-ublock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
-			reason: '{{uw-ublock}} <!-- Username violation, soft block -->',
+			reason: '{{Uw-ublock}} <!-- Username violation, soft block -->',
 			reasonParam: true,
 			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
@@ -1195,7 +1195,7 @@
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			nocreate: true,
-			reason: '{{uw-uhblock}} <!-- Username violation, hard block -->',
+			reason: '{{Uw-uhblock}} <!-- Username violation, hard block -->',
 			reasonParam: true,
 			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},

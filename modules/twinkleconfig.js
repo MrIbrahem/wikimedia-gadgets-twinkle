@@ -26,7 +26,7 @@
 
 	Twinkle.config.commonSets = {
 		csdCriteria: {
-			db: 'مبررات مخصصة ({{db}})',
+			db: 'مبررات مخصصة ({{شطب}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 			u1: "U1", u2: "U2", u5: "U5",
@@ -44,7 +44,7 @@
 			"r2", "r3", "r4"
 		],
 		csdCriteriaNotification: {
-			db: 'مبررات مخصصة ({{db}})',
+			db: 'مبررات مخصصة ({{شطب}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g6: 'G6 ("copy-paste move" only)',
 			g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
@@ -63,7 +63,7 @@
 			"r2", "r3", "r4"
 		],
 		csdAndImageDeletionCriteria: {
-			db: 'مبررات مخصصة ({{db}})',
+			db: 'مبررات مخصصة ({{شطب}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 			u1: "U1", u2: "U2", u5: "U5",
@@ -492,7 +492,7 @@
 				{
 					name: "welcomeUserOnSpeedyDeletionNotification",
 					label: "ترحيب بمنشئ الصفحة عند الإخطار بهذه المعايير",
-					helptip: "يتم الترحيب فقط إذا تم إخطار المستخدم بالحذف، وفقط إذا لم تكن صفحة نقاشه موجودة. القالب المستخدم هو {{firstarticle}}.",
+					helptip: "يتم الترحيب فقط إذا تم إخطار المستخدم بالحذف، وفقط إذا لم تكن صفحة نقاشه موجودة. القالب المستخدم هو {{First article}}.",
 					type: "set",
 					setValues: Twinkle.config.commonSets.csdCriteriaNotification,
 					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaNotificationDisplayOrder

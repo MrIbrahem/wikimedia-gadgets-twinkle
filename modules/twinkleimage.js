@@ -77,12 +77,12 @@
 				{
 					label: 'أساس منطقي للاستخدام غير الحر المتنازع عليه (CSD F7)',
 					value: 'disputed non-free use rationale',
-					tooltip: 'تحتوي الصورة أو الوسائط على أساس منطقي للاستخدام العادل يتم التنازع عليه أو غير صالح، مثل علامة {{Non-free logo}} على صورة فوتوغرافية لتميمة'
+					tooltip: 'تحتوي الصورة أو الوسائط على أساس منطقي للاستخدام العادل يتم التنازع عليه أو غير صالح، مثل علامة {{شعار غير حر}} على صورة فوتوغرافية لتميمة'
 				},
 				{
 					label: 'استخدام غير حر قابل للاستبدال (CSD F7)',
 					value: 'replaceable non-free use',
-					tooltip: 'قد تفشل الصورة أو الوسائط في معيار المحتوى غير الحر الأول لويكيبيديا ([[WP:NFCC#1]]) من حيث أنها توضح موضوعًا يمكن العثور فيه بشكل معقول على صورة مجانية أو إنشاؤها والتي توفر بشكل كافٍ نفس المعلومات'
+					tooltip: 'قد تفشل الصورة أو الوسائط في معيار المحتوى غير الحر الأول لويكيبيديا ([[ويكيبيديا:معايير المحتوى غير الحر]]) من حيث أنها توضح موضوعًا يمكن العثور فيه بشكل معقول على صورة مجانية أو إنشاؤها والتي توفر بشكل كافٍ نفس المعلومات'
 				},
 				{
 					label: 'لا يوجد دليل على الإذن (CSD F11)',
@@ -312,7 +312,7 @@
 		addToLog: function (params, initialContrib) {
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 			usl.initialText =
-				"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[ويكيبيديا:لمح البصر|Twinkle]].\n\n" +
 				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
 				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام لمح البصر.' : '');
 
@@ -328,7 +328,7 @@
 			// If a logged file is deleted but exists on commons, the wikilink will be blue, so provide a link to the log
 			const fileLogLink = ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} سجل])';
 
-			let appendText = '# [[:' + Morebits.pageNameNorm + ']]' + fileLogLink + ': DI [[ويكيبيديا:معايير الحذف السريع#' + params.normalized.toUpperCase() + '|CSD ' + params.normalized.toUpperCase() + ']] ({{tl|di-' + params.templatename + '}})';
+			let appendText = '# [[:' + Morebits.pageNameNorm + ']]' + fileLogLink + ': DI [[ويكيبيديا:معايير الحذف السريع#' + params.normalized.toUpperCase() + '|CSD ' + params.normalized.toUpperCase() + ']] ({{وصلة قالب|di-' + params.templatename + '}})';
 
 			['reason', 'replacement', 'source'].forEach((item) => {
 				if (params[item]) {
@@ -341,7 +341,7 @@
 				appendText += '; معلومات إضافية:' + extraInfo;
 			}
 			if (initialContrib) {
-				appendText += '; تم إعلام {{user|1=' + initialContrib + '}}';
+				appendText += '; تم إعلام {{مستخدم|1=' + initialContrib + '}}';
 			}
 			appendText += ' ~~~~~\n';
 
