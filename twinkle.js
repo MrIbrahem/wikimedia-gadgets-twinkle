@@ -455,7 +455,7 @@
 		}
 		if (!Twinkle.findSources) {
 			const parser = new Morebits.wiki.Preview($(divID)[0]);
-			parser.beginRender('({{Find sources|' + Morebits.pageNameNorm + '}})', 'WP:AFD').then(() => {
+			parser.beginRender('({{جد مصادر|' + Morebits.pageNameNorm + '}})', 'WP:AFD').then(() => {
 				// Save for second-time around
 				Twinkle.findSources = parser.previewbox.innerHTML;
 				$(divID).removeClass('morebits-previewbox');
