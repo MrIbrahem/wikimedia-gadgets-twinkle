@@ -565,7 +565,7 @@
 			redirectDeleter.setPageList(pages);
 			redirectDeleter.run((pageName) => {
 				const wikipedia_page = new Morebits.wiki.Page(pageName, 'حذف ' + pageName);
-				wikipedia_page.setEditSummary('[[WP:CSD#G8|G8]]: تحويل إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
+				wikipedia_page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: تحويل إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
 				wikipedia_page.setChangeTags(Twinkle.changeTags);
 				wikipedia_page.deletePage(redirectDeleter.workerSuccess, redirectDeleter.workerFailure);
 			});
@@ -579,7 +579,7 @@
 			}
 
 			const page = new Morebits.wiki.Page(apiobj.params.talkPage, 'حذف صفحة نقاش الصفحة ' + apiobj.params.page);
-			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
+			page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
 			page.setChangeTags(Twinkle.changeTags);
 			page.deletePage();
 		},

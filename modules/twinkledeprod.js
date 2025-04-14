@@ -167,7 +167,7 @@
 			}
 
 			const page = new Morebits.wiki.Page('Talk:' + apiobj.params.page, 'حذف صفحة نقاش الصفحة ' + apiobj.params.page);
-			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
+			page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
 			page.setChangeTags(Twinkle.changeTags);
 			page.deletePage();
 		},
@@ -177,7 +177,7 @@
 			redirects.forEach((rd) => {
 				const title = rd.title;
 				const page = new Morebits.wiki.Page(title, 'حذف صفحة إعادة التوجيه ' + title);
-				page.setEditSummary('[[WP:CSD#G8|G8]]: إعادة توجيه إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
+				page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: إعادة توجيه إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
 				page.setChangeTags(Twinkle.changeTags);
 				page.deletePage();
 			});

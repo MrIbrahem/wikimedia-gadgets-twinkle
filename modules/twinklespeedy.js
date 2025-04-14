@@ -43,7 +43,7 @@
 		const dialog = Twinkle.speedy.dialog;
 		dialog.setTitle('اختر معايير الحذف السريع');
 		dialog.setScriptName('Twinkle');
-		dialog.addFooterLink('سياسة الحذف السريع', 'WP:CSD');
+		dialog.addFooterLink('سياسة الحذف السريع', 'ويكيبيديا:معايير الحذف السريع');
 		dialog.addFooterLink('تفضيلات CSD', 'ويكيبيديا:Twinkle/Preferences#speedy');
 		dialog.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#speedy');
 		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
@@ -1255,7 +1255,7 @@
 					params.normalized !== 'f8' &&
 					!document.getElementById('ca-talk').classList.contains('new')) {
 					const talkpage = new Morebits.wiki.Page(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceNumber') + 1] + ':' + mw.config.get('wgTitle'), 'حذف صفحة النقاش');
-					talkpage.setEditSummary('[[WP:CSD#G8|G8]]: صفحة نقاش الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
+					talkpage.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: صفحة نقاش الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
 					talkpage.setChangeTags(Twinkle.changeTags);
 					talkpage.deletePage();
 					// this is ugly, but because of the architecture of wiki.api, it is needed
@@ -1348,7 +1348,7 @@
 				snapshot.forEach((value) => {
 					const title = value.title;
 					const page = new Morebits.wiki.Page(title, 'حذف إعادة التوجيه "' + title + '"');
-					page.setEditSummary('[[WP:CSD#G8|G8]]: إعادة توجيه إلى الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
+					page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: إعادة توجيه إلى الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
 					page.setChangeTags(Twinkle.changeTags);
 					page.deletePage(onsuccess);
 				});
@@ -1438,14 +1438,14 @@
 					if (params.normalizeds.length > 1) {
 						editsummary = 'طلب حذف سريع (';
 						$.each(params.normalizeds, (index, norm) => {
-							editsummary += '[[WP:CSD#' + norm.toUpperCase() + '|CSD ' + norm.toUpperCase() + ']], ';
+							editsummary += '[[ويكيبيديا:معايير الحذف السريع#' + norm.toUpperCase() + '|CSD ' + norm.toUpperCase() + ']], ';
 						});
 						editsummary = editsummary.substr(0, editsummary.length - 2); // remove trailing comma
 						editsummary += ').';
 					} else if (params.normalizeds[0] === 'db') {
-						editsummary = 'طلب [[WP:CSD|حذف سريع]] مع الأساس المنطقي "' + params.templateParams[0]['1'] + '".';
+						editsummary = 'طلب [[ويكيبيديا:معايير الحذف السريع|حذف سريع]] مع الأساس المنطقي "' + params.templateParams[0]['1'] + '".';
 					} else {
-						editsummary = 'طلب حذف سريع ([[WP:CSD#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']]).';
+						editsummary = 'طلب حذف سريع ([[ويكيبيديا:معايير الحذف السريع#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']]).';
 					}
 
 					// Blank attack pages
@@ -1502,9 +1502,9 @@
 			addToLog: function (params, initialContrib) {
 				const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 				usl.initialText =
-					"هذا سجل لجميع ترشيحات [[WP:CSD|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+					"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
 					'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، يمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، و' +
-					'ترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
+					'ترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
 					(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام لمح البصر.' : '');
 
 				const formatParamLog = function (normalize, csdparam, input) {
@@ -1544,14 +1544,14 @@
 				if (params.normalizeds.length > 1) {
 					appendText += 'معايير متعددة (';
 					$.each(params.normalizeds, (index, norm) => {
-						appendText += '[[WP:CSD#' + norm.toUpperCase() + '|' + norm.toUpperCase() + ']], ';
+						appendText += '[[ويكيبيديا:معايير الحذف السريع#' + norm.toUpperCase() + '|' + norm.toUpperCase() + ']], ';
 					});
 					appendText = appendText.substr(0, appendText.length - 2); // remove trailing comma
 					appendText += ')';
 				} else if (params.normalizeds[0] === 'db') {
 					appendText += '{{tl|db-reason}}';
 				} else {
-					appendText += '[[WP:CSD#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']] ({{tl|db-' + params.values[0] + '}})';
+					appendText += '[[ويكيبيديا:معايير الحذف السريع#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']] ({{tl|db-' + params.values[0] + '}})';
 				}
 
 				// If params is "empty" it will still be full of empty arrays, but ask anyway

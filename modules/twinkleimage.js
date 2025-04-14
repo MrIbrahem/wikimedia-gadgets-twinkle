@@ -20,7 +20,7 @@
 		const Window = new Morebits.SimpleWindow(600, 330);
 		Window.setTitle('ملف للحذف السريع المؤرخ');
 		Window.setScriptName('لمح البصر!');
-		Window.addFooterLink('سياسة الحذف السريع', 'WP:CSD#Files');
+		Window.addFooterLink('سياسة الحذف السريع', 'ويكيبيديا:معايير الحذف السريع#Files');
 		Window.addFooterLink('تفضيلات الصورة', 'ويكيبيديا:Twinkle/Preferences#image');
 		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#image');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
@@ -275,7 +275,7 @@
 			tag += '|help=off}}\n';
 
 			pageobj.setPageText(tag + text);
-			pageobj.setEditSummary('هذا الملف مُرشح للحذف، حسب [[WP:CSD#' + params.normalized + '|CSD ' + params.normalized + ']] (' + params.type + ').');
+			pageobj.setEditSummary('هذا الملف مُرشح للحذف، حسب [[ويكيبيديا:معايير الحذف السريع#' + params.normalized + '|CSD ' + params.normalized + ']] (' + params.type + ').');
 			pageobj.setChangeTags(Twinkle.changeTags);
 			pageobj.setWatchlist(Twinkle.getPref('deliWatchPage'));
 			pageobj.setCreateOption('nocreate');
@@ -312,8 +312,8 @@
 		addToLog: function (params, initialContrib) {
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 			usl.initialText =
-				"هذا سجل لجميع ترشيحات [[WP:CSD|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
-				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
+				"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
 				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام لمح البصر.' : '');
 
 			const formatParamLog = function (normalize, csdparam, input) {
@@ -328,7 +328,7 @@
 			// If a logged file is deleted but exists on commons, the wikilink will be blue, so provide a link to the log
 			const fileLogLink = ' ([{{fullurl:Special:Log|page=' + mw.util.wikiUrlencode(mw.config.get('wgPageName')) + '}} سجل])';
 
-			let appendText = '# [[:' + Morebits.pageNameNorm + ']]' + fileLogLink + ': DI [[WP:CSD#' + params.normalized.toUpperCase() + '|CSD ' + params.normalized.toUpperCase() + ']] ({{tl|di-' + params.templatename + '}})';
+			let appendText = '# [[:' + Morebits.pageNameNorm + ']]' + fileLogLink + ': DI [[ويكيبيديا:معايير الحذف السريع#' + params.normalized.toUpperCase() + '|CSD ' + params.normalized.toUpperCase() + ']] ({{tl|di-' + params.templatename + '}})';
 
 			['reason', 'replacement', 'source'].forEach((item) => {
 				if (params[item]) {
