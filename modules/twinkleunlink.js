@@ -16,7 +16,7 @@
 			(!Morebits.userIsInGroup('extendedconfirmed') && !Morebits.userIsSysop)) {
 			return;
 		}
-		Twinkle.addPortletLink(Twinkle.unlink.callback, 'إزالة الرابط', 'tw-unlink', 'إزالة الروابط الخلفية');
+		Twinkle.addPortletLink(Twinkle.unlink.callback, 'إزالة الرابط', 'tw-unlink', 'إزالة الصفحات المرتبطة');
 	};
 
 	// the parameter is used when invoking unlink from admin speedy
@@ -24,11 +24,11 @@
 		const fileSpace = mw.config.get('wgNamespaceNumber') === 6;
 
 		const Window = new Morebits.SimpleWindow(600, 440);
-		Window.setTitle('إزالة الروابط الخلفية' + (fileSpace ? ' واستخدامات الملف' : ''));
-		Window.setScriptName('Twinkle');
-		Window.addFooterLink('تفضيلات إزالة الرابط', 'WP:TW/PREF#unlink');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#unlink');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.setTitle('إزالة الصفحات المرتبطة' + (fileSpace ? ' واستخدامات الملف' : ''));
+		Window.setScriptName('لمح البصر!');
+		Window.addFooterLink('تفضيلات إزالة الرابط', 'ويكيبيديا:Twinkle/Preferences#unlink');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#unlink');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.unlink.callback.evaluate);
 
@@ -48,7 +48,7 @@
 			type: 'div',
 			style: 'margin-bottom: 0.5em',
 			label: [
-				'تتيح لك هذه الأداة إزالة ارتباط جميع الروابط الواردة ("الروابط الخلفية") من الصفحات المحددة أدناه التي تشير إلى هذه الصفحة' +
+				'تتيح لك هذه الأداة إزالة ارتباط جميع الروابط الواردة ("الصفحات المرتبطة") من الصفحات المحددة أدناه التي تشير إلى هذه الصفحة' +
 				(fileSpace ? '، و/أو إخفاء جميع تضمينات هذا الملف عن طريق تغليفها في ترميز تعليق <!-- --> ' : '') +
 				'. على سبيل المثال، ',
 				linkTextBefore, ' سيصبح ', linkTextAfter, ' و ',
@@ -81,7 +81,7 @@
 		} else {
 			query.blfilterredir = 'nonredirects';
 		}
-		const wikipedia_api = new Morebits.wiki.Api('جلب الروابط الخلفية', query, Twinkle.unlink.callbacks.display.backlinks);
+		const wikipedia_api = new Morebits.wiki.Api('جلب الصفحات المرتبطة', query, Twinkle.unlink.callbacks.display.backlinks);
 		wikipedia_api.params = { form: form, Window: Window, image: fileSpace };
 		wikipedia_api.post();
 
@@ -113,7 +113,7 @@
 		Morebits.SimpleWindow.setButtonsEnabled(false);
 		Morebits.Status.init(form);
 
-		const unlinker = new Morebits.BatchOperation('إزالة الارتباط ' + (input.backlinks.length ? 'روابط خلفية' +
+		const unlinker = new Morebits.BatchOperation('إزالة الارتباط ' + (input.backlinks.length ? 'صفحات مرتبطة' +
 			(input.imageusage.length ? ' وحالات استخدام الملف' : '') : 'حالات استخدام الملف'));
 		unlinker.setOption('preserveIndividualStatusLines', true);
 		unlinker.setPageList(pages);
@@ -153,7 +153,7 @@
 						});
 						apiobj.params.form.append({
 							type: 'div',
-							label: 'المساحات الاسمية المحددة: ' + namespaces.join(', '),
+							label: 'النطاق المناسب: ' + namespaces.join(', '),
 							tooltip: 'يمكنك تغيير هذا من خلال تفضيلات توينكل الخاصة بك، في [[WP:TWPREFS]]'
 						});
 						if (response['query-continue'] && response['query-continue'].imageusage) {
@@ -193,14 +193,14 @@
 						// Label made by Twinkle.generateBatchPageLinks
 						list.push({ label: '', value: backlinks[i].title, checked: true });
 					}
-					apiobj.params.form.append({ type: 'header', label: 'روابط خلفية' });
+					apiobj.params.form.append({ type: 'header', label: 'صفحات مرتبطة' });
 					namespaces = [];
 					$.each(Twinkle.getPref('unlinkNamespaces'), (k, v) => {
 						namespaces.push(v === '0' ? '(مقالة)' : mw.config.get('wgFormattedNamespaces')[v]);
 					});
 					apiobj.params.form.append({
 						type: 'div',
-						label: 'المساحات الاسمية المحددة: ' + namespaces.join(', '),
+						label: 'النطاق المناسب: ' + namespaces.join(', '),
 						tooltip: 'يمكنك تغيير هذا من خلال تفضيلات توينكل الخاصة بك، المرتبطة في الجزء السفلي من نافذة توينكل هذه'
 					});
 					if (response['query-continue'] && response['query-continue'].backlinks) {
@@ -231,7 +231,7 @@
 					});
 					havecontent = true;
 				} else {
-					apiobj.params.form.append({ type: 'div', label: 'لم يُعثر على روابط خلفية.' });
+					apiobj.params.form.append({ type: 'div', label: 'لم يُعثر على صفحات مرتبطة.' });
 				}
 
 				if (havecontent) {
@@ -271,7 +271,7 @@
 				text = wikiPage.removeLink(Morebits.pageNameNorm).getText();
 				// did we actually make any changes?
 				if (text === oldtext) {
-					warningString = warningString ? 'روابط خلفية أو استخدامات الملف' : 'روابط خلفية';
+					warningString = warningString ? 'صفحات مرتبطة أو استخدامات الملف' : 'صفحات مرتبطة';
 				} else {
 					summaryText = (summaryText ? summaryText + ' / ' : '') + 'إزالة الرابط (الروابط) إلى';
 					oldtext = text;

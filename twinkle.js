@@ -11,7 +11,7 @@
  * ----------
  *
  * This is AzaToth's Twinkle, the popular script sidekick for newbies, admins, and
- * every Wikipedian in between. Visit [[WP:TW]] for more information.
+ * every Wikipedian in between. Visit [[وب:لمح البصر]] for more information.
  */
 // <nowiki>
 
@@ -89,7 +89,7 @@
 		markProdPagesAsPatrolled: false,
 		prodReasonDefault: '',
 		logProdPages: false,
-		prodLogPageName: 'سجل اقتراح الحذف',
+		prodLogPageName: 'سجل اقتراحات الحذف',
 
 		// CSD
 		speedySelectionStyle: 'buttonClick',
@@ -125,7 +125,7 @@
 
 		// XfD
 		logXfdNominations: false,
-		xfdLogPageName: 'سجل مناقشات الحذف',
+		xfdLogPageName: 'سجل نقاشات الحذف',
 		noLogOnXfdNomination: [],
 		xfdWatchDiscussion: 'default',
 		xfdWatchList: 'no',
@@ -141,9 +141,9 @@
 		batchChunks: 50,
 
 		// Deprecated options, as a fallback for add-on scripts/modules
-		summaryAd: ' ([[WP:TW|توينكل]])',
-		deletionSummaryAd: ' ([[WP:TW|توينكل]])',
-		protectionSummaryAd: ' ([[WP:TW|توينكل]])',
+		summaryAd: ' ([[وب:لمح البصر|لمح البصر]])',
+		deletionSummaryAd: ' ([[وب:لمح البصر|لمح البصر]])',
+		protectionSummaryAd: ' ([[وب:لمح البصر|لمح البصر]])',
 
 		// Tag
 		groupByDefault: true,
@@ -162,7 +162,7 @@
 		watchWelcomes: '3 months',
 		insertUsername: true,
 		quickWelcomeMode: 'norm',
-		quickWelcomeTemplate: 'welcome',
+		quickWelcomeTemplate: 'ترحيب',
 		customWelcomeList: [],
 		customWelcomeSignature: true,
 
@@ -170,7 +170,7 @@
 		markTalkbackAsMinor: false,
 		insertTalkbackSignature: true, // always sign talkback templates
 		talkbackHeading: 'رسالة جديدة من ' + mw.config.get('wgUserName'),
-		mailHeading: "لديك بريد جديد!",
+		mailHeading: "لديك بريد!",
 
 		// Shared
 		markSharedIPAsMinor: true
@@ -222,14 +222,14 @@
 			case 'vector-2022':
 				navigation = '#right-navigation';
 				id = 'p-twinkle';
-				text = 'TW';
+				text = 'لمح البصر';
 				// In order to get mw.util.addPortlet to generate a dropdown menu in vector and vector-2022, the nextnodeid must be p-cactions. Any other nextnodeid will generate a non-dropdown portlet instead.
 				nextnodeid = 'p-cactions';
 				break;
 			case 'timeless':
 				navigation = '#page-tools .sidebar-inner';
 				id = 'p-twinkle';
-				text = 'توينكل';
+				text = 'لمح البصر';
 				nextnodeid = 'p-userpagetools';
 				break;
 			default:
@@ -404,7 +404,7 @@
 		// If using a skin with space for lots of modules, display a link to Twinkle Preferences
 		const usingSkinWithDropDownMenu = mw.config.get('skin') === 'vector' || mw.config.get('skin') === 'vector-2022' || mw.config.get('skin') === 'timeless';
 		if (usingSkinWithDropDownMenu) {
-			Twinkle.addPortletLink(mw.util.getUrl('Wikipedia:Twinkle/Preferences'), 'التهيئة', 'tw-config', 'فتح صفحة تفضيلات Twinkle');
+			Twinkle.addPortletLink(mw.util.getUrl('Wikipedia:Twinkle/Preferences'), 'التفضيلات', 'tw-config', 'افتح صفحة تفضيلات لمح البصر');
 		}
 	};
 
@@ -418,7 +418,7 @@
 	// Twinkle.changeTags = '';
 	// Available for actions that don’t (yet) support tags
 	// currently: FlaggedRevs and PageTriage
-	Twinkle.summaryAd = ' ([[WP:TW|توينكل]])';
+	Twinkle.summaryAd = ' ([[وب:لمح البصر|لمح البصر]])';
 
 	// Various hatnote templates, used when tagging (csd/xfd/tag/prod/protect) to
 	// ensure MOS:ORDER
@@ -455,7 +455,7 @@
 		}
 		if (!Twinkle.findSources) {
 			const parser = new Morebits.wiki.Preview($(divID)[0]);
-			parser.beginRender('({{Find sources|' + Morebits.pageNameNorm + '}})', 'WP:AFD').then(() => {
+			parser.beginRender('({{جد مصادر|' + Morebits.pageNameNorm + '}})', 'WP:AFD').then(() => {
 				// Save for second-time around
 				Twinkle.findSources = parser.previewbox.innerHTML;
 				$(divID).removeClass('morebits-previewbox');

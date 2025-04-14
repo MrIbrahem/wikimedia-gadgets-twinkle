@@ -31,13 +31,13 @@
 	Twinkle.arv.callback = function (uid, isIP) {
 		const Window = new Morebits.SimpleWindow(600, 500);
 		Window.setTitle('الإبلاغ المتقدم والتدقيق'); // Backronym
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('دليل AIV', 'WP:GAIV');
 		Window.addFooterLink('دليل UAA', 'WP:UAAI');
 		Window.addFooterLink('دليل SPI', 'Wikipedia:Sockpuppet investigations/SPI/Guide to filing cases');
-		Window.addFooterLink('تفضيلات ARV', 'WP:TW/PREF#arv');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#arv');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('تفضيلات ARV', 'ويكيبيديا:Twinkle/Preferences#arv');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#arv');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.arv.callback.evaluate);
 		const categories = form.append({
@@ -115,7 +115,7 @@
 				const block = blocklist[0];
 				let message = (isIP ? 'هذا الـ IP ' + (Morebits.ip.isRange(uid) ? 'نطاق' : 'عنوان') : 'هذا الحساب') + 'هو ' + (block.partial ? 'جزئياً' : 'محظور بالفعل');
 				// Start and end differ, range blocked
-				message += block.rangestart !== block.rangeend ? ' كجزء من حظر نطاق.' : '.';
+				message += block.rangestart !== block.rangeend ? ' كجزء من منع نطاق.' : '.';
 				if (block.partial) {
 					$('#twinkle-arv-blockwarning').css('color', 'black'); // Less severe
 				}
@@ -191,7 +191,7 @@
 							value: 'final'
 						},
 						{
-							label: 'تخريب بعد الإفراج الأخير (خلال يوم واحد) عن الحظر',
+							label: 'تخريب بعد الإفراج الأخير (خلال يوم واحد) عن المنع',
 							value: 'postblock'
 						},
 						{
@@ -227,7 +227,7 @@
 				work_area.append({
 					type: 'header',
 					label: 'نوع (أنواع) اسم المستخدم غير المناسب',
-					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل، تحظر أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا، تعتبر غير مناسبة.'
+					tooltip: 'لا تسمح ويكيبيديا بأسماء المستخدمين المضللة أو الترويجية أو المسيئة أو المعطلة. وبالمثل، تمنع أسماء النطاقات وعناوين البريد الإلكتروني. تنطبق هذه المعايير على كل من أسماء المستخدمين والتوقيعات. لا تزال أسماء المستخدمين غير المناسبة بلغة أخرى، أو التي تمثل اسمًا غير لائق مع أخطاء إملائية واستبدالات، أو تفعل ذلك بشكل غير مباشر أو ضمنيًا، تعتبر غير مناسبة.'
 				});
 				work_area.append({
 					type: 'checkbox',
@@ -743,7 +743,7 @@
 				case 'final':
 					return 'تخريب بعد التحذير النهائي';
 				case 'postblock':
-					return 'تخريب بعد الإفراج الأخير عن الحظر';
+					return 'تخريب بعد الإفراج الأخير عن المنع';
 				case 'vandalonly':
 					return 'تشير الإجراءات بوضوح إلى حساب تخريبي فقط';
 				case 'promoonly':
@@ -757,9 +757,9 @@
 
 		if (input.page !== '') {
 			// Allow links to redirects, files, and categories
-			text = 'في {{No redirect|:' + input.page + '}}';
+			text = 'في {{لا تحويل|:' + input.page + '}}';
 			if (input.badid !== '') {
-				text += ' ({{diff|' + input.page + '|' + input.badid + '|' + input.goodid + '|diff}})';
+				text += ' ({{Diff|' + input.page + '|' + input.badid + '|' + input.goodid + '|diff}})';
 			}
 			text += ':';
 		}
@@ -789,7 +789,7 @@
 	};
 
 	Twinkle.arv.callback.buildAivReport = function (input) {
-		return '\n*{{vandal|' + (/=/.test(input.uid) ? '1=' : '') + input.uid + '}} &ndash; ' + Twinkle.arv.callback.getAivReasonWikitext(input);
+		return '\n*{{وصلات مخرب|' + (/=/.test(input.uid) ? '1=' : '') + input.uid + '}} &ndash; ' + Twinkle.arv.callback.getAivReasonWikitext(input);
 	};
 
 	Twinkle.arv.callback.getUsernameReportWikitext = function (input) {
@@ -806,7 +806,7 @@
 			adjective = 'an';
 		}
 
-		let text = '*{{user-uaa|1=' + input.uid + '}} – ';
+		let text = '*{{مستخدم-أمف|1=' + input.uid + '}} – ';
 		if (input.arvtype.length) {
 			text += 'انتهاك لسياسة اسم المستخدم كاسم مستخدم ' + adjective + ' ' + input.arvtype + '. ';
 		}
@@ -924,7 +924,7 @@
 					const last = sub[0];
 					const first = sub.slice(-1)[0];
 					const label = 'تعديلات متتالية أُجريت من ' + new Morebits.Date(first.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(last.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)';
-					ret = '# {{diff|oldid=' + first.parentid + '|diff=' + last.revid + '|label=' + label + '}}\n';
+					ret = '# {{Diff|oldid=' + first.parentid + '|diff=' + last.revid + '|label=' + label + '}}\n';
 				}
 				ret += sub.reverse().map((v) => (sub.length >= 2 ? '#' : '') + '# {{diff2|' + v.revid + '|' + new Morebits.Date(v.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC)}} ' + hasHiddenComment(v)).join('\n');
 				return ret;
@@ -935,7 +935,7 @@
 			if (params.free_resolves) {
 				const page = params.free_resolves;
 				if (page.compare) {
-					resolvetext += '\n#  {{diff|oldid=' + page.compare.fromrevid + '|diff=' + page.compare.torevid + '|label=تعديلات متتالية في ' + page.compare.totitle + '}}';
+					resolvetext += '\n#  {{Diff|oldid=' + page.compare.fromrevid + '|diff=' + page.compare.torevid + '|label=تعديلات متتالية في ' + page.compare.totitle + '}}';
 				} else if (page.revisions) {
 					const revCount = page.revisions.length;
 					let rev;
@@ -946,7 +946,7 @@
 						rev = page.revisions[0];
 						const revLatest = page.revisions[revCount - 1];
 						const label = 'تعديلات متتالية أُجريت من ' + new Morebits.Date(rev.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) إلى ' + new Morebits.Date(revLatest.timestamp).format('HH:mm, D MMMM YYYY', 'utc') + ' (UTC) في ' + page.title;
-						resolvetext += '\n# {{diff|oldid=' + rev.revid + '|diff=' + revLatest.revid + '|label=' + label + '}}\n';
+						resolvetext += '\n# {{Diff|oldid=' + rev.revid + '|diff=' + revLatest.revid + '|label=' + label + '}}\n';
 					}
 				}
 			}

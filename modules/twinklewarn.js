@@ -58,9 +58,9 @@
 		dialog.setTitle('تحذير / إخطار المستخدم');
 		dialog.setScriptName('Twinkle');
 		dialog.addFooterLink('اختيار مستوى التحذير', 'WP:UWUL#Levels');
-		dialog.addFooterLink('تفضيلات التحذير', 'WP:TW/PREF#warn');
-		dialog.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#warn');
-		dialog.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		dialog.addFooterLink('تفضيلات التحذير', 'ويكيبيديا:Twinkle/Preferences#warn');
+		dialog.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#warn');
+		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.warn.callback.evaluate);
 		const main_select = form.append({
@@ -723,50 +723,50 @@
 				},
 				'uw-tempabuse': {
 					level1: {
-						label: 'استخدام غير لائق لقالب التحذير أو الحظر',
-						summary: 'ملاحظة عامة: استخدام غير لائق لقالب التحذير أو الحظر'
+						label: 'استخدام غير لائق لقالب التحذير أو المنع',
+						summary: 'ملاحظة عامة: استخدام غير لائق لقالب التحذير أو المنع'
 					},
 					level2: {
-						label: 'استخدام غير لائق لقالب التحذير أو الحظر',
-						summary: 'تحذير: استخدام غير لائق لقالب التحذير أو الحظر'
+						label: 'استخدام غير لائق لقالب التحذير أو المنع',
+						summary: 'تحذير: استخدام غير لائق لقالب التحذير أو المنع'
 					}
 				}
 			},
 			'Removal of deletion tags': {
 				'uw-afd': {
 					level1: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'ملاحظة عامة: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{حذف}}'
 					},
 					level2: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'تحذير: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'تحذير: إزالة قوالب {{حذف}}'
 					},
 					level3: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'تحذير: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'تحذير: إزالة قوالب {{حذف}}'
 					},
 					level4: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'تحذير نهائي: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{حذف}}'
 					}
 				},
 				'uw-blpprod': {
 					level1: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'ملاحظة عامة: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{حذف سيرة}}'
 					},
 					level2: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'تحذير: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'تحذير: إزالة قوالب {{حذف سيرة}}'
 					},
 					level3: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'تحذير: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'تحذير: إزالة قوالب {{حذف سيرة}}'
 					},
 					level4: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'تحذير نهائي: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{حذف سيرة}}'
 					}
 				},
 				'uw-idt': {
@@ -1026,8 +1026,8 @@
 				summary: 'إشعار: تقرير AIV سيئ'
 			},
 			'uw-articletodraft': {
-				label: 'تم نقل المقالة إلى مساحة المسودة',
-				summary: 'إشعار: تم نقل المقالة إلى مساحة المسودة',
+				label: 'تم نقل المقالة إلى نطاق المسودة',
+				summary: 'إشعار: تم نقل المقالة إلى نطاق المسودة',
 				hideReason: true
 			},
 			'uw-autobiography': {
@@ -1098,8 +1098,8 @@
 				summary: 'إشعار: استخدام غير صحيح لـ DISPLAYTITLE'
 			},
 			'uw-draftfirst': {
-				label: 'يجب على المستخدم الصياغة في مساحة المستخدم دون التعرض لخطر الحذف السريع',
-				summary: 'إشعار: ضع في اعتبارك صياغة مقالتك في [[Help:Userspace draft|مساحة المستخدم]]'
+				label: 'يجب على المستخدم الصياغة في نطاق المستخدم دون التعرض لخطر الحذف السريع',
+				summary: 'إشعار: ضع في اعتبارك صياغة مقالتك في [[Help:Userspace draft|نطاق المستخدم]]'
 			},
 			'uw-editsummary': {
 				label: 'مستخدم جديد لا يستخدم ملخص التعديل',
@@ -1219,8 +1219,8 @@
 				summary: 'إشعار: النسخ من مصادر مرخصة بشكل متوافق دون إسناد'
 			},
 			'uw-userspace draft finish': {
-				label: 'مسودة مساحة مستخدم قديمة',
-				summary: 'إشعار: مسودة مساحة مستخدم قديمة'
+				label: 'مسودة نطاق مستخدم قديمة',
+				summary: 'إشعار: مسودة نطاق مستخدم قديمة'
 			},
 			'uw-usertalk': {
 				label: 'إساءة استخدام صفحة نقاش المستخدم',
@@ -1277,8 +1277,8 @@
 				heading: 'ويكيبيديا وحقوق النشر'
 			},
 			'uw-copyright-remove': {
-				label: 'إزالة قالب {{copyvio}} من المقالات',
-				summary: 'تحذير: إزالة قوالب {{copyvio}}'
+				label: 'إزالة قالب {{خرق}} من المقالات',
+				summary: 'تحذير: إزالة قوالب {{خرق}}'
 			},
 			'uw-derogatory': {
 				label: 'إضافة محتوى مهين / بغيض',
@@ -1527,7 +1527,7 @@
 				if (Twinkle.warn.talkpageObj) {
 					autolevelProc();
 				} else {
-					const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
+					const usertalk_page = new Morebits.wiki.Page('نقاش_المستخدم:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
 					usertalk_page.setFollowRedirect(true, false);
 					usertalk_page.load((pageobj) => {
 						Twinkle.warn.talkpageObj = pageobj; // Update talkpageObj
@@ -1660,14 +1660,14 @@
 		$('#tw-warn-red-notice').remove();
 		let $redWarning;
 		if (selected_template === 'uw-username') {
-			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
-				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في Twinkle). " +
-				'يجب استخدام {{uw-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
+			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{تنبيه اسم مخالف}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
+				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في لمح البصر). " +
+				'يجب استخدام {{تنبيه اسم مخالف}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		} else if (selected_template === 'uw-coi-username') {
-			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-coi-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
-				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في Twinkle). " +
-				'يجب استخدام {{uw-coi-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
+			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{Uw-coi-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
+				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في لمح البصر). " +
+				'يجب استخدام {{Uw-coi-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		}
 	};
@@ -1711,13 +1711,13 @@
 			const templatetext = Twinkle.warn.callbacks.getWarningWikitext(templatename, linkedarticle,
 				input.reason, input.main_group === 'custom');
 
-			form.previewer.beginRender(templatetext, 'User_talk:' + mw.config.get('wgRelevantUserName')); // Force wikitext/correct username
+			form.previewer.beginRender(templatetext, 'نقاش_المستخدم:' + mw.config.get('wgRelevantUserName')); // Force wikitext/correct username
 		},
 		// Just a pass-through unless the autolevel option was selected
 		preview: function (form) {
 			if (form.main_group.value === 'autolevel') {
 				// Always get a new, updated talkpage for autolevel processing
-				const usertalk_page = new Morebits.wiki.Page('User_talk:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
+				const usertalk_page = new Morebits.wiki.Page('نقاش_المستخدم:' + mw.config.get('wgRelevantUserName'), 'جارٍ تحميل التحذيرات السابقة');
 				usertalk_page.setFollowRedirect(true, false);
 				// Will fail silently if the talk page is a cross-ns redirect,
 				// removal of the preview box handled when loading the menu
@@ -2020,14 +2020,14 @@
 	};
 
 	Twinkle.warn.callback.evaluate = function twinklewarnCallbackEvaluate(e) {
-		const userTalkPage = 'User_talk:' + mw.config.get('wgRelevantUserName');
+		const userTalkPage = 'نقاش_المستخدم:' + mw.config.get('wgRelevantUserName');
 
 		// reason, main_group, sub_group, article
 		const params = Morebits.QuickForm.getInputData(e.target);
 
 		// Check that a reason was filled in if uw-username was selected
 		if (params.sub_group === 'uw-username' && !params.article) {
-			alert('يجب عليك تقديم سبب لقالب {{uw-username}}.');
+			alert('يجب عليك تقديم سبب لقالب {{تنبيه اسم مخالف}}.');
 			return;
 		}
 

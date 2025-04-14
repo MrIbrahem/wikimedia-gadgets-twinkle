@@ -29,9 +29,9 @@
 		subpagesLoaded = false;
 		const Window = new Morebits.SimpleWindow(600, 400);
 		Window.setTitle('حذف دفعة');
-		Window.setScriptName('Twinkle');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#batchdelete');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.setScriptName('لمح البصر!');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#batchdelete');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchdelete.callback.evaluate);
 		form.append({
@@ -77,7 +77,7 @@
 											value: 'delete_subpage_redirects'
 										},
 										{
-											label: 'إلغاء ارتباط الروابط الخلفية لكل صفحة فرعية محذوفة (في نطاقات Main و Portal فقط)',
+											label: 'إلغاء ارتباط الصفحات المرتبطة لكل صفحة فرعية محذوفة (في نطاقات Main و Portal فقط)',
 											name: 'unlink_subpages',
 											value: 'unlink_subpages'
 										}
@@ -88,7 +88,7 @@
 					}
 				},
 				{
-					label: 'إلغاء ارتباط الروابط الخلفية لكل صفحة (في نطاقات Main و Portal فقط)',
+					label: 'إلغاء ارتباط الصفحات المرتبطة لكل صفحة (في نطاقات Main و Portal فقط)',
 					name: 'unlink_page',
 					value: 'unlink',
 					checked: false
@@ -565,7 +565,7 @@
 			redirectDeleter.setPageList(pages);
 			redirectDeleter.run((pageName) => {
 				const wikipedia_page = new Morebits.wiki.Page(pageName, 'حذف ' + pageName);
-				wikipedia_page.setEditSummary('[[WP:CSD#G8|G8]]: تحويل إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
+				wikipedia_page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: تحويل إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
 				wikipedia_page.setChangeTags(Twinkle.changeTags);
 				wikipedia_page.deletePage(redirectDeleter.workerSuccess, redirectDeleter.workerFailure);
 			});
@@ -579,7 +579,7 @@
 			}
 
 			const page = new Morebits.wiki.Page(apiobj.params.talkPage, 'حذف صفحة نقاش الصفحة ' + apiobj.params.page);
-			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
+			page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
 			page.setChangeTags(Twinkle.changeTags);
 			page.deletePage();
 		},

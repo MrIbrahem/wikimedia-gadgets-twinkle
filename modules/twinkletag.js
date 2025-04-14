@@ -36,11 +36,11 @@
 
 	Twinkle.tag.callback = function twinkletagCallback() {
 		const Window = new Morebits.SimpleWindow(630, Twinkle.tag.mode === 'article' ? 500 : 400);
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		// anyone got a good policy/guideline/info page/instructional page link??
-		Window.addFooterLink('Tag prefs', 'WP:TW/PREF#tag');
-		Window.addFooterLink('Twinkle help', 'WP:TW/DOC#tag');
-		Window.addFooterLink('Give feedback', 'WT:TW');
+		Window.addFooterLink('Tag prefs', 'ويكيبيديا:Twinkle/Preferences#tag');
+		Window.addFooterLink('Twinkle help', 'ويكيبيديا:لمح البصر/توثيق#tag');
+		Window.addFooterLink('Give feedback', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.tag.callback.evaluate);
 
@@ -296,7 +296,7 @@
 				// Look for existing maintenance tags in the lead section and put them in array
 
 				// All tags are HTML table elements that are direct children of .mw-parser-output,
-				// except when they are within {{multiple issues}}
+				// except when they are within {{مشكلات متعددة}}
 				$('.mw-parser-output').children().each((i, e) => {
 
 					// break out on encountering the first heading, which means we are no
@@ -305,7 +305,7 @@
 						return false;
 					}
 
-					// The ability to remove tags depends on the template's {{ambox}} |name=
+					// The ability to remove tags depends on the template's {{صندوق رسالة مقالة}} |name=
 					// parameter bearing the template's correct name (preferably) or a name that at
 					// least redirects to the actual name
 
@@ -326,7 +326,7 @@
 					}
 				});
 
-				// {{Uncategorized}} and {{Improve categories}} are usually placed at the end
+				// {{غير مصنفة}} and {{تحسين تصنيف}} are usually placed at the end
 				if ($('.box-Uncategorized').length) {
 					Twinkle.tag.alreadyPresentTags.push('Uncategorized');
 				}
@@ -523,7 +523,7 @@
 	// Tags for ARTICLES start here
 	Twinkle.tag.article = {};
 
-	// Shared across {{Rough translation}} and {{Not English}}
+	// Shared across {{Rough translation}} and {{ترجمة غير مكتملة}}
 	const translationSubgroups = [
 		{
 			name: 'translationLanguage',
@@ -549,7 +549,7 @@
 		}
 	] : []);
 
-	// Subgroups for {{merge}}, {{merge-to}} and {{merge-from}}
+	// Subgroups for {{دمج}}, {{دمج إلى}} and {{دمج من}}
 	const getMergeSubgroups = function (tag) {
 		let otherTagName = 'دمج';
 		switch (tag) {
@@ -591,7 +591,7 @@
 
 	// Tags arranged by category; will be used to generate the alphabetical list,
 	// but tags should be in alphabetical order within the categories
-	// excludeMI: true indicate a tag that *does not* work inside {{multiple issues}}
+	// excludeMI: true indicate a tag that *does not* work inside {{مشكلات متعددة}}
 	// Add new categories with discretion - the list is long enough as is!
 	Twinkle.tag.article.tagList = {
 		'قوالب التنظيف والصيانة': {
@@ -682,24 +682,24 @@
 						parameter: '1',
 						type: 'select',
 						list: [
-							{ label: "{{notability}}: قد لا يفي موضوع المقال بالإرشادات العامة للملاحظة", value: '' },
-							{ label: '{{notability|Academics}}: إرشادات الملاحظة للأكاديميين', value: 'Academics' },
-							{ label: '{{notability|Astro}}: إرشادات الملاحظة للأجرام الفلكية', value: 'Astro' },
-							{ label: '{{notability|Biographies}}: إرشادات الملاحظة للسير الذاتية', value: 'Biographies' },
-							{ label: '{{notability|Books}}: إرشادات الملاحظة للكتب', value: 'Books' },
-							{ label: '{{notability|Companies}}: إرشادات الملاحظة للشركات', value: 'Companies' },
-							{ label: '{{notability|Events}}: إرشادات الملاحظة للأحداث', value: 'Events' },
-							{ label: '{{notability|Films}}: إرشادات الملاحظة للأفلام', value: 'Films' },
-							{ label: '{{notability|Geographic}}: إرشادات الملاحظة للمعالم الجغرافية', value: 'Geographic' },
-							{ label: '{{notability|Lists}}: إرشادات الملاحظة للقوائم المستقلة', value: 'Lists' },
-							{ label: '{{notability|Music}}: إرشادات الملاحظة للموسيقى', value: 'Music' },
-							{ label: '{{notability|Neologisms}}: إرشادات الملاحظة للكلمات الجديدة', value: 'Neologisms' },
-							{ label: '{{notability|Numbers}}: إرشادات الملاحظة للأرقام', value: 'Numbers' },
-							{ label: '{{notability|Organizations}}: إرشادات الملاحظة للمنظمات', value: 'Organizations' },
-							{ label: '{{notability|Products}}: إرشادات الملاحظة للمنتجات والخدمات', value: 'Products' },
-							{ label: '{{notability|Sports}}: إرشادات الملاحظة للرياضة وألعاب القوى', value: 'Sports' },
-							{ label: '{{notability|Television}}: إرشادات الملاحظة للبرامج التلفزيونية', value: 'Television' },
-							{ label: '{{notability|Web}}: إرشادات الملاحظة لمحتوى الويب', value: 'Web' }
+							{ label: "{{ملحوظية}}: قد لا يفي موضوع المقال بالإرشادات العامة للملاحظة", value: '' },
+							{ label: '{{ملحوظية|Academics}}: إرشادات الملاحظة للأكاديميين', value: 'Academics' },
+							{ label: '{{ملحوظية|Astro}}: إرشادات الملاحظة للأجرام الفلكية', value: 'Astro' },
+							{ label: '{{ملحوظية|Biographies}}: إرشادات الملاحظة للسير الذاتية', value: 'Biographies' },
+							{ label: '{{ملحوظية|Books}}: إرشادات الملاحظة للكتب', value: 'Books' },
+							{ label: '{{ملحوظية|Companies}}: إرشادات الملاحظة للشركات', value: 'Companies' },
+							{ label: '{{ملحوظية|Events}}: إرشادات الملاحظة للأحداث', value: 'Events' },
+							{ label: '{{ملحوظية|Films}}: إرشادات الملاحظة للأفلام', value: 'Films' },
+							{ label: '{{ملحوظية|Geographic}}: إرشادات الملاحظة للمعالم الجغرافية', value: 'Geographic' },
+							{ label: '{{ملحوظية|Lists}}: إرشادات الملاحظة للقوائم المستقلة', value: 'Lists' },
+							{ label: '{{ملحوظية|Music}}: إرشادات الملاحظة للموسيقى', value: 'Music' },
+							{ label: '{{ملحوظية|Neologisms}}: إرشادات الملاحظة للكلمات الجديدة', value: 'Neologisms' },
+							{ label: '{{ملحوظية|Numbers}}: إرشادات الملاحظة للأرقام', value: 'Numbers' },
+							{ label: '{{ملحوظية|Organizations}}: إرشادات الملاحظة للمنظمات', value: 'Organizations' },
+							{ label: '{{ملحوظية|Products}}: إرشادات الملاحظة للمنتجات والخدمات', value: 'Products' },
+							{ label: '{{ملحوظية|Sports}}: إرشادات الملاحظة للرياضة وألعاب القوى', value: 'Sports' },
+							{ label: '{{ملحوظية|Television}}: إرشادات الملاحظة للبرامج التلفزيونية', value: 'Television' },
+							{ label: '{{ملحوظية|Web}}: إرشادات الملاحظة لمحتوى الويب', value: 'Web' }
 						]
 					}
 				}
@@ -1170,15 +1170,15 @@
 
 	Twinkle.tag.fileList = {
 		"قوالب مشاكل الترخيص والمصدر": [
-			{ label: '{{Better source requested}}: تتكون معلومات المصدر من عنوان URL لصورة مجردة/عنوان URL أساسي عام فقط', value: 'Better source requested' },
-			{ label: '{{Maybe free media}}: تم وضع علامة حاليًا بموجب ترخيص غير مجاني، ولكن قد يتوفر ترخيص مجاني', value: 'Maybe free media' },
-			{ label: '{{Non-free reduce}}: صورة استخدام عادل غير منخفضة الدقة (أو مقطع صوتي طويل جدًا، إلخ)', value: 'Non-free reduce' },
-			{ label: '{{Orphaned non-free revisions}}: وسائط استخدام عادل مع مراجعات قديمة تحتاج إلى حذف', value: 'Orphaned non-free revisions' }
+			{ label: '{{مطلوب مصدر أفضل}}: تتكون معلومات المصدر من عنوان URL لصورة مجردة/عنوان URL أساسي عام فقط', value: 'Better source requested' },
+			{ label: '{{وسائط قد تكون حرة}}: تم وضع علامة حاليًا بموجب ترخيص غير مجاني، ولكن قد يتوفر ترخيص مجاني', value: 'Maybe free media' },
+			{ label: '{{تصغير حجم ملف غير حر}}: صورة استخدام عادل غير منخفضة الدقة (أو مقطع صوتي طويل جدًا، إلخ)', value: 'Non-free reduce' },
+			{ label: '{{إصدارات غير حرة يتيمة}}: وسائط استخدام عادل مع مراجعات قديمة تحتاج إلى حذف', value: 'Orphaned non-free revisions' }
 		],
 		"قوالب متعلقة بويكيميديا كومنز": [
-			{ label: '{{Copy to Commons}}: وسائط مجانية يجب نسخها إلى كومنز', value: 'Copy to Commons' },
+			{ label: '{{تصدير إلى كومنز}}: وسائط مجانية يجب نسخها إلى كومنز', value: 'Copy to Commons' },
 			{
-				label: '{{Deleted on Commons}}: تم حذف الملف مسبقًا من كومنز',
+				label: '{{حذف من كومنز}}: تم حذف الملف مسبقًا من كومنز',
 				value: 'Deleted on Commons',
 				subgroup: {
 					type: 'input',
@@ -1188,7 +1188,7 @@
 				}
 			},
 			{
-				label: '{{Do not move to Commons}}: الملف غير مناسب للنقل إلى كومنز',
+				label: '{{لا تصدر لكومنز}}: الملف غير مناسب للنقل إلى كومنز',
 				value: 'Do not move to Commons',
 				subgroup: [
 					{
@@ -1208,7 +1208,7 @@
 				]
 			},
 			{
-				label: '{{Keep local}}: طلب الاحتفاظ بنسخة محلية من ملف كومنز',
+				label: '{{إبقاء نسخة محلية}}: طلب الاحتفاظ بنسخة محلية من ملف كومنز',
 				value: 'Keep local',
 				subgroup: {
 					type: 'input',
@@ -1218,7 +1218,7 @@
 				}
 			},
 			{
-				label: '{{Nominated for deletion on Commons}}: تم ترشيح الملف للحذف في كومنز',
+				label: '{{رشح للحذف من كومنز}}: تم ترشيح الملف للحذف في كومنز',
 				value: 'Nominated for deletion on Commons',
 				subgroup: {
 					type: 'input',
@@ -1229,15 +1229,15 @@
 			}
 		],
 		"قوالب التنظيف": [
-			{ label: '{{Artifacts}}: يحتوي PNG على بقايا ضغط', value: 'Artifacts' },
-			{ label: '{{Bad font}}: يستخدم SVG خطوطًا غير متوفرة على خادم الصور المصغرة', value: 'Bad font' },
-			{ label: '{{Bad format}}: يجب تحويل ملف PDF/DOC/... إلى تنسيق أكثر فائدة', value: 'Bad format' },
-			{ label: '{{Bad GIF}}: GIF يجب أن يكون PNG أو JPEG أو SVG', value: 'Bad GIF' },
-			{ label: '{{Bad JPEG}}: JPEG يجب أن يكون PNG أو SVG', value: 'Bad JPEG' },
-			{ label: '{{Bad SVG}}: SVG مع مزيج من رسومات نقطية ومتجهة', value: 'Bad SVG' },
-			{ label: '{{Bad trace}}: SVG تم تتبعه تلقائيًا ويتطلب تنظيفًا', value: 'Bad trace' },
+			{ label: '{{آثار الضغط}}: يحتوي PNG على بقايا ضغط', value: 'Artifacts' },
+			{ label: '{{خط رديئ}}: يستخدم SVG خطوطًا غير متوفرة على خادم الصور المصغرة', value: 'Bad font' },
+			{ label: '{{ملف PDF رديئ}}: يجب تحويل ملف PDF/DOC/... إلى تنسيق أكثر فائدة', value: 'Bad format' },
+			{ label: '{{صورة GIF رديئة}}: GIF يجب أن يكون PNG أو JPEG أو SVG', value: 'Bad GIF' },
+			{ label: '{{صورة JPEG رديئة}}: JPEG يجب أن يكون PNG أو SVG', value: 'Bad JPEG' },
+			{ label: '{{صورة SVG بعناصر نقطية}}: SVG مع مزيج من رسومات نقطية ومتجهة', value: 'Bad SVG' },
+			{ label: '{{رسم رديء}}: SVG تم تتبعه تلقائيًا ويتطلب تنظيفًا', value: 'Bad trace' },
 			{
-				label: '{{Cleanup image}}: تنظيف عام', value: 'Cleanup image',
+				label: '{{تهذيب صورة}}: تنظيف عام', value: 'Cleanup image',
 				subgroup: {
 					type: 'input',
 					name: 'cleanupimageReason',
@@ -1246,15 +1246,15 @@
 					required: true
 				}
 			},
-			{ label: '{{ClearType}}: صورة (ليست لقطة شاشة) مع ClearType anti-aliasing', value: 'ClearType' },
-			{ label: '{{Fake SVG}}: SVG تحتوي فقط على رسومات نقطية بدون محتوى متجه حقيقي', value: 'Fake SVG' },
-			{ label: '{{Imagewatermark}}: تحتوي الصورة على علامة مائية مرئية أو غير مرئية', value: 'Imagewatermark' },
-			{ label: '{{NoCoins}}: صورة تستخدم عملات معدنية للإشارة إلى المقياس', value: 'NoCoins' },
-			{ label: '{{Overcompressed JPEG}}: JPEG مع مستويات عالية من القطع الأثرية', value: 'Overcompressed JPEG' },
-			{ label: '{{Opaque}}: يجب أن تكون الخلفية غير الشفافة شفافة', value: 'Opaque' },
-			{ label: '{{Remove border}}: حدود غير ضرورية، مساحة بيضاء، إلخ.', value: 'Remove border' },
+			{ label: '{{صور تستخدم كليرتايب}}: صورة (ليست لقطة شاشة) مع ClearType anti-aliasing', value: 'ClearType' },
+			{ label: '{{صورة SVG لا تتضمن سوى رسوميات نقطية}}: SVG تحتوي فقط على رسومات نقطية بدون محتوى متجه حقيقي', value: 'Fake SVG' },
+			{ label: '{{صورة بعلامة مائية}}: تحتوي الصورة على علامة مائية مرئية أو غير مرئية', value: 'Imagewatermark' },
+			{ label: '{{لا عملات معدنية}}: صورة تستخدم عملات معدنية للإشارة إلى المقياس', value: 'NoCoins' },
+			{ label: '{{صورة ذات ضغط JPEG مفرط}}: JPEG مع مستويات عالية من القطع الأثرية', value: 'Overcompressed JPEG' },
+			{ label: '{{صورة بخلفية عتيمة}}: يجب أن تكون الخلفية غير الشفافة شفافة', value: 'Opaque' },
+			{ label: '{{صورة بحاجة لإزالة الحدود}}: حدود غير ضرورية، نطاق بيضاء، إلخ.', value: 'Remove border' },
 			{
-				label: '{{Rename media}}: يجب إعادة تسمية الملف وفقًا للمعايير في [[WP:FMV]]',
+				label: '{{إعادة تسمية وسائط}}: يجب إعادة تسمية الملف وفقًا للمعايير في [[WP:FMV]]',
 				value: 'Rename media',
 				subgroup: [
 					{
@@ -1271,39 +1271,39 @@
 					}
 				]
 			},
-			{ label: '{{Should be PNG}}: يجب أن يكون GIF أو JPEG بدون فقدان للبيانات', value: 'Should be PNG' },
+			{ label: '{{يجب أن تكون بتنسيق PNG}}: يجب أن يكون GIF أو JPEG بدون فقدان للبيانات', value: 'Should be PNG' },
 			{
-				label: '{{Should be SVG}}: يجب أن يكون PNG أو GIF أو JPEG رسومات متجهة', value: 'Should be SVG',
+				label: '{{يجب أن تكون بتنسيق SVG}}: يجب أن يكون PNG أو GIF أو JPEG رسومات متجهة', value: 'Should be SVG',
 				subgroup: {
 					name: 'svgCategory',
 					type: 'select',
 					list: [
-						{ label: '{{Should be SVG|other}}', value: 'other' },
-						{ label: '{{Should be SVG|alphabet}}: صور الأحرف، أمثلة الخطوط، إلخ.', value: 'alphabet' },
-						{ label: '{{Should be SVG|chemical}}: مخططات كيميائية، إلخ.', value: 'chemical' },
-						{ label: '{{Should be SVG|circuit}}: مخططات الدوائر الإلكترونية، إلخ.', value: 'circuit' },
-						{ label: '{{Should be SVG|coat of arms}}: شعارات النبالة', value: 'coat of arms' },
-						{ label: '{{Should be SVG|diagram}}: الرسوم البيانية التي لا تتناسب مع أي فئة فرعية أخرى', value: 'diagram' },
-						{ label: '{{Should be SVG|emblem}}: الشعارات، الشعارات الحرة/المفتوحة المصدر، الشارات، إلخ.', value: 'emblem' },
-						{ label: '{{Should be SVG|fair use}}: صور الاستخدام العادل، شعارات الاستخدام العادل', value: 'fair use' },
-						{ label: '{{Should be SVG|flag}}: أعلام', value: 'flag' },
-						{ label: '{{Should be SVG|graph}}: مخططات مرئية للبيانات', value: 'graph' },
-						{ label: '{{Should be SVG|logo}}: الشعارات', value: 'logo' },
-						{ label: '{{Should be SVG|map}}: الخرائط', value: 'map' },
-						{ label: '{{Should be SVG|music}}: المقاييس الموسيقية، النوتات، إلخ.', value: 'music' },
-						{ label: '{{Should be SVG|physical}}: صور "واقعية" للأشياء المادية، الناس، إلخ.', value: 'physical' },
-						{ label: '{{Should be SVG|symbol}}: رموز مختلفة، أيقونات، إلخ.', value: 'symbol' }
+						{ label: '{{يجب أن تكون بتنسيق SVG|other}}', value: 'other' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|alphabet}}: صور الأحرف، أمثلة الخطوط، إلخ.', value: 'alphabet' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|chemical}}: مخططات كيميائية، إلخ.', value: 'chemical' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|circuit}}: مخططات الدوائر الإلكترونية، إلخ.', value: 'circuit' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|coat of arms}}: شعارات النبالة', value: 'coat of arms' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|diagram}}: الرسوم البيانية التي لا تتناسب مع أي فئة فرعية أخرى', value: 'diagram' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|emblem}}: الشعارات، الشعارات الحرة/المفتوحة المصدر، الشارات، إلخ.', value: 'emblem' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|fair use}}: صور الاستخدام العادل، شعارات الاستخدام العادل', value: 'fair use' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|flag}}: أعلام', value: 'flag' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|graph}}: مخططات مرئية للبيانات', value: 'graph' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|logo}}: الشعارات', value: 'logo' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|map}}: الخرائط', value: 'map' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|music}}: المقاييس الموسيقية، النوتات، إلخ.', value: 'music' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|physical}}: صور "واقعية" للأشياء المادية، الناس، إلخ.', value: 'physical' },
+						{ label: '{{يجب أن تكون بتنسيق SVG|symbol}}: رموز مختلفة، أيقونات، إلخ.', value: 'symbol' }
 					]
 				}
 			},
-			{ label: '{{Should be text}}: يجب تمثيل الصورة كنص أو جداول أو ترميز رياضي', value: 'Should be text' }
+			{ label: '{{يجب أن تكون بتنسيق نصي}}: يجب تمثيل الصورة كنص أو جداول أو ترميز رياضي', value: 'Should be text' }
 		],
 		"قوالب جودة الصورة": [
-			{ label: '{{Image hoax}}: قد يتم التلاعب بالصورة أو تشكل خدعة', value: 'Image hoax' },
-			{ label: '{{Image-blownout}}', value: 'Image-blownout' },
-			{ label: '{{Image-out-of-focus}}', value: 'Image-out-of-focus' },
+			{ label: '{{صورة خادعة}}: قد يتم التلاعب بالصورة أو تشكل خدعة', value: 'Image hoax' },
+			{ label: '{{صورة متوهجة}}', value: 'Image-blownout' },
+			{ label: '{{صورة ضبابية}}', value: 'Image-out-of-focus' },
 			{
-				label: '{{Image-Poor-Quality}}', value: 'Image-Poor-Quality',
+				label: '{{صورة منخفضة الجودة}}', value: 'Image-Poor-Quality',
 				subgroup: {
 					type: 'input',
 					name: 'ImagePoorQualityReason',
@@ -1312,9 +1312,9 @@
 					required: true
 				}
 			},
-			{ label: '{{Image-underexposure}}', value: 'Image-underexposure' },
+			{ label: '{{صورة ضعيفة العرض}}', value: 'Image-underexposure' },
 			{
-				label: '{{Low quality chem}}: هياكل كيميائية متنازع عليها', value: 'Low quality chem',
+				label: '{{هيكل كيميائي ضعيف الجودة}}: هياكل كيميائية متنازع عليها', value: 'Low quality chem',
 				subgroup: {
 					type: 'input',
 					name: 'lowQualityChemReason',
@@ -1325,9 +1325,9 @@
 			}
 		],
 		"قوالب الاستبدال": [
-			{ label: '{{Obsolete}}: نسخة محسنة متاحة', value: 'Obsolete' },
-			{ label: '{{PNG version available}}', value: 'PNG version available' },
-			{ label: '{{Vector version available}}', value: 'Vector version available' }
+			{ label: '{{ملف مهمل}}: نسخة محسنة متاحة', value: 'Obsolete' },
+			{ label: '{{نسخة PNG متوفرة}}', value: 'PNG version available' },
+			{ label: '{{نسخة متجهية متوفرة}}', value: 'Vector version available' }
 		]
 	};
 
@@ -1354,9 +1354,9 @@
 			 */
 			const postRemoval = function () {
 				if (params.tagsToRemove.length) {
-					// Remove empty {{multiple issues}} if found
+					// Remove empty {{مشكلات متعددة}} if found
 					pageText = pageText.replace(/\{\{(multiple ?issues|article ?issues|mi)\s*\|\s*\}\}\n?/im, '');
-					// Remove single-element {{multiple issues}} if found
+					// Remove single-element {{مشكلات متعددة}} if found
 					pageText = pageText.replace(/\{\{(?:multiple ?issues|article ?issues|mi)\s*\|\s*(\{\{[^}]+\}\})\s*\}\}/im, '$1');
 				}
 
@@ -1450,7 +1450,7 @@
 						otherpage.load(Twinkle.tag.callbacks.article);
 					}
 
-					// Special functions for {{not English}} and {{rough translation}}
+					// Special functions for {{ترجمة غير مكتملة}} and {{rough translation}}
 					// Post at WP:PNT (mainspace only)
 					if (params.translationPostAtPNT) {
 						const pntPage = new Morebits.wiki.Page('Wikipedia:Pages needing translation into English',
@@ -1491,7 +1491,7 @@
 							pageobj.save();
 						});
 					}
-					// Notify the user ({{Not English}} only)
+					// Notify the user ({{ترجمة غير مكتملة}} only)
 					if (params.translationNotify) {
 						new Morebits.wiki.Page(Morebits.pageNameNorm).lookupCreation((innerPageobj) => {
 							const initialContrib = innerPageobj.getCreator();
@@ -1666,9 +1666,9 @@
 			};
 
 			/**
-			 * Adds the tags which go outside {{multiple issues}}, either because
-			 * these tags aren't supported in {{multiple issues}} or because
-			 * {{multiple issues}} is not being added to the page at all
+			 * Adds the tags which go outside {{مشكلات متعددة}}, either because
+			 * these tags aren't supported in {{مشكلات متعددة}} or because
+			 * {{مشكلات متعددة}} is not being added to the page at all
 			 */
 			const addUngroupedTags = function () {
 				$.each(tags, addTag);
@@ -1758,7 +1758,7 @@
 
 				const getRedirectsFor = [];
 
-				// Reposition the tags on the page into {{multiple issues}}, if found with its
+				// Reposition the tags on the page into {{مشكلات متعددة}}, if found with its
 				// proper name, else moves it to `getRedirectsFor` array to be handled later
 				groupableExistingTags.forEach((tag) => {
 					const tagRegex = new RegExp('(\\{\\{' + Morebits.pageNameRegex(tag) + '\\s*(\\|[^}]+)?\\}\\}\\n?)');
@@ -1880,10 +1880,10 @@
 						oldPageTags += '\n' + pageTag;
 					});
 				}
-				pageText = pageText.trim() + '\n\n{{Redirect category shell|' + tagText + oldPageTags + '\n}}';
+				pageText = pageText.trim() + '\n\n{{غلاف تصنيف تحويل|' + tagText + oldPageTags + '\n}}';
 			}
 
-			summaryText += (tags.length > 0 ? ' قالب' + (tags.length > 1 ? 's' : ' ') : ' {{[[Template:Redirect category shell|Redirect category shell]]}}') + ' إلى التحويل';
+			summaryText += (tags.length > 0 ? ' قالب' + (tags.length > 1 ? 's' : ' ') : ' {{[[قالب:غلاف تصنيف تحويل|Redirect category shell]]}}') + ' إلى التحويل';
 
 			// avoid truncated summaries
 			if (summaryText.length > 499) {
@@ -1964,7 +1964,7 @@
 							break;
 						case 'Orphaned non-free revisions':
 							currentTag = 'subst:' + currentTag; // subst
-							// remove {{non-free reduce}} and redirects
+							// remove {{تصغير حجم ملف غير حر}} and redirects
 							text = text.replace(/\{\{\s*(Template\s*:\s*)?(Non-free reduce|FairUseReduce|Fairusereduce|Fair Use Reduce|Fair use reduce|Reduce size|Reduce|Fair-use reduce|Image-toobig|Comic-ovrsize-img|Non-free-reduce|Nfr|Smaller image|Nonfree reduce)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/ig, '');
 							currentTag += '|date={{subst:date}}';
 							break;
@@ -2053,7 +2053,7 @@
 
 				if ((params.tags.includes('Merge')) || (params.tags.includes('Merge from')) ||
 					(params.tags.includes('Merge to'))) {
-					if (Twinkle.tag.checkIncompatible(['Merge', 'Merge from', 'Merge to'], params.tags, 'إذا كانت هناك حاجة إلى عدة عمليات دمج، فاستخدم {{Merge}} وافصل أسماء المقالات بأحرف الأنابيب (على الرغم من أنه في هذه الحالة لا يمكن لـ توينكل وضع علامة على المقالات الأخرى تلقائيًا).')) {
+					if (Twinkle.tag.checkIncompatible(['Merge', 'Merge from', 'Merge to'], params.tags, 'إذا كانت هناك حاجة إلى عدة عمليات دمج، فاستخدم {{دمج}} وافصل أسماء المقالات بأحرف الأنابيب (على الرغم من أنه في هذه الحالة لا يمكن لـ توينكل وضع علامة على المقالات الأخرى تلقائيًا).')) {
 						return;
 					}
 					if ((params.mergeTagOther || params.mergeReason) && params.mergeTarget.includes('|')) {
@@ -2096,46 +2096,46 @@
 
 					// Check that selected templates make sense given the file's extension.
 
-					// {{Bad GIF|JPEG|SVG}}, {{Fake SVG}}
+					// {{صورة GIF رديئة|JPEG|SVG}}, {{صورة SVG لا تتضمن سوى رسوميات نقطية}}
 					if (extensionUpper !== 'GIF' && params.tags.includes('Bad GIF')) {
-						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Bad GIF}} غير مناسب.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{صورة GIF رديئة}} غير مناسب.');
 						return;
 					} else if (extensionUpper !== 'JPEG' && params.tags.includes('Bad JPEG')) {
-						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Bad JPEG}} غير مناسب.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{صورة JPEG رديئة}} غير مناسب.');
 						return;
 					} else if (extensionUpper !== 'SVG' && params.tags.includes('Bad SVG')) {
-						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Bad SVG}} غير مناسب.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{صورة SVG بعناصر نقطية}} غير مناسب.');
 						return;
 					} else if (extensionUpper !== 'SVG' && params.tags.includes('Fake SVG')) {
-						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{Fake SVG}} غير مناسب.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا فإن {{صورة SVG لا تتضمن سوى رسوميات نقطية}} غير مناسب.');
 						return;
 					}
 
-					// {{Should be PNG|SVG}}
+					// {{يجب أن تكون بتنسيق PNG|SVG}}
 					if (params.tags.includes('Should be ' + extensionUpper)) {
 						alert('هذا بالفعل ملف ' + extension + '، لذا فإن {{Should be ' + extensionUpper + '}} غير مناسب.');
 						return;
 					}
 
-					// {{Overcompressed JPEG}}
+					// {{صورة ذات ضغط JPEG مفرط}}
 					if (params.tags.includes('Overcompressed JPEG') && extensionUpper !== 'JPEG') {
-						alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{Overcompressed JPEG}}.');
+						alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{صورة ذات ضغط JPEG مفرط}}.');
 						return;
 					}
 
-					// {{Bad trace}} and {{Bad font}}
+					// {{رسم رديء}} and {{خط رديئ}}
 					if (extensionUpper !== 'SVG') {
 						if (params.tags.includes('Bad trace')) {
-							alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{Bad trace}}.');
+							alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{رسم رديء}}.');
 							return;
 						} else if (params.tags.includes('Bad font')) {
-							alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{Bad font}}.');
+							alert('يبدو أن هذا ملف ' + extension + '، لذا من المحتمل ألا ينطبق {{خط رديئ}}.');
 							return;
 						}
 					}
 				}
 
-				// {{Do not move to Commons}}
+				// {{لا تصدر لكومنز}}
 				if (
 					params.tags.includes('Do not move to Commons') &&
 					params.DoNotMoveToCommons_expiry &&

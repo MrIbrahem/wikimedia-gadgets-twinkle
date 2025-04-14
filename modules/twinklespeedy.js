@@ -43,10 +43,10 @@
 		const dialog = Twinkle.speedy.dialog;
 		dialog.setTitle('اختر معايير الحذف السريع');
 		dialog.setScriptName('Twinkle');
-		dialog.addFooterLink('سياسة الحذف السريع', 'WP:CSD');
-		dialog.addFooterLink('تفضيلات CSD', 'WP:TW/PREF#speedy');
-		dialog.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#speedy');
-		dialog.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		dialog.addFooterLink('سياسة الحذف السريع', 'ويكيبيديا:معايير الحذف السريع');
+		dialog.addFooterLink('تفضيلات CSD', 'ويكيبيديا:Twinkle/Preferences#speedy');
+		dialog.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#speedy');
+		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(callbackfunc, Twinkle.getPref('speedySelectionStyle') === 'radioClick' ? 'change' : null);
 		if (Morebits.userIsSysop) {
@@ -180,7 +180,7 @@
 					label: 'ضع علامة على حماية الإنشاء (salting) أيضًا',
 					value: 'salting',
 					name: 'salting',
-					tooltip: 'عند تحديده، ستكون علامة الحذف السريع مصحوبة بعلامة {{salt}} تطلب من المسؤول الذي يحذف تطبيق حماية الإنشاء. حدد فقط ما إذا كانت هذه الصفحة قد أعيد إنشاؤها بشكل متكرر.',
+					tooltip: 'عند تحديده، ستكون علامة الحذف السريع مصحوبة بعلامة {{Salt}} تطلب من المسؤول الذي يحذف تطبيق حماية الإنشاء. حدد فقط ما إذا كانت هذه الصفحة قد أعيد إنشاؤها بشكل متكرر.',
 					event: function (event) {
 						event.stopPropagation();
 					}
@@ -297,7 +297,7 @@
 				case 7: // file talk
 					appendList('الملفات', Twinkle.speedy.fileList);
 					if (!mode.isSysop) {
-						work_area.append({ type: 'div', label: 'يمكن وضع علامة على CSD F4 (بدون ترخيص) و F5 (استخدام غير مجاني يتيم) و F6 (بدون أساس منطقي للاستخدام غير المجاني) و F11 (بدون إذن) باستخدام علامة التبويب "DI" في Twinkle.' });
+						work_area.append({ type: 'div', label: 'يمكن وضع علامة على CSD F4 (بدون ترخيص) و F5 (استخدام غير مجاني يتيم) و F6 (بدون أساس منطقي للاستخدام غير المجاني) و F11 (بدون إذن) باستخدام علامة التبويب "DI" في لمح البصر.' });
 					}
 					break;
 
@@ -473,9 +473,9 @@
 
 	Twinkle.speedy.customRationale = [
 		{
-			label: 'الأساس المنطقي المخصص' + (Morebits.userIsSysop ? ' (سبب الحذف المخصص)' : ' باستخدام قالب {{db}}'),
+			label: 'الأساس المنطقي المخصص' + (Morebits.userIsSysop ? ' (سبب الحذف المخصص)' : ' باستخدام قالب {{شطب}}'),
 			value: 'reason',
-			tooltip: '{{db}} هي اختصار لعبارة "حذف بسبب". يجب أن يظل أحد معايير الحذف الأخرى على الأقل ساريًا على الصفحة، ويجب عليك ذكر ذلك في الأساس المنطقي الخاص بك. هذا ليس "حلًا شاملاً" عندما لا يمكنك العثور على أي معايير تناسب.',
+			tooltip: '{{شطب}} هي اختصار لعبارة "حذف بسبب". يجب أن يظل أحد معايير الحذف الأخرى على الأقل ساريًا على الصفحة، ويجب عليك ذكر ذلك في الأساس المنطقي الخاص بك. هذا ليس "حلًا شاملاً" عندما لا يمكنك العثور على أي معايير تناسب.',
 			subgroup: {
 				name: 'reason_1',
 				type: 'input',
@@ -531,19 +531,19 @@
 		{
 			label: 'F5: ملف محمي بحقوق الطبع والنشر غير مجاني غير مستخدم',
 			value: 'f5',
-			tooltip: 'الملفات التي ليست بموجب ترخيص مجاني أو في المجال العام والتي لا يتم استخدامها في أي مقال، والتي يقتصر استخدامها على مقال محذوف، والتي من غير المحتمل جدًا استخدامها في أي مقال آخر. يمكن تقديم استثناءات معقولة للملفات التي رُفعت لمقال قادم. بالنسبة للملفات الأخرى غير المجانية غير المستخدمة، استخدم الخيار "الاستخدام غير المجاني اليتيم" في علامة التبويب DI في Twinkle.',
+			tooltip: 'الملفات التي ليست بموجب ترخيص مجاني أو في المجال العام والتي لا يتم استخدامها في أي مقال، والتي يقتصر استخدامها على مقال محذوف، والتي من غير المحتمل جدًا استخدامها في أي مقال آخر. يمكن تقديم استثناءات معقولة للملفات التي رُفعت لمقال قادم. بالنسبة للملفات الأخرى غير المجانية غير المستخدمة، استخدم الخيار "الاستخدام غير المجاني اليتيم" في علامة التبويب DI في لمح البصر.',
 			hideWhenUser: true
 		},
 		{
 			label: 'F6: فقدان الأساس المنطقي للاستخدام العادل',
 			value: 'norat',
-			tooltip: 'يمكن حذف أي ملف بدون أساس منطقي للاستخدام العادل بعد سبعة أيام من تحميله. قوالب الاستخدام العادل القياسية لا تشكل أساسًا منطقيًا للاستخدام العادل. يجب عدم حذف الملفات التي رُفعت قبل 2006-05-04 على الفور؛ بدلاً من ذلك، يجب إخطار القائم بالتحميل بالحاجة إلى أساس منطقي للاستخدام العادل. يمكن وضع علامة على الملفات التي رُفعت بعد 2006-05-04 باستخدام الخيار "لا يوجد أساس منطقي للاستخدام غير المجاني" في وحدة DI في Twinkle. يمكن العثور على هذه الملفات في التصنيفات الفرعية المؤرخة من التصنيف: ملفات بدون أساس منطقي للاستخدام غير المجاني.',
+			tooltip: 'يمكن حذف أي ملف بدون أساس منطقي للاستخدام العادل بعد سبعة أيام من تحميله. قوالب الاستخدام العادل القياسية لا تشكل أساسًا منطقيًا للاستخدام العادل. يجب عدم حذف الملفات التي رُفعت قبل 2006-05-04 على الفور؛ بدلاً من ذلك، يجب إخطار القائم بالتحميل بالحاجة إلى أساس منطقي للاستخدام العادل. يمكن وضع علامة على الملفات التي رُفعت بعد 2006-05-04 باستخدام الخيار "لا يوجد أساس منطقي للاستخدام غير المجاني" في وحدة DI في لمح البصر. يمكن العثور على هذه الملفات في التصنيفات الفرعية المؤرخة من التصنيف: ملفات بدون أساس منطقي للاستخدام غير المجاني.',
 			hideWhenUser: true
 		},
 		{
 			label: 'F7: وسائط الاستخدام العادل من وكالة صور تجارية ليست موضوع تعليق موثق',
 			value: 'badfairuse',
-			tooltip: 'تعتبر الصور أو الوسائط غير المجانية من مصدر تجاري (مثل Associated Press أو Getty) ، حيث لا يكون الملف نفسه موضوع تعليق موثق، مطالبة غير صالحة بالاستخدام العادل وتفشل في المتطلبات الصارمة لـ WP:NFCC. بالنسبة للحالات التي تتطلب فترة انتظار (أساس منطقي غير صالح أو متنازع عليه أو صور قابلة للاستبدال) ، استخدم الخيارات الموجودة في علامة التبويب DI في Twinkle.',
+			tooltip: 'تعتبر الصور أو الوسائط غير المجانية من مصدر تجاري (مثل Associated Press أو Getty) ، حيث لا يكون الملف نفسه موضوع تعليق موثق، مطالبة غير صالحة بالاستخدام العادل وتفشل في المتطلبات الصارمة لـ WP:NFCC. بالنسبة للحالات التي تتطلب فترة انتظار (أساس منطقي غير صالح أو متنازع عليه أو صور قابلة للاستبدال) ، استخدم الخيارات الموجودة في علامة التبويب DI في لمح البصر.',
 			subgroup: {
 				name: 'badfairuse_rationale',
 				type: 'input',
@@ -555,7 +555,7 @@
 		{
 			label: 'F8: الملف متاح كنسخة متطابقة أو ذات دقة أعلى على ويكيميديا ​​كومنز',
 			value: 'commons',
-			tooltip: 'بشرط استيفاء الشروط التالية: 1: تنسيق الملف لكلا الصورتين هو نفسه. 2: ترخيص الملف وحالة المصدر يتجاوزان أي شك معقول، والترخيص مقبول بلا شك في Commons. 3: جميع المعلومات الموجودة في صفحة وصف الملف موجودة في صفحة وصف ملف Commons. يتضمن ذلك سجل التحميل الكامل مع روابط لصفحات المستخدم المحلي للقائم بالتحميل. 4: الملف غير محمي، ولا تحتوي صفحة وصف الملف على طلب بعدم نقله إلى Commons. 5: إذا كان الملف متاحًا في Commons باسم مختلف عن الاسم المحلي، فيجب تحديث جميع المراجع المحلية إلى الملف للإشارة إلى العنوان المستخدم في Commons. 6: بالنسبة لملفات {{c-uploaded}}: يمكن حذفها بسرعة بمجرد إيقافها عن الصفحة الرئيسية',
+			tooltip: 'بشرط استيفاء الشروط التالية: 1: تنسيق الملف لكلا الصورتين هو نفسه. 2: ترخيص الملف وحالة المصدر يتجاوزان أي شك معقول، والترخيص مقبول بلا شك في Commons. 3: جميع المعلومات الموجودة في صفحة وصف الملف موجودة في صفحة وصف ملف Commons. يتضمن ذلك سجل التحميل الكامل مع روابط لصفحات المستخدم المحلي للقائم بالتحميل. 4: الملف غير محمي، ولا تحتوي صفحة وصف الملف على طلب بعدم نقله إلى Commons. 5: إذا كان الملف متاحًا في Commons باسم مختلف عن الاسم المحلي، فيجب تحديث جميع المراجع المحلية إلى الملف للإشارة إلى العنوان المستخدم في Commons. 6: بالنسبة لملفات {{صورة مهمة}}: يمكن حذفها بسرعة بمجرد إيقافها عن الصفحة الرئيسية',
 			subgroup: {
 				name: 'commons_filename',
 				type: 'input',
@@ -607,7 +607,7 @@
 		{
 			label: 'A2: مقالات بلغة أجنبية موجودة في مشروع ويكيميديا ​​آخر',
 			value: 'foreign',
-			tooltip: 'إذا كانت المقالة المعنية غير موجودة في مشروع آخر، فيجب استخدام القالب {{notenglish}} بدلاً من ذلك. يجب إدراج جميع المقالات بلغة غير الإنجليزية التي لا تفي بهذه المعايير (ولا تفي بأي معايير أخرى للحذف السريع) في صفحات تحتاج إلى ترجمة (PNT) للمراجعة والترجمة المحتملة',
+			tooltip: 'إذا كانت المقالة المعنية غير موجودة في مشروع آخر، فيجب استخدام القالب {{ترجمة غير مكتملة}} بدلاً من ذلك. يجب إدراج جميع المقالات بلغة غير الإنجليزية التي لا تفي بهذه المعايير (ولا تفي بأي معايير أخرى للحذف السريع) في صفحات تحتاج إلى ترجمة (PNT) للمراجعة والترجمة المحتملة',
 			subgroup: {
 				name: 'foreign_source',
 				type: 'input',
@@ -731,13 +731,13 @@
 		{
 			label: 'U5: مستخدم غير مساهم يسيء استخدام ويكيبيديا كمضيف ويب',
 			value: 'notwebhost',
-			tooltip: 'صفحات في مساحة المستخدم تتكون من كتابات أو معلومات أو مناقشات أو أنشطة لا ترتبط ارتباطًا وثيقًا بأهداف ويكيبيديا، حيث لم يقم المالك بإجراء تعديلات قليلة أو معدومة خارج صفحات المستخدم، باستثناء المسودات المعقولة والصفحات الملتزمة بـ WP:UPYES. ينطبق بغض النظر عن عمر الصفحة المعنية.',
+			tooltip: 'صفحات في نطاق المستخدم تتكون من كتابات أو معلومات أو مناقشات أو أنشطة لا ترتبط ارتباطًا وثيقًا بأهداف ويكيبيديا، حيث لم يقم المالك بإجراء تعديلات قليلة أو معدومة خارج صفحات المستخدم، باستثناء المسودات المعقولة والصفحات الملتزمة بـ WP:UPYES. ينطبق بغض النظر عن عمر الصفحة المعنية.',
 			hideWhenRedirect: true
 		},
 		{
 			label: 'G11: صفحة مستخدم ترويجية تحت اسم مستخدم ترويجي',
 			value: 'spamuser',
-			tooltip: 'صفحة مستخدم ترويجية، مع اسم مستخدم يروج أو يشير إلى الانتماء إلى الشيء الذي يتم الترويج له. لاحظ أن مجرد وجود صفحة على شركة أو منتج في مساحة مستخدم ما لا يؤهلها للحذف. إذا كانت صفحة المستخدم غير مرغوب فيها ولكن اسم المستخدم ليس كذلك، ففكر في وضع علامة عليها باستخدام G11 العادي بدلاً من ذلك.',
+			tooltip: 'صفحة مستخدم ترويجية، مع اسم مستخدم يروج أو يشير إلى الانتماء إلى الشيء الذي يتم الترويج له. لاحظ أن مجرد وجود صفحة على شركة أو منتج في نطاق مستخدم ما لا يؤهلها للحذف. إذا كانت صفحة المستخدم غير مرغوب فيها ولكن اسم المستخدم ليس كذلك، ففكر في وضع علامة عليها باستخدام G11 العادي بدلاً من ذلك.',
 			hideWhenMultiple: true,
 			hideWhenRedirect: true
 		},
@@ -789,7 +789,7 @@
 		{
 			label: 'G5: تم إنشاؤها بواسطة مستخدم محظور أو محظور',
 			value: 'banned',
-			tooltip: 'الصفحات التي أُنشأها مستخدمين محظورين أو محظورين في انتهاك للحظر أو الحظر المفروض عليهم، والتي لا تحتوي على تعديلات جوهرية من قبل الآخرين',
+			tooltip: 'الصفحات التي أُنشأها مستخدمين محظورين أو محظورين في انتهاك للمنع أو المنع المفروض عليهم، والتي لا تحتوي على تعديلات جوهرية من قبل الآخرين',
 			subgroup: {
 				name: 'banned_user',
 				type: 'input',
@@ -972,7 +972,7 @@
 			tooltip: 'ومع ذلك، فإن عمليات إعادة التوجيه من الأخطاء الإملائية الشائعة أو التسميات الخاطئة شائعة الاستخدام بشكل عام، وكذلك عمليات إعادة التوجيه بلغات أخرى'
 		},
 		{
-			label: 'R4: إعادة توجيه مساحة اسم الملف باسم يطابق صفحة Commons',
+			label: 'R4: إعادة توجيه نطاق اسم الملف باسم يطابق صفحة Commons',
 			value: 'redircom',
 			tooltip: 'يجب ألا تحتوي إعادة التوجيه على أي روابط واردة (ما لم تكن الروابط مخصصة بوضوح للملف أو إعادة التوجيه في Commons).',
 			showInNamespaces: [6]
@@ -1065,7 +1065,7 @@
 					code += '|' + norm.toUpperCase();
 					parameters = params.templateParams[index] || [];
 					for (const i in parameters) {
-						if (typeof parameters[i] === 'string' && !parseInt(i, 10)) { // skip numeric parameters - {{db-multiple}} doesn't understand them
+						if (typeof parameters[i] === 'string' && !parseInt(i, 10)) { // skip numeric parameters - {{Db-multiple}} doesn't understand them
 							code += '|' + i + '=' + parameters[i];
 						}
 					}
@@ -1255,7 +1255,7 @@
 					params.normalized !== 'f8' &&
 					!document.getElementById('ca-talk').classList.contains('new')) {
 					const talkpage = new Morebits.wiki.Page(mw.config.get('wgFormattedNamespaces')[mw.config.get('wgNamespaceNumber') + 1] + ':' + mw.config.get('wgTitle'), 'حذف صفحة النقاش');
-					talkpage.setEditSummary('[[WP:CSD#G8|G8]]: صفحة نقاش الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
+					talkpage.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: صفحة نقاش الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
 					talkpage.setChangeTags(Twinkle.changeTags);
 					talkpage.deletePage();
 					// this is ugly, but because of the architecture of wiki.api, it is needed
@@ -1297,7 +1297,7 @@
 						}
 					});
 					$bigtext = $('<span>', {
-						text: 'لعزل الروابط الخلفية وإزالة مثيلات استخدام الملف',
+						text: 'لعزل الصفحات المرتبطة وإزالة مثيلات استخدام الملف',
 						css: { fontSize: '130%', fontWeight: 'bold' }
 					});
 					Morebits.Status.info($bigtext[0], $link[0]);
@@ -1313,7 +1313,7 @@
 						}
 					});
 					$bigtext = $('<span>', {
-						text: 'لعزل الروابط الخلفية',
+						text: 'لعزل الصفحات المرتبطة',
 						css: { fontSize: '130%', fontWeight: 'bold' }
 					});
 					Morebits.Status.info($bigtext[0], $link[0]);
@@ -1348,7 +1348,7 @@
 				snapshot.forEach((value) => {
 					const title = value.title;
 					const page = new Morebits.wiki.Page(title, 'حذف إعادة التوجيه "' + title + '"');
-					page.setEditSummary('[[WP:CSD#G8|G8]]: إعادة توجيه إلى الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
+					page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: إعادة توجيه إلى الصفحة المحذوفة [[' + Morebits.pageNameNorm + ']]');
 					page.setChangeTags(Twinkle.changeTags);
 					page.deletePage(onsuccess);
 				});
@@ -1372,7 +1372,7 @@
 				let code = buildData[0];
 				params.utparams = buildData[1];
 
-				// Set the correct value for |ts= parameter in {{db-g13}}
+				// Set the correct value for |ts= parameter in {{Db-g13}}
 				if (params.normalizeds.includes('g13')) {
 					code = code.replace('$TIMESTAMP', pageobj.getLastEditTime());
 				}
@@ -1415,9 +1415,9 @@
 
 					if (params.requestsalt) {
 						if (!params.normalizeds.includes('g10')) {
-							code += '\n{{salt}}';
+							code += '\n{{Salt}}';
 						} else {
-							code = '{{salt}}\n' + code;
+							code = '{{Salt}}\n' + code;
 						}
 					}
 
@@ -1438,14 +1438,14 @@
 					if (params.normalizeds.length > 1) {
 						editsummary = 'طلب حذف سريع (';
 						$.each(params.normalizeds, (index, norm) => {
-							editsummary += '[[WP:CSD#' + norm.toUpperCase() + '|CSD ' + norm.toUpperCase() + ']], ';
+							editsummary += '[[ويكيبيديا:معايير الحذف السريع#' + norm.toUpperCase() + '|CSD ' + norm.toUpperCase() + ']], ';
 						});
 						editsummary = editsummary.substr(0, editsummary.length - 2); // remove trailing comma
 						editsummary += ').';
 					} else if (params.normalizeds[0] === 'db') {
-						editsummary = 'طلب [[WP:CSD|حذف سريع]] مع الأساس المنطقي "' + params.templateParams[0]['1'] + '".';
+						editsummary = 'طلب [[ويكيبيديا:معايير الحذف السريع|حذف سريع]] مع الأساس المنطقي "' + params.templateParams[0]['1'] + '".';
 					} else {
-						editsummary = 'طلب حذف سريع ([[WP:CSD#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']]).';
+						editsummary = 'طلب حذف سريع ([[ويكيبيديا:معايير الحذف السريع#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']]).';
 					}
 
 					// Blank attack pages
@@ -1465,7 +1465,7 @@
 					const talkName = new mw.Title(pageobj.getPageName()).getTalkPage().toText();
 					if (talkName !== pageobj.getPageName()) {
 						if (params.requestsalt) {
-							code += '\n{{salt}}';
+							code += '\n{{Salt}}';
 						}
 
 						pageobj.getStatusElement().warn('تعذر تحرير الصفحة، ووضع العلامة على صفحة النقاش');
@@ -1502,10 +1502,10 @@
 			addToLog: function (params, initialContrib) {
 				const usl = new Morebits.UserspaceLogger(Twinkle.getPref('speedyLogPageName'));
 				usl.initialText =
-					"هذا سجل لجميع ترشيحات [[WP:CSD|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+					"هذا سجل لجميع ترشيحات [[ويكيبيديا:معايير الحذف السريع|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[ويكيبيديا:لمح البصر|لمح البصر]].\n\n" +
 					'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، يمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، و' +
-					'ترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
-					(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام Twinkle.' : '');
+					'ترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
+					(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام لمح البصر.' : '');
 
 				const formatParamLog = function (normalize, csdparam, input) {
 					if ((normalize === 'G4' && csdparam === 'xfd') ||
@@ -1544,14 +1544,14 @@
 				if (params.normalizeds.length > 1) {
 					appendText += 'معايير متعددة (';
 					$.each(params.normalizeds, (index, norm) => {
-						appendText += '[[WP:CSD#' + norm.toUpperCase() + '|' + norm.toUpperCase() + ']], ';
+						appendText += '[[ويكيبيديا:معايير الحذف السريع#' + norm.toUpperCase() + '|' + norm.toUpperCase() + ']], ';
 					});
 					appendText = appendText.substr(0, appendText.length - 2); // remove trailing comma
 					appendText += ')';
 				} else if (params.normalizeds[0] === 'db') {
-					appendText += '{{tl|db-reason}}';
+					appendText += '{{وصلة قالب|شطب}}';
 				} else {
-					appendText += '[[WP:CSD#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']] ({{tl|db-' + params.values[0] + '}})';
+					appendText += '[[ويكيبيديا:معايير الحذف السريع#' + params.normalizeds[0].toUpperCase() + '|CSD ' + params.normalizeds[0].toUpperCase() + ']] ({{وصلة قالب|db-' + params.values[0] + '}})';
 				}
 
 				// If params is "empty" it will still be full of empty arrays, but ask anyway
@@ -1576,13 +1576,13 @@
 				}
 
 				if (params.requestsalt) {
-					appendText += '; طلب حماية الإنشاء ([[WP:SALT|salting]])';
+					appendText += '; طلب حماية الإنشاء ([[ويكيبيديا:سياسة الحماية|salting]])';
 				}
 				if (extraInfo) {
 					appendText += '; معلومات إضافية:' + extraInfo;
 				}
 				if (initialContrib) {
-					appendText += '; تم إخطار {{user|1=' + initialContrib + '}}';
+					appendText += '; تم إخطار {{مستخدم|1=' + initialContrib + '}}';
 				}
 				appendText += ' ~~~~~\n';
 

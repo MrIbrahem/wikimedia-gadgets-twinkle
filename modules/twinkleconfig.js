@@ -26,7 +26,7 @@
 
 	Twinkle.config.commonSets = {
 		csdCriteria: {
-			db: 'مبررات مخصصة ({{db}})',
+			db: 'مبررات مخصصة ({{شطب}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 			u1: "U1", u2: "U2", u5: "U5",
@@ -44,7 +44,7 @@
 			"r2", "r3", "r4"
 		],
 		csdCriteriaNotification: {
-			db: 'مبررات مخصصة ({{db}})',
+			db: 'مبررات مخصصة ({{شطب}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g6: 'G6 ("copy-paste move" only)',
 			g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
@@ -63,7 +63,7 @@
 			"r2", "r3", "r4"
 		],
 		csdAndImageDeletionCriteria: {
-			db: 'مبررات مخصصة ({{db}})',
+			db: 'مبررات مخصصة ({{شطب}})',
 			g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 			a1: "A1", a2: "A2", a3: "A3", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 			u1: "U1", u2: "U2", u5: "U5",
@@ -158,7 +158,7 @@
 				// TwinkleConfig.dialogLargeFont (boolean)
 				{
 					name: "dialogLargeFont",
-					label: 'استخدام نص أكبر في حوارات Twinkle',
+					label: 'استخدام نص أكبر في حوارات لمح البصر',
 					type: "boolean"
 				},
 
@@ -321,7 +321,7 @@
 				{
 					name: "logProdPages",
 					label: 'الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي وسمت بالحذف المقترح',
-					helptip: 'نظرًا لأن غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، يوفر سجل المستخدم طريقة جيدة لتتبع جميع الصفحات التي وسمت بالحذف المقترح باستخدام Twinkle.',
+					helptip: 'نظرًا لأن غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، يوفر سجل المستخدم طريقة جيدة لتتبع جميع الصفحات التي وسمت بالحذف المقترح باستخدام لمح البصر.',
 					type: "boolean"
 				},
 				{
@@ -341,7 +341,7 @@
 				// Option to automatically open the warning menu if the user talk page is opened post-reversion
 				{
 					name: "autoMenuAfterRollback",
-					label: "فتح قائمة التحذير في توينكل تلقائيًا على صفحة نقاش المستخدم بعد التراجع باستخدام Twinkle",
+					label: "فتح قائمة التحذير في توينكل تلقائيًا على صفحة نقاش المستخدم بعد التراجع باستخدام لمح البصر",
 					helptip: "يعمل فقط إذا تم تحديد المربع المناسب أدناه.",
 					type: "boolean"
 				},
@@ -492,7 +492,7 @@
 				{
 					name: "welcomeUserOnSpeedyDeletionNotification",
 					label: "ترحيب بمنشئ الصفحة عند الإخطار بهذه المعايير",
-					helptip: "يتم الترحيب فقط إذا تم إخطار المستخدم بالحذف، وفقط إذا لم تكن صفحة نقاشه موجودة. القالب المستخدم هو {{firstarticle}}.",
+					helptip: "يتم الترحيب فقط إذا تم إخطار المستخدم بالحذف، وفقط إذا لم تكن صفحة نقاشه موجودة. القالب المستخدم هو {{First article}}.",
 					type: "set",
 					setValues: Twinkle.config.commonSets.csdCriteriaNotification,
 					setDisplayOrder: Twinkle.config.commonSets.csdCriteriaNotificationDisplayOrder
@@ -575,7 +575,7 @@
 				{
 					name: "logSpeedyNominations",
 					label: "الاحتفاظ بسجل في نطاق المستخدم لجميع طلبات الحذف السريع",
-					helptip: "نظرًا لأن المستخدمين غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، فإن سجل المستخدم يوفر طريقة جيدة لتتبع جميع الصفحات التي رُشحت للحذف السريع باستخدام Twinkle. يتم أيضًا تسجيل الملفات الموسومة باستخدام DI.",
+					helptip: "نظرًا لأن المستخدمين غير الإداريين لا يمكنهم الوصول إلى مساهماتهم المحذوفة، فإن سجل المستخدم يوفر طريقة جيدة لتتبع جميع الصفحات التي رُشحت للحذف السريع باستخدام لمح البصر. يتم أيضًا تسجيل الملفات الموسومة باستخدام DI.",
 					type: "boolean"
 				},
 				{
@@ -834,7 +834,7 @@
 				{
 					name: "logXfdNominations",
 					label: "الاحتفاظ بسجل في نطاق المستخدم لجميع الصفحات التي ترشحها لمناقشة الحذف (XfD)",
-					helptip: "يوفر سجل نطاق المستخدم طريقة جيدة لتتبع جميع الصفحات التي ترشحها لـ XfD باستخدام Twinkle.",
+					helptip: "يوفر سجل نطاق المستخدم طريقة جيدة لتتبع جميع الصفحات التي ترشحها لـ XfD باستخدام لمح البصر.",
 					type: "boolean"
 				},
 				{
@@ -1295,7 +1295,7 @@
 				}
 				link = document.createElement("a");
 				link.setAttribute("href", mw.util.getUrl(mw.config.get("wgFormattedNamespaces")[mw.config.get("wgNamespaceIds").project] + ':Twinkle/Preferences'));
-				link.appendChild(document.createTextNode('لوحة تفضيلات Twinkle'));
+				link.appendChild(document.createTextNode('لوحة تفضيلات لمح البصر'));
 				box.appendChild(link);
 				box.appendChild(document.createTextNode('، أو عن طريق تعديل هذه الصفحة.'));
 				$(box).insertAfter($('#contentSub'));
@@ -1304,10 +1304,10 @@
 				// place "Looking for Twinkle options?" notice
 				box.setAttribute("class", 'config-userskin-box');
 
-				box.appendChild(document.createTextNode('إذا كنت ترغب في تعيين تفضيلات Twinkle، يمكنك استخدام '));
+				box.appendChild(document.createTextNode('إذا كنت ترغب في تعيين تفضيلات لمح البصر، يمكنك استخدام '));
 				link = document.createElement("a");
 				link.setAttribute("href", mw.util.getUrl(mw.config.get("wgFormattedNamespaces")[mw.config.get("wgNamespaceIds").project] + ':Twinkle/Preferences'));
-				link.appendChild(document.createTextNode('لوحة تفضيلات Twinkle'));
+				link.appendChild(document.createTextNode('لوحة تفضيلات لمح البصر'));
 				box.appendChild(link);
 				box.appendChild(document.createTextNode('.'));
 				$(box).insertAfter($('#contentSub'));
@@ -1533,7 +1533,7 @@
 				break;
 
 			default:
-				alert('تكوين twinkle: نوع بيانات غير معروف للتفضيل ' + pref.name);
+				alert('تكوين لمح البصر: نوع بيانات غير معروف للتفضيل ' + pref.name);
 				break;
 		}
 	};
@@ -1673,11 +1673,11 @@
 			'// twinkleoptions.js: ملف تفضيلات توينكل الشخصية\n' +
 			'//\n' +
 			'// NOTE: أسهل طريقة لتغيير تفضيلات توينكل الخاصة بك هي استخدام\n' +
-			'// لوحة تفضيلات Twinkle، في [[' + Morebits.pageNameNorm + ']].\n' +
+			'// لوحة تفضيلات لمح البصر، في [[' + Morebits.pageNameNorm + ']].\n' +
 			'//\n' +
 			'// هذا الملف يتم إنشاؤه تلقائيًا. أي تغييرات تجريها (بصرف النظر عن\n' +
 			'// تغيير معلمات التكوين بطريقة JavaScript صالحة) سيتم\n' +
-			'// الكتابة فوقها في المرة التالية التي تنقر فيها على "حفظ" في تفضيلات Twinkle\n' +
+			'// الكتابة فوقها في المرة التالية التي تنقر فيها على "حفظ" في تفضيلات لمح البصر\n' +
 			'// اللوحة. إذا قمت بتعديل هذا الملف، فتأكد من استخدام JavaScript الصحيح.\n' +
 			// eslint-disable-next-line no-useless-concat
 			'// <no' + 'wiki>\n' +
@@ -1692,7 +1692,7 @@
 			'// End of twinkleoptions.js\n';
 
 		pageobj.setPageText(text);
-		pageobj.setEditSummary('حفظ تفضيلات Twinkle: تعديل تلقائي من [[:' + Morebits.pageNameNorm + ']]');
+		pageobj.setEditSummary('حفظ تفضيلات لمح البصر: تعديل تلقائي من [[:' + Morebits.pageNameNorm + ']]');
 		pageobj.setChangeTags(Twinkle.changeTags);
 		pageobj.setCreateOption("recreate");
 		pageobj.save(Twinkle.config.saveSuccess);

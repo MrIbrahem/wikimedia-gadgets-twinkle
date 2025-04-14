@@ -23,10 +23,10 @@
 
 		const Window = new Morebits.SimpleWindow(600, 350);
 		Window.setTitle('رد');
-		Window.setScriptName('Twinkle');
-		Window.addFooterLink('تفضيلات رد', 'WP:TW/PREF#talkback');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#talkback');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.setScriptName('لمح البصر!');
+		Window.addFooterLink('تفضيلات رد', 'ويكيبيديا:Twinkle/Preferences#talkback');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#talkback');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.talkback.evaluate);
 
@@ -150,7 +150,7 @@
 					type: 'input',
 					name: 'page',
 					label: 'اسم صفحة المناقشة',
-					tooltip: "اسم الصفحة التي تجري فيها المناقشة. على سبيل المثال: 'User talk:Jimbo Wales' أو Wikipedia talk:Twinkle'. يقتصر على جميع المحادثات ومساحة ويكيبيديا ومساحة القوالب.",
+					tooltip: "اسم الصفحة التي تجري فيها المناقشة. على سبيل المثال: 'User talk:Jimbo Wales' أو Wikipedia talk:Twinkle'. يقتصر على جميع المحادثات ونطاق ويكيبيديا ونطاق القوالب.",
 					value: prev_page || 'User talk:' + mw.config.get('wgUserName')
 				});
 				work_area.append({
@@ -219,18 +219,18 @@
 
 	Twinkle.talkback.noticeboards = {
 		an: {
-			label: "WP:AN (لوحة إعلانات المدراء)",
+			label: "WP:AN (إخطار الإداريين)",
 			text: '{{subst:AN-notice|thread=$SECTION}} ~~~~',
 			editSummary: 'إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين]]'
 		},
 		an3: {
-			label: "WP:AN3 (لوحة إعلانات المدراء/حرب التحرير)",
+			label: "WP:AN3 (إخطار الإداريين/حرب التحرير)",
 			text: '{{subst:An3-notice|$SECTION}} ~~~~',
 			editSummary: "إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين/استرجاعات ثلاثة]]"
 		},
 		ani: {
-			label: "WP:ANI (لوحة إعلانات المدراء/الحوادث)",
-			text: "== إشعار بمناقشة لوحة إعلانات المدراء/الحوادث ==\n" +
+			label: "WP:ANI (إخطار الإداريين/الحوادث)",
+			text: "== إشعار بمناقشة إخطار الإداريين/الحوادث ==\n" +
 				'{{subst:ANI-notice|thread=$SECTION}} ~~~~',
 			editSummary: 'إشعار بالمناقشة في [[ويكيبيديا:إخطار الإداريين/Incidents]]',
 			defaultSelected: true
@@ -384,7 +384,7 @@
 					break;
 				case 'mail':
 					text = '==' + Twinkle.getPref('mailHeading') + '==\n' +
-						"{{You've got mail|subject=" + input.section + '|ts=~~~~~}}';
+						"{{لديك بريد|subject=" + input.section + '|ts=~~~~~}}';
 
 					if (input.message) {
 						text += '\n' + input.message + '  ~~~~';
@@ -394,12 +394,12 @@
 					break;
 				case 'see':
 					var heading = Twinkle.getPref('talkbackHeading');
-					text = '{{subst:Please see|location=' + input.page + (input.section ? '#' + input.section : '') +
+					text = '{{subst:دعوة|location=' + input.page + (input.section ? '#' + input.section : '') +
 						'|more=' + input.message + '|heading=' + heading + '}}';
 					break;
 				default: // talkback
 					text = '==' + Twinkle.getPref('talkbackHeading') + '==\n' +
-						'{{talkback|' + input.page + (input.section ? '|' + input.section : '') + '|ts=~~~~~}}';
+						'{{رد|' + input.page + (input.section ? '|' + input.section : '') + '|ts=~~~~~}}';
 
 					if (input.message) {
 						text += '\n' + input.message + ' ~~~~';

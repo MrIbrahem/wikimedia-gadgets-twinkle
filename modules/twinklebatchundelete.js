@@ -21,10 +21,10 @@
 
 	Twinkle.batchundelete.callback = function twinklebatchundeleteCallback() {
 		const Window = new Morebits.SimpleWindow(600, 400);
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.setTitle('استرجاع الدفعي');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#batchundelete');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#batchundelete');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchundelete.callback.evaluate);
 		form.append({

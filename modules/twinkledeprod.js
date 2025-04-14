@@ -26,10 +26,10 @@
 	Twinkle.deprod.callback = function () {
 		const Window = new Morebits.SimpleWindow(800, 400);
 		Window.setTitle('تنظيف PROD');
-		Window.setScriptName('Twinkle');
-		Window.addFooterLink('الحذف المقترح', 'WP:PROD');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#deprod');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.setScriptName('لمح البصر!');
+		Window.addFooterLink('الحذف المقترح', 'ويكيبيديا:اقتراح الحذف');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#deprod');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(callback_commit);
 
@@ -154,7 +154,7 @@
 			}
 
 			var page = new Morebits.wiki.Page(pageName, 'حذف الصفحة ' + pageName);
-			page.setEditSummary('منتهي الصلاحية [[WP:PROD|PROD]]، كان السبب: ' + concerns[pageName]);
+			page.setEditSummary('منتهي الصلاحية [[ويكيبيديا:اقتراح الحذف|PROD]]، كان السبب: ' + concerns[pageName]);
 			page.setChangeTags(Twinkle.changeTags);
 			page.suppressProtectWarning();
 			page.deletePage(batchOperation.workerSuccess, batchOperation.workerFailure);
@@ -167,7 +167,7 @@
 			}
 
 			const page = new Morebits.wiki.Page('Talk:' + apiobj.params.page, 'حذف صفحة نقاش الصفحة ' + apiobj.params.page);
-			page.setEditSummary('[[WP:CSD#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
+			page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: [[Help:Talk page|صفحة نقاش]] الصفحة المحذوفة [[' + apiobj.params.page + ']]');
 			page.setChangeTags(Twinkle.changeTags);
 			page.deletePage();
 		},
@@ -177,7 +177,7 @@
 			redirects.forEach((rd) => {
 				const title = rd.title;
 				const page = new Morebits.wiki.Page(title, 'حذف صفحة إعادة التوجيه ' + title);
-				page.setEditSummary('[[WP:CSD#G8|G8]]: إعادة توجيه إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
+				page.setEditSummary('[[ويكيبيديا:معايير الحذف السريع#G8|G8]]: إعادة توجيه إلى صفحة محذوفة [[' + apiobj.params.page + ']]');
 				page.setChangeTags(Twinkle.changeTags);
 				page.deletePage();
 			});
