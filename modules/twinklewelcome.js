@@ -708,7 +708,7 @@
 				const hasTalkHeader = /^\{\{Talk ?header\}\}/i.test(text);
 				if (hasTalkHeader) {
 					text = text.replace(/^\{\{Talk ?header\}\}\n{0,2}/i, '');
-					text = '{{Talk header}}\n\n' + welcomeText + '\n\n' + text;
+					text = '{{رأس نقاش}}\n\n' + welcomeText + '\n\n' + text;
 					text = text.trim();
 				} else {
 					text = welcomeText + '\n\n' + text;
