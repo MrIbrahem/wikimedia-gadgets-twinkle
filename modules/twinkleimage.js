@@ -22,7 +22,7 @@
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('سياسة الحذف السريع', 'WP:CSD#Files');
 		Window.addFooterLink('تفضيلات الصورة', 'WP:TW/PREF#image');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#image');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#image');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.image.callback.evaluate);
@@ -314,7 +314,7 @@
 			usl.initialText =
 				"هذا سجل لجميع ترشيحات [[WP:CSD|الحذف السريع]] التي قام بها هذا المستخدم باستخدام وحدة CSD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
 				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
-				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام Twinkle.' : '');
+				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف السريع الصريح التي تتم باستخدام لمح البصر.' : '');
 
 			const formatParamLog = function (normalize, csdparam, input) {
 				if (normalize === 'F5' && csdparam === 'replacement') {

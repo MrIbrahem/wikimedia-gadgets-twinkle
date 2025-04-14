@@ -121,7 +121,7 @@
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('حول مناقشات الحذف', 'WP:XFD');
 		Window.addFooterLink('تفضيلات XfD', 'WP:TW/PREF#xfd');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#xfd');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#xfd');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.xfd.callback.evaluate);
@@ -989,7 +989,7 @@
 			usl.initialText =
 				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
 				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
-				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام Twinkle.' : '');
+				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام لمح البصر.' : '');
 
 			let editsummary;
 			if (params.discussionpage) {

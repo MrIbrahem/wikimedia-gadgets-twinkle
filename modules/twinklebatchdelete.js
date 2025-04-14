@@ -30,7 +30,7 @@
 		const Window = new Morebits.SimpleWindow(600, 400);
 		Window.setTitle('حذف دفعة');
 		Window.setScriptName('لمح البصر!');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#batchdelete');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#batchdelete');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchdelete.callback.evaluate);

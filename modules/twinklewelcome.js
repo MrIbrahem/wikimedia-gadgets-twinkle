@@ -124,7 +124,7 @@
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('لجنة الترحيب', 'ويكيبيديا:لجنة الترحيب');
 		Window.addFooterLink('تفضيلات الترحيب', 'WP:TW/PREF#welcome');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#welcome');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#welcome');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.welcome.callback.evaluate);

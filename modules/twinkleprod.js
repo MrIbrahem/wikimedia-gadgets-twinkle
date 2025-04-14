@@ -88,7 +88,7 @@
 		});
 
 		Window.addFooterLink('تفضيلات PROD', 'WP:TW/PREF#prod');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#prod');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#prod');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		form.append({ type: 'submit', label: 'اقتراح الحذف' });

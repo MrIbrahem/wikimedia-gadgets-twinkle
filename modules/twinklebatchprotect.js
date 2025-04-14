@@ -24,7 +24,7 @@
 		Window.setTitle('حماية دفعة');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#protect');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#protect');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.batchprotect.callback.evaluate);

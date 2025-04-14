@@ -59,7 +59,7 @@
 		dialog.setScriptName('Twinkle');
 		dialog.addFooterLink('اختيار مستوى التحذير', 'WP:UWUL#Levels');
 		dialog.addFooterLink('تفضيلات التحذير', 'WP:TW/PREF#warn');
-		dialog.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#warn');
+		dialog.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#warn');
 		dialog.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.warn.callback.evaluate);
@@ -1661,12 +1661,12 @@
 		let $redWarning;
 		if (selected_template === 'uw-username') {
 			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
-				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في Twinkle). " +
+				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في لمح البصر). " +
 				'يجب استخدام {{uw-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		} else if (selected_template === 'uw-coi-username') {
 			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-coi-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
-				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في Twinkle). " +
+				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في لمح البصر). " +
 				'يجب استخدام {{uw-coi-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		}

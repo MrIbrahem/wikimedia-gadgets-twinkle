@@ -28,7 +28,7 @@
 		Window.setTitle('تنظيف PROD');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('الحذف المقترح', 'WP:PROD');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#deprod');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#deprod');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(callback_commit);

@@ -25,7 +25,7 @@
 		Window.setTitle('رد');
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('تفضيلات رد', 'WP:TW/PREF#talkback');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#talkback');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#talkback');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.talkback.evaluate);

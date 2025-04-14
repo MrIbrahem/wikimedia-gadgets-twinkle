@@ -40,7 +40,7 @@
 		Window.addFooterLink('قوالب المنع', 'Template:Uw-block/doc/Block_templates');
 		Window.addFooterLink('سياسة المنع', 'WP:BLOCK');
 		Window.addFooterLink('تفضيلات المنع', 'WP:TW/PREF#block');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#block');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#block');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		// Always added, hidden later if actual user not blocked

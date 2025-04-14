@@ -27,7 +27,7 @@
 		Window.setTitle('إزالة الصفحات المرتبطة' + (fileSpace ? ' واستخدامات الملف' : ''));
 		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('تفضيلات إزالة الرابط', 'WP:TW/PREF#unlink');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#unlink');
+		Window.addFooterLink('مساعدة لمح البصر!', 'WP:TW/DOC#unlink');
 		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.unlink.callback.evaluate);
