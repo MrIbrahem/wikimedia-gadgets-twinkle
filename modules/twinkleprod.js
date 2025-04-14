@@ -389,7 +389,7 @@
 			}
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('prodLogPageName'));
 			usl.initialText =
-				"هذا سجل لجميع علامات [[ويكيبيديا:اقتراح الحذف|الحذف المقترح]] التي طُبقت أو تأييدها من قبل هذا المستخدم باستخدام وحدة PROD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
+				"هذا سجل لجميع علامات [[ويكيبيديا:اقتراح الحذف|الحذف المقترح]] التي طُبقت أو تأييدها من قبل هذا المستخدم باستخدام وحدة PROD الخاصة بـ [[ويكيبيديا:لمح البصر|لمح البصر]].\n\n" +
 				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].';
 
 			let logText = '# [[:' + Morebits.pageNameNorm + ']]';
@@ -405,7 +405,7 @@
 			} else {
 				logText += (params.blp ? 'BLP ' : '') + 'PROD';
 				if (params.logInitialContrib) {
-					logText += '; تم إعلام {{user|' + params.logInitialContrib + '}}';
+					logText += '; تم إعلام {{مستخدم|' + params.logInitialContrib + '}}';
 				}
 				logText += ' ~~~~~\n';
 				if (!params.blp && params.reason) {
