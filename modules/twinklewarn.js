@@ -735,38 +735,38 @@
 			'Removal of deletion tags': {
 				'uw-afd': {
 					level1: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'ملاحظة عامة: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{حذف}}'
 					},
 					level2: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'تحذير: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'تحذير: إزالة قوالب {{حذف}}'
 					},
 					level3: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'تحذير: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'تحذير: إزالة قوالب {{حذف}}'
 					},
 					level4: {
-						label: 'إزالة قوالب {{afd}}',
-						summary: 'تحذير نهائي: إزالة قوالب {{afd}}'
+						label: 'إزالة قوالب {{حذف}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{حذف}}'
 					}
 				},
 				'uw-blpprod': {
 					level1: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'ملاحظة عامة: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'ملاحظة عامة: إزالة قوالب {{حذف سيرة}}'
 					},
 					level2: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'تحذير: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'تحذير: إزالة قوالب {{حذف سيرة}}'
 					},
 					level3: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'تحذير: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'تحذير: إزالة قوالب {{حذف سيرة}}'
 					},
 					level4: {
-						label: 'إزالة قوالب {{blp prod}}',
-						summary: 'تحذير نهائي: إزالة قوالب {{blp prod}}'
+						label: 'إزالة قوالب {{حذف سيرة}}',
+						summary: 'تحذير نهائي: إزالة قوالب {{حذف سيرة}}'
 					}
 				},
 				'uw-idt': {
@@ -1277,8 +1277,8 @@
 				heading: 'ويكيبيديا وحقوق النشر'
 			},
 			'uw-copyright-remove': {
-				label: 'إزالة قالب {{copyvio}} من المقالات',
-				summary: 'تحذير: إزالة قوالب {{copyvio}}'
+				label: 'إزالة قالب {{خرق}} من المقالات',
+				summary: 'تحذير: إزالة قوالب {{خرق}}'
 			},
 			'uw-derogatory': {
 				label: 'إضافة محتوى مهين / بغيض',
@@ -1660,14 +1660,14 @@
 		$('#tw-warn-red-notice').remove();
 		let $redWarning;
 		if (selected_template === 'uw-username') {
-			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
+			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{تنبيه اسم مخالف}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
 				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في لمح البصر). " +
-				'يجب استخدام {{uw-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
+				'يجب استخدام {{تنبيه اسم مخالف}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		} else if (selected_template === 'uw-coi-username') {
-			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{uw-coi-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
+			$redWarning = $("<div style='color: red;' id='tw-warn-red-notice'>يجب <b>عدم</b> استخدام {{Uw-coi-username}} لانتهاكات سياسة اسم المستخدم <b>الصارخة</b>. " +
 				"يجب الإبلاغ عن الانتهاكات الصارخة مباشرة إلى UAA (عبر علامة تبويب ARV في لمح البصر). " +
-				'يجب استخدام {{uw-coi-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
+				'يجب استخدام {{Uw-coi-username}} فقط في الحالات الطارئة من أجل الانخراط في مناقشة مع المستخدم.</div>');
 			$redWarning.insertAfter(Morebits.QuickForm.getElementLabelObject(e.target.form.reasonGroup));
 		}
 	};
@@ -2027,7 +2027,7 @@
 
 		// Check that a reason was filled in if uw-username was selected
 		if (params.sub_group === 'uw-username' && !params.article) {
-			alert('يجب عليك تقديم سبب لقالب {{uw-username}}.');
+			alert('يجب عليك تقديم سبب لقالب {{تنبيه اسم مخالف}}.');
 			return;
 		}
 
