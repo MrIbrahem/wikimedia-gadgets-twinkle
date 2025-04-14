@@ -44,7 +44,7 @@
 					break;
 			}
 		}
-		Twinkle.addPortletLink(Twinkle.xfd.callback, 'XFD', 'tw-xfd', tooltip);
+		Twinkle.addPortletLink(Twinkle.xfd.callback, 'نقاش حذف', 'tw-xfd', tooltip);
 	};
 
 	const utils = {
@@ -118,18 +118,18 @@
 	Twinkle.xfd.callback = function twinklexfdCallback() {
 		const Window = new Morebits.SimpleWindow(700, 400);
 		Window.setTitle('بدء مناقشة حول الحذف (XfD)');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('حول مناقشات الحذف', 'WP:XFD');
-		Window.addFooterLink('تفضيلات XfD', 'WP:TW/PREF#xfd');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#xfd');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('تفضيلات XfD', 'ويكيبيديا:Twinkle/Preferences#xfd');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#xfd');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.xfd.callback.evaluate);
 		const categories = form.append({
 			type: 'select',
 			name: 'venue',
 			label: 'مكان مناقشة الحذف:',
-			tooltip: 'عند التنشيط، يتم تحديد خيار افتراضي، بناءً على مساحة الاسم التي تتواجد فيها. يجب أن يكون هذا الافتراضي هو الأنسب.',
+			tooltip: 'عند التنشيط، يتم تحديد خيار افتراضي، بناءً على نطاق الاسم التي تتواجد فيها. يجب أن يكون هذا الافتراضي هو الأنسب.',
 			event: Twinkle.xfd.callback.change_category
 		});
 		const namespace = mw.config.get('wgNamespaceNumber');
@@ -267,7 +267,7 @@
 				if (namespace === 14) { // category
 					text = 'الرجاء استخدام CfD أو CfDS لإعادة تسمية التصنيف.';
 				} else if ([118, 119, 2, 3].includes(namespace)) { // draft, draft talk, user, user talk
-					text = 'لا يُسمح بعمليات RM في المسودة ومساحة المستخدم، ما لم تكن طلبات فنية غير مثيرة للجدل.';
+					text = 'لا يُسمح بعمليات RM في المسودة ونطاق المستخدم، ما لم تكن طلبات فنية غير مثيرة للجدل.';
 				}
 				break;
 
@@ -432,7 +432,7 @@
 								name: 'tfdtarget',
 								type: 'input',
 								label: 'الآخر ' + templateOrModule + ' ليتم دمجه:',
-								tooltip: 'مطلوب. يجب ألا يتضمن البادئة ' + Morebits.string.toUpperCaseFirstChar(templateOrModule) + ': لمساحة الاسم.',
+								tooltip: 'مطلوب. يجب ألا يتضمن البادئة ' + Morebits.string.toUpperCaseFirstChar(templateOrModule) + ': لنطاق الاسم.',
 								required: true
 							});
 							target.parentNode.appendChild(tfdtarget.render());
@@ -471,7 +471,7 @@
 							name: 'noinclude',
 							tooltip: 'سوف يلف علامة الحذف في علامات <noinclude> ، بحيث لا يتم استبدالها مع القالب.',
 							disabled: templateOrModule === 'module',
-							checked: !!$('.box-Subst_only').length // Default to checked if page carries {{subst only}}
+							checked: !!$('.box-Subst_only').length // Default to checked if page carries {{ينسخ دائما}}
 						}
 					]
 				});
@@ -518,10 +518,10 @@
 						type: 'checkbox',
 						list: [
 							{
-								label: 'إخطار مالك مساحة المستخدم (إذا لم يكن هو مُنشئ الصفحة)',
+								label: 'إخطار مالك نطاق المستخدم (إذا لم يكن هو مُنشئ الصفحة)',
 								value: 'notifyuserspace',
 								name: 'notifyuserspace',
-								tooltip: 'إذا كان المستخدم الذي تقع في مساحة المستخدم الخاصة به هذه الصفحة ليس هو مُنشئ الصفحة (على سبيل المثال، الصفحة عبارة عن مقالة تم إنقاذها ومخزنة كمسودة في مساحة المستخدم) ، فقم أيضًا بإخطار مالك مساحة المستخدم.',
+								tooltip: 'إذا كان المستخدم الذي تقع في نطاق المستخدم الخاصة به هذه الصفحة ليس هو مُنشئ الصفحة (على سبيل المثال، الصفحة عبارة عن مقالة تم إنقاذها ومخزنة كمسودة في نطاق المستخدم) ، فقم أيضًا بإخطار مالك نطاق المستخدم.',
 								checked: true
 							}
 						]
@@ -987,9 +987,9 @@
 			const usl = new Morebits.UserspaceLogger(Twinkle.getPref('xfdLogPageName'));// , 'Adding entry to userspace log');
 
 			usl.initialText =
-				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[WP:TW|Twinkle]].\n\n" +
-				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[WP:CSD#U1|CSD U1]].' +
-				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام Twinkle.' : '');
+				"هذا سجل لجميع ترشيحات [[WP:XFD|مناقشة الحذف]] التي قدمها هذا المستخدم باستخدام وحدة XfD الخاصة بـ [[ويكيبيديا:لمح البصر|لمح البصر]].\n\n" +
+				'إذا لم تعد ترغب في الاحتفاظ بهذا السجل، فيمكنك إيقاف تشغيله باستخدام [[ويكيبيديا:Twinkle/Preferences|لوحة التفضيلات]] ، وترشيح هذه الصفحة للحذف السريع بموجب [[ويكيبيديا:معايير الحذف السريع#U1|CSD U1]].' +
+				(Morebits.userIsSysop ? '\n\nلا يتتبع هذا السجل عمليات الحذف المتعلقة بـ XfD التي تتم باستخدام لمح البصر.' : '');
 
 			let editsummary;
 			if (params.discussionpage) {
@@ -1021,7 +1021,7 @@
 					break;
 				case 'mfd':
 					if (params.notifyuserspace && params.userspaceOwner && params.userspaceOwner !== initialContrib) {
-						appendText += '; تم إعلام {{user|1=' + params.userspaceOwner + '}}';
+						appendText += '; تم إعلام {{مستخدم|1=' + params.userspaceOwner + '}}';
 					}
 					break;
 				case 'cfd':
@@ -1060,7 +1060,7 @@
 			}
 
 			if (initialContrib && params.notifycreator) {
-				appendText += '; تم إعلام {{user|1=' + initialContrib + '}}';
+				appendText += '; تم إعلام {{مستخدم|1=' + initialContrib + '}}';
 			}
 			appendText += ' ~~~~~';
 			if (params.reason) {
@@ -1627,7 +1627,7 @@
 				if (params.notifyuserspace) {
 					if (params.userspaceOwner !== initialContrib) {
 						// Don't log if notifying creator above, will log then
-						Twinkle.xfd.callbacks.notifyUser(params, params.userspaceOwner, params.notifycreator, 'إعلام مالك مساحة المستخدم (' + params.userspaceOwner + ')');
+						Twinkle.xfd.callbacks.notifyUser(params, params.userspaceOwner, params.notifycreator, 'إعلام مالك نطاق المستخدم (' + params.userspaceOwner + ')');
 					} else if (!params.notifycreator) {
 						// If we thought we would notify the owner but didn't,
 						// then we need to log if we didn't notify the creator
@@ -1647,7 +1647,7 @@
 				params.logpage = 'Wikipedia:Files for discussion/' + date;
 				params.discussionpage = params.logpage + '#' + Morebits.pageNameNorm;
 
-				params.tagText = '{{ffd|log=' + date + '|help=off}}\n';
+				params.tagText = '{{ملف للنقاش|log=' + date + '|help=off}}\n';
 				if (pageobj.canEdit()) {
 					text = text.replace(/\{\{(mtc|(copy |move )?to ?commons|move to wikimedia commons|copy to wikimedia commons)[^}]*\}\}/gi, '');
 

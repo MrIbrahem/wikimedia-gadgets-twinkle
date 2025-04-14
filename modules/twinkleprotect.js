@@ -23,11 +23,11 @@
 	Twinkle.protect.callback = function twinkleprotectCallback() {
 		const Window = new Morebits.SimpleWindow(620, 530);
 		Window.setTitle(Morebits.userIsSysop ? 'تطبيق أو طلب أو إضافة قالب حماية صفحة' : 'طلب أو إضافة قالب حماية صفحة');
-		Window.setScriptName('Twinkle');
+		Window.setScriptName('لمح البصر!');
 		Window.addFooterLink('قوالب الحماية', 'Template:Protection templates');
-		Window.addFooterLink('سياسة الحماية', 'WP:PROT');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#protect');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.addFooterLink('سياسة الحماية', 'ويكيبيديا:سياسة الحماية');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#protect');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.protect.callback.evaluate);
 		const actionfield = form.append({
@@ -787,7 +787,7 @@
 		'pp-dispute': {
 			edit: 'sysop',
 			move: 'sysop',
-			reason: '[[WP:PP#Content disputes|حرب تحرير / نزاع محتوى]]'
+			reason: '[[ويكيبيديا:سياسة الحماية#Content disputes|حرب تحرير / نزاع محتوى]]'
 		},
 		'pp-vandalism': {
 			edit: 'sysop',
@@ -798,7 +798,7 @@
 			edit: 'sysop',
 			move: 'sysop',
 			expiry: 'infinity',
-			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر]]'
+			reason: '[[ويكيبيديا:سياسة الحماية#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]'
 		},
 		'pp-template': {
 			edit: 'templateeditor',
@@ -867,7 +867,7 @@
 			edit: 'autoconfirmed',
 			move: 'autoconfirmed',
 			expiry: 'infinity',
-			reason: '[[WP:PP#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر]]',
+			reason: '[[ويكيبيديا:سياسة الحماية#Talk-page protection|استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع]]',
 			template: 'pp-usertalk'
 		},
 		'pp-semi-template': { // removed for now
@@ -1315,7 +1315,7 @@
 						break;
 					case 'pp-usertalk':
 					case 'pp-semi-usertalk':
-						typereason = 'استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر';
+						typereason = 'استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع';
 						break;
 					case 'pp-semi-sock':
 					case 'pp-30-500-sock':
@@ -1451,10 +1451,11 @@
 					tag += '|small=yes';
 				}
 
-				if (/^\s*#redirect/i.test(text)) { // redirect page
+				if (/^\s*#redirect/i.test(text) || /^\s*#تحويل/i.test(text)) { // redirect page
 					// Only tag if no {{rcat shell}} is found
 					if (!text.match(/{{(?:redr|this is a redirect|r(?:edirect)?(?:.?cat.*)?[ _]?sh)/i)) {
 						text = text.replace(/#REDIRECT ?(\[\[.*?\]\])(.*)/i, '#REDIRECT $1$2\n\n{{' + tag + '}}');
+						text = text.replace(/#تحويل ?(\[\[.*?\]\])(.*)/i, '#تحويل $1$2\n\n{{' + tag + '}}');
 					} else {
 						Morebits.Status.info('غلاف فئة التحويل موجود', 'لا يوجد شيء للقيام به');
 						return;

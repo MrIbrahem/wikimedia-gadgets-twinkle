@@ -36,12 +36,12 @@
 		const Window = new Morebits.SimpleWindow(650, 530);
 		// need to be verbose about who we're blocking
 		Window.setTitle('منع أو إصدار قالب منع لـ ' + relevantUserName);
-		Window.setScriptName('Twinkle');
-		Window.addFooterLink('قوالب الحظر', 'Template:Uw-block/doc/Block_templates');
-		Window.addFooterLink('سياسة الحظر', 'WP:BLOCK');
-		Window.addFooterLink('تفضيلات الحظر', 'WP:TW/PREF#block');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#block');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.setScriptName('لمح البصر!');
+		Window.addFooterLink('قوالب المنع', 'Template:Uw-block/doc/Block_templates');
+		Window.addFooterLink('سياسة المنع', 'WP:BLOCK');
+		Window.addFooterLink('تفضيلات المنع', 'ويكيبيديا:Twinkle/Preferences#block');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#block');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		// Always added, hidden later if actual user not blocked
 		Window.addFooterLink('إلغاء منع هذا المستخدم', 'Special:Unblock/' + relevantUserName, true);
@@ -59,19 +59,19 @@
 				{
 					label: 'منع المستخدم',
 					value: 'block',
-					tooltip: 'منع المستخدم ذي الصلة بالخيارات المحددة. إذا تم إلغاء تحديد الحظر الجزئي، فسيكون هذا حظرًا على مستوى الموقع.',
+					tooltip: 'منع المستخدم ذي الصلة بالخيارات المحددة. إذا تم إلغاء تحديد المنع الجزئي، فسيكون هذا منعًا على مستوى الموقع.',
 					checked: true
 				},
 				{
 					label: 'منع جزئي',
 					value: 'partial',
-					tooltip: 'تمكين الحظر الجزئي وقوالب الحظر الجزئي.',
+					tooltip: 'تمكين المنع الجزئي وقوالب المنع الجزئي.',
 					checked: Twinkle.getPref('defaultToPartialBlocks') // Overridden if already blocked
 				},
 				{
 					label: 'إضافة قالب منع إلى صفحة نقاش المستخدم',
 					value: 'template',
-					tooltip: 'إذا نسي مدير الحظر إصدار قالب منع، أو قمت للتو بحظر المستخدم دون وضع قالب له، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع الحظر الجزئي لقوالب الحظر الجزئي.',
+					tooltip: 'إذا نسي مدير المنع إصدار قالب منع، أو قمت للتو بمنع المستخدم دون وضع قالب له، فيمكنك استخدام هذا لإصدار القالب المناسب. حدد مربع المنع الجزئي لقوالب المنع الجزئي.',
 					// Disallow when viewing the block dialog on an IP range
 					checked: !Morebits.ip.isRange(relevantUserName),
 					disabled: Morebits.ip.isRange(relevantUserName)
@@ -308,11 +308,11 @@
 		$partial.prop('disabled', !blockBox && !templateBox);
 
 		// Add current block parameters as default preset
-		const prior = { label: 'الحظر السابق' };
+		const prior = { label: 'المنع السابق' };
 		if (blockedUserName === relevantUserName) {
 			Twinkle.block.blockPresetsInfo.prior = Twinkle.block.currentBlockInfo;
 			// value not a valid template selection, chosen below by setting templateName
-			prior.list = [{ label: 'إعدادات الحظر السابقة', value: 'prior', selected: true }];
+			prior.list = [{ label: 'إعدادات المنع السابقة', value: 'prior', selected: true }];
 
 			// Arrays of objects are annoying to check
 			if (!blockGroup.some((bg) => bg.label === prior.label)) {
@@ -394,7 +394,7 @@
 					type: 'select',
 					multiple: true,
 					name: 'pagerestrictions',
-					label: 'صفحات محددة لحظر التحرير منها',
+					label: 'صفحات محددة لمنع التحرير منها',
 					value: '',
 					tooltip: '10 صفحات كحد أقصى.'
 				});
@@ -402,9 +402,9 @@
 					type: 'select',
 					multiple: true,
 					name: 'namespacerestrictions',
-					label: 'منع المساحات الاسمية',
+					label: 'منع النطاقات المحددة',
 					value: '',
-					tooltip: 'منع من تعديل هذه المساحات الاسمية.'
+					tooltip: 'منع من تعديل هذه النطاقات المحددة.'
 				});
 				$.each(menuFormattedNamespaces, (number, name) => {
 					// Ignore -1: Special; -2: Media; and 2300-2303: Gadget (talk) and Gadget definition (talk)
@@ -429,24 +429,24 @@
 				},
 				{
 					checked: Twinkle.block.field_block_options.disabletalk,
-					label: 'منع هذا المستخدم من تعديل صفحة نقاشه أثناء الحظر',
+					label: 'منع هذا المستخدم من تعديل صفحة نقاشه أثناء المنع',
 					name: 'disabletalk',
 					value: '1',
-					tooltip: partialBox ? 'إذا كنت تصدر حظرًا جزئيًا، فيجب أن يظل هذا غير محدد ما لم تمنعهم أيضًا من تعديل مساحة نقاش المستخدم' : ''
+					tooltip: partialBox ? 'إذا كنت تصدر منعًا جزئيًا، فيجب أن يظل هذا غير محدد ما لم تمنعهم أيضًا من تعديل نطاق نقاش المستخدم' : ''
 				}
 			];
 
 			if (Twinkle.block.isRegistered) {
 				blockoptions.push({
 					checked: Twinkle.block.field_block_options.autoblock,
-					label: 'الحظر التلقائي لأي عناوين IP مستخدمة (منع صارم)',
+					label: 'المنع التلقائي لأي عناوين IP مستخدمة (منع دائم)',
 					name: 'autoblock',
 					value: '1'
 				});
 			} else {
 				blockoptions.push({
 					checked: Twinkle.block.field_block_options.hardblock,
-					label: 'منع المستخدمين المسجلين من استخدام عنوان IP هذا (منع صارم)',
+					label: 'منع المستخدمين المسجلين من استخدام عنوان IP هذا (منع دائم)',
 					name: 'hardblock',
 					value: '1'
 				});
@@ -466,7 +466,7 @@
 			});
 			field_block_options.append({
 				type: 'textarea',
-				label: 'السبب (لسجل الحظر):',
+				label: 'السبب (لسجل المنع):',
 				name: 'reason',
 				tooltip: 'ضع في اعتبارك إضافة تفاصيل مفيدة إلى الرسالة الافتراضية.',
 				value: Twinkle.block.field_block_options.reason
@@ -477,7 +477,7 @@
 				name: 'filerlog_label',
 				label: 'انظر أيضا:',
 				style: 'display:inline-block;font-style:normal !important',
-				tooltip: 'أدخل رسالة "انظر أيضًا" للإشارة إلى ما إذا كان سجل المرشح أو المساهمات المحذوفة قد لعبت دورًا في قرار الحظر.'
+				tooltip: 'أدخل رسالة "انظر أيضًا" للإشارة إلى ما إذا كان سجل المرشح أو المساهمات المحذوفة قد لعبت دورًا في قرار المنع.'
 			});
 			field_block_options.append({
 				type: 'checkbox',
@@ -528,7 +528,7 @@
 			name: 'dstopic',
 			label: 'موضوع DS',
 			value: '',
-			tooltip: 'إذا تم تحديده، فسوف يقوم بإبلاغ القالب وقد تتم إضافته إلى رسالة الحظر',
+			tooltip: 'إذا تم تحديده، فسوف يقوم بإبلاغ القالب وقد تتم إضافته إلى رسالة المنع',
 			event: Twinkle.block.callback.toggle_ds_reason
 		};
 		if (templateBox) {
@@ -559,23 +559,23 @@
 				name: 'area',
 				label: 'المنطقة المحظورة من',
 				value: '',
-				tooltip: 'شرح اختياري للصفحات أو المساحات الاسمية التي مٌنع المستخدم من تعديلها.'
+				tooltip: 'شرح اختياري للصفحات أو النطاقات المحددة التي مٌنع المستخدم من تعديلها.'
 			});
 
 			if (!blockBox) {
 				field_template_options.append({
 					type: 'input',
 					name: 'template_expiry',
-					label: 'مدة الحظر:',
+					label: 'مدة المنع:',
 					value: '',
-					tooltip: 'الفترة التي يستحقها الحظر، على سبيل المثال 24 ساعة، أسبوعان، غير محددة وما إلى ذلك...'
+					tooltip: 'الفترة التي يستحقها المنع، على سبيل المثال 24 ساعة، أسبوعان، غير محددة وما إلى ذلك...'
 				});
 			}
 			field_template_options.append({
 				type: 'input',
 				name: 'block_reason',
 				label: '"مُنعت بسبب ..."',
-				tooltip: 'سبب اختياري، لاستبدال السبب العام الافتراضي. متاح فقط لقوالب الحظر العامة.',
+				tooltip: 'سبب اختياري، لاستبدال السبب العام الافتراضي. متاح فقط لقوالب المنع العامة.',
 				value: Twinkle.block.field_template_options.block_reason
 			});
 
@@ -587,7 +587,7 @@
 						{
 							label: 'عدم تضمين تاريخ انتهاء الصلاحية في القالب',
 							checked: Twinkle.block.field_template_options.blank_duration,
-							tooltip: 'بدلاً من تضمين المدة، اجعل قالب الحظر يقرأ "لقد مُنعت مؤقتًا..."'
+							tooltip: 'بدلاً من تضمين المدة، اجعل قالب المنع يقرأ "لقد مُنعت مؤقتًا..."'
 						}
 					]
 				});
@@ -599,19 +599,19 @@
 							label: 'تم تعطيل الوصول إلى صفحة النقاش',
 							name: 'notalk',
 							checked: Twinkle.block.field_template_options.notalk,
-							tooltip: 'اجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى صفحة النقاش'
+							tooltip: 'اجعل قالب المنع ينص على أنه تمت إزالة وصول المستخدم إلى صفحة النقاش'
 						},
 						{
 							label: 'تم منع المستخدم من إرسال بريد إلكتروني',
 							name: 'noemail_template',
 							checked: Twinkle.block.field_template_options.noemail_template,
-							tooltip: 'إذا لم تُوفر المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
+							tooltip: 'إذا لم تُوفر المنطقة، فاجعل قالب المنع ينص على أنه تمت إزالة وصول المستخدم إلى البريد الإلكتروني'
 						},
 						{
 							label: 'تم منع المستخدم من إنشاء حسابات',
 							name: 'nocreate_template',
 							checked: Twinkle.block.field_template_options.nocreate_template,
-							tooltip: 'إذا لم تُوفر المنطقة، فاجعل قالب الحظر ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
+							tooltip: 'إذا لم تُوفر المنطقة، فاجعل قالب المنع ينص على أنه تمت إزالة قدرة المستخدم على إنشاء حسابات'
 						}
 					]
 				});
@@ -644,7 +644,7 @@
 			$form.find('[name=pagerestrictions]').select2({
 				theme: 'default select2-morebits',
 				width: '100%',
-				placeholder: 'حدد صفحات لحظر المستخدم من تعديلها',
+				placeholder: 'حدد صفحات لمنع المستخدم من تعديلها',
 				language: {
 					errorLoading: function () {
 						return 'مصطلح بحث غير مكتمل أو غير صالح';
@@ -698,7 +698,7 @@
 					searching: Morebits.select2.queryInterceptor
 				},
 				templateResult: Morebits.select2.highlightSearchMatches,
-				placeholder: 'حدد المساحات الاسمية لحظر المستخدم من'
+				placeholder: 'حدد النطاقات المحددة لمنع المستخدم من'
 			});
 
 			mw.util.addCSS(
@@ -740,7 +740,7 @@
 			// Range blocked
 			if (Twinkle.block.currentBlockInfo.rangestart !== Twinkle.block.currentBlockInfo.rangeend) {
 				if (sameUser) {
-					statusStr += ' كحظر نطاق';
+					statusStr += ' كمنع نطاق';
 				} else {
 					statusStr += ' ضمن' + (Morebits.ip.get64(relevantUserName) === blockedUserName ? ' /64' : '') + ' منع نطاق';
 					// Link to the full range
@@ -757,7 +757,7 @@
 
 			let infoStr = 'سوف يقوم هذا النموذج';
 			if (sameUser) {
-				infoStr += ' بتغيير هذا الحظر';
+				infoStr += ' بتغيير هذا المنع';
 				if (Twinkle.block.currentBlockInfo.partial === undefined && partialBox) {
 					infoStr += ' ، وتحويله إلى منع جزئي';
 				} else if (Twinkle.block.currentBlockInfo.partial === '' && !partialBox) {
@@ -778,18 +778,18 @@
 		// only return the correct block log if wgRelevantUserName is the
 		// exact range, not merely a funtional equivalent
 		if (Twinkle.block.hasBlockLog) {
-			const $blockloglink = $('<span>').append($('<a target="_blank" href="' + mw.util.getUrl('Special:Log', { action: 'view', page: relevantUserName, type: 'block' }) + '">سجل الحظر</a>)'));
+			const $blockloglink = $('<span>').append($('<a target="_blank" href="' + mw.util.getUrl('Special:Log', { action: 'view', page: relevantUserName, type: 'block' }) + '">سجل المنع</a>)'));
 			if (!Twinkle.block.currentBlockInfo) {
 				const lastBlockAction = Twinkle.block.blockLog[0];
 				if (lastBlockAction.action === 'unblock') {
-					$blockloglink.append(' (تم إلغاء الحظر ' + new Morebits.Date(lastBlockAction.timestamp).calendar('utc') + ')');
+					$blockloglink.append(' (تم إلغاء المنع ' + new Morebits.Date(lastBlockAction.timestamp).calendar('utc') + ')');
 				} else { // block or reblock
 					$blockloglink.append(' (' + lastBlockAction.params.duration + ', انتهت صلاحيته ' + new Morebits.Date(lastBlockAction.params.expiry).calendar('utc') + ')');
 				}
 			}
 
 			Morebits.Status.init($('div[name="hasblocklog"] span').last()[0]);
-			Morebits.Status.warn(Twinkle.block.currentBlockInfo ? 'الحظر السابق' : 'تم منع هذا ' + (Morebits.ip.isRange(relevantUserName) ? 'نطاق' : 'مستخدم') + ' في الماضي', $blockloglink[0]);
+			Morebits.Status.warn(Twinkle.block.currentBlockInfo ? 'المنع السابق' : 'تم منع هذا ' + (Morebits.ip.isRange(relevantUserName) ? 'نطاق' : 'مستخدم') + ' في الماضي', $blockloglink[0]);
 		}
 
 		// Make sure all the fields are correct based on initial defaults
@@ -836,7 +836,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			nonstandard: true,
-			reason: '{{anonblock}}',
+			reason: '{{Anonblock}}',
 			sig: '~~~~'
 		},
 		'anonblock - school': {
@@ -844,7 +844,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			nonstandard: true,
-			reason: '{{anonblock}} <!-- من المحتمل أن تكون مدرسة بناءً على دليل سلوكي -->',
+			reason: '{{Anonblock}} <!-- من المحتمل أن تكون مدرسة بناءً على دليل سلوكي -->',
 			templateName: 'anonblock',
 			sig: '~~~~'
 		},
@@ -854,7 +854,7 @@
 			nocreate: true,
 			nonstandard: true,
 			hardblock: true,
-			reason: '{{blocked proxy}}',
+			reason: '{{بروكسي ممنوع}}',
 			sig: null
 		},
 		'CheckUser block': {
@@ -862,7 +862,7 @@
 			forUnregisteredOnly: true,
 			nocreate: true,
 			nonstandard: true,
-			reason: '{{CheckUser block}}',
+			reason: '{{منع تدقيق مستخدم}}',
 			sig: '~~~~'
 		},
 		'checkuserblock-account': {
@@ -937,8 +937,8 @@
 			expiry: '24 hours',
 			nocreate: true,
 			pageParam: true,
-			reason: 'انتهاك [[WP:Three-revert rule|قاعدة الثلاثة استرجاعات]]',
-			summary: 'مُنعت من التحرير بسبب انتهاك [[WP:3RR|قاعدة الثلاثة استرجاعات]]'
+			reason: 'انتهاك [[ويكيبيديا:حرب التحرير|قاعدة الثلاثة استرجاعات]]',
+			summary: 'مُنعت من التحرير بسبب انتهاك [[ويكيبيديا:حرب التحرير|قاعدة الثلاثة استرجاعات]]'
 		},
 		'uw-ablock': {
 			autoblock: true,
@@ -954,8 +954,8 @@
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
-			reason: 'استخدام ويكيبيديا لأغراض [[WP:Spam|البريد العشوائي]] أو [[WP:NOTADVERTISING|الإعلان]]',
-			summary: 'مُنعت من التحرير بسبب [[WP:SOAP|الإعلان أو الترويج الذاتي]]'
+			reason: 'استخدام ويكيبيديا لأغراض [[WP:Spam|البريد العشوائي]] أو [[ويكيبيديا:ويكيبيديا ليست|الإعلان]]',
+			summary: 'مُنعت من التحرير بسبب [[ويكيبيديا:ويكيبيديا ليست|الإعلان أو الترويج الذاتي]]'
 		},
 		'uw-aeblock': {
 			autoblock: true,
@@ -969,7 +969,7 @@
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
-			reason: 'انتهاكات [[WP:Biographies of living persons|السير الذاتية للأشخاص الأحياء]]',
+			reason: 'انتهاكات [[ويكيبيديا:سير الأحياء|السير الذاتية للأشخاص الأحياء]]',
 			summary: 'مُنعت من التحرير بسبب انتهاكات [[ويكيبيديا:سير الأحياء|سياسة السير الذاتية للأشخاص الأحياء]] في ويكيبيديا'
 		},
 		'uw-block': {
@@ -979,7 +979,7 @@
 			nocreate: true,
 			pageParam: true,
 			reasonParam: true,
-			summary: 'تم حظرك من التحرير',
+			summary: 'تم منعك من التحرير',
 			suppressArticleInSummary: true
 		},
 		'uw-blockindef': {
@@ -996,20 +996,20 @@
 			disabletalk: true,
 			pageParam: true,
 			reasonParam: true,
-			summary: 'تم حظرك من التحرير وتم تعطيل الوصول إلى صفحة نقاش المستخدم الخاصة بك',
+			summary: 'تم منعك من التحرير وتم تعطيل الوصول إلى صفحة نقاش المستخدم الخاصة بك',
 			suppressArticleInSummary: true
 		},
 		'uw-botblock': {
 			forRegisteredOnly: true,
 			pageParam: true,
-			reason: 'تشغيل [[WP:BOT|نص روبوت]] بدون [[WP:BRFA|موافقة]]',
-			summary: 'لقد مُنعت من التحرير لأنه يبدو أنك تقوم بتشغيل [[WP:BOT|نص روبوت]] بدون [[WP:BRFA|موافقة]]'
+			reason: 'تشغيل [[ويكيبيديا:بوت|نص روبوت]] بدون [[ويكيبيديا:طلب صلاحية بوت|موافقة]]',
+			summary: 'لقد مُنعت من التحرير لأنه يبدو أنك تقوم بتشغيل [[ويكيبيديا:بوت|نص روبوت]] بدون [[ويكيبيديا:طلب صلاحية بوت|موافقة]]'
 		},
 		'uw-botublock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-botublock}} <!-- Username implies a bot, soft block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعني أن هذا حساب [[WP:BOT|روبوت]] ، والذي لم تتم الموافقة عليه حاليًا'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يعني أن هذا حساب [[ويكيبيديا:بوت|روبوت]] ، والذي لم تتم الموافقة عليه حاليًا'
 		},
 		'uw-botuhblock': {
 			autoblock: true,
@@ -1017,13 +1017,13 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: '{{uw-botuhblock}} <!-- Username implies a bot, hard block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
 		'uw-causeblock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
-			reason: '{{uw-causeblock}} <!-- Username represents a non-profit, soft block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
+			reason: '{{Uw-causeblock}} <!-- Username represents a non-profit, soft block -->',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
 		},
 		'uw-compblock': {
 			autoblock: true,
@@ -1031,15 +1031,15 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: 'حساب مخترق',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يُعتقد أن [[WP:SECURE|حسابك قد تم اختراقه]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يُعتقد أن [[ويكيبيديا:أمان حساب المستخدم|حسابك قد تم اختراقه]]'
 		},
 		'uw-copyrightblock': {
 			autoblock: true,
 			expiry: 'infinity',
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:Copyright violations|انتهاكات حقوق الطبع والنشر]]',
-			summary: 'مُنعت من التحرير بسبب [[WP:COPYVIO|انتهاك حقوق الطبع والنشر المستمر]]'
+			reason: '[[ويكيبيديا:انتهاكات حقوق التأليف والنشر|انتهاكات حقوق الطبع والنشر]]',
+			summary: 'مُنعت من التحرير بسبب [[ويكيبيديا:انتهاكات حقوق التأليف والنشر|انتهاك حقوق الطبع والنشر المستمر]]'
 		},
 		'uw-dblock': {
 			autoblock: true,
@@ -1051,65 +1051,65 @@
 		'uw-disruptblock': {
 			autoblock: true,
 			nocreate: true,
-			reason: '[[WP:Disruptive editing|تحرير مزعج]]',
-			summary: 'مُنعت من التحرير بسبب [[WP:DE|التحرير المزعج]]'
+			reason: '[[ويكيبيديا:تعديلات مزعجة|تحرير مزعج]]',
+			summary: 'مُنعت من التحرير بسبب [[ويكيبيديا:تعديلات مزعجة|التحرير المزعج]]'
 		},
 		'uw-efblock': {
 			autoblock: true,
 			nocreate: true,
-			reason: 'تشغيل [[WP:Edit filter|مرشح التحرير]] بشكل متكرر',
-			summary: 'مُنعت من التحرير بسبب التعديلات المزعجة التي أدت بشكل متكرر إلى تشغيل [[WP:EF|مرشح التحرير]]'
+			reason: 'تشغيل [[ويكيبيديا:مرشح الإساءة|مرشح التحرير]] بشكل متكرر',
+			summary: 'مُنعت من التحرير بسبب التعديلات المزعجة التي أدت بشكل متكرر إلى تشغيل [[ويكيبيديا:مرشح الإساءة|مرشح التحرير]]'
 		},
 		'uw-ewblock': {
 			autoblock: true,
 			expiry: '24 hours',
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:Edit warring|حرب التحرير]]',
-			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[WP:DE|التعطيل]] الناجم عن مشاركتك في [[WP:EW|حرب التحرير]]'
+			reason: '[[ويكيبيديا:حرب التحرير|حرب التحرير]]',
+			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[ويكيبيديا:تعديلات مزعجة|التعطيل]] الناجم عن مشاركتك في [[ويكيبيديا:حرب التحرير|حرب التحرير]]'
 		},
 		'uw-hblock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:No personal attacks|هجمات شخصية]] أو [[WP:Harassment|مضايقة]]',
-			summary: 'لقد مُنعت من التحرير لمحاولة [[WP:HARASS|مضايقة]] مستخدمين آخرين'
+			reason: '[[ويكيبيديا:لا للهجوم الشخصي|هجمات شخصية]] أو [[ويكيبيديا:تحرش|مضايقة]]',
+			summary: 'لقد مُنعت من التحرير لمحاولة [[ويكيبيديا:تحرش|مضايقة]] مستخدمين آخرين'
 		},
 		'uw-ipevadeblock': {
 			forUnregisteredOnly: true,
 			nocreate: true,
-			reason: '[[WP:Blocking policy#Evasion of blocks|التهرب من الحظر]]',
-			summary: 'تم منع عنوان IP الخاص بك من التحرير لأنه تم استخدامه [[WP:EVADE|للتهرب من منع سابق]]'
+			reason: '[[ويكيبيديا:سياسة المنع|التهرب من المنع]]',
+			summary: 'تم منع عنوان IP الخاص بك من التحرير لأنه تم استخدامه [[ويكيبيديا:سياسة المنع|للتهرب من منع سابق]]'
 		},
 		'uw-lblock': {
 			autoblock: true,
 			expiry: 'infinity',
 			nocreate: true,
-			reason: 'إصدار [[WP:No legal threats|تهديدات قانونية]]',
-			summary: 'لقد مُنعت من التحرير لإصدار [[WP:NLT|تهديدات قانونية أو اتخاذ إجراء قانوني]]'
+			reason: 'إصدار [[ويكيبيديا:لا تهديدات قضائية|تهديدات قانونية]]',
+			summary: 'لقد مُنعت من التحرير لإصدار [[ويكيبيديا:لا تهديدات قضائية|تهديدات قانونية أو اتخاذ إجراء قانوني]]'
 		},
 		'uw-nothereblock': {
 			autoblock: true,
 			expiry: 'infinity',
 			nocreate: true,
-			reason: 'بوضوح [[WP:NOTHERE|ليس هنا لبناء موسوعة]]',
+			reason: 'بوضوح [[وب:ليس بناء الموسوعة|ليس هنا لبناء موسوعة]]',
 			forRegisteredOnly: true,
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يبدو أنك لست هنا [[WP:NOTHERE|لبناء موسوعة]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأنه يبدو أنك لست هنا [[وب:ليس بناء الموسوعة|لبناء موسوعة]]'
 		},
 		'uw-npblock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
-			reason: 'إنشاء [[WP:Patent nonsense|هراء واضح]] أو صفحات أخرى غير لائقة',
-			summary: 'لقد مُنعت من التحرير لإنشاء [[WP:PN|صفحات غير منطقية]]'
+			reason: 'إنشاء [[ويكيبيديا:كلام فارغ|هراء واضح]] أو صفحات أخرى غير لائقة',
+			summary: 'لقد مُنعت من التحرير لإنشاء [[ويكيبيديا:كلام فارغ|صفحات غير منطقية]]'
 		},
 		'uw-pablock': {
 			autoblock: true,
 			expiry: '31 hours',
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:No personal attacks|هجمات شخصية]] أو [[WP:Harassment|مضايقة]]',
-			summary: 'لقد مُنعت من التحرير لإجراء [[WP:NPA|هجمات شخصية]] تجاه مستخدمين آخرين'
+			reason: '[[ويكيبيديا:لا للهجوم الشخصي|هجمات شخصية]] أو [[ويكيبيديا:تحرش|مضايقة]]',
+			summary: 'لقد مُنعت من التحرير لإجراء [[ويكيبيديا:لا للهجوم الشخصي|هجمات شخصية]] تجاه مستخدمين آخرين'
 		},
 		'uw-sblock': {
 			autoblock: true,
@@ -1123,36 +1123,36 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:Spam|البريد العشوائي]] / [[WP:NOTADVERTISING|الإعلان]] فقط',
+			reason: '[[WP:Spam|البريد العشوائي]] / [[ويكيبيديا:ويكيبيديا ليست|الإعلان]] فقط',
 			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان أو الترويج]]'
 		},
 		'uw-socialmediablock': {
 			autoblock: true,
 			nocreate: true,
 			pageParam: true,
-			reason: 'استخدام ويكيبيديا كـ [[WP:NOTMYSPACE|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]',
-			summary: 'لقد مُنعت من التحرير لاستخدام صفحات المستخدم و/أو المقالات كـ [[WP:NOTMYSPACE|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]'
+			reason: 'استخدام ويكيبيديا كـ [[ويكيبيديا:ويكيبيديا ليست|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]',
+			summary: 'لقد مُنعت من التحرير لاستخدام صفحات المستخدم و/أو المقالات كـ [[ويكيبيديا:ويكيبيديا ليست|مدونة أو مضيف ويب أو موقع تواصل اجتماعي أو منتدى]]'
 		},
 		'uw-sockblock': {
 			autoblock: true,
 			forRegisteredOnly: true,
 			nocreate: true,
-			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
+			reason: 'إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]',
 			summary: 'لقد مُنعت من التحرير لإساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-softerblock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
-			reason: '{{uw-softerblock}} <!-- Promotional username, soft block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
+			reason: '{{اسم مستخدم غير مقبول}} <!-- Promotional username, soft block -->',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يعطي انطباعًا بأن الحساب يمثل مجموعة أو منظمة أو موقع ويب'
 		},
 		'uw-spamublock': {
 			autoblock: true,
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			nocreate: true,
-			reason: '{{uw-spamublock}} <!-- Promotional username, promotional edits -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان]] واسم المستخدم الخاص بك هو انتهاك لـ [[WP:U|سياسة اسم المستخدم]]'
+			reason: '{{Uw-spamublock}} <!-- Promotional username, promotional edits -->',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم فقط لـ [[WP:SPAM|البريد العشوائي أو الإعلان]] واسم المستخدم الخاص بك هو انتهاك لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
 		'uw-spoablock': {
 			autoblock: true,
@@ -1164,7 +1164,7 @@
 		},
 		'uw-talkrevoked': {
 			disabletalk: true,
-			reason: 'إلغاء الوصول إلى صفحة النقاش: استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر',
+			reason: 'إلغاء الوصول إلى صفحة النقاش: استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع',
 			prependReason: true,
 			summary: 'تم تعطيل الوصول إلى صفحة نقاش المستخدم الخاصة بك',
 			useInitialOptions: true
@@ -1172,38 +1172,38 @@
 		'uw-ublock': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
-			reason: '{{uw-ublock}} <!-- Username violation, soft block -->',
+			reason: '{{Uw-ublock}} <!-- Username violation, soft block -->',
 			reasonParam: true,
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
 		'uw-ublock-double': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-ublock-double}} <!-- Username closely resembles another user, soft block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك مشابه جدًا لاسم المستخدم لمستخدم ويكيبيديا آخر'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك مشابه جدًا لاسم المستخدم لمستخدم ويكيبيديا آخر'
 		},
 		'uw-ucblock': {
 			autoblock: true,
 			expiry: '31 hours',
 			nocreate: true,
 			pageParam: true,
-			reason: 'الإضافة المستمرة لـ [[WP:INTREF|محتوى غير موثوق]]',
-			summary: 'مُنعت من التحرير بسبب الإضافة المستمرة لـ [[WP:INTREF|محتوى غير موثوق]]'
+			reason: 'الإضافة المستمرة لـ [[مساعدة:مقدمة عن الاستشهاد باستخدام ترميز ويكي/1|محتوى غير موثوق]]',
+			summary: 'مُنعت من التحرير بسبب الإضافة المستمرة لـ [[مساعدة:مقدمة عن الاستشهاد باستخدام ترميز ويكي/1|محتوى غير موثوق]]'
 		},
 		'uw-uhblock': {
 			autoblock: true,
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			nocreate: true,
-			reason: '{{uw-uhblock}} <!-- Username violation, hard block -->',
+			reason: '{{Uw-uhblock}} <!-- Username violation, hard block -->',
 			reasonParam: true,
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن اسم المستخدم الخاص بك يمثل انتهاكًا صارخًا لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
 		'uw-ublock-wellknown': {
 			expiry: 'infinity',
 			forRegisteredOnly: true,
 			reason: '{{uw-ublock-wellknown}} <!-- Username represents a well-known person, soft block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يطابق اسم شخص حي معروف'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يطابق اسم شخص حي معروف'
 		},
 		'uw-uhblock-double': {
 			autoblock: true,
@@ -1211,7 +1211,7 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			reason: '{{uw-uhblock-double}} <!-- Attempted impersonation of another user, hard block -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[WP:U|اسم المستخدم]] الخاص بك يبدو أنه ينتحل شخصية مستخدم ويكيبيديا راسخ آخر'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن [[ويكيبيديا:سياسة اسم المستخدم|اسم المستخدم]] الخاص بك يبدو أنه ينتحل شخصية مستخدم ويكيبيديا راسخ آخر'
 		},
 		'uw-upeblock': {
 			autoblock: true,
@@ -1219,8 +1219,8 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:PAID|تحرير مدفوع غير معلن]] في انتهاك لـ [[WP:TOU|شروط استخدام]] WMF',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم في انتهاك [[WP:PAID|سياسة ويكيبيديا بشأن الدعوة المدفوعة غير المعلنة]]'
+			reason: '[[ويكيبيديا:مساهمات مدفوعة|تحرير مدفوع غير معلن]] في انتهاك لـ [[WP:TOU|شروط استخدام]] WMF',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك يستخدم في انتهاك [[ويكيبيديا:مساهمات مدفوعة|سياسة ويكيبيديا بشأن الدعوة المدفوعة غير المعلنة]]'
 		},
 		'uw-vaublock': {
 			autoblock: true,
@@ -1229,14 +1229,14 @@
 			nocreate: true,
 			pageParam: true,
 			reason: '{{uw-vaublock}} <!-- Username violation, vandalism-only account -->',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك [[WP:DISRUPTONLY|يستخدم فقط للتخريب]] واسم المستخدم الخاص بك هو انتهاك صارخ لـ [[WP:U|سياسة اسم المستخدم]]'
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك [[ويكيبيديا:سياسة المنع|يستخدم فقط للتخريب]] واسم المستخدم الخاص بك هو انتهاك صارخ لـ [[ويكيبيديا:سياسة اسم المستخدم|سياسة اسم المستخدم]]'
 		},
 		'uw-vblock': {
 			autoblock: true,
 			expiry: '31 hours',
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:Vandalism|تخريب]]',
+			reason: '[[ويكيبيديا:تخريب|تخريب]]',
 			summary: 'لقد مُنعت من التحرير لمنع المزيد من [[ويكيبيديا:تخريب|التخريب]]'
 		},
 		'uw-voablock': {
@@ -1245,8 +1245,8 @@
 			forRegisteredOnly: true,
 			nocreate: true,
 			pageParam: true,
-			reason: '[[WP:DISRUPTONLY|حساب تخريبي فقط]]',
-			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك [[WP:DISRUPTONLY|يستخدم فقط للتخريب]]'
+			reason: '[[ويكيبيديا:سياسة المنع|حساب تخريبي فقط]]',
+			summary: 'لقد مُنعت إلى أجل غير مسمى من التحرير لأن حسابك [[ويكيبيديا:سياسة المنع|يستخدم فقط للتخريب]]'
 		},
 		'zombie proxy': {
 			expiry: '1 month',
@@ -1264,8 +1264,8 @@
 			nocreate: true,
 			pageParam: false,
 			reasonParam: true,
-			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد [[WP:PB|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
+			reason: 'إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]',
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-acpblockindef': {
 			autoblock: true,
@@ -1274,8 +1274,8 @@
 			nocreate: true,
 			pageParam: false,
 			reasonParam: true,
-			reason: 'إساءة استخدام [[WP:Sock puppetry|حسابات متعددة]]',
-			summary: 'لقد [[WP:PB|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
+			reason: 'إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]',
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت إلى أجل غير مسمى من إنشاء حسابات]] بسبب إساءة استخدام [[ويكيبيديا:دمية جورب|حسابات متعددة]]'
 		},
 		'uw-aepblock': {
 			autoblock: true,
@@ -1283,7 +1283,7 @@
 			pageParam: false,
 			reason: '[[WP:Arbitration enforcement|إنفاذ التحكيم]]',
 			reasonParam: true,
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] من التحرير بسبب انتهاك [[WP:Arbitration|قرار التحكيم]]'
 		},
 		'uw-epblock': {
 			autoblock: true,
@@ -1293,8 +1293,8 @@
 			noemail: true,
 			pageParam: false,
 			reasonParam: true,
-			reason: 'بريد إلكتروني [[WP:Harassment|مضايقة]]',
-			summary: 'لقد [[WP:PB|مُنعت من إرسال بريد إلكتروني]] إلى محررين آخرين بسبب [[WP:Harassment|المضايقة]]'
+			reason: 'بريد إلكتروني [[ويكيبيديا:تحرش|مضايقة]]',
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت من إرسال بريد إلكتروني]] إلى محررين آخرين بسبب [[ويكيبيديا:تحرش|المضايقة]]'
 		},
 		'uw-ewpblock': {
 			autoblock: true,
@@ -1302,8 +1302,8 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			reason: '[[WP:Edit warring|حرب التحرير]]',
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من تحرير مناطق معينة من الموسوعة لمنع المزيد من [[WP:DE|التعطيل]] بسبب [[WP:EW|حرب التحرير]]'
+			reason: '[[ويكيبيديا:حرب التحرير|حرب التحرير]]',
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] من تحرير مناطق معينة من الموسوعة لمنع المزيد من [[ويكيبيديا:تعديلات مزعجة|التعطيل]] بسبب [[ويكيبيديا:حرب التحرير|حرب التحرير]]'
 		},
 		'uw-pblock': {
 			autoblock: true,
@@ -1311,7 +1311,7 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] من مناطق معينة من الموسوعة'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] من مناطق معينة من الموسوعة'
 		},
 		'uw-pblockindef': {
 			autoblock: true,
@@ -1320,7 +1320,7 @@
 			nocreate: false,
 			pageParam: false,
 			reasonParam: true,
-			summary: 'لقد [[WP:PB|مُنعت جزئيًا]] إلى أجل غير مسمى من مناطق معينة من الموسوعة'
+			summary: 'لقد [[ويكيبيديا:منع جزئي|مُنعت جزئيًا]] إلى أجل غير مسمى من مناطق معينة من الموسوعة'
 		}
 	};
 
@@ -1346,7 +1346,7 @@
 	//   value: <string, the key of a preset in blockPresetsInfo>
 	Twinkle.block.blockGroups = [
 		{
-			label: 'أسباب الحظر الشائعة',
+			label: 'أسباب المنع الشائعة',
 			list: [
 				{ label: 'anonblock', value: 'anonblock' },
 				{ label: 'anonblock - من المحتمل أن تكون مدرسة', value: 'anonblock - school' },
@@ -1355,7 +1355,7 @@
 				{ label: 'منع عام (سبب مخصص) - IP', value: 'uw-ablock', selected: true }, // set only when blocking IP
 				{ label: 'منع عام (سبب مخصص) - غير محدد', value: 'uw-blockindef' },
 				{ label: 'تحرير تخريبي', value: 'uw-disruptblock' },
-				{ label: 'استخدام غير لائق لصفحة نقاش المستخدم أثناء الحظر', value: 'uw-talkrevoked' },
+				{ label: 'استخدام غير لائق لصفحة نقاش المستخدم أثناء المنع', value: 'uw-talkrevoked' },
 				{ label: 'ليس هنا لبناء موسوعة', value: 'uw-nothereblock' },
 				{ label: 'محتوى غير موثوق', value: 'uw-ucblock' },
 				{ label: 'تخريب', value: 'uw-vblock' },
@@ -1365,9 +1365,9 @@
 		{
 			label: 'أسباب موسعة',
 			list: [
-				{ label: 'إعلان', value: 'uw-adblock' },
+				{ label: 'حساب للسبام أو الدعاية فقط', value: 'uw-adblock' },
 				{ label: 'إنفاذ التحكيم', value: 'uw-aeblock' },
-				{ label: 'التهرب من الحظر - IP', value: 'uw-ipevadeblock' },
+				{ label: 'التهرب من المنع - IP', value: 'uw-ipevadeblock' },
 				{ label: 'انتهاكات سير الأحياء', value: 'uw-bioblock' },
 				{ label: 'انتهاكات حقوق الطبع والنشر', value: 'uw-copyrightblock' },
 				{ label: 'إنشاء صفحات عديمة المعنى', value: 'uw-npblock' },
@@ -1393,13 +1393,13 @@
 			label: 'انتهاكات اسم المستخدم',
 			list: [
 				{ label: 'اسم مستخدم روبوت، منع خفيف', value: 'uw-botublock' },
-				{ label: 'اسم مستخدم روبوت، منع صارم', value: 'uw-botuhblock' },
-				{ label: 'اسم مستخدم ترويجي، منع صارم', value: 'uw-spamublock' },
+				{ label: 'اسم مستخدم روبوت، منع دائم', value: 'uw-botuhblock' },
+				{ label: 'اسم مستخدم ترويجي، منع دائم', value: 'uw-spamublock' },
 				{ label: 'اسم مستخدم ترويجي، منع خفيف', value: 'uw-softerblock' },
 				{ label: 'اسم مستخدم مشابه، منع خفيف', value: 'uw-ublock-double' },
 				{ label: 'انتهاك اسم المستخدم، منع خفيف', value: 'uw-ublock' },
-				{ label: 'انتهاك اسم المستخدم، منع صارم', value: 'uw-uhblock' },
-				{ label: 'انتحال شخصية اسم المستخدم، منع صارم', value: 'uw-uhblock-double' },
+				{ label: 'انتهاك اسم المستخدم، منع دائم', value: 'uw-uhblock' },
+				{ label: 'انتحال شخصية اسم المستخدم، منع دائم', value: 'uw-uhblock-double' },
 				{ label: 'اسم المستخدم يمثل شخصًا معروفًا، منع خفيف', value: 'uw-ublock-wellknown' },
 				{ label: 'اسم المستخدم يمثل مؤسسة غير ربحية، منع خفيف', value: 'uw-causeblock' },
 				{ label: 'انتهاك اسم المستخدم، حساب تخريبي فقط', value: 'uw-vaublock' }
@@ -1425,7 +1425,7 @@
 
 	Twinkle.block.blockGroupsPartial = [
 		{
-			label: 'أسباب الحظر الجزئي الشائعة',
+			label: 'أسباب المنع الجزئي الشائعة',
 			list: [
 				{ label: 'منع جزئي عام (سبب مخصص)', value: 'uw-pblock', selected: true },
 				{ label: 'منع جزئي عام (سبب مخصص) - غير محدد', value: 'uw-pblockindef' },
@@ -1433,7 +1433,7 @@
 			]
 		},
 		{
-			label: 'أسباب الحظر الجزئي الموسعة',
+			label: 'أسباب المنع الجزئي الموسعة',
 			list: [
 				{ label: 'إنفاذ التحكيم', value: 'uw-aepblock' },
 				{ label: 'مضايقة البريد الإلكتروني', value: 'uw-epblock' },
@@ -1722,7 +1722,7 @@
 
 		const templateText = Twinkle.block.callback.getBlockNoticeWikitext(params);
 
-		form.previewer.beginRender(templateText, 'User_talk:' + relevantUserName); // Force wikitext/correct username
+		form.previewer.beginRender(templateText, 'نقاش_المستخدم:' + relevantUserName); // Force wikitext/correct username
 	};
 
 	Twinkle.block.callback.evaluate = function twinkleblockCallbackEvaluate(e) {
@@ -1761,14 +1761,14 @@
 		if (toBlock) {
 			if (blockoptions.partial) {
 				if (blockoptions.disabletalk && !blockoptions.namespacerestrictions.includes('3')) {
-					return alert('لا يمكن للحظر الجزئي منع الوصول إلى صفحة النقاش ما لم يتم تقييدهم أيضًا من تعديل مساحة نقاش المستخدم!');
+					return alert('لا يمكن للمنع الجزئي منع الوصول إلى صفحة النقاش ما لم يتم تقييدهم أيضًا من تعديل نطاق نقاش المستخدم!');
 				}
 				if (!blockoptions.namespacerestrictions && !blockoptions.pagerestrictions) {
 					if (!blockoptions.noemail && !blockoptions.nocreate) { // Blank entries technically allowed [[phab:T208645]]
 						return alert('لم يتم تحديد أي صفحات أو مساحات اسم، كما لم يتم تطبيق قيود على البريد الإلكتروني أو إنشاء الحساب؛ يرجى تحديد خيار واحد على الأقل لتطبيق منع جزئي!');
 					} else if ((templateoptions.template !== 'uw-epblock' || $form.find('select[name="preset"]').val() !== 'uw-epblock') &&
 						// Don't require confirmation if email harassment defaults are set
-						!confirm('أنت على وشك الحظر بدون قيود على تحرير الصفحة أو المساحة الاسمية، هل أنت متأكد من أنك تريد المتابعة؟')) {
+						!confirm('أنت على وشك المنع بدون قيود على تحرير الصفحة أو النطاق المحدد، هل أنت متأكد من أنك تريد المتابعة؟')) {
 						return;
 					}
 				}
@@ -1779,12 +1779,12 @@
 				return alert("لا يمكن منع عنوان IP إلى أجل غير مسمى!");
 			}
 			if (!blockoptions.reason) {
-				return alert('يرجى تقديم سبب للحظر!');
+				return alert('يرجى تقديم سبب للمنع!');
 			}
 
 			Morebits.SimpleWindow.setButtonsEnabled(false);
 			Morebits.Status.init(e.target);
-			const statusElement = new Morebits.Status('تنفيذ الحظر');
+			const statusElement = new Morebits.Status('تنفيذ المنع');
 			blockoptions.action = 'block';
 
 			blockoptions.user = relevantUserName;
@@ -1848,7 +1848,7 @@
 				const logid = data.query.logevents.length ? logevents.logid : false;
 
 				if (logid !== Twinkle.block.blockLogId || !!block !== !!Twinkle.block.currentBlockInfo) {
-					let message = 'تغيرت حالة الحظر لـ ' + blockoptions.user + '. ';
+					let message = 'تغيرت حالة المنع لـ ' + blockoptions.user + '. ';
 					if (block) {
 						message += 'الحالة الجديدة: ';
 					} else {
@@ -1870,7 +1870,7 @@
 						' بسبب "' + logevents.comment + '". هل تريد التجاوز بإعداداتك؟';
 
 					if (!confirm(message)) {
-						Morebits.Status.info('تنفيذ الحظر', 'تم الإلغاء من قبل المستخدم');
+						Morebits.Status.info('تنفيذ المنع', 'تم الإلغاء من قبل المستخدم');
 						return;
 					}
 					blockoptions.reblock = 1; // Writing over a block will fail otherwise
@@ -1879,7 +1879,7 @@
 				// execute block
 				blockoptions.tags = Twinkle.changeTags;
 				blockoptions.token = mw.user.tokens.get('csrfToken');
-				const mbApi = new Morebits.wiki.Api('تنفيذ الحظر', blockoptions, (() => {
+				const mbApi = new Morebits.wiki.Api('تنفيذ المنع', blockoptions, (() => {
 					statusElement.info('اكتمل');
 					if (toWarn) {
 						Twinkle.block.callback.issue_template(templateoptions);
@@ -1900,7 +1900,7 @@
 	Twinkle.block.callback.issue_template = function twinkleblockCallbackIssueTemplate(formData) {
 		// Use wgRelevantUserName to ensure the block template goes to a single IP and not to the
 		// "talk page" of an IP range (which does not exist)
-		const userTalkPage = 'User_talk:' + mw.config.get('wgRelevantUserName');
+		const userTalkPage = 'نقاش_المستخدم:' + mw.config.get('wgRelevantUserName');
 
 		const params = Twinkle.block.combineFormDataAndFieldTemplateOptions(
 			formData,

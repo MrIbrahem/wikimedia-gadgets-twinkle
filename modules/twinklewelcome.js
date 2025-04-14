@@ -56,7 +56,7 @@
 				const welcomeNode = document.createElement('strong');
 				const welcomeLink = document.createElement('a');
 				welcomeLink.appendChild(spanTag('Black', '['));
-				welcomeLink.appendChild(spanTag('Goldenrod', 'ترحيب'));
+				welcomeLink.appendChild(spanTag('Goldenrod', 'welcome'));
 				welcomeLink.appendChild(spanTag('Black', ']'));
 				welcomeNode.appendChild(welcomeLink);
 
@@ -89,9 +89,10 @@
 		if (mw.config.exists('wgRelevantUserName') && !Morebits.ip.isRange(mw.config.get('wgRelevantUserName'))) {
 			Twinkle.addPortletLink(() => {
 				Twinkle.welcome.callback(mw.config.get('wgRelevantUserName'));
-			}, 'Wel', 'twinkle-welcome', 'ترحيب بالمستخدم');
+			}, 'ترحيب', 'twinkle-welcome', 'ترحيب بالمستخدم');
 		}
 	};
+
 
 	Twinkle.welcome.welcomeUser = function welcomeUser() {
 		Morebits.Status.init(document.getElementById('mw-content-text'));
@@ -120,11 +121,11 @@
 
 		const Window = new Morebits.SimpleWindow(600, 420);
 		Window.setTitle('ترحيب بالمستخدم');
-		Window.setScriptName('Twinkle');
-		Window.addFooterLink('لجنة الترحيب', 'WP:WC');
-		Window.addFooterLink('تفضيلات الترحيب', 'WP:TW/PREF#welcome');
-		Window.addFooterLink('مساعدة Twinkle', 'WP:TW/DOC#welcome');
-		Window.addFooterLink('إعطاء ملاحظات', 'WT:TW');
+		Window.setScriptName('لمح البصر!');
+		Window.addFooterLink('لجنة الترحيب', 'ويكيبيديا:لجنة الترحيب');
+		Window.addFooterLink('تفضيلات الترحيب', 'ويكيبيديا:Twinkle/Preferences#welcome');
+		Window.addFooterLink('مساعدة لمح البصر!', 'ويكيبيديا:لمح البصر/توثيق#welcome');
+		Window.addFooterLink('إعطاء ملاحظات', 'وب:لمح البصر');
 
 		const form = new Morebits.QuickForm(Twinkle.welcome.callback.evaluate);
 
@@ -707,7 +708,7 @@
 				const hasTalkHeader = /^\{\{Talk ?header\}\}/i.test(text);
 				if (hasTalkHeader) {
 					text = text.replace(/^\{\{Talk ?header\}\}\n{0,2}/i, '');
-					text = '{{Talk header}}\n\n' + welcomeText + '\n\n' + text;
+					text = '{{رأس نقاش}}\n\n' + welcomeText + '\n\n' + text;
 					text = text.trim();
 				} else {
 					text = welcomeText + '\n\n' + text;
