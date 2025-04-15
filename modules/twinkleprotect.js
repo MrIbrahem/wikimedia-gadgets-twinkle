@@ -792,7 +792,7 @@
 		'pp-vandalism': {
 			edit: 'sysop',
 			move: 'sysop',
-			reason: '[[WP:Vandalism|تخريب مستمر]]'
+			reason: '[[ويكيبيديا:تخريب|تخريب مستمر]]'
 		},
 		'pp-usertalk': {
 			edit: 'sysop',
@@ -816,7 +816,7 @@
 		'pp-30-500-vandalism': {
 			edit: 'extendedconfirmed',
 			move: 'extendedconfirmed',
-			reason: '[[WP:Vandalism|تخريب مستمر]] من حسابات (مؤكدة تلقائيًا)',
+			reason: '[[ويكيبيديا:تخريب|تخريب مستمر]] من حسابات (مؤكدة تلقائيًا)',
 			template: 'pp-extended'
 		},
 		'pp-30-500-disruptive': {
@@ -845,7 +845,7 @@
 		},
 		'pp-semi-vandalism': {
 			edit: 'autoconfirmed',
-			reason: '[[WP:Vandalism|تخريب مستمر]]',
+			reason: '[[ويكيبيديا:تخريب|تخريب مستمر]]',
 			template: 'pp-vandalism'
 		},
 		'pp-semi-disruptive': {
@@ -889,7 +889,7 @@
 		},
 		'pp-pc-vandalism': {
 			stabilize: 'autoconfirmed', // stabilize = Pending Changes
-			reason: '[[WP:Vandalism|تخريب مستمر]]',
+			reason: '[[ويكيبيديا:تخريب|تخريب مستمر]]',
 			template: 'pp-pc'
 		},
 		'pp-pc-disruptive': {
