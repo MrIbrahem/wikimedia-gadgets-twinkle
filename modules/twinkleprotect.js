@@ -963,30 +963,30 @@
 		{
 			label: 'قوالب حماية التعديل',
 			list: [
-				{ label: '{{pp-vandalism}}: تخريب', value: 'pp-vandalism' },
-				{ label: '{{pp-dispute}}: نزاع/حرب تحرير', value: 'pp-dispute' },
-				{ label: '{{pp-blp}}: انتهاكات BLP', value: 'pp-blp' },
-				{ label: '{{pp-sock}}: استخدام الدمى', value: 'pp-sock' },
-				{ label: '{{pp-template}}: قالب عالي المخاطر', value: 'pp-template' },
-				{ label: '{{pp-usertalk}}: نقاش مستخدم محظور', value: 'pp-usertalk' },
-				{ label: '{{pp-protected}}: حماية عامة', value: 'pp-protected' },
-				{ label: '{{pp-semi-indef}}: حماية شبه دائمة طويلة الأجل', value: 'pp-semi-indef' },
-				{ label: '{{pp-extended}}: حماية مؤكدة ممتدة', value: 'pp-extended' }
+				{ label: '{{' + 'pp-vandalism}}: تخريب', value: 'pp-vandalism' },
+				{ label: '{{' + 'pp-dispute}}: نزاع/حرب تحرير', value: 'pp-dispute' },
+				{ label: '{{' + 'pp-blp}}: انتهاكات BLP', value: 'pp-blp' },
+				{ label: '{{' + 'pp-sock}}: استخدام الدمى', value: 'pp-sock' },
+				{ label: '{{' + 'pp-template}}: قالب عالي المخاطر', value: 'pp-template' },
+				{ label: '{{' + 'pp-usertalk}}: نقاش مستخدم محظور', value: 'pp-usertalk' },
+				{ label: '{{' + 'pp-protected}}: حماية عامة', value: 'pp-protected' },
+				{ label: '{{' + 'pp-semi-indef}}: حماية شبه دائمة طويلة الأجل', value: 'pp-semi-indef' },
+				{ label: '{{' + 'pp-extended}}: حماية مؤكدة ممتدة', value: 'pp-extended' }
 			]
 		},
 		{
 			label: 'قوالب التغييرات المعلقة',
 			list: [
-				{ label: '{{pp-pc}}: تغييرات معلقة', value: 'pp-pc' }
+				{ label: '{{' + 'pp-pc}}: تغييرات معلقة', value: 'pp-pc' }
 			]
 		},
 		{
 			label: 'قوالب حماية النقل',
 			list: [
-				{ label: '{{pp-move-dispute}}: نزاع/حرب نقل', value: 'pp-move-dispute' },
-				{ label: '{{pp-move-vandalism}}: تخريب نقل الصفحات', value: 'pp-move-vandalism' },
-				{ label: '{{pp-move-indef}}: عام طويل الأجل', value: 'pp-move-indef' },
-				{ label: '{{pp-move}}: آخر', value: 'pp-move' }
+				{ label: '{{' + 'pp-move-dispute}}: نزاع/حرب نقل', value: 'pp-move-dispute' },
+				{ label: '{{' + 'pp-move-vandalism}}: تخريب نقل الصفحات', value: 'pp-move-vandalism' },
+				{ label: '{{' + 'pp-move-indef}}: عام طويل الأجل', value: 'pp-move-indef' },
+				{ label: '{{' + 'pp-move}}: آخر', value: 'pp-move' }
 			]
 		}
 	]
@@ -1283,6 +1283,7 @@
 						if (admins.length && !confirm('هل حاولت الاتصال بمسؤولي الحماية أولاً (' + Morebits.array.uniq(admins).join(', ') + ')؟')) {
 							return false;
 						}
+						break;
 					// otherwise falls through
 					default:
 						typename = 'إلغاء الحماية';
